@@ -4,7 +4,7 @@
 </script>
 
 <li
-	class="transition-all duration-300 border-b border-gray-300 py-6 uppercase font-semibold text-lg hover:text-colorthree md:text-base md:px-4 md:border-none"
+	class="transition-all duration-300 border-b border-gray-300 py-6 text-lg text-fondPrincipalDark hover:text-colorthree md:text-lg md:px-4 md:border-none"
 >
 	<a href={link}>{libelle}</a>
 </li>

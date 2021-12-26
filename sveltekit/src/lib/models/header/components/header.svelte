@@ -17,7 +17,9 @@
 	};
 </script>
 
-<header class="flex items-center flex-none pl-2 pr-4 h-24 border-b border-gray-300 md:pl-4">
+<header
+	class="flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4"
+>
 	<!-- menu sandwich -->
 	<div class="flex justify-between w-full items-center md:hidden">
 		<!-- barre du menu -->
@@ -32,15 +34,17 @@
 
 	<!-- contenu du menu -->
 	<nav
-		class={`transition-all duration-300 absolute top-24 ${addStyleNav} w-full h-full md:static md:h-min`}
+		class={`transition-all duration-300 absolute top-24 ${addStyleNav} w-full min-h-screen md:static md:min-h-min`}
 	>
-		<ul class="px-4 py-4 bg-white h-full md:h-min md:bg-transparent md:flex md:flex-row md:p-0">
-			<NavItem libelle="woopear" link="#coucou" />
-			<NavItem libelle="services" link="#coucou" />
-			<NavItem libelle="methode" link="#coucou" />
-			<NavItem libelle="equipe" link="#coucou" />
-			<NavItem libelle="réalisations" link="#coucou" />
-			<NavItem libelle="contact" link="#coucou" />
+		<ul
+			class="px-4 py-4 bg-fondPrincipalClaire min-h-screen md:min-h-min md:bg-transparent md:flex md:flex-row md:p-0"
+		>
+			<NavItem libelle="Woopear" link="#coucou" />
+			<NavItem libelle="Services" link="#coucou" />
+			<NavItem libelle="Methode" link="#coucou" />
+			<NavItem libelle="Equipe" link="#coucou" />
+			<NavItem libelle="Réalisations" link="#coucou" />
+			<NavItem libelle="Contact" link="#coucou" />
 		</ul>
 	</nav>
 </header>

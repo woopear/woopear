@@ -4,7 +4,7 @@ const config = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['"M PLUS Rounded 1c"', '"sans-serif"']
+				sans: ['"Nunito Sans"', '"sans-serif"']
 			},
 			colors: {
 				fondPrincipalClaire: '#ffffff',
