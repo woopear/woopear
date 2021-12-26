@@ -1,6 +1,6 @@
 services:
   mysql:
-    container_name: mysql # vous pouvez modifier
+    container_name: mysql-woopear # vous pouvez modifier
     image: mysql:8.0 # si vous changer la version il faudra peut etre apporter des modifications à ce document
     command: --default-authentication-plugin=mysql_native_password
     restart: on-failure
@@ -17,7 +17,7 @@ services:
       - ./mysql:/var/lib/mysql:rw # volume en lecture/écriture
 
   pma:
-    container_name: pma # vous pouvez modifier
+    container_name: pma-woopear # vous pouvez modifier
     image: phpmyadmin:latest # si vous changer la version il faudra peut etre apporter des modifications à ce document
     restart: on-failure
     links:
@@ -34,7 +34,7 @@ services:
       - mysql # tant que le service mysql n'est pas construit on créer pas celui-ci
 
   strapi:
-    container_name: strapi # vous pouvez modifier
+    container_name: strapi-woopear # vous pouvez modifier
     image: strapi/strapi # si vous changer la version il faudra peut etre apporter des modifications à ce document
     environment:
       DATABASE_CLIENT: mysql # nom de la base de données utilisé
@@ -55,7 +55,7 @@ services:
       - ./strapi:/srv/app:rw # volume en lecture/écriture
 
   sveltekit:
-    container_name: svelte # vous pouvez modifier
+    container_name: svelte-woopear # vous pouvez modifier
     image: front # vous pouvez modifier
     restart: on-failure
     build:
