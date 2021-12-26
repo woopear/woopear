@@ -1,0 +1,25 @@
+# image node avec alpine
+FROM node:14.18.1-alpine
+
+# assurer l'installation de tous les packages
+ENV NODE_ENV development
+
+# creation du dossier front et on ce met dedans
+WORKDIR /front
+
+# copie les fichiers package et install les dépendences
+COPY ./sveltekit/package-lock.json .
+COPY ./sveltekit/package.json .
+RUN npm i
+
+#install tool for "rm -rf command" for node
+RUN npm install glob rimraf
+
+# copie tout le contenue du dossier dans le dossier courant (/app)
+COPY ./sveltekit .
+
+# expose les ports (app + vite) + execute la commande
+EXPOSE 3000
+EXPOSE 24680
+CMD [ "npm", "run", "dev", "-- --host 0.0.0.0"]
+
