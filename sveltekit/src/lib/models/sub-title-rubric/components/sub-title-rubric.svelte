@@ -10,9 +10,9 @@
 <!--
   @component
 
-  ## sub-title
+  ## sub-title-rubric
 
-  > je suis le text en dessous du titre  
+  > je suis le text en dessous du titre,   
   > de la rubrique, on peux ajouter du style  
   > et il faut renseigner le text obligatoirement
 
@@ -29,7 +29,7 @@
   ### exemple d'utilisation
 
   ```js
-  <SubTitle subTitle="je suis le petit sub title" />
+  <SubTitleRubric subTitle="je suis le petit sub title" />
   ```
 
   ### fonctions / variables  
