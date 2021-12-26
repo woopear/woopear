@@ -3,11 +3,13 @@
 	export let link: string;
 </script>
 
-<li
-	class="transition-all duration-300 border-b border-gray-300 py-6 text-lg text-fondPrincipalDark hover:text-colorthree md:text-lg md:px-4 md:border-none"
->
-	<a href={link}>{libelle}</a>
-</li>
+{#if libelle && link}
+	<li
+		class="transition-all duration-300 border-b border-gray-300 py-6 text-base text-fondPrincipalDark hover:text-colorthree md:text-lg md:px-4 md:border-none"
+	>
+		<a href={link}>{libelle}</a>
+	</li>
+{/if}
 
 <!--
   @component
