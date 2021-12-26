@@ -17,9 +17,7 @@
 	};
 </script>
 
-<header
-	class="flex items-center flex-none pl-2 pr-4 h-24 border-b border-fondPrincipalDark md:pl-4"
->
+<header class="flex items-center flex-none pl-2 pr-4 h-24 border-b border-gray-300 md:pl-4">
 	<!-- menu sandwich -->
 	<div class="flex justify-between w-full items-center md:hidden">
 		<!-- barre du menu -->
@@ -89,13 +87,13 @@
 	.open :nth-child(1) {
 		top: 22px;
 		left: 8px;
-		transform: rotate(135deg);
+		transform: rotate(315deg);
 		transition: all 0.6s;
 	}
 	.open :nth-child(2) {
 		top: 22px;
 		left: 8px;
-		transform: rotate(-135deg);
+		transform: rotate(-315deg);
 		transition: all 0.6s;
 	}
 	.close {
