@@ -1,4 +1,6 @@
 <script lang="ts">
 </script>
 
-<p>footer</p>
+<footer class="flex-none">
+	<p>footer</p>
+</footer>

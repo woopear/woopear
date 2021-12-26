@@ -2,17 +2,17 @@ const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		colors: {
-			fondPrincipalClaire: '#ffffff',
-			fondPrincipalDark: '#331133',
-			color1: '#0057FF',
-			color2: '#CC00FF',
-			color3: '#FFB800',
-			color4: '#19B500'
-		},
 		extend: {
 			fontFamily: {
-				sans: ['Roboto', 'sans-serif']
+				sans: ['"M PLUS Rounded 1c"', '"sans-serif"']
+			},
+			colors: {
+				fondPrincipalClaire: '#ffffff',
+				fondPrincipalDark: '#331133',
+				colorone: '#0057FF',
+				colortwo: '#CC00FF',
+				colorthree: '#FFB800',
+				colorfour: '#19B500'
 			}
 		}
 	},
