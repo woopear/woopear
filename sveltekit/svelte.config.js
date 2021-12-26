@@ -5,7 +5,7 @@ import preprocess from 'svelte-preprocess';
 const config = {
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
-	preprocess: preprocess(),
+	preprocess: [preprocess({})],
 
 	kit: {
 		adapter: adapter(),
@@ -13,8 +13,14 @@ const config = {
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
 		vite: {
-			hmr: {
-				port: 24680
+			server: {
+				watch: {
+					usePolling: true
+				},
+				hmr: {
+					port: 24680,
+					clientPort: 3000
+				}
 			}
 		}
 	}
