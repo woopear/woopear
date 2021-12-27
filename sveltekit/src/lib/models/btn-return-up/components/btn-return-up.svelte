@@ -1,12 +1,16 @@
 <script lang="ts">
 	import LogoChevronUp from '$lib/models/logo/components/logo-chevron-up.svelte';
+	import { onMount } from 'svelte';
 
 	export let addStyleDiv = '';
 
 	let seeArrowUp = false;
-	// au scroll arriver à 300 pixel de scroll on affiche sinon on cache
-	window.addEventListener('scroll', () => {
-		300 < window.scrollY ? (seeArrowUp = true) : (seeArrowUp = false);
+
+	onMount(() => {
+		// au scroll arriver à 300 pixel de scroll on affiche sinon on cache
+		window.addEventListener('scroll', () => {
+			300 < window.scrollY ? (seeArrowUp = true) : (seeArrowUp = false);
+		});
 	});
 
 	const backTop = (): void => {

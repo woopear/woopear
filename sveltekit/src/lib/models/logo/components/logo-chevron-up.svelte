@@ -3,7 +3,7 @@
 
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10"
+	class="h-6 w-6 md:h-8 md:w-8"
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke="currentColor"
