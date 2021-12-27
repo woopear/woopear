@@ -3,6 +3,7 @@
 	import { afterUpdate, beforeUpdate } from 'svelte';
 	import { logoStore } from '../stores/logo.store';
 
+	export let addStyleDiv = '';
 	let init: boolean;
 
 	beforeUpdate(() => {
@@ -23,7 +24,7 @@
 {#if init}
 	<div
 		on:click={logoService.activateDisableDarkMode}
-		class="transition-all duration-300 shadow-lg cursor-pointer w-fit h-fit p-2 rounded-full bg-white text-gray-400 hover:shadow-2xl hover:text-black md:p-2 lg:p-3 dark:hover:text-colorthree"
+		class={`transition-all duration-300 shadow-lg cursor-pointer w-fit h-fit p-2 rounded-full bg-white text-gray-400 ${addStyleDiv} hover:shadow-2xl hover:text-black md:p-2 lg:p-3 dark:hover:text-colorthree`}
 	>
 		{#if $logoStore.darkMode === false}
 			<!-- lune -->
@@ -76,7 +77,10 @@
 
   ### props
 
-  - RAS
+  ```js
+  // ajouter du style
+  export let addStyleDiv = '';
+  ```
 
   ### exemple d'utilisation
 
