@@ -3,11 +3,13 @@
 	export let addStyleDiv = '';
 </script>
 
-<div class={`${addStyleDiv}`}>
-	<section class={`px-6 py-6 ${color}`}>
-		<slot />
-	</section>
-</div>
+{#if color}
+	<div class={`${addStyleDiv}`}>
+		<section class={`px-6 py-6 ${color}`}>
+			<slot />
+		</section>
+	</div>
+{/if}
 
 <!--
   @component
