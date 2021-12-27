@@ -1,0 +1,53 @@
+<script lang="ts">
+	import { logoService } from '$lib/models/logo/logo.service';
+	import { afterUpdate } from 'svelte';
+	import { logoStore } from '../stores/logo.store';
+
+	let init: boolean;
+	afterUpdate(() => {
+		// apres le chargement du composant
+		// on set à true pour afficher le logo
+		init = true;
+	});
+</script>
+
+{#if init}
+	<div
+		on:click={logoService.activateDisableDarkMode}
+		class="transition-all duration-300 shadow-lg cursor-pointer w-fit h-fit p-2 rounded-full bg-white text-gray-400 hover:shadow-2xl hover:text-black md:p-2 lg:p-3"
+	>
+		{#if $logoStore.darkMode === false}
+			<!-- lune -->
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+				/>
+			</svg>
+		{:else if $logoStore.darkMode === true}
+			<!-- soleil -->
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+				/>
+			</svg>
+		{/if}
+	</div>
+{/if}
