@@ -60,3 +60,41 @@
 		{/if}
 	</div>
 {/if}
+
+<!--
+  @component
+
+  ## logo-dark-mode
+
+  > logo qui permet de gere le dark mode  
+  > il contient une fonction venant du store du logo  
+  > cette fonction modifie le store darkMode +  
+  > modifie le localstorage afin de garder en memoir  
+  > la selection de l'utilisateur  
+  > on peux voir aussi que au chargement il test le store darkMode  
+  > pour configurer la balise html  
+
+  ### props
+
+  - RAS
+
+  ### exemple d'utilisation
+
+  ```js
+   <LogoDarkMode />
+  ```
+
+  ### fonctions / variables
+
+  ```js
+  // fonction qui active/desactive le mode dark
+  logoService.activateDisableDarkMode(): void
+
+  // permet d'attendre que le composant soit finis de monter
+  let init: boolean;
+  ```
+  ### les imports
+
+  - RAS
+
+-->
