@@ -7,7 +7,7 @@ const config = {
 				sans: ['"Nunito Sans"', '"sans-serif"']
 			},
 			colors: {
-				fondPrincipalClaire: '#ffffff',
+				fondPrincipalClaire: '#f5f5f7',
 				fondPrincipalDark: '#331133',
 				colorone: '#0057FF',
 				colortwo: '#CC00FF',
