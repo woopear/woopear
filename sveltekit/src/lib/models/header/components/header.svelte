@@ -18,14 +18,18 @@
 </script>
 
 <header
-	class="flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4"
+	class="transition-all duration-300 flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4 dark:bg-fondPrincipalDark"
 >
 	<!-- menu sandwich -->
 	<div class="flex justify-between w-full items-center md:hidden">
 		<!-- barre du menu -->
 		<div on:click={clickForSeeMenu} class={styleDiv}>
-			<div class="bg-fondPrincipalDark absolute rounded-full w-8 h-1 top-4 left-2" />
-			<div class="bg-fondPrincipalDark absolute rounded-full w-8 h-1 top-7 left-2" />
+			<div
+				class="bg-fondPrincipalDark absolute rounded-full w-8 h-1 top-4 left-2 dark:bg-fondPrincipalClaire"
+			/>
+			<div
+				class="bg-fondPrincipalDark absolute rounded-full w-8 h-1 top-7 left-2 dark:bg-fondPrincipalClaire"
+			/>
 		</div>
 	</div>
 
@@ -37,7 +41,7 @@
 		class={`transition-all duration-300 absolute top-24 ${addStyleNav} w-full min-h-screen md:static md:min-h-min`}
 	>
 		<ul
-			class="px-4 py-4 bg-fondPrincipalClaire min-h-screen md:min-h-min md:bg-transparent md:flex md:flex-row md:p-0"
+			class="px-4 py-4 bg-fondPrincipalClaire min-h-screen md:min-h-min md:bg-transparent md:flex md:flex-row md:p-0 dark:bg-fondPrincipalDark"
 		>
 			<NavItem libelle="Woopear" link="#coucou" />
 			<NavItem libelle="Services" link="#coucou" />

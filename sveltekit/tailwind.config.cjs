@@ -1,6 +1,6 @@
 const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-
+	darkMode: 'class',
 	theme: {
 		extend: {
 			fontFamily: {
@@ -8,7 +8,8 @@ const config = {
 			},
 			colors: {
 				fondPrincipalClaire: '#f5f5f7',
-				fondPrincipalDark: '#331133',
+				fondPrincipalDark: '#313131',
+				fondSecondaireDark: '#1F1F1F',
 				colorone: '#0057FF',
 				colortwo: '#CC00FF',
 				colorthree: '#FFB800',

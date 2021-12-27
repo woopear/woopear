@@ -7,7 +7,7 @@
 
 {#key refresh}
 	<main
-		class={`flex flex-col flex-1 mt-24 ${addStyleMain}`}
+		class={`transition-all duration-300 flex flex-col flex-1 mt-24 bg-fondPrincipalClaire text-fondPrincipalDark dark:bg-fondPrincipalDark dark:text-fondPrincipalClaire ${addStyleMain}`}
 		in:fly={{ y: -50, duration: 250, delay: 300 }}
 	>
 		<slot />

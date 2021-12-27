@@ -4,7 +4,9 @@
 </script>
 
 <div class={`${addStyleDiv}`}>
-	<section class={`bg-white px-6 py-6 rounded-3xl ${addStyle}`}>
+	<section
+		class={`transition-all duration-300 bg-white px-6 py-6 rounded-3xl dark:bg-fondSecondaireDark ${addStyle}`}
+	>
 		<slot />
 	</section>
 </div>

@@ -5,7 +5,7 @@
 
 {#if title}
 	<h2
-		class={`text-3xl font-bold text-fondPrincipalDark ${addStyle} sm:text-4xl md:text-5xl lg:text-6xl`}
+		class={`text-3xl font-bold text-fondPrincipalDark ${addStyle} sm:text-4xl md:text-5xl lg:text-6xl dark:text-white`}
 	>
 		{title}
 	</h2>

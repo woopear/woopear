@@ -1,9 +1,18 @@
 <script lang="ts">
 	import { logoService } from '$lib/models/logo/logo.service';
-	import { afterUpdate } from 'svelte';
+	import { afterUpdate, beforeUpdate } from 'svelte';
 	import { logoStore } from '../stores/logo.store';
 
 	let init: boolean;
+
+	beforeUpdate(() => {
+		if ($logoStore.darkMode) {
+			document.getElementById('html').classList.add('dark');
+		} else {
+			document.getElementById('html').classList.remove('dark');
+		}
+	});
+
 	afterUpdate(() => {
 		// apres le chargement du composant
 		// on set à true pour afficher le logo
@@ -14,7 +23,7 @@
 {#if init}
 	<div
 		on:click={logoService.activateDisableDarkMode}
-		class="transition-all duration-300 shadow-lg cursor-pointer w-fit h-fit p-2 rounded-full bg-white text-gray-400 hover:shadow-2xl hover:text-black md:p-2 lg:p-3"
+		class="transition-all duration-300 shadow-lg cursor-pointer w-fit h-fit p-2 rounded-full bg-white text-gray-400 hover:shadow-2xl hover:text-black md:p-2 lg:p-3 dark:hover:text-colorthree"
 	>
 		{#if $logoStore.darkMode === false}
 			<!-- lune -->
@@ -36,7 +45,7 @@
 			<!-- soleil -->
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				class="h-6 w-6"
+				class="h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10"
 				fill="none"
 				viewBox="0 0 24 24"
 				stroke="currentColor"
