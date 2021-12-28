@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "methods",
+  "info": {
+    "name": "method"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "steps": {
+      "collection": "steps"
+    }
+  }
+}
