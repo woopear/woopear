@@ -5,3 +5,11 @@ export interface ITechno {
 	name?: string;
 	image?: IImage;
 }
+
+export interface ITechnosReceved {
+	technos: ITechno[];
+}
+
+export interface ITechnoReceved {
+	techno: ITechno;
+}

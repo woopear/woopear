@@ -5,3 +5,7 @@ export interface IContact {
 	address?: string;
 	email?: string;
 }
+
+export interface IContactReceved {
+	contact: IContact;
+}

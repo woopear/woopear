@@ -9,3 +9,11 @@ export interface IProducer {
 	image?: IImage;
 	team?: ITeam;
 }
+
+export interface IProducersReceved {
+	producers: IProducer[];
+}
+
+export interface IProducerReceved {
+	producer: IProducer;
+}

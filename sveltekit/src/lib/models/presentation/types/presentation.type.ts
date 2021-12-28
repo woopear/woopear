@@ -7,3 +7,7 @@ export interface IPresentation {
 	description?: string;
 	image?: IImage;
 }
+
+export interface IPresentationReceved {
+	presentation: IPresentation;
+}

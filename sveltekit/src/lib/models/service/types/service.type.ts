@@ -6,3 +6,11 @@ export interface IService {
 	description?: string;
 	image?: IImage;
 }
+
+export interface IServicesReceved {
+	services: IService[];
+}
+
+export interface IServiceReceved {
+	service: IService;
+}

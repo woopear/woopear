@@ -6,3 +6,7 @@ export interface IMethod {
 	description?: string;
 	steps?: IStep[];
 }
+
+export interface IMethodReceved {
+	method: IMethod;
+}

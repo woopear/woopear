@@ -14,3 +14,11 @@ export interface IUser {
 	role?: IRole;
 	avatar?: IImage;
 }
+
+export interface IUsersReceved {
+	users: IUser[];
+}
+
+export interface IUserReceved {
+	user: IUser;
+}

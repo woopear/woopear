@@ -6,3 +6,11 @@ export interface ITeam {
 	description?: string;
 	producers?: IProducer[];
 }
+
+export interface ITeamsReceved {
+	teams: ITeam[];
+}
+
+export interface ITeamReceved {
+	team: ITeam;
+}

@@ -8,3 +8,11 @@ export interface IProduct {
 	urlLink?: string;
 	image?: IImage;
 }
+
+export interface IProductsReceved {
+	products: IProduct[];
+}
+
+export interface IProductReceved {
+	product: IProduct;
+}

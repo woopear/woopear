@@ -9,3 +9,11 @@ export interface IStep {
 	method?: IMethod;
 	image?: IImage;
 }
+
+export interface IStepsReceved {
+	steps: IStep[];
+}
+
+export interface IStepReceved {
+	step: IStep;
+}
