@@ -18,3 +18,9 @@
 > pour la suite il vous faudra la base de données  
 > et l'importer dans votre phpmysql  
 > demander à votre administrateur de vous fournir la bdd
+
+## Les ports
+
+- front => 3000
+- back => 1337
+- phpmyadmin => 8080
