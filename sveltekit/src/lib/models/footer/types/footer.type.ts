@@ -6,5 +6,5 @@ export interface IFooter extends IDateModel {
 }
 
 export interface IFooterReceved {
-	footer: IFooter;
+	footer?: IFooter;
 }
