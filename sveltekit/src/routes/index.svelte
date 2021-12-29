@@ -2,4 +2,3 @@
 </script>
 
 <p>coucou</p>
-<p>coucou</p>

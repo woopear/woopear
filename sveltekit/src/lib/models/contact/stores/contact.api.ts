@@ -1,3 +1,4 @@
+import { errorService } from '$lib/models/error/error.service';
 import { graphqlService } from '$lib/models/graphql/graphql.service';
 import { contactQuery } from '../queries/contact.query';
 import type { IContactReceved } from '../types/contact.type';
@@ -19,7 +20,9 @@ export const contactApi = {
 
 			// test si error
 			if (!contact) {
-				console.log('pas de partie contact');
+				const errorMessage = 'La recuperation de la partie contact à échoué';
+				errorService.addNewError(errorMessage);
+				throw new Error(errorMessage);
 			}
 
 			// set contact
