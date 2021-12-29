@@ -4,7 +4,7 @@
 	import LogoDarkMode from '$lib/models/logo/components/logo-dark-mode.svelte';
 </script>
 
-<nav class="fixed right-6 bottom-12 z-40">
+<nav class="transition-all duration-300 fixed p-6 -right-10 top-28 z-40 hover:right-0 sm:-right-12">
 	<ul>
 		<LogoConnexion addStyleDiv="mb-4" />
 		<LogoDarkMode addStyleDiv="mb-4" />

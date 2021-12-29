@@ -18,7 +18,7 @@
 </script>
 
 <header
-	class="transition-all duration-300 flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4 dark:bg-fondPrincipalDark"
+	class="transition-all duration-300 flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4 dark:bg-fondPrincipalDark z-40"
 >
 	<!-- menu sandwich -->
 	<div class="flex justify-between w-full items-center md:hidden">

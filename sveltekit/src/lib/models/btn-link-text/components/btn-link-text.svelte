@@ -3,11 +3,12 @@
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 
 	export let textBtn: string;
+	export let colorText = 'text-colorone';
 	export let myClick;
 </script>
 
 {#if textBtn}
-	<button class="text-colorone flex text-base items-center md:text-lg" on:click={myClick}>
+	<button class={`${colorText} flex text-base items-center md:text-lg`} on:click={myClick}>
 		<span class="hover:underline mr-1">
 			{filterStringService.firstToUppperCase(textBtn)}
 		</span>
@@ -29,6 +30,9 @@
   ```js
   // text du btn
  export let textBtn: string;
+
+ // couleur du text
+ export let colorText = 'text-colorone';
 
  // la fonction à passé pour qu'elle soit
  // executer au click du btn
