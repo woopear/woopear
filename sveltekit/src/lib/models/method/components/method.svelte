@@ -1,5 +1,6 @@
 <script lang="ts">
 	import BoxRubricSans from '$lib/models/box-rubric/components/box-rubric-sans.svelte';
+	import Step from '$lib/models/step/components/step.svelte';
 	import TextContentRubric from '$lib/models/text-content-rubric/components/text-content-rubric.svelte';
 	import TitleRubric from '$lib/models/title-rubric/components/title-rubric.svelte';
 	import type { IMethod } from '../types/method.type';
@@ -15,6 +16,13 @@
 			<TextContentRubric text={method.description} addStyle="mt-8 text-justify lg:text-center" />
 		</section>
 	</BoxRubricSans>
+	{#if method.steps.length > 0}
+		<div
+			class="px-4 sm:flex sm:flex-col sm:items-center lg:flex-row lg:flex-wrap lg:items-stretch lg:justify-around"
+		>
+			<Step steps={method.steps} />
+		</div>
+	{/if}
 {:else if method && 'id' in method}
 	<!-- partie admin -->
 {/if}
