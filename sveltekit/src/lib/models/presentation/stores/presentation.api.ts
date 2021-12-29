@@ -1,3 +1,4 @@
+import { errorService } from '$lib/models/error/error.service';
 import { graphqlService } from '$lib/models/graphql/graphql.service';
 import { presentationQuery } from '../queries/presentation.query';
 import type { IPresentationReceved } from '../types/presentation.type';
@@ -13,7 +14,7 @@ export const presentationApi = {
 		const p = presentationGetter.getterPresentation();
 
 		// si presentation n'est pas encore initialiser
-		if ('id' in p === false) {
+		if (p === null || 'id' in p === false) {
 			// recuperation
 			const { presentation } = await graphqlService.request<IPresentationReceved>(
 				presentationQuery.getPresentation
@@ -21,7 +22,9 @@ export const presentationApi = {
 
 			// test si error
 			if (!presentation) {
-				console.log('pas de presentation');
+				const message = 'il y a eu un probleme à la recuperation de la presentation';
+				errorService.addNewError(message);
+				throw new Error(message);
 			}
 
 			// set le store

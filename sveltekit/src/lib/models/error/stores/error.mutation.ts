@@ -6,6 +6,8 @@ export const errorMutation = {
 	 */
 	addNewError: (value: string): void => {
 		errorStore.update((n) => {
+			// si l'erreur existe deja on l'enleve
+			n.error = n.error.filter((el) => el !== value);
 			n.error = [...n.error, value];
 			return n;
 		});

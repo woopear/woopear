@@ -11,7 +11,7 @@
 <!-- si il y a une erreur dans le tableau -->
 {#if $errorStore.error.length > 0}
 	<section
-		class="fixed top-10 right-8 z-40 text-fondPrincipalDark dark:text-fondPrincipalClaire w-7/12 sm:w-5/12 md:w-4/12 xl:w-3/12"
+		class="fixed top-10 right-8 text-fondPrincipalDark dark:text-fondPrincipalClaire w-7/12 sm:w-5/12 md:w-4/12 xl:w-3/12 z-50"
 	>
 		{#each $errorStore.error as error}
 			<div
@@ -31,7 +31,7 @@
 						typeBtn={EBtnBgColorAction.ERROR}
 						sizeBtn={EBtnSizeAction.SMALL}
 						addStyle=""
-						handlerClick={errorService.removeError(error)}
+						handlerClick={() => errorService.removeError(error)}
 					/>
 				</div>
 			</div>
