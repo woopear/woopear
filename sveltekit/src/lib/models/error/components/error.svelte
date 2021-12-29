@@ -5,6 +5,7 @@
 	import { errorStore } from '$lib/models/error/stores/error.store';
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 	import { errorService } from '../error.service';
+	import { constError } from '../stores/error.const';
 </script>
 
 <!-- si il y a une erreur dans le tableau -->
@@ -18,7 +19,8 @@
 			>
 				<!-- title -->
 				<p class="text-red-500 font-bold mb-2 flex">
-					<LogoError color="text-red-500" /> <span class="ml-2">Une erreur est survenu</span>
+					<LogoError color="text-red-500" />
+					<span class="ml-2">{constError.titleNotificationError}</span>
 				</p>
 				<!-- text de l'erreur -->
 				<p class="text-sm">{filterStringService.textFormating(error)}</p>
