@@ -24,7 +24,7 @@
 	<footer
 		class="transition-all duration-300 flex-none px-4 py-6 border-t border-gray-300 bg-fondPrincipalClaire text-fondPrincipalDark dark:text-fondPrincipalClaire dark:bg-fondPrincipalDark"
 	>
-		<div class="flex flex-col items-center sm:flex-row-reverse sm:items-start sm:px-8 lg:px-24">
+		<div class="flex flex-col items-center sm:flex-row-reverse sm:items-start sm:px-8 lg:px-28">
 			<!-- menu footer -->
 			<nav class="text-xs w-6/12 mb-6 sm:flex sm:flex-col sm:items-end sm:pr-12">
 				<ul>
