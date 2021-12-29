@@ -18,7 +18,7 @@
 </script>
 
 <header
-	class="transition-all duration-300 flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4 dark:bg-fondPrincipalDark"
+	class="transition-all duration-300 flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4 dark:bg-fondPrincipalDark z-40"
 >
 	<!-- menu sandwich -->
 	<div class="flex justify-between w-full items-center md:hidden">
@@ -43,12 +43,12 @@
 		<ul
 			class="px-4 py-4 bg-fondPrincipalClaire min-h-screen md:min-h-min md:bg-transparent md:flex md:flex-row md:p-0 dark:bg-fondPrincipalDark"
 		>
-			<NavItem libelle="Woopear" link="#coucou" />
-			<NavItem libelle="Services" link="#coucou" />
-			<NavItem libelle="Methode" link="#coucou" />
-			<NavItem libelle="Equipe" link="#coucou" />
-			<NavItem libelle="Réalisations" link="#coucou" />
-			<NavItem libelle="Contact" link="#coucou" />
+			<NavItem libelle="woopear" link="#coucou" />
+			<NavItem libelle="services" link="#coucou" />
+			<NavItem libelle="methode" link="#coucou" />
+			<NavItem libelle="equipe" link="#coucou" />
+			<NavItem libelle="réalisations" link="#coucou" />
+			<NavItem libelle="contact" link="#coucou" />
 		</ul>
 	</nav>
 </header>

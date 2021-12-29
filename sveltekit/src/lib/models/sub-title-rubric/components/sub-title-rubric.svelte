@@ -1,10 +1,14 @@
 <script lang="ts">
+	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
+
 	export let subTitle: string;
 	export let addStyle = '';
 </script>
 
 {#if subTitle}
-	<h3 class={`text-lg font-thin md:text-xl ${addStyle}`}>{subTitle}</h3>
+	<h3 class={`text-lg font-thin md:text-xl ${addStyle}`}>
+		{filterStringService.firstToUppperCase(subTitle)}
+	</h3>
 {/if}
 
 <!--

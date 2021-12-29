@@ -1,6 +1,9 @@
 import type { IImage } from '$lib/models/image/types/image.type';
 import type { IRole } from '$lib/models/role/types/role.type';
 
+/**
+ * interface user
+ */
 export interface IUser {
 	id?: string;
 	username?: string;
@@ -15,10 +18,16 @@ export interface IUser {
 	avatar?: IImage;
 }
 
+/**
+ * interface pour l'bjet reçus par graphql pour tout les user
+ */
 export interface IUsersReceved {
 	users: IUser[];
 }
 
+/**
+ * interface pour l'bjet reçus par graphql pour un user
+ */
 export interface IUserReceved {
 	user: IUser;
 }

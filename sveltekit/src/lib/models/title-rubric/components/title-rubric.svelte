@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
+
 	export let title: string;
 	export let addStyle = '';
 </script>
@@ -7,7 +9,7 @@
 	<h2
 		class={`text-3xl font-bold text-fondPrincipalDark ${addStyle} sm:text-4xl md:text-5xl lg:text-6xl dark:text-white`}
 	>
-		{title}
+		{filterStringService.firstToUppperCase(title)}
 	</h2>
 {/if}
 
