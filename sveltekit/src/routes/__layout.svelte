@@ -5,9 +5,12 @@
 	import PageTransition from '$lib/models/page-transition/components/page-transition.svelte';
 	import MenuFloat from '$lib/models/menu-float/components/menu-float.svelte';
 	import { page } from '$app/stores';
+	import Error from '$lib/models/error/components/error.svelte';
 </script>
 
 <MenuFloat />
+
+<Error />
 
 <Header />
 
