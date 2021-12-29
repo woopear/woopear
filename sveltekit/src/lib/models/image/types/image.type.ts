@@ -1,3 +1,6 @@
+/**
+ * interface des images
+ */
 export interface IImage {
 	id?: string;
 	name?: string;

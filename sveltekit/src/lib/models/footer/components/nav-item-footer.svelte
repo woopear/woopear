@@ -1,12 +1,13 @@
 <script lang="ts">
 	import LogoChevronRight from '$lib/models/logo/components/logo-chevron-right.svelte';
+	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 
 	export let libelle: string;
 	export let link: string;
 </script>
 
 <li class="text-fondPrincipalDark flex text-xs items-center pt-2 dark:text-fondPrincipalClaire">
-	<a class="hover:underline mr-1" href={link}>{libelle}</a>
+	<a class="hover:underline mr-1" href={link}>{filterStringService.firstToUppperCase(libelle)}</a>
 	<LogoChevronRight size="h-3 w-3" />
 </li>
 

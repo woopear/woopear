@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
+
 	export let text: string;
 	export let addStyle = '';
 </script>
 
 {#if text}
 	<p class={`text-lg ${addStyle}`}>
-		{text}
+		{filterStringService.firstToUppperCase(text)}
 	</p>
 {/if}
 

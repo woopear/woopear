@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LogoChevronRight from '$lib/models/logo/components/logo-chevron-right.svelte';
+	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 
 	export let textBtn: string;
 	export let myClick;
@@ -8,7 +9,7 @@
 {#if textBtn}
 	<button class="text-colorone flex text-base items-center md:text-lg" on:click={myClick}>
 		<span class="hover:underline mr-1">
-			{textBtn}
+			{filterStringService.firstToUppperCase(textBtn)}
 		</span>
 		<LogoChevronRight />
 	</button>

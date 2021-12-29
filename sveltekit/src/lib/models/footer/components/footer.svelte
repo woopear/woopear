@@ -6,6 +6,7 @@
 	import { presentationStore } from '$lib/models/presentation/stores/presentation.store';
 	import { contactService } from '$lib/models/contact/contact.service';
 	import { contactStore } from '$lib/models/contact/stores/contact.store';
+	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 	import LogoWoopear from '$lib/models/logo/components/logo-woopear.svelte';
 	import NavItemFooter from './nav-item-footer.svelte';
 
@@ -27,8 +28,8 @@
 			<!-- menu footer -->
 			<nav class="text-xs w-6/12 mb-6 sm:flex sm:flex-col sm:items-end sm:pr-12">
 				<ul>
-					<NavItemFooter libelle="Mentions légales" link="#" />
-					<NavItemFooter libelle="Cookies" link="#" />
+					<NavItemFooter libelle="mentions légales" link="#" />
+					<NavItemFooter libelle="cookies" link="#" />
 				</ul>
 			</nav>
 			<!-- section entreprise + contact -->
@@ -39,15 +40,15 @@
 						<span class="mr-2">
 							<LogoWoopear hPixel="12" wPixel="12" />
 						</span>
-						{$presentationStore.presentation.title}
+						{filterStringService.firstToUppperCase($presentationStore.presentation.title)}
 					</h1>
-					<p>{$presentationStore.presentation.subTitle}</p>
+					<p>{filterStringService.textFormating($presentationStore.presentation.subTitle)}</p>
 				</section>
 				<!-- text de contact -->
 				<section class="text-xs mb-6">
-					<h3 class="font-bold">contact</h3>
-					<p>{$contactStore.contact.address}</p>
-					<p>{$contactStore.contact.phoneNumber}</p>
+					<h3 class="font-bold">{filterStringService.firstToUppperCase('contact')}</h3>
+					<p>{filterStringService.textFormating($contactStore.contact.address)}</p>
+					<p>{filterStringService.textFormating($contactStore.contact.phoneNumber)}</p>
 					<p>{$contactStore.contact.email}</p>
 				</section>
 			</section>

@@ -43,12 +43,12 @@
 		<ul
 			class="px-4 py-4 bg-fondPrincipalClaire min-h-screen md:min-h-min md:bg-transparent md:flex md:flex-row md:p-0 dark:bg-fondPrincipalDark"
 		>
-			<NavItem libelle="Woopear" link="#coucou" />
-			<NavItem libelle="Services" link="#coucou" />
-			<NavItem libelle="Methode" link="#coucou" />
-			<NavItem libelle="Equipe" link="#coucou" />
-			<NavItem libelle="Réalisations" link="#coucou" />
-			<NavItem libelle="Contact" link="#coucou" />
+			<NavItem libelle="woopear" link="#coucou" />
+			<NavItem libelle="services" link="#coucou" />
+			<NavItem libelle="methode" link="#coucou" />
+			<NavItem libelle="equipe" link="#coucou" />
+			<NavItem libelle="réalisations" link="#coucou" />
+			<NavItem libelle="contact" link="#coucou" />
 		</ul>
 	</nav>
 </header>
