@@ -11,14 +11,14 @@
 {#if method && 'id' in method}
 	<!-- partie public -->
 	<BoxRubricSans>
-		<section class="py-12 md:py-16 md:w-9/12 md:m-auto lg:w-8/12 lg:text-center xl:w-6/12">
+		<section class="mb-8 pt-12 md:pt-16 md:w-9/12 md:m-auto lg:w-8/12 lg:text-center xl:w-6/12">
 			<TitleRubric title={method.title} />
 			<TextContentRubric text={method.description} addStyle="mt-8 text-justify lg:text-center" />
 		</section>
 	</BoxRubricSans>
 	{#if method.steps.length > 0}
 		<div
-			class="px-4 sm:flex sm:flex-col sm:items-center lg:flex-row lg:flex-wrap lg:items-stretch lg:justify-around"
+			class="mb-12 px-4 sm:flex sm:flex-col sm:items-center lg:flex-row lg:flex-wrap lg:items-stretch lg:justify-around"
 		>
 			<Step steps={method.steps} />
 		</div>
