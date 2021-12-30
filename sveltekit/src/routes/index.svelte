@@ -12,6 +12,7 @@
 	import { serviceStore } from '$lib/models/service/stores/service.store';
 	import Team from '$lib/models/team/components/team.svelte';
 	import { teamStore } from '$lib/models/team/stores/team.store';
+	import Techno from '$lib/models/techno/components/techno.svelte';
 
 	onMount(async () => {
 		// on recupere la presentation
@@ -33,3 +34,5 @@
 <Service services={$serviceStore.services} />
 <!-- box team -->
 <Team team={$teamStore.team} />
+<!-- box techno -->
+<Techno />
