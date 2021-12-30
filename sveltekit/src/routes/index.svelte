@@ -5,10 +5,13 @@
 	import { presentationStore } from '$lib/models/presentation/stores/presentation.store';
 	import { serviceService } from '$lib/models/service/service.service';
 	import { methodService } from '$lib/models/method/method.service';
+	import { teamService } from '$lib/models/team/team.service';
 	import { onMount } from 'svelte';
 	import { methodStore } from '$lib/models/method/stores/method.store';
 	import Service from '$lib/models/service/components/service.svelte';
 	import { serviceStore } from '$lib/models/service/stores/service.store';
+	import Team from '$lib/models/team/components/team.svelte';
+	import { teamStore } from '$lib/models/team/stores/team.store';
 
 	onMount(async () => {
 		// on recupere la presentation
@@ -17,6 +20,8 @@
 		await methodService.getMethod();
 		// on recupere les services
 		await serviceService.getServices();
+		// on recupere la team
+		await teamService.getTeams();
 	});
 </script>
 
@@ -26,3 +31,5 @@
 <Method method={$methodStore.method} />
 <!-- box service -->
 <Service services={$serviceStore.services} />
+<!-- box team -->
+<Team team={$teamStore.team} />

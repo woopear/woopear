@@ -1,6 +1,9 @@
 import { gql } from 'graphql-request';
 
 export const serviceQuery = {
+	/**
+	 * query pour recuperer les services
+	 */
 	getServices: gql`
 		query getServices {
 			services {
