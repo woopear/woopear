@@ -1,11 +1,12 @@
 <script lang="ts">
 	export let addStyle = '';
 	export let addStyleDiv = '';
+	export let padding = 'px-6 py-6';
 </script>
 
 <div class={`${addStyleDiv}`}>
 	<section
-		class={`transition-all duration-300 bg-white px-6 py-6 rounded-3xl dark:bg-fondSecondaireDark ${addStyle}`}
+		class={`transition-all duration-300 bg-white ${padding} rounded-3xl dark:bg-fondSecondaireDark ${addStyle}`}
 	>
 		<slot />
 	</section>
@@ -31,6 +32,9 @@
 
   // ajouter du style à la div qui englobe la box
   export let addStyleDiv = '';
+
+  // modifier le padding du cadre blanc
+	export let padding = 'px-6 py-6';
   ```
 
   ### exemple d'utilisation
