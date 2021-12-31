@@ -35,16 +35,25 @@
 	});
 </script>
 
+<div id="woopear" />
 <!-- box presentation -->
 <Presentation presentation={$presentationStore.presentation} />
+
+<div id="methode" />
 <!-- box method -->
 <Method method={$methodStore.method} />
+
+<div id="service" />
 <!-- box service -->
 <Service services={$serviceStore.services} />
+
+<div id="equipe" />
 <!-- box team -->
 <Team team={$teamStore.team} />
 <!-- partie product -->
+
 <!-- box techno -->
 <Techno technos={$technoStore.technos} />
+<div id="contact" />
 <!-- partie contact -->
 <Contact contact={$contactStore.contact} />

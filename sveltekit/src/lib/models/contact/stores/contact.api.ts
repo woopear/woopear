@@ -28,5 +28,12 @@ export const contactApi = {
 			// set contact
 			contactMutation.setContact(contact);
 		}
+	},
+
+	/**
+	 * envoie du mailConatct au backend
+	 */
+	sendMailContact: async (): Promise<void> => {
+		//const response = await fetch()
 	}
 };
