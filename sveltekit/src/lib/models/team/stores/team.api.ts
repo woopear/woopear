@@ -27,7 +27,6 @@ export const teamApi = {
 
 			// set store team
 			teamMutation.setTeam(teams[0]);
-			console.log(t);
 		}
 	}
 };
