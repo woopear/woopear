@@ -15,6 +15,9 @@
 	import Techno from '$lib/models/techno/components/techno.svelte';
 	import { technoService } from '$lib/models/techno/techno.service';
 	import { technoStore } from '$lib/models/techno/stores/techno.store';
+	import Contact from '$lib/models/contact/components/contact.svelte';
+	import { contactService } from '$lib/models/contact/contact.service';
+	import { contactStore } from '$lib/models/contact/stores/contact.store';
 
 	onMount(async () => {
 		// on recupere la presentation
@@ -27,6 +30,8 @@
 		await teamService.getTeams();
 		// on recupere les technos
 		await technoService.getTechnos();
+		// on recupere contact
+		await contactService.getContact();
 	});
 </script>
 
@@ -38,5 +43,8 @@
 <Service services={$serviceStore.services} />
 <!-- box team -->
 <Team team={$teamStore.team} />
+<!-- partie product -->
 <!-- box techno -->
 <Techno technos={$technoStore.technos} />
+<!-- partie contact -->
+<Contact contact={$contactStore.contact} />
