@@ -24,10 +24,17 @@ module.exports = {
       };
       await strapi.plugins["email"].services.email.send(emailOptions);
       strapi.log.debug(`Email envoyé à : ${sendTo}`);
-      ctx.send({ message: true });
+      ctx.send({
+        state: true,
+        message:
+          "Votre message à bien été envoyé, nous vous ferons un retour le plus vite possible",
+      });
     } catch (err) {
       strapi.log.error(`Error envoie email à ${sendTo}`, err);
-      ctx.send({ error: false });
+      ctx.send({
+        state: false,
+        message: "Votre message n'a pas pu être envoyé",
+      });
     }
   },
 };

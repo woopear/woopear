@@ -6,9 +6,11 @@
 	import MenuFloat from '$lib/models/menu-float/components/menu-float.svelte';
 	import { page } from '$app/stores';
 	import Error from '$lib/models/error/components/error.svelte';
+	import Notification from '$lib/models/notification/components/notification.svelte';
 </script>
 
 <Error />
+<Notification />
 
 <Header />
 

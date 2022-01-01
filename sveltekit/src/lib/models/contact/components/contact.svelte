@@ -7,14 +7,16 @@
 	import TitleRubric from '$lib/models/title-rubric/components/title-rubric.svelte';
 	import type { IContact } from '../types/contact.type';
 	import { formProvider } from '$lib/providers/form/form.service';
+	import { contactService } from '../contact.service';
 
 	export let contact: IContact;
 
 	// send message
-	const handlerForm = (e) => {
+	const handlerForm = async (e) => {
 		// creation du formdata
 		const data = formProvider.createFormData(e.target);
-		console.log(data);
+		// on envoie le mail
+		await contactService.sendMailContact(data);
 	};
 </script>
 
