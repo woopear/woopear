@@ -1,21 +1,21 @@
 <script lang="ts">
 	import BoxRubric from '$lib/models/box-rubric/components/box-rubric.svelte';
 	import BtnAction from '$lib/models/btn-action/components/btn-action.svelte';
-	import { EBtnBgColorAction, EBtnSizeAction } from '$lib/models/btn-action/types/btn-action.enum';
 	import Input from '$lib/models/input/components/input.svelte';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import TitleRubric from '$lib/models/title-rubric/components/title-rubric.svelte';
+	import { EBtnBgColorAction, EBtnSizeAction } from '$lib/models/btn-action/types/btn-action.enum';
 	import type { IContact } from '../types/contact.type';
 	import { formProvider } from '$lib/providers/form/form.service';
 	import { contactService } from '../contact.service';
 
 	export let contact: IContact;
 
-	// send message
-	const handlerForm = async (e) => {
+	// envoie du message
+	const handlerForm = async (e): Promise<void> => {
 		// creation du formdata
 		const data = formProvider.createFormData(e.target);
-		// on envoie le mail
+		// on envoie le message
 		await contactService.sendMailContact(data);
 	};
 </script>
@@ -50,3 +50,47 @@
 		</div>
 	</BoxRubric>
 </form>
+
+<!--
+  @component
+
+  ## contact
+
+  > Composant de contact, contient le formulaire d'envoie  
+  > d'email, fomulaire basic avec un anvoir avec preventdefault  
+  > le btn est de type submit, quand l'utilisateur envoie un message
+  > une notification apparait sur l'écran pour l'avertir que le message  
+  > à été envoyé ou pas  
+
+  ### props
+
+  ```js
+  // donnée de contact venant de l'api
+  export let contact: IContact;
+  ```
+
+  ### exemple d'utilisation
+
+  ```js
+  <Contact contact={$contactStore.contact} />
+  ```
+
+  ### fonctions / variables
+
+  ```js
+  // creer un formdata + envoie le message via l'api
+  const handlerForm = async (e): Promise<void>
+  ```
+
+  ### les imports
+
+  ```js
+  import BoxRubric from '$lib/models/box-rubric/components/box-rubric.svelte';
+  import BtnAction from '$lib/models/btn-action/components/btn-action.svelte';
+  import Input from '$lib/models/input/components/input.svelte';
+  import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
+  import TitleRubric from '$lib/models/title-rubric/components/title-rubric.svelte';
+
+  ```
+
+-->
