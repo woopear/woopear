@@ -19,7 +19,7 @@
 						<div
 							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:mr-4 lg:h-72 xl:h-96"
 							style={`background-image: url("${import.meta.env.VITE_URL_API_IMG}${
-								service.image.url
+								service.image.formats.small.url
 							}");`}
 						/>
 						<div class="sm:flex-1 lg:w-4/12 lg:flex-none">
@@ -37,7 +37,7 @@
 						<div
 							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:ml-4 lg:h-72 xl:h-96"
 							style={`background-image: url("${import.meta.env.VITE_URL_API_IMG}${
-								service.image.url
+								service.image.formats.small.url
 							}");`}
 						/>
 						<div class="sm:flex-1 sm:flex sm:flex-col sm:items-end lg:w-4/12 lg:flex-none">
