@@ -11,8 +11,10 @@
 		<section>
 			<img
 				class="w-32 h-32 bg-cover rounded-full m-auto"
-				src={`${import.meta.env.VITE_URL_API_IMG}${step.image.url}`}
-				alt={step.image.alternativeText}
+				src={step.image !== null
+					? `${import.meta.env.VITE_URL_API_IMG}${step.image.url}`
+					: '../../../../../static/image-found.png'}
+				alt={step.image !== null ? step.image.alternativeText : 'image non fournis'}
 			/>
 			<h2 class="font-bold mt-6 mb-2 lg:mt-0 xl:text-lg">
 				{filterStringService.firstToUppperCase(step.title)}

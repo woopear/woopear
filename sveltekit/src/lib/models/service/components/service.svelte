@@ -18,9 +18,11 @@
 					<section class="py-8 sm:py-12 sm:flex sm:items-start">
 						<div
 							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:mr-4 lg:h-72 xl:h-96"
-							style={`background-image: url("${import.meta.env.VITE_URL_API_IMG}${
-								service.image.formats.small.url
-							}");`}
+							style={service.image !== null
+								? `background-image: url("${import.meta.env.VITE_URL_API_IMG}${
+										service.image.formats.small.url
+								  }");`
+								: "background-image: url('../../../../../static/image-found.png');"}
 						/>
 						<div class="sm:flex-1 lg:w-4/12 lg:flex-none">
 							<h2 class="text-xl font-bold my-2 lg:text-3xl">
@@ -35,10 +37,12 @@
 					<!-- cadre avec l'image droite -->
 					<section class="py-8 sm:py-12 sm:flex sm:items-start sm:flex-row-reverse">
 						<div
-							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:ml-4 lg:h-72 xl:h-96"
-							style={`background-image: url("${import.meta.env.VITE_URL_API_IMG}${
-								service.image.formats.small.url
-							}");`}
+							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:mr-4 lg:h-72 xl:h-96"
+							style={service.image !== null
+								? `background-image: url("${import.meta.env.VITE_URL_API_IMG}${
+										service.image.formats.small.url
+								  }");`
+								: "background-image: url('../../../../../static/image-found.png');"}
 						/>
 						<div class="sm:flex-1 sm:flex sm:flex-col sm:items-end lg:w-4/12 lg:flex-none">
 							<h2 class="text-xl font-bold my-2 lg:text-3xl">

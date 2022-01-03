@@ -19,9 +19,11 @@
 					<section>
 						<div
 							class="rounded-t-3xl bg-cover bg-center w-full h-40 sm:flex-none lg:h-72 xl:h-96"
-							style={`background-image: url("${import.meta.env.VITE_URL_API_IMG}${
-								product.image.formats.small.url
-							}");`}
+							style={product.image !== null
+								? `background-image: url("${import.meta.env.VITE_URL_API_IMG}${
+										product.image.formats.small.url
+								  }");`
+								: "background-image: url('../../../../../static/image-found.png');"}
 						/>
 						<div class="p-4 xl:p-8">
 							<div class="flex justify-between items-center px-2 pt-2 pb-4">
