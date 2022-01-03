@@ -3,6 +3,7 @@
 	import BoxRubricSans from '$lib/models/box-rubric/components/box-rubric-sans.svelte';
 	import BoxRubric from '$lib/models/box-rubric/components/box-rubric.svelte';
 	import BtnLinkText from '$lib/models/btn-link-text/components/btn-link-text.svelte';
+	import LogoBookmark from '$lib/models/logo/components/logo-bookmark.svelte';
 	import TitleRubric from '$lib/models/title-rubric/components/title-rubric.svelte';
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 	import type { IProduct } from '../types/product.type';
@@ -32,9 +33,12 @@
 								</h2>
 								<BtnLinkText textBtn="Voir le site" myClick={() => goto(`${product.urlLink}`)} />
 							</div>
-							<h4 class="font-thin pl-4 pb-4 lg:text-lg">
-								{filterStringService.firstToUppperCase(product.type)}
-							</h4>
+							<div class="flex items-center pl-4 pb-4">
+								<LogoBookmark addStyleDiv="text-colorone pr-2" />
+								<h4 class="font-thin lg:text-lg">
+									{filterStringService.firstToUppperCase(product.type)}
+								</h4>
+							</div>
 							<p class="px-4 text-justify pb-4 lg:text-lg">
 								{filterStringService.textFormating(product.description)}
 							</p>
