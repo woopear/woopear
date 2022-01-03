@@ -4,5 +4,5 @@
 </script>
 
 <BoxRubricSans>
-	<TitleRubric title="Connexion" addStyle="text-center" />
+	<TitleRubric title="Connexion" addStyle="text-center mt-12" />
 </BoxRubricSans>

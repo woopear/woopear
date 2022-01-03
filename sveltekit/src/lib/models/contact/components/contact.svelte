@@ -11,12 +11,21 @@
 
 	export let contact: IContact;
 
+	let valueEmail = '';
+	let valueTel = '';
+	let valueMessage = '';
+
 	// envoie du message
 	const handlerForm = async (e): Promise<void> => {
 		// creation du formdata
 		const data = formProvider.createFormData(e.target);
 		// on envoie le message
 		await contactService.sendMailContact(data);
+
+		// on reset les valeurs des inputs
+		valueEmail = '';
+		valueTel = '';
+		valueMessage = '';
 	};
 </script>
 
@@ -33,10 +42,16 @@
 				addStyle="text-center"
 			/>
 			<p class="mt-6 mb-12">OU</p>
-			<Input placeholder="Votre email *" required={true} name="email" />
-			<Input addDiv="mt-4 mb-8" placeholder="Votre numéro de téléphone" name="tel" />
+			<Input placeholder="Votre email *" required={true} name="email" bind:value={valueEmail} />
+			<Input
+				addDiv="mt-4 mb-8"
+				placeholder="Votre numéro de téléphone"
+				name="tel"
+				bind:value={valueTel}
+			/>
 			<div class="w-full">
 				<textarea
+					bind:value={valueMessage}
 					required
 					name="message"
 					rows="5"
