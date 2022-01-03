@@ -1,15 +1,8 @@
 <script lang="ts">
-	export let wPixel = '52';
-	export let hPixel = '32';
+	export let size = 'h-6 w-6 md:h-8 md:w-8';
 </script>
 
-<svg
-	xmlns="http://www.w3.org/2000/svg"
-	width={wPixel}
-	height={hPixel}
-	viewBox="0 0 1007 862"
-	fill="none"
->
+<svg xmlns="http://www.w3.org/2000/svg" class={`${size}`} viewBox="0 0 1007 862" fill="none">
 	<path
 		d="M545 35.1045L651.481 428.909"
 		stroke="#0076E3"

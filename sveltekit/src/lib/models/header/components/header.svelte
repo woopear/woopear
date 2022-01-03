@@ -38,7 +38,7 @@
 	{/if}
 
 	<!-- logo woopear -->
-	<LogoWoopear />
+	<LogoWoopear size="w-10 h-10" />
 
 	<!-- contenu du menu -->
 	{#if $page.path === '/'}
