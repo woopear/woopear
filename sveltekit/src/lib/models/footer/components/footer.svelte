@@ -1,23 +1,14 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { footerService } from '$lib/models/footer/footer.service';
-	import { footerStore } from '../stores/footer.store';
-	import { presentationService } from '$lib/models/presentation/presentation.service';
-	import { presentationStore } from '$lib/models/presentation/stores/presentation.store';
-	import { contactService } from '$lib/models/contact/contact.service';
-	import { contactStore } from '$lib/models/contact/stores/contact.store';
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 	import LogoWoopear from '$lib/models/logo/components/logo-woopear.svelte';
 	import NavItemFooter from './nav-item-footer.svelte';
+	import type { IFooter } from '../types/footer.type';
+	import type { IPresentation } from '$lib/models/presentation/types/presentation.type';
+	import type { IContact } from '$lib/models/contact/types/contact.type';
 
-	onMount(async () => {
-		// recupere le footer
-		await footerService.getFooter();
-		// recupere presentation
-		await presentationService.getPresentation();
-		// recupere contact
-		await contactService.getContact();
-	});
+	export let footer: IFooter;
+	export let presentation: IPresentation;
+	export let contact: IContact;
 </script>
 
 <footer
@@ -31,7 +22,7 @@
 				<NavItemFooter libelle="cookies" link="#" />
 			</ul>
 		</nav>
-		{#if 'id' in $presentationStore.presentation && 'id' in $contactStore.contact}
+		{#if 'id' in presentation && 'id' in contact}
 			<!-- section entreprise + contact -->
 			<section class="flex flex-col items-start w-6/12">
 				<!-- text de recap presentation -->
@@ -40,24 +31,24 @@
 						<span class="mr-2">
 							<LogoWoopear hPixel="12" wPixel="12" />
 						</span>
-						{filterStringService.firstToUppperCase($presentationStore.presentation.title)}
+						{filterStringService.firstToUppperCase(presentation.title)}
 					</h1>
-					<p>{filterStringService.textFormating($presentationStore.presentation.subTitle)}</p>
+					<p>{filterStringService.textFormating(presentation.subTitle)}</p>
 				</section>
 				<!-- text de contact -->
 				<section class="text-xs mb-6">
 					<h3 class="font-bold">{filterStringService.firstToUppperCase('contact')}</h3>
-					<p>{filterStringService.textFormating($contactStore.contact.address)}</p>
-					<p>{filterStringService.textFormating($contactStore.contact.phoneNumber)}</p>
-					<p>{$contactStore.contact.email}</p>
+					<p>{filterStringService.textFormating(contact.address)}</p>
+					<p>{filterStringService.textFormating(contact.phoneNumber)}</p>
+					<p>{contact.email}</p>
 				</section>
 			</section>
 		{/if}
 	</div>
-	{#if 'copyright' in $footerStore.footer}
+	{#if 'copyright' in footer}
 		<!-- copyright -->
 		<section class="text-xs">
-			<p class="text-center">{$footerStore.footer.copyright} {new Date().getFullYear()}</p>
+			<p class="text-center">{footer.copyright} {new Date().getFullYear()}</p>
 		</section>
 	{/if}
 </footer>

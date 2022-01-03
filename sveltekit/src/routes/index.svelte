@@ -41,7 +41,7 @@
 		await technoService.getTechnos();
 		// on recupere contact
 		await contactService.getContact();
-		//loader = false;
+		loader = false;
 	});
 </script>
 
