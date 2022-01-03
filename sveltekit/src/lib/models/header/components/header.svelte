@@ -44,21 +44,33 @@
 		<ul
 			class="px-4 py-4 bg-fondPrincipalClaire min-h-screen md:min-h-min md:bg-transparent md:flex md:flex-row md:p-0 dark:bg-fondPrincipalDark"
 		>
-			<NavItem libelle={constItemMenuHeader.home.libelle} link={constItemMenuHeader.home.path} />
 			<NavItem
+				handlerClickA={clickForSeeMenu}
+				libelle={constItemMenuHeader.home.libelle}
+				link={constItemMenuHeader.home.path}
+			/>
+			<NavItem
+				handlerClickA={clickForSeeMenu}
 				libelle={constItemMenuHeader.service.libelle}
 				link={constItemMenuHeader.service.path}
 			/>
 			<NavItem
+				handlerClickA={clickForSeeMenu}
 				libelle={constItemMenuHeader.method.libelle}
 				link={constItemMenuHeader.method.path}
 			/>
-			<NavItem libelle={constItemMenuHeader.team.libelle} link={constItemMenuHeader.team.path} />
 			<NavItem
+				handlerClickA={clickForSeeMenu}
+				libelle={constItemMenuHeader.team.libelle}
+				link={constItemMenuHeader.team.path}
+			/>
+			<NavItem
+				handlerClickA={clickForSeeMenu}
 				libelle={constItemMenuHeader.product.libelle}
 				link={constItemMenuHeader.product.path}
 			/>
 			<NavItem
+				handlerClickA={clickForSeeMenu}
 				libelle={constItemMenuHeader.contact.libelle}
 				link={constItemMenuHeader.contact.path}
 			/>
