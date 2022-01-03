@@ -70,7 +70,7 @@
 
 <style>
 	.barre-blue {
-		animation: test 4s infinite linear;
+		animation: test 3s infinite linear;
 	}
 
 	.barre-violet {
