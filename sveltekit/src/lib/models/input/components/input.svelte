@@ -10,7 +10,7 @@
 			required
 			{...$$restProps}
 			bind:value
-			class="transition-all duration-300 w-full border-2 border-gray-300 py-2 px-4 rounded-lg focus:outline-none focus:border-colorone dark:bg-fondSecondaireDark"
+			class="transition-all duration-300 w-full border-2 bg-transparent border-gray-300 py-2 px-4 rounded-lg focus:outline-none focus:border-colorone dark:bg-fondSecondaireDark"
 		/>
 	</div>
 {:else}
@@ -18,7 +18,7 @@
 		<input
 			{...$$restProps}
 			bind:value
-			class="transition-all duration-300 w-full border-2 border-gray-300 py-2 px-4 rounded-lg focus:outline-none focus:border-colorone dark:bg-fondSecondaireDark"
+			class="transition-all duration-300 w-full border-2 bg-transparent border-gray-300 py-2 px-4 rounded-lg focus:outline-none focus:border-colorone dark:bg-fondSecondaireDark"
 		/>
 	</div>
 {/if}
