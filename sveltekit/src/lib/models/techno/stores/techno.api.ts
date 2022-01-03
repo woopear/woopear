@@ -20,7 +20,7 @@ export const technoApi = {
 
 			// test si error
 			if (!technos) {
-				const message = 'il y a eu un probleme à la recuperation du composant équipe';
+				const message = 'il y a eu un probleme à la recuperation du composant technos';
 				errorService.addNewError(message);
 				throw new Error(message);
 			}

@@ -2,7 +2,7 @@ import type { IItemMenuHeader } from '../types/header.type';
 
 export const constItemMenuHeader: IItemMenuHeader = {
 	home: {
-		libelle: 'woopear',
+		libelle: 'Accueil',
 		path: '#woopear'
 	},
 	service: {

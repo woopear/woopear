@@ -18,6 +18,9 @@
 	import Contact from '$lib/models/contact/components/contact.svelte';
 	import { contactService } from '$lib/models/contact/contact.service';
 	import { contactStore } from '$lib/models/contact/stores/contact.store';
+	import Product from '$lib/models/product/components/product.svelte';
+	import { productService } from '$lib/models/product/product.service';
+	import { productStore } from '$lib/models/product/stores/product.store';
 
 	onMount(async () => {
 		// on recupere la presentation
@@ -28,6 +31,8 @@
 		await serviceService.getServices();
 		// on recupere la team
 		await teamService.getTeams();
+		// on recupere les realisations
+		await productService.getProducts();
 		// on recupere les technos
 		await technoService.getTechnos();
 		// on recupere contact
@@ -50,10 +55,14 @@
 <div id="equipe" />
 <!-- box team -->
 <Team team={$teamStore.team} />
+
+<div id="realisation" />
 <!-- partie product -->
+<Product products={$productStore.products} />
 
 <!-- box techno -->
 <Techno technos={$technoStore.technos} />
+
 <div id="contact" />
 <!-- partie contact -->
 <Contact contact={$contactStore.contact} />
