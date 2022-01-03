@@ -16,6 +16,7 @@ export const presentationQuery = {
 					name
 					alternativeText
 					url
+					formats
 				}
 				created_at
 				updated_at

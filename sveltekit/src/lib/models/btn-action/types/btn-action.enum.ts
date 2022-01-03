@@ -3,8 +3,8 @@
  */
 export const enum EBtnBgColorAction {
 	ERROR = 'bg-red-600 hover:bg-red-500',
-	VALIDATE = 'bg-colorone',
-	WARRNING = 'bg-colorthree'
+	VALIDATE = 'bg-colorone hover:bg-[#4785FF]',
+	WARRNING = 'bg-colorthree hover:bg-[#FFD770]'
 }
 
 /**

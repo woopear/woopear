@@ -1,6 +1,7 @@
 <script lang="ts">
 	import LogoWoopear from '$lib/models/logo/components/logo-woopear.svelte';
 	import NavItem from './nav-item.svelte';
+	import { constItemMenuHeader } from '../stores/header.const';
 
 	let styleDiv = `group close cursor-pointer h-12 w-12 relative ml-2`;
 	let addStyleNav = `-left-full`;
@@ -18,7 +19,7 @@
 </script>
 
 <header
-	class="transition-all duration-300 flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4 dark:bg-fondPrincipalDark z-40"
+	class="transition-all duration-300 shadow-md flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4 dark:bg-fondPrincipalDark z-40"
 >
 	<!-- menu sandwich -->
 	<div class="flex justify-between w-full items-center md:hidden">
@@ -43,12 +44,24 @@
 		<ul
 			class="px-4 py-4 bg-fondPrincipalClaire min-h-screen md:min-h-min md:bg-transparent md:flex md:flex-row md:p-0 dark:bg-fondPrincipalDark"
 		>
-			<NavItem libelle="woopear" link="#coucou" />
-			<NavItem libelle="services" link="#coucou" />
-			<NavItem libelle="methode" link="#coucou" />
-			<NavItem libelle="equipe" link="#coucou" />
-			<NavItem libelle="réalisations" link="#coucou" />
-			<NavItem libelle="contact" link="#coucou" />
+			<NavItem libelle={constItemMenuHeader.home.libelle} link={constItemMenuHeader.home.path} />
+			<NavItem
+				libelle={constItemMenuHeader.service.libelle}
+				link={constItemMenuHeader.service.path}
+			/>
+			<NavItem
+				libelle={constItemMenuHeader.method.libelle}
+				link={constItemMenuHeader.method.path}
+			/>
+			<NavItem libelle={constItemMenuHeader.team.libelle} link={constItemMenuHeader.team.path} />
+			<NavItem
+				libelle={constItemMenuHeader.product.libelle}
+				link={constItemMenuHeader.product.path}
+			/>
+			<NavItem
+				libelle={constItemMenuHeader.contact.libelle}
+				link={constItemMenuHeader.contact.path}
+			/>
 		</ul>
 	</nav>
 </header>
