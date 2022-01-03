@@ -20,18 +20,18 @@
 	});
 </script>
 
-{#if 'copyright' in $footerStore.footer && 'id' in $presentationStore.presentation && 'id' in $contactStore.contact}
-	<footer
-		class="transition-all duration-300 flex-none px-4 py-6 border-t border-gray-300 bg-fondPrincipalClaire text-fondPrincipalDark dark:text-fondPrincipalClaire dark:bg-fondPrincipalDark"
-	>
-		<div class="flex flex-col items-center sm:flex-row-reverse sm:items-start sm:px-8 lg:px-28">
-			<!-- menu footer -->
-			<nav class="text-xs w-6/12 mb-6 sm:flex sm:flex-col sm:items-end sm:pr-12">
-				<ul>
-					<NavItemFooter libelle="mentions légales" link="#" />
-					<NavItemFooter libelle="cookies" link="#" />
-				</ul>
-			</nav>
+<footer
+	class="transition-all duration-300 flex-none px-4 py-6 border-t border-gray-300 bg-fondPrincipalClaire text-fondPrincipalDark dark:text-fondPrincipalClaire dark:bg-fondPrincipalDark"
+>
+	<div class="flex flex-col items-center sm:flex-row-reverse sm:items-start sm:px-8 lg:px-28">
+		<!-- menu footer -->
+		<nav class="text-xs w-6/12 mb-6 sm:flex sm:flex-col sm:items-end sm:pr-12">
+			<ul>
+				<NavItemFooter libelle="mentions légales" link="#" />
+				<NavItemFooter libelle="cookies" link="#" />
+			</ul>
+		</nav>
+		{#if 'id' in $presentationStore.presentation && 'id' in $contactStore.contact}
 			<!-- section entreprise + contact -->
 			<section class="flex flex-col items-start w-6/12">
 				<!-- text de recap presentation -->
@@ -52,13 +52,15 @@
 					<p>{$contactStore.contact.email}</p>
 				</section>
 			</section>
-		</div>
+		{/if}
+	</div>
+	{#if 'copyright' in $footerStore.footer}
 		<!-- copyright -->
 		<section class="text-xs">
 			<p class="text-center">{$footerStore.footer.copyright} {new Date().getFullYear()}</p>
 		</section>
-	</footer>
-{/if}
+	{/if}
+</footer>
 
 <!--
   @component

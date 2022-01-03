@@ -21,8 +21,12 @@
 	import Product from '$lib/models/product/components/product.svelte';
 	import { productService } from '$lib/models/product/product.service';
 	import { productStore } from '$lib/models/product/stores/product.store';
+	import Loader from '$lib/models/loader/components/loader.svelte';
+
+	let loader = true;
 
 	onMount(async () => {
+		loader = true;
 		// on recupere la presentation
 		await presentationService.getPresentation();
 		// on recupere la method
@@ -37,32 +41,39 @@
 		await technoService.getTechnos();
 		// on recupere contact
 		await contactService.getContact();
+		//loader = false;
 	});
 </script>
 
-<div id="woopear" />
-<!-- box presentation -->
-<Presentation presentation={$presentationStore.presentation} />
+{#if loader}
+	<div class="flex-1 flex justify-center items-center">
+		<Loader hPixel="50" wPixel="50" />
+	</div>
+{:else}
+	<div id="woopear" />
+	<!-- box presentation -->
+	<Presentation presentation={$presentationStore.presentation} />
 
-<div id="methode" />
-<!-- box method -->
-<Method method={$methodStore.method} />
+	<div id="methode" />
+	<!-- box method -->
+	<Method method={$methodStore.method} />
 
-<div id="service" />
-<!-- box service -->
-<Service services={$serviceStore.services} />
+	<div id="service" />
+	<!-- box service -->
+	<Service services={$serviceStore.services} />
 
-<div id="equipe" />
-<!-- box team -->
-<Team team={$teamStore.team} />
+	<div id="equipe" />
+	<!-- box team -->
+	<Team team={$teamStore.team} />
 
-<div id="realisation" />
-<!-- partie product -->
-<Product products={$productStore.products} />
+	<div id="realisation" />
+	<!-- partie product -->
+	<Product products={$productStore.products} />
 
-<!-- box techno -->
-<Techno technos={$technoStore.technos} />
+	<!-- box techno -->
+	<Techno technos={$technoStore.technos} />
 
-<div id="contact" />
-<!-- partie contact -->
-<Contact contact={$contactStore.contact} />
+	<div id="contact" />
+	<!-- partie contact -->
+	<Contact contact={$contactStore.contact} />
+{/if}
