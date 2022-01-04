@@ -3,6 +3,7 @@
 	import BoxRubricSans from '$lib/models/box-rubric/components/box-rubric-sans.svelte';
 	import BoxRubric from '$lib/models/box-rubric/components/box-rubric.svelte';
 	import BtnLinkText from '$lib/models/btn-link-text/components/btn-link-text.svelte';
+	import LogoBookmark from '$lib/models/logo/components/logo-bookmark.svelte';
 	import TitleRubric from '$lib/models/title-rubric/components/title-rubric.svelte';
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 	import type { IProduct } from '../types/product.type';
@@ -19,9 +20,11 @@
 					<section>
 						<div
 							class="rounded-t-3xl bg-cover bg-center w-full h-40 sm:flex-none lg:h-72 xl:h-96"
-							style={`background-image: url("${import.meta.env.VITE_URL_API_IMG}${
-								product.image.formats.small.url
-							}");`}
+							style={product.image !== null
+								? `background-image: url("${import.meta.env.VITE_URL_API_IMG}${
+										product.image.formats.small.url
+								  }");`
+								: "background-image: url('../../../../../static/image-found.png');"}
 						/>
 						<div class="p-4 xl:p-8">
 							<div class="flex justify-between items-center px-2 pt-2 pb-4">
@@ -30,9 +33,12 @@
 								</h2>
 								<BtnLinkText textBtn="Voir le site" myClick={() => goto(`${product.urlLink}`)} />
 							</div>
-							<h4 class="font-thin pl-4 pb-4 lg:text-lg">
-								{filterStringService.firstToUppperCase(product.type)}
-							</h4>
+							<div class="flex items-center pl-4 pb-4">
+								<LogoBookmark addStyleDiv="text-colorone pr-2" />
+								<h4 class="font-thin lg:text-lg">
+									{filterStringService.firstToUppperCase(product.type)}
+								</h4>
+							</div>
 							<p class="px-4 text-justify pb-4 lg:text-lg">
 								{filterStringService.textFormating(product.description)}
 							</p>

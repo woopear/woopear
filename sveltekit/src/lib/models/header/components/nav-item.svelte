@@ -3,13 +3,14 @@
 
 	export let libelle: string;
 	export let link: string;
+	export let handlerClickA;
 </script>
 
 {#if libelle && link}
 	<li
 		class="transition-all duration-300 border-b border-gray-300 py-6 text-base text-fondPrincipalDark hover:text-colorthree md:text-lg md:px-4 md:border-none dark:text-fondPrincipalClaire dark:hover:text-colorthree"
 	>
-		<a href={link}>{filterStringService.firstToUppperCase(libelle)}</a>
+		<a on:click={handlerClickA} href={link}>{filterStringService.firstToUppperCase(libelle)}</a>
 	</li>
 {/if}
 
@@ -30,6 +31,9 @@
 
   // lien de l'encre
   export let link: string;
+
+  // props pour affecter fonction au click de la balise a
+  export let handlerClickA;
   ```
 
   ### exemple d'utilisation

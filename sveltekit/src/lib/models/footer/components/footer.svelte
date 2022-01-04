@@ -1,64 +1,57 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { footerService } from '$lib/models/footer/footer.service';
-	import { footerStore } from '../stores/footer.store';
-	import { presentationService } from '$lib/models/presentation/presentation.service';
-	import { presentationStore } from '$lib/models/presentation/stores/presentation.store';
-	import { contactService } from '$lib/models/contact/contact.service';
-	import { contactStore } from '$lib/models/contact/stores/contact.store';
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 	import LogoWoopear from '$lib/models/logo/components/logo-woopear.svelte';
 	import NavItemFooter from './nav-item-footer.svelte';
+	import type { IFooter } from '../types/footer.type';
+	import type { IPresentation } from '$lib/models/presentation/types/presentation.type';
+	import type { IContact } from '$lib/models/contact/types/contact.type';
 
-	onMount(async () => {
-		// recupere le footer
-		await footerService.getFooter();
-		// recupere presentation
-		await presentationService.getPresentation();
-		// recupere contact
-		await contactService.getContact();
-	});
+	export let footer: IFooter;
+	export let presentation: IPresentation;
+	export let contact: IContact;
 </script>
 
-{#if 'copyright' in $footerStore.footer && 'id' in $presentationStore.presentation && 'id' in $contactStore.contact}
-	<footer
-		class="transition-all duration-300 flex-none px-4 py-6 border-t border-gray-300 bg-fondPrincipalClaire text-fondPrincipalDark dark:text-fondPrincipalClaire dark:bg-fondPrincipalDark"
-	>
-		<div class="flex flex-col items-center sm:flex-row-reverse sm:items-start sm:px-8 lg:px-28">
-			<!-- menu footer -->
-			<nav class="text-xs w-6/12 mb-6 sm:flex sm:flex-col sm:items-end sm:pr-12">
-				<ul>
-					<NavItemFooter libelle="mentions légales" link="#" />
-					<NavItemFooter libelle="cookies" link="#" />
-				</ul>
-			</nav>
+<footer
+	class="transition-all duration-300 flex-none px-4 py-6 border-t border-gray-300 bg-fondPrincipalClaire text-fondPrincipalDark dark:text-fondPrincipalClaire dark:bg-fondPrincipalDark"
+>
+	<div class="flex flex-col items-center sm:flex-row-reverse sm:items-start sm:px-8 lg:px-28">
+		<!-- menu footer -->
+		<nav class="text-xs w-6/12 mb-6 sm:flex sm:flex-col sm:items-end sm:pr-12">
+			<ul>
+				<NavItemFooter libelle="mentions légales" link="#" />
+				<NavItemFooter libelle="cookies" link="#" />
+			</ul>
+		</nav>
+		{#if 'id' in presentation && 'id' in contact}
 			<!-- section entreprise + contact -->
 			<section class="flex flex-col items-start w-6/12">
 				<!-- text de recap presentation -->
 				<section class="text-xs mb-6">
 					<h1 class="font-bold flex items-center">
 						<span class="mr-2">
-							<LogoWoopear hPixel="12" wPixel="12" />
+							<LogoWoopear size="h-4 w-4" />
 						</span>
-						{filterStringService.firstToUppperCase($presentationStore.presentation.title)}
+						{filterStringService.firstToUppperCase(presentation.title)}
 					</h1>
-					<p>{filterStringService.textFormating($presentationStore.presentation.subTitle)}</p>
+					<p>{filterStringService.textFormating(presentation.subTitle)}</p>
 				</section>
 				<!-- text de contact -->
 				<section class="text-xs mb-6">
 					<h3 class="font-bold">{filterStringService.firstToUppperCase('contact')}</h3>
-					<p>{filterStringService.textFormating($contactStore.contact.address)}</p>
-					<p>{filterStringService.textFormating($contactStore.contact.phoneNumber)}</p>
-					<p>{$contactStore.contact.email}</p>
+					<p>{filterStringService.textFormating(contact.address)}</p>
+					<p>{filterStringService.textFormating(contact.phoneNumber)}</p>
+					<p>{contact.email}</p>
 				</section>
 			</section>
-		</div>
+		{/if}
+	</div>
+	{#if 'copyright' in footer}
 		<!-- copyright -->
 		<section class="text-xs">
-			<p class="text-center">{$footerStore.footer.copyright} {new Date().getFullYear()}</p>
+			<p class="text-center">{footer.copyright} {new Date().getFullYear()}</p>
 		</section>
-	</footer>
-{/if}
+	{/if}
+</footer>
 
 <!--
   @component

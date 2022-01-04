@@ -9,7 +9,9 @@
 	<!-- img -->
 	<div
 		class="rounded-full bg-cover bg-center h-24 w-24"
-		style={`background-image: url("${import.meta.env.VITE_URL_API_IMG}${producer.image.url}");`}
+		style={producer.image !== null
+			? `background-image: url("${import.meta.env.VITE_URL_API_IMG}${producer.image.url}");`
+			: "background-image: url('../../../../../static/image-found.png');"}
 	/>
 	<!-- nom -->
 	<h1 class="mt-8 mb-2 font-bold text-xl">

@@ -20,6 +20,7 @@ export const teamQuery = {
 						name
 						alternativeText
 						url
+						formats
 					}
 					created_at
 					updated_at
