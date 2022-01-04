@@ -1,44 +1,10 @@
 services:
-  mysql:
-    container_name: mysql-woopear # vous pouvez modifier
-    image: mysql:8.0 # si vous changer la version il faudra peut etre apporter des modifications à ce document
-    command: --default-authentication-plugin=mysql_native_password
-    restart: on-failure
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE} # à renseigner dans votre .env
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # à renseigner dans votre .env
-      MYSQL_USER: ${MYSQL_USER} # à renseigner dans votre .env
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD} # à renseigner dans votre .env
-    networks:
-      - woopear # vous pouvez le modifier (attention il est relier à tous les services il faudra egalement le modifier la bas)
-    ports:
-      - 3306:3306 # vous pouvez modifier (attention d'autre service utilise ce port pour ce connecter à votre BDD)
-    volumes:
-      - ./mysql:/var/lib/mysql:rw # volume en lecture/écriture
-
-  pma:
-    container_name: pma-woopear # vous pouvez modifier
-    image: phpmyadmin:latest # si vous changer la version il faudra peut etre apporter des modifications à ce document
-    restart: on-failure
-    links:
-      - mysql # service mysql
-    environment:
-      PMA_HOST: mysql # service mysql
-      PMA_PORT: 3306 # port de la BDD
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # à renseigner dans votre .env
-    ports:
-      - '8080:80' # vous pouvez le modifier
-    networks:
-      - woopear # vous pouvez le modifier (attention il est relier à tous les services il faudra egalement le modifier la bas)
-    depends_on:
-      - mysql # tant que le service mysql n'est pas construit on créer pas celui-ci
-
   strapi:
     container_name: strapi-woopear # vous pouvez modifier
     image: strapi/strapi # si vous changer la version il faudra peut etre apporter des modifications à ce document
     environment:
       DATABASE_CLIENT: mysql # nom de la base de données utilisé
-      DATABASE_HOST: mysql # service mysql
+      DATABASE_HOST: mysql-test # service mysql
       DATABASE_PORT: 3306 # port de la BDD
       DATABASE_NAME: ${MYSQL_DATABASE} # à renseigner dans votre .env
       DATABASE_USERNAME: ${MYSQL_USER} # à renseigner dans votre .env
@@ -48,9 +14,7 @@ services:
     ports:
       - '1337:1337' # vous pouvez le modifier
     networks:
-      - woopear # vous pouvez le modifier (attention il est relier à tous les services il faudra egalement le modifier la bas)
-    depends_on:
-      - mysql # tant que le service mysql n'est pas construit on créer pas celui-ci
+      - woopear-network # vous pouvez le modifier (attention il est relier à tous les services il faudra egalement le modifier la bas)
     volumes:
       - ./strapi:/srv/app:rw # volume en lecture/écriture
 
@@ -66,18 +30,18 @@ services:
       - '3000:3000' # vous pouvez modifier la premiere valeur (dans un environement wsl, il faudra modifier votre svelte.config.js)
       - '24680:24680' # vous pouvez modifier la premiere valeur (mais il faudra modifier votre svelte.config.js)
     networks:
-      - woopear # vous pouvez le modifier (attention il est relier à tous les services il faudra egalement le modifier la bas)
+      - woopear-network # vous pouvez le modifier (attention il est relier à tous les services il faudra egalement le modifier la bas)
     volumes:
       - ./sveltekit:/front # modifier seulement si vous savez quoi faire
       - ./sveltekit/node_modules:/front/node_modules # modifier seulement si vous savez quoi faire
       - ./sveltekit/.svelte-kit:/front/.svelte-kit # modifier seulement si vous savez quoi faire
 
 networks:
-  woopear: # si vous avez changer le nom de votre network modifier également le nom ici
+  woopear-network: # si vous avez changer le nom de votre network modifier également le nom ici
     driver: bridge
+    external: true
 
 # si vous avez modifier les volumes modifier les aussi ici
 volumes:
-  mysql:
   strapi:
   sveltekit:
