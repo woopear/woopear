@@ -29,7 +29,7 @@
 				<section class="text-xs mb-6">
 					<h1 class="font-bold flex items-center">
 						<span class="mr-2">
-							<LogoWoopear hPixel="12" wPixel="12" />
+							<LogoWoopear size="h-4 w-4" />
 						</span>
 						{filterStringService.firstToUppperCase(presentation.title)}
 					</h1>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 
 	export let addStyleMain = '';
 	export let refresh = '';
@@ -8,7 +8,7 @@
 {#key refresh}
 	<main
 		class={`transition-all duration-300 relative flex flex-col flex-1 mt-24 bg-fondPrincipalClaire text-fondPrincipalDark dark:bg-fondPrincipalDark dark:text-fondPrincipalClaire ${addStyleMain}`}
-		in:fly={{ y: -50, duration: 250, delay: 300 }}
+		in:fade={{ duration: 250, delay: 300 }}
 	>
 		<slot />
 	</main>
