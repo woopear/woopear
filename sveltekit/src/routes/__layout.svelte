@@ -10,6 +10,7 @@
 	import type { IFooterReceved } from '$lib/models/footer/types/footer.type';
 	import type { IPresentationReceved } from '$lib/models/presentation/types/presentation.type';
 	import type { IContactReceved } from '$lib/models/contact/types/contact.type';
+	import InfoBulle from '$lib/models/info-bulle/components/info-bulle.svelte';
 
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	export const load = async ({ fetch }) => {
@@ -46,6 +47,8 @@
 
 <Error />
 <Notification />
+<InfoBulle infoBulleError={true} />
+<InfoBulle infoBulleError={false} />
 
 <Header />
 

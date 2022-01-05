@@ -12,6 +12,11 @@
 
 	let valueIdentifier = '';
 	let valuePassword = '';
+	let event: MouseEvent;
+
+	const hanlderClickBtnAction = (e): void => {
+		event = e;
+	};
 
 	// connexion user => go vers le dashboard
 	const handlerForm = async (e): Promise<void> => {
@@ -19,7 +24,7 @@
 		const formData: IConnextionObject = formProvider.createFormData(e.target);
 
 		// connexion user
-		await connexionService.login(formData);
+		await connexionService.login(formData, event);
 
 		// efface les inputs
 		valueIdentifier = '';
@@ -48,10 +53,16 @@
 			name="identifier"
 			bind:value={valueIdentifier}
 		/>
-		<Input placeholder="Mot de passe" required={true} name="password" bind:value={valuePassword} />
+		<Input
+			placeholder="Mot de passe"
+			type="password"
+			required={true}
+			name="password"
+			bind:value={valuePassword}
+		/>
 		<div class="mt-4 ml-auto">
 			<BtnAction
-				handlerClick={undefined}
+				handlerClick={hanlderClickBtnAction}
 				textBtn="se connecter"
 				sizeBtn={EBtnSizeAction.MEDIUM}
 				typeBtn={EBtnBgColorAction.VALIDATE}
