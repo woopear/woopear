@@ -30,6 +30,7 @@
 		loader = true;
 		// reset info bulle
 		infoBulleService.resetXAndYInfoBubble();
+		infoBulleService.resetXAndYInfoBubbleText();
 		infoBulleService.setInfoBubbleText('');
 		infoBulleService.setInfoBubbleError('');
 		// on recupere la presentation

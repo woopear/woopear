@@ -20,3 +20,11 @@ export const enum EInfoBubbleAddClient {
 	X = 30,
 	Y = 10
 }
+
+export const enum EInfoBulleLogo {
+	MODEDARK = 'Activer / Désactiver mode sombre',
+	HOME = "Retour à l'accueil",
+	DASHBOARD = 'Votre tableau de bord',
+	DISCONNECT = 'Vous déconnectez',
+	CONNEXION = 'Vous connectez'
+}

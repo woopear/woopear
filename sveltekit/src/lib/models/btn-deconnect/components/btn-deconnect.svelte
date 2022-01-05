@@ -1,12 +1,29 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
 	import { connexionService } from '$lib/models/connexion/connexion.service';
+	import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
+	import { EInfoBulleLogo } from '$lib/models/info-bulle/types/info-bulle.enum';
 	import LogoDisconnect from '$lib/models/logo/components/logo-disconnect.svelte';
 
 	export let addStyleDiv = '';
+
+	// entrer de la souris sur le logo
+	const mouseEnterDiv = (e: MouseEvent): void => {
+		infoBulleService.setInfoBubbleText(EInfoBulleLogo.DISCONNECT);
+		infoBulleService.definePositionXInfoBubbleText(e, window.innerWidth);
+		infoBulleService.definePositionYInfoBubbleText(e);
+	};
+
+	// sortie de la souris du logo
+	const mouseOutDiv = (): void => {
+		infoBulleService.setInfoBubbleText('');
+		infoBulleService.resetXAndYInfoBubbleText();
+	};
 </script>
 
 <button
+	on:mouseenter={mouseEnterDiv}
+	on:mouseleave={mouseOutDiv}
 	on:click={() => {
 		connexionService.resetCurrentLogin();
 		goto('/connexion');

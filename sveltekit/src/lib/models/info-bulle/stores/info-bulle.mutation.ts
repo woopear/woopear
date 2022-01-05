@@ -25,7 +25,7 @@ export const infoBulleMutation = {
 	},
 
 	/**
-	 * fonction qui set la position X de l'infobulle
+	 * fonction qui set la position X de l'infobulle error
 	 * @param css => design à affecter
 	 */
 	setInfoBubbleX: (css: string): void => {
@@ -36,7 +36,7 @@ export const infoBulleMutation = {
 	},
 
 	/**
-	 * fonction qui set la position Y de l'infobulle
+	 * fonction qui set la position Y de l'infobulle error
 	 * @param css => design à affecter
 	 */
 	setInfoBubbleY: (css: string): void => {
@@ -47,10 +47,40 @@ export const infoBulleMutation = {
 	},
 
 	/**
+	 * fonction qui set la position X de l'infobulle
+	 * @param css => design à affecter
+	 */
+	setInfoBubbleXText: (css: string): void => {
+		infoBubbleStore.update((n) => {
+			n.infoBubbleXText = css;
+			return n;
+		});
+	},
+
+	/**
+	 * fonction qui set la position Y de l'infobulle
+	 * @param css => design à affecter
+	 */
+	setInfoBubbleYText: (css: string): void => {
+		infoBubbleStore.update((n) => {
+			n.infoBubbleYText = css;
+			return n;
+		});
+	},
+
+	/**
 	 * fonction qui reset le left et le top de la div info bulle
 	 */
 	resetXAndYInfoBubble: (): void => {
 		infoBulleMutation.setInfoBubbleY('left: 0px');
 		infoBulleMutation.setInfoBubbleX('top: 0px');
+	},
+
+	/**
+	 * fonction qui reset le left et le top de la div info bulle
+	 */
+	resetXAndYInfoBubbleText: (): void => {
+		infoBulleMutation.setInfoBubbleYText('left: 0px');
+		infoBulleMutation.setInfoBubbleXText('top: 0px');
 	}
 };

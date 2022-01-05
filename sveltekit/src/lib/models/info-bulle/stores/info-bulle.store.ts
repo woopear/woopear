@@ -6,5 +6,7 @@ export const infoBubbleStore = writable({
 	infoBubbleText: '' as TTextInfoBubble,
 	infoBubbleError: '' as TTextInfoBubble,
 	infoBubbleX: '',
-	infoBubbleY: ''
+	infoBubbleY: '',
+	infoBubbleXText: '',
+	infoBubbleYText: ''
 });

@@ -19,8 +19,8 @@
 
 <!-- info bulle pour passage de la souris -->
 {#if $infoBubbleStore.infoBubbleText && infoBulleError === false}
-	<div class={`fixed z-50 p-3 w-64 shadow-xl bg-gray-500`} {style}>
-		<p class={`text-black text-sm`}>
+	<div class={`fixed z-50 py-1 px-2 w-fit shadow-xl bg-gray-800 dark:bg-white`} {style}>
+		<p class={`text-white dark:text-black text-xs`}>
 			{filterStringService.textFormating($infoBubbleStore.infoBubbleText)}
 		</p>
 	</div>
