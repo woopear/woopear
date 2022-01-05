@@ -8,7 +8,7 @@
 	let openClose = false;
 
 	// affiche / cache le mot de passe
-	const changeViewPassword = (e): void => {
+	const changeViewPassword = (): void => {
 		openClose = !openClose;
 		if ($$restProps.type === 'password') {
 			$$restProps.type = 'text';
