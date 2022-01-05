@@ -56,6 +56,7 @@
 		<Input
 			placeholder="Mot de passe"
 			type="password"
+			password={true}
 			required={true}
 			name="password"
 			bind:value={valuePassword}
