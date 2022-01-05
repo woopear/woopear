@@ -14,6 +14,7 @@
 	let valuePassword = '';
 	let event: MouseEvent;
 
+	// recuperation du event click sur le btn pour afficher l'info bulle error à l'endroit du click
 	const hanlderClickBtnAction = (e): void => {
 		event = e;
 	};

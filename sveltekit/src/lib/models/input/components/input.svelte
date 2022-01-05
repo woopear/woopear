@@ -15,20 +15,18 @@
 		} else {
 			$$restProps.type = 'password';
 		}
-		console.log($$restProps);
+	};
 
-		setTimeout(() => {
-			if ($$restProps.type !== 'password') {
-				$$restProps.type = 'password';
-				openClose = !openClose;
-			}
-		}, 5000);
+	// des que le user ecris dans le input on remet le logoEye en mode caché
+	const resetLogoEye = (): void => {
+		openClose = false;
 	};
 </script>
 
 {#if required && password}
 	<div class={`w-full relative ${addDiv}`}>
 		<input
+			on:input={resetLogoEye}
 			required
 			{...$$restProps}
 			bind:value
