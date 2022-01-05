@@ -2,8 +2,7 @@ services:
   strapi:
     container_name: strapi-woopear # vous pouvez modifier
     image: strapi/strapi # si vous changer la version il faudra peut etre apporter des modifications à ce document
-    env_file:
-      - ./strapi/.env
+    env_file: ./strapi/.env
     environment:
       DATABASE_CLIENT: mysql # nom de la base de données utilisé
       DATABASE_HOST: ${DATABASE_HOST} # service mysql
