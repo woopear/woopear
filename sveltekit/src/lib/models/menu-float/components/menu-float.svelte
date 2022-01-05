@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-
 	import { page } from '$app/stores';
-
+	import BtnDeconnect from '$lib/models/btn-deconnect/components/btn-deconnect.svelte';
 	import BtnReturnHome from '$lib/models/btn-return-home/components/btn-return-home.svelte';
 	import BtnReturnUp from '$lib/models/btn-return-up/components/btn-return-up.svelte';
 	import { connexionStore } from '$lib/models/connexion/stores/connexion.store';
@@ -22,6 +21,7 @@
 			>
 				<LogoWoopear />
 			</div>
+			<BtnDeconnect addStyleDiv="block mb-4" />
 			<!-- si page dashboard woopear + jwt on affiche btn acces dashboard woopear + accueil + deconnexion-->
 		{:else if $page.path === '/dashboard' && $connexionStore.currentLogin.jwt}
 			<!-- go dashboard -->
@@ -31,6 +31,8 @@
 			>
 				<LogoWoopear />
 			</div>
+			<!-- btn deconnection -->
+			<BtnDeconnect addStyleDiv="block mb-4" />
 			<!-- go accueil -->
 			<BtnReturnHome addStyleDiv="mb-4" />
 		{:else if $page.path === '/'}
