@@ -9,7 +9,8 @@
  */
 export const enum EInfoBulleError {
 	CONNEXION = 'Vos identifiant sont incorrect.',
-	SEND_MAIL_REST_PASSWORD_NOK = "Impossible de faire votre demande, l'email n'existe pas, contacter woopear pour ouvrir un compte."
+	SEND_MAIL_REST_PASSWORD_NOK = "Impossible de faire votre demande, l'email n'existe pas, contacter woopear pour ouvrir un compte.",
+	UPDATE_PASSWORD = 'Une erreur est survenu, impossible de modifier le mot de passe'
 }
 
 /**

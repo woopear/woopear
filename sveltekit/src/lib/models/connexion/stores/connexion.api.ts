@@ -9,10 +9,13 @@ export const connexionApi = {
 	/**
 	 * connexion user recupere le login
 	 */
-	login: async (data: IConnextionObject, e): Promise<void> => {
+	login: async (data: IConnextionObject, e: MouseEvent): Promise<void> => {
 		try {
+			// connexion
 			const res = await graphqlService.request<ILoginReceved>(connexionQuery.login, data);
+			// on set le store currentLogin
 			connexionMutation.setCurrentLogin(res.login);
+			// on set le headers
 			graphqlService.setHeaders({
 				Authorization: `Bearer ${res.login.jwt}`
 			});
@@ -21,7 +24,7 @@ export const connexionApi = {
 			infoBulleService.setInfoBubbleError(EInfoBulleError.CONNEXION);
 			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
 			infoBulleService.definePositionYInfoBubble(e);
-			throw new Error('Veuillez renseigner des identifiants valide !');
+			throw new Error(EInfoBulleError.CONNEXION);
 		}
 	},
 
@@ -30,6 +33,6 @@ export const connexionApi = {
 	 */
 	logout: (): void => {
 		connexionMutation.resetCurrentLogin();
-		graphqlService.setHeader('authorization', '');
+		graphqlService.setHeader('Authorization', '');
 	}
 };

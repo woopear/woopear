@@ -44,6 +44,7 @@
 					// si valueEmail est renseigné, on envoie l'email
 					if (valueEmail !== '') {
 						forgotPasswordService.sendMailForgotPassword(valueEmail, event);
+						valueEmail = '';
 					}
 				}}
 			>
