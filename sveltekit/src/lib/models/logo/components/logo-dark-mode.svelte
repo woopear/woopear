@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
+	import { EInfoBulleLogo } from '$lib/models/info-bulle/types/info-bulle.enum';
+
 	import { logoService } from '$lib/models/logo/logo.service';
 	import { afterUpdate, beforeUpdate } from 'svelte';
 	import { logoStore } from '../stores/logo.store';
@@ -19,10 +22,25 @@
 		// on set à true pour afficher le logo
 		init = true;
 	});
+
+	// entrer de la souris sur le logo
+	const mouseEnterDiv = (e: MouseEvent): void => {
+		infoBulleService.setInfoBubbleText(EInfoBulleLogo.MODEDARK);
+		infoBulleService.definePositionXInfoBubbleText(e, window.innerWidth);
+		infoBulleService.definePositionYInfoBubbleText(e);
+	};
+
+	// sortie de la souris du logo
+	const mouseOutDiv = (): void => {
+		infoBulleService.setInfoBubbleText('');
+		infoBulleService.resetXAndYInfoBubbleText();
+	};
 </script>
 
 {#if init}
 	<div
+		on:mouseenter={mouseEnterDiv}
+		on:mouseleave={mouseOutDiv}
 		on:click={logoService.activateDisableDarkMode}
 		class={`transition-all duration-300 shadow-lg cursor-pointer w-fit h-fit p-2 rounded-full bg-white text-gray-400 ${addStyleDiv} hover:shadow-2xl hover:text-black md:p-2 lg:p-3 dark:hover:text-colorthree`}
 	>
