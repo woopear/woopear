@@ -14,7 +14,7 @@ export const connexionApi = {
 			const res = await graphqlService.request<ILoginReceved>(connexionQuery.login, data);
 			connexionMutation.setCurrentLogin(res.login);
 			graphqlService.setHeaders({
-				authorization: `Bearer ${res.login.jwt}`
+				Authorization: `Bearer ${res.login.jwt}`
 			});
 		} catch (error) {
 			// config info bulle
