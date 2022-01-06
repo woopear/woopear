@@ -25,7 +25,7 @@
 	};
 </script>
 
-<nav class="transition-all duration-300 fixed p-6 right-0 top-24 z-40 hover:right-0 lg:-right-12">
+<nav class="transition-all duration-300 fixed p-6 right-0 top-24 z-30 hover:right-0 lg:-right-12">
 	<ul>
 		<!-- si page accueil + jwt on affiche btn acces dashboard woopear + deconnexion-->
 		{#if $page.path === '/' && $connexionStore.currentLogin.jwt}

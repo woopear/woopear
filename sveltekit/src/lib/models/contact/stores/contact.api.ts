@@ -42,7 +42,7 @@ export const contactApi = {
 	 */
 	sendMailContact: async (data: IObjectSendMail): Promise<void> => {
 		// envoie mail
-		const response = await fetchProvider.callApiSkillz<IObjectSedMailResponseReceved>(
+		const response = await fetchProvider.callApi<IObjectSedMailResponseReceved>(
 			`${import.meta.env.VITE_URL_API}/emails`,
 			EMethodeFetch.POST,
 			fetchProvider.headersSample(),

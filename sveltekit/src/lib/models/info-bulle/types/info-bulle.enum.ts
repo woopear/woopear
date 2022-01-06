@@ -8,7 +8,8 @@
  * enum pour toutes les erreurs du site
  */
 export const enum EInfoBulleError {
-	CONNEXION = 'Vos identifiant sont incorrect.'
+	CONNEXION = 'Vos identifiant sont incorrect.',
+	SEND_MAIL_REST_PASSWORD_NOK = "Impossible de faire votre demande, l'email n'existe pas, contacter woopear pour ouvrir un compte."
 }
 
 /**

@@ -20,7 +20,7 @@
 </script>
 
 <header
-	class="transition-all duration-300 shadow-md flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4 dark:bg-fondPrincipalDark z-40"
+	class="transition-all duration-300 shadow-md flex items-center flex-none fixed bg-fondPrincipalClaire pl-2 pr-4 h-24 w-full border-b border-gray-300 md:pl-4 dark:bg-fondPrincipalDark z-30"
 >
 	<!-- menu sandwich -->
 	{#if $page.path === '/'}
