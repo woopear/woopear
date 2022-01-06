@@ -11,6 +11,7 @@
 	import type { IPresentationReceved } from '$lib/models/presentation/types/presentation.type';
 	import type { IContactReceved } from '$lib/models/contact/types/contact.type';
 	import InfoBulle from '$lib/models/info-bulle/components/info-bulle.svelte';
+	import ForgotPassword from '$lib/models/forgot-password/components/forgot-password.svelte';
 
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	export const load = async ({ fetch }) => {
@@ -49,6 +50,7 @@
 <Notification />
 <InfoBulle infoBulleError={true} />
 <InfoBulle infoBulleError={false} />
+<ForgotPassword />
 
 <Header />
 

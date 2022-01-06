@@ -9,6 +9,7 @@
 	import type { IConnextionObject } from '../types/connexion.type';
 	import { connexionStore } from '../stores/connexion.store';
 	import { goto } from '$app/navigation';
+	import { forgotPasswordService } from '$lib/models/forgot-password/forgot-password.service';
 
 	let valueIdentifier = '';
 	let valuePassword = '';
@@ -70,7 +71,7 @@
 				typeBtn={EBtnBgColorAction.VALIDATE}
 			/>
 		</div>
-		<div class="mt-6 mx-auto">
+		<div class="mt-6 mx-auto" on:click={forgotPasswordService.activeForgotPassword}>
 			<p class="text-colorone text-xs border-t pt-4 cursor-pointer hover:underline">
 				Mot de passe oublié ?
 			</p>
