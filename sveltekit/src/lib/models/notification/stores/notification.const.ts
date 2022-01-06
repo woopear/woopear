@@ -3,5 +3,5 @@ export const constNotification = {
 };
 
 export const constNotificationSendMailResetPassword = {
-	SEND_MAIL_RESET_PASSWORD_OK: 'Votre demande de mot de passe oublé, à bien été envoyé.'
+	SEND_MAIL_RESET_PASSWORD_OK: 'Votre demande de mot de passe oublié, à bien été envoyé.'
 };
