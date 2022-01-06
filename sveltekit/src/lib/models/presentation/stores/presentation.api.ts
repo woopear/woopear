@@ -30,5 +30,25 @@ export const presentationApi = {
 			// set le store
 			presentationMutation.setPresentation(presentation);
 		}
+	},
+	updatePresentation: async (data):Promise<void> => {
+		console.log(graphqlService.request);
+		
+		const {presentation} = await graphqlService.request<IPresentationReceved>(
+			presentationQuery.updatePresentation
+			);
+			console.log('api', presentation);
+
+		// test si error
+		if (!presentation) {
+			const message = 'il y a eu un probleme à la modification de la presentation';
+			errorService.addNewError(message);
+			throw new Error(message);
+		}
+
+		// set le store
+		presentationMutation.setPresentation(presentation);
 	}
+
+	
 };

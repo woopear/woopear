@@ -10,5 +10,7 @@ export const presentationMutation = {
 			n.presentation = presentation;
 			return n;
 		});
+		console.log('mutation', presentation);
 	}
+	
 };
