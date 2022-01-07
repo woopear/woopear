@@ -13,6 +13,8 @@ export const connexionApi = {
 		try {
 			// connexion
 			const res = await graphqlService.request<ILoginReceved>(connexionQuery.login, data);
+			console.log(res.login.jwt);
+
 			// on set le store currentLogin
 			connexionMutation.setCurrentLogin(res.login);
 			// on set le headers
