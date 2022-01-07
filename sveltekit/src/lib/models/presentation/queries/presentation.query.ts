@@ -29,11 +29,9 @@ export const presentationQuery = {
 		updatePresentation(input: {data: $data}){
 			presentation{
 				title
-				title
 				subTitle
 				description
 			}
-			
 		} 
 	}
 	`
