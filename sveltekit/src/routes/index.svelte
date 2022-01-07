@@ -56,7 +56,6 @@
 		<Loader hPixel="50" wPixel="50" />
 	</div>
 {:else}
-	<div id="woopear" />
 	<!-- box presentation -->
 	<Presentation presentation={$presentationStore.presentation} />
 

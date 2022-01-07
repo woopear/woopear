@@ -12,8 +12,8 @@
 </script>
 
 {#if products.length > 0}
-	<BoxRubricSans>
-		<TitleRubric title="Nos réalisations" addStyle="text-center mt-12" />
+	<BoxRubricSans addStyleDiv="pt-24 lg:pb-24">
+		<TitleRubric title="Nos réalisations" addStyle="md:text-center" />
 		<div class="mt-12 md:flex md:flex-wrap md:justify-evenly md:items-stretch lg:mt-24">
 			{#each products as product}
 				<BoxRubric padding="p-0" addStyleDiv="mb-6 md:w-5/12" addStyle="h-full">

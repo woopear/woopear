@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 
 	export let addStyleMain = '';
 	export let refresh = '';
@@ -7,7 +7,8 @@
 
 {#key refresh}
 	<main
-		class={`transition-all duration-300 relative flex flex-col flex-1 mt-24 bg-fondPrincipalClaire text-fondPrincipalDark dark:bg-fondPrincipalDark dark:text-fondPrincipalClaire ${addStyleMain}`}
+		id="woopear"
+		class={`transition-all duration-300 relative flex flex-col flex-1 pt-24 bg-fondPrincipalClaire text-fondPrincipalDark dark:bg-fondPrincipalDark dark:text-fondPrincipalClaire ${addStyleMain}`}
 		in:fade={{ duration: 250, delay: 300 }}
 	>
 		<slot />

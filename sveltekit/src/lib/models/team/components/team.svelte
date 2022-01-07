@@ -9,10 +9,13 @@
 </script>
 
 {#if team && 'id' in team}
-	<BoxRubricColor color="bg-[#D6E4FF] dark:bg-[#00143d] transition-all duration-300">
-		<section class="py-12">
+	<BoxRubricColor
+		color="bg-[#D6E4FF] dark:bg-[#00143d] transition-all duration-300"
+		addStyleDiv="py-24"
+	>
+		<section class="pt-8">
 			<!-- title + subtitle -->
-			<div class="text-center md:flex md:flex-col md:items-center">
+			<div class="text-justify md:text-center md:flex md:flex-col md:items-center">
 				<TitleRubric title={team.title} addStyle="mb-8" />
 				<SubTitleRubric subTitle={team.description} addStyle="md:w-9/12 xl:w-6/12" />
 			</div>

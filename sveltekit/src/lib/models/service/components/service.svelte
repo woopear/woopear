@@ -8,10 +8,13 @@
 </script>
 
 {#if services.length > 0}
-	<BoxRubricColor color="bg-[#ffe8ad] dark:bg-[#523a00] transition-all duration-300">
-		<section class="py-12">
+	<BoxRubricColor
+		color="bg-[#ffe8ad] dark:bg-[#523a00] transition-all duration-300"
+		addStyleDiv="py-24"
+	>
+		<section class="pt-8">
 			<!-- title service -->
-			<TitleRubric title="nos services" addStyle="lg:mt-8 lg:mb-8 lg:text-center" />
+			<TitleRubric title="nos services" addStyle="lg:mb-12 lg:text-center" />
 			{#each services as service, index}
 				{#if index % 2 === 0}
 					<!-- cadre avec l'image à gauche -->
