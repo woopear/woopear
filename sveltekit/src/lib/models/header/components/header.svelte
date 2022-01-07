@@ -55,13 +55,13 @@
 				/>
 				<NavItem
 					handlerClickA={clickForSeeMenu}
-					libelle={constItemMenuHeader.service.libelle}
-					link={constItemMenuHeader.service.path}
+					libelle={constItemMenuHeader.method.libelle}
+					link={constItemMenuHeader.method.path}
 				/>
 				<NavItem
 					handlerClickA={clickForSeeMenu}
-					libelle={constItemMenuHeader.method.libelle}
-					link={constItemMenuHeader.method.path}
+					libelle={constItemMenuHeader.service.libelle}
+					link={constItemMenuHeader.service.path}
 				/>
 				<NavItem
 					handlerClickA={clickForSeeMenu}
