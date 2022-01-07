@@ -12,8 +12,8 @@
 </script>
 
 {#if products.length > 0}
-	<BoxRubricSans>
-		<TitleRubric title="Nos réalisations" addStyle="text-center mt-12" />
+	<BoxRubricSans addStyleDiv="pt-24 lg:pb-24">
+		<TitleRubric title="Nos réalisations" addStyle="md:text-center" />
 		<div class="mt-12 md:flex md:flex-wrap md:justify-evenly md:items-stretch lg:mt-24">
 			{#each products as product}
 				<BoxRubric padding="p-0" addStyleDiv="mb-6 md:w-5/12" addStyle="h-full">
@@ -31,7 +31,7 @@
 								<h2 class="font-bold lg:text-3xl">
 									{filterStringService.firstToUppperCase(product.name)}
 								</h2>
-								<BtnLinkText textBtn="Voir le site" myClick={() => goto(`${product.urlLink}`)} />
+								<BtnLinkText textBtn="Voir le site" href={product.urlLink} />
 							</div>
 							<div class="flex items-center pl-4 pb-4">
 								<LogoBookmark addStyleDiv="text-colorone pr-2" />

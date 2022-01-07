@@ -20,6 +20,11 @@
 	});
 </script>
 
+<!-- head -->
+<svelte:head>
+	<title>Woopear | Réinitialisation mot de passe</title>
+</svelte:head>
+
 {#if loader}
 	<Loader />
 {:else}
