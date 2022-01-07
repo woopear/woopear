@@ -26,6 +26,11 @@
 	});
 </script>
 
+<!-- head -->
+<svelte:head>
+	<title>Woopear | Tableau de bord</title>
+</svelte:head>
+
 {#if loader}
 	<Loader />
 {:else}

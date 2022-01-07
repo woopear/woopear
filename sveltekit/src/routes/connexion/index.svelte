@@ -12,6 +12,11 @@
 	});
 </script>
 
+<!-- head -->
+<svelte:head>
+	<title>Woopear | Connexion</title>
+</svelte:head>
+
 <div class="flex flex-1 items-center justify-center">
 	<Connexion />
 </div>

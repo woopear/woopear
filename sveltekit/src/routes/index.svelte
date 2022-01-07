@@ -51,6 +51,11 @@
 	});
 </script>
 
+<!-- head -->
+<svelte:head>
+	<title>Woopear | Accueil</title>
+</svelte:head>
+
 {#if loader}
 	<div class="flex-1 flex justify-center items-center">
 		<Loader hPixel="50" wPixel="50" />
