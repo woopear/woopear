@@ -4,16 +4,16 @@
 
 	export let textBtn: string;
 	export let colorText = 'text-colorone';
-	export let myClick;
+	export let href;
 </script>
 
 {#if textBtn}
-	<button class={`${colorText} flex text-base items-center md:text-lg`} on:click={myClick}>
+	<a class={`${colorText} flex text-base items-center md:text-lg`} {href} target="_blank">
 		<span class="hover:underline mr-1">
 			{filterStringService.firstToUppperCase(textBtn)}
 		</span>
 		<LogoChevronRight />
-	</button>
+	</a>
 {/if}
 
 <!--

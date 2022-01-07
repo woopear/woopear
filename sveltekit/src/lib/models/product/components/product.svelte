@@ -31,7 +31,7 @@
 								<h2 class="font-bold lg:text-3xl">
 									{filterStringService.firstToUppperCase(product.name)}
 								</h2>
-								<BtnLinkText textBtn="Voir le site" myClick={() => goto(`${product.urlLink}`)} />
+								<BtnLinkText textBtn="Voir le site" href={product.urlLink} />
 							</div>
 							<div class="flex items-center pl-4 pb-4">
 								<LogoBookmark addStyleDiv="text-colorone pr-2" />
