@@ -30,7 +30,9 @@ export const enum EInfoBulleLogo {
 	DISCONNECT = 'Vous déconnectez',
 	CONNEXION = 'Vous connectez',
 }
-
+/**
+ * enum pour dire que l'action effectuer s'est bien passé
+ */
 export const enum EInfoBulleValider {
 	PRESENTATION = 'Modification présentation réussi'
 

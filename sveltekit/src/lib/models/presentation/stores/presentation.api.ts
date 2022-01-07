@@ -34,16 +34,21 @@ export const presentationApi = {
 			presentationMutation.setPresentation(presentation);
 		}
 	},
+
+	/**
+	 * modification de la presentation
+	 * @param data le formdata de la modifcation effectuer
+	 * @param e l'event du click a la modification
+	 */
 	updatePresentation: async (data, e):Promise<void> => {
-		console.log(graphqlService.request);
-		console.log('dataApi',data);
+
 		try{
 			const {updatePresentation} = await graphqlService.request<IPresentationUpdateReceved>(
 				presentationQuery.updatePresentation,{data: data}
 				);
-				console.log('api', updatePresentation);
-				
+				// config info bulle
 				infoBulleService.setInfoBubbleText(EInfoBulleValider.PRESENTATION)
+				
 				// sub à presentation
 				const p = presentationGetter.getterPresentation();
 				
