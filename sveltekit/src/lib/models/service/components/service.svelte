@@ -17,7 +17,7 @@
 					<!-- cadre avec l'image à gauche -->
 					<section class="py-8 sm:py-12 sm:flex sm:items-start">
 						<div
-							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:mr-4 lg:h-72 xl:h-96"
+							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:mr-12 lg:h-72 xl:h-96"
 							style={service.image !== null
 								? `background-image: url("${import.meta.env.VITE_URL_API_IMG}${
 										service.image.formats.small.url
@@ -37,7 +37,7 @@
 					<!-- cadre avec l'image droite -->
 					<section class="py-8 sm:py-12 sm:flex sm:items-start sm:flex-row-reverse">
 						<div
-							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:mr-4 lg:h-72 xl:h-96"
+							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:ml-12 lg:h-72 xl:h-96"
 							style={service.image !== null
 								? `background-image: url("${import.meta.env.VITE_URL_API_IMG}${
 										service.image.formats.small.url
