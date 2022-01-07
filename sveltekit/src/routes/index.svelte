@@ -22,11 +22,17 @@
 	import { productService } from '$lib/models/product/product.service';
 	import { productStore } from '$lib/models/product/stores/product.store';
 	import Loader from '$lib/models/loader/components/loader.svelte';
+	import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
 
 	let loader = true;
 
 	onMount(async () => {
 		loader = true;
+		// reset info bulle
+		infoBulleService.resetXAndYInfoBubble();
+		infoBulleService.resetXAndYInfoBubbleText();
+		infoBulleService.setInfoBubbleText('');
+		infoBulleService.setInfoBubbleError('');
 		// on recupere la presentation
 		await presentationService.getPresentation();
 		// on recupere la method

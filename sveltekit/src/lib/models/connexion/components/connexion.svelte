@@ -9,9 +9,16 @@
 	import type { IConnextionObject } from '../types/connexion.type';
 	import { connexionStore } from '../stores/connexion.store';
 	import { goto } from '$app/navigation';
+	import { forgotPasswordService } from '$lib/models/forgot-password/forgot-password.service';
 
 	let valueIdentifier = '';
 	let valuePassword = '';
+	let event: MouseEvent;
+
+	// recuperation du event click sur le btn pour afficher l'info bulle error à l'endroit du click
+	const hanlderClickBtnAction = (e): void => {
+		event = e;
+	};
 
 	// connexion user => go vers le dashboard
 	const handlerForm = async (e): Promise<void> => {
@@ -19,7 +26,7 @@
 		const formData: IConnextionObject = formProvider.createFormData(e.target);
 
 		// connexion user
-		await connexionService.login(formData);
+		await connexionService.login(formData, event);
 
 		// efface les inputs
 		valueIdentifier = '';
@@ -48,16 +55,23 @@
 			name="identifier"
 			bind:value={valueIdentifier}
 		/>
-		<Input placeholder="Mot de passe" required={true} name="password" bind:value={valuePassword} />
+		<Input
+			placeholder="Mot de passe"
+			type="password"
+			password={true}
+			required={true}
+			name="password"
+			bind:value={valuePassword}
+		/>
 		<div class="mt-4 ml-auto">
 			<BtnAction
-				handlerClick={undefined}
+				handlerClick={hanlderClickBtnAction}
 				textBtn="se connecter"
 				sizeBtn={EBtnSizeAction.MEDIUM}
 				typeBtn={EBtnBgColorAction.VALIDATE}
 			/>
 		</div>
-		<div class="mt-6 mx-auto">
+		<div class="mt-6 mx-auto" on:click={forgotPasswordService.activeForgotPassword}>
 			<p class="text-colorone text-xs border-t pt-4 cursor-pointer hover:underline">
 				Mot de passe oublié ?
 			</p>

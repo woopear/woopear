@@ -55,7 +55,7 @@ export const fetchProvider = {
 	 * @param data => les données à envoyer
 	 * @returns
 	 */
-	callApiSkillz: async function <T>(
+	callApi: async function <T>(
 		url: string,
 		method: EMethodeFetch,
 		header: HeadersInit,
