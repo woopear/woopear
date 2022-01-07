@@ -1,3 +1,6 @@
+import { EInfoBulleError, EInfoBulleValider } from '$lib/models/info-bulle/types/info-bulle.enum';
+import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
+import type { IPresentationUpdateReceved } from './../types/presentation.type';
 import { errorService } from '$lib/models/error/error.service';
 import { graphqlService } from '$lib/models/graphql/graphql.service';
 import { presentationQuery } from '../queries/presentation.query';
@@ -31,24 +34,27 @@ export const presentationApi = {
 			presentationMutation.setPresentation(presentation);
 		}
 	},
-	updatePresentation: async (data):Promise<void> => {
+	updatePresentation: async (data, e):Promise<void> => {
 		console.log(graphqlService.request);
-		
-		const {presentation} = await graphqlService.request<IPresentationReceved>(
-			presentationQuery.updatePresentation
-			);
-			console.log('api', presentation);
-
-		// test si error
-		if (!presentation) {
-			const message = 'il y a eu un probleme à la modification de la presentation';
-			errorService.addNewError(message);
-			throw new Error(message);
+		console.log('dataApi',data);
+		try{
+			const {updatePresentation} = await graphqlService.request<IPresentationUpdateReceved>(
+				presentationQuery.updatePresentation,{data: data}
+				);
+				console.log('api', updatePresentation);
+				
+				infoBulleService.setInfoBubbleText(EInfoBulleValider.PRESENTATION)
+				// sub à presentation
+				const p = presentationGetter.getterPresentation();
+				
+				// set le store
+				presentationMutation.setPresentation(updatePresentation.presentation);
+		} catch(error){
+			// config info bulle
+			infoBulleService.setInfoBubbleError(EInfoBulleError.MODIFICATION_PRESENTATION);
+			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
+			infoBulleService.definePositionYInfoBubble(e);
+			throw new Error(EInfoBulleError.MODIFICATION_PRESENTATION);
 		}
-
-		// set le store
-		presentationMutation.setPresentation(presentation);
 	}
-
-	
 };

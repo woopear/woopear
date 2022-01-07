@@ -9,7 +9,8 @@
  */
 export const enum EInfoBulleError {
 	CONNEXION = 'Vos identifiant sont incorrect.',
-	SEND_MAIL_REST_PASSWORD_NOK = "Impossible de faire votre demande, l'email n'existe pas, contacter woopear pour ouvrir un compte."
+	SEND_MAIL_REST_PASSWORD_NOK = "Impossible de faire votre demande, l'email n'existe pas, contacter woopear pour ouvrir un compte.",
+	MODIFICATION_PRESENTATION = "une erreur c'est produit a la modification de la présentation"
 }
 
 /**
@@ -27,5 +28,10 @@ export const enum EInfoBulleLogo {
 	HOME = "Retour à l'accueil",
 	DASHBOARD = 'Votre tableau de bord',
 	DISCONNECT = 'Vous déconnectez',
-	CONNEXION = 'Vous connectez'
+	CONNEXION = 'Vous connectez',
+}
+
+export const enum EInfoBulleValider {
+	PRESENTATION = 'Modification présentation réussi'
+
 }
