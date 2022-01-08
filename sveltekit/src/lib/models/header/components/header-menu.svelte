@@ -12,7 +12,7 @@
 	// liste des paths où le menu n'apparait pas
 	let pathsMenu = ['/connexion', '/forgot-password'];
 	let pathMenuPrincipal = ['/'];
-	let pathMenuDashboard = ['/dashboard'];
+	let pathMenuDashboard = ['/dashboard', '/dashboard/mentions-legales'];
 </script>
 
 <!-- menu sandwich -->
