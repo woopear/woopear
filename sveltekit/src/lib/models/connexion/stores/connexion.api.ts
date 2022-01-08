@@ -4,6 +4,7 @@ import { connexionQuery } from '../queries/connexion.query';
 import type { IConnextionObject, ILoginReceved } from '../types/connexion.type';
 import { connexionMutation } from './connexion.mutation';
 import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
+import { userService } from '$lib/models/users/user.service';
 
 export const connexionApi = {
 	/**
@@ -21,6 +22,10 @@ export const connexionApi = {
 			graphqlService.setHeaders({
 				Authorization: `Bearer ${res.login.jwt}`
 			});
+
+			// set userCurrent avec le currentLogin
+			// pour les informations du user connecté
+			await userService.getUserCurrent(e);
 		} catch (error) {
 			// config info bulle
 			infoBulleService.setInfoBubbleError(EInfoBulleError.CONNEXION);
@@ -35,6 +40,7 @@ export const connexionApi = {
 	 */
 	logout: (): void => {
 		connexionMutation.resetCurrentLogin();
+		userService.resetUserCurrent();
 		graphqlService.setHeader('Authorization', '');
 	}
 };
