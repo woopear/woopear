@@ -36,7 +36,7 @@
 <!-- contenu du menu -->
 {#if !pathsMenu.includes($page.path)}
 	<nav
-		class={`transition-all duration-300 absolute top-24 ${addStyleNav} w-full min-h-screen md:static md:min-h-min`}
+		class={`transition-all duration-300 absolute top-24 ${addStyleNav} w-full min-h-screen md:static md:min-h-min lg:pl-8`}
 	>
 		<ul class="">
 			{#if pathMenuPrincipal.includes($page.path)}

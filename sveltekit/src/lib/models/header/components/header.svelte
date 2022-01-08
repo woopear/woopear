@@ -1,7 +1,8 @@
 <script lang="ts">
 	import NavItem from './nav-item.svelte';
-	import { constItemMenuHeader } from '../stores/header.const';
+	import { constItemMenuDashbord, constItemMenuHeader } from '../stores/header.const';
 	import HeaderMenu from './header-menu.svelte';
+	import { connexionStore } from '$lib/models/connexion/stores/connexion.store';
 
 	let styleDiv = `group close cursor-pointer h-12 w-12 relative ml-2`;
 	let addStyleNav = `-left-full`;
@@ -64,11 +65,15 @@
 			slot="menu-dashboard"
 			class="px-4 py-4 bg-fondPrincipalClaire min-h-screen md:min-h-min md:bg-transparent md:flex md:flex-row md:p-0 dark:bg-fondPrincipalDark"
 		>
-			<NavItem
-				handlerClickA={clickForSeeMenu}
-				libelle={constItemMenuHeader.contact.libelle}
-				link={constItemMenuHeader.contact.path}
-			/>
+			{#if $connexionStore.currentLogin.user}
+				{#if $connexionStore.currentLogin.user.role.type === 'root'}
+					<NavItem
+						handlerClickA={clickForSeeMenu}
+						libelle={constItemMenuDashbord.mentionlegales.libelle}
+						link={constItemMenuDashbord.mentionlegales.path}
+					/>
+				{/if}
+			{/if}
 		</div>
 	</HeaderMenu>
 </header>
