@@ -29,5 +29,12 @@ export const enum EInfoBulleLogo {
 	HOME = "Retour à l'accueil",
 	DASHBOARD = 'Votre tableau de bord',
 	DISCONNECT = 'Vous déconnectez',
-	CONNEXION = 'Vous connectez'
+	CONNEXION = 'Vous connectez',
+}
+/**
+ * enum pour dire que l'action effectuer s'est bien passé
+ */
+export const enum EInfoBulleValider {
+	PRESENTATION = 'Modification présentation réussi'
+
 }
