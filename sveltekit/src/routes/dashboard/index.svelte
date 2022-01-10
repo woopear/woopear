@@ -4,6 +4,7 @@
 	import { connexionStore } from '$lib/models/connexion/stores/connexion.store';
 	import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
 	import Loader from '$lib/models/loader/components/loader.svelte';
+	import UserProfil from '$lib/models/users/components/user-profil.svelte';
 	import { onMount } from 'svelte';
 
 	let loader = true;
@@ -26,8 +27,13 @@
 	});
 </script>
 
+<!-- head -->
+<svelte:head>
+	<title>Utilisateur | Tableau de bord</title>
+</svelte:head>
+
 {#if loader}
 	<Loader />
 {:else}
-	<p>dashbord</p>
+	<UserProfil />
 {/if}

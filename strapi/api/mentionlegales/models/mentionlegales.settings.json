@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mentionlegales",
+  "info": {
+    "name": "mentionlegales",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "activate": {
+      "type": "boolean"
+    },
+    "articlementions": {
+      "collection": "articlementions",
+      "via": "mentionlegales",
+      "dominant": true
+    }
+  }
+}

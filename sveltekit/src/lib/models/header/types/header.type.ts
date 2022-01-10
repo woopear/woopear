@@ -11,3 +11,7 @@ export interface IItemMenuHeader {
 	product?: IItemMenu;
 	contact?: IItemMenu;
 }
+
+export interface IItemMenuDashboard {
+	mentionlegales?: IItemMenu;
+}

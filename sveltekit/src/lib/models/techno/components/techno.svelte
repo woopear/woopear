@@ -11,7 +11,7 @@
 {#if $technoStore.technos.length > 0}
 	<BoxRubricSans>
 		<TitleRubric title="nos technos" addStyle="text-center mt-12" />
-		<section class="scroll flex sm:justify-center mt-10 mb-6 overflow-auto pb-6">
+		<section class="scroll flex sm:justify-center mt-10 overflow-auto">
 			{#each technos as techno}
 				<div class="items-scroll flex flex-nowrap flex-col items-center">
 					<div class="flex flex-col items-center w-28">

@@ -38,8 +38,11 @@
 
 {#if presentation}
 	<!-- partie public -->
-	<BoxRubricColor color="bg-[#DCFFD6] dark:bg-[#062900] transition-all duration-300">
-		<section id="woopear" class="py-12 md:py-16 lg:flex lg:items-start lg:justify-center lg:mt-8">
+	<BoxRubricColor
+		color="bg-[#DCFFD6] dark:bg-[#062900] transition-all duration-300"
+		addStyleDiv="py-24"
+	>
+		<section class=" lg:flex lg:items-start lg:justify-center">
 			<img
 				class="h-32 w-32 m-auto md:w-44 md:h-44 lg:m-0 lg:mr-16 xl:mr-28 xl:w-52 xl:h-52"
 				src={presentation.image !== null

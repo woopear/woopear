@@ -8,16 +8,19 @@
 </script>
 
 {#if services.length > 0}
-	<BoxRubricColor color="bg-[#ffe8ad] dark:bg-[#523a00] transition-all duration-300">
-		<section class="py-12">
+	<BoxRubricColor
+		color="bg-[#ffe8ad] dark:bg-[#523a00] transition-all duration-300"
+		addStyleDiv="py-24"
+	>
+		<section class="pt-8">
 			<!-- title service -->
-			<TitleRubric title="nos services" addStyle="lg:mt-8 lg:mb-8 lg:text-center" />
+			<TitleRubric title="nos services" addStyle="lg:mb-12 lg:text-center" />
 			{#each services as service, index}
 				{#if index % 2 === 0}
 					<!-- cadre avec l'image à gauche -->
 					<section class="py-8 sm:py-12 sm:flex sm:items-start">
 						<div
-							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:mr-4 lg:h-72 xl:h-96"
+							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:mr-12 lg:h-72 xl:h-96"
 							style={service.image !== null
 								? `background-image: url("${import.meta.env.VITE_URL_API_IMG}${
 										service.image.formats.small.url
@@ -37,7 +40,7 @@
 					<!-- cadre avec l'image droite -->
 					<section class="py-8 sm:py-12 sm:flex sm:items-start sm:flex-row-reverse">
 						<div
-							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:mr-4 lg:h-72 xl:h-96"
+							class="rounded-lg bg-cover bg-center w-full h-40 sm:flex-none sm:w-1/2 sm:ml-12 lg:h-72 xl:h-96"
 							style={service.image !== null
 								? `background-image: url("${import.meta.env.VITE_URL_API_IMG}${
 										service.image.formats.small.url

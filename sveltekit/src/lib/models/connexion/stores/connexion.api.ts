@@ -4,24 +4,34 @@ import { connexionQuery } from '../queries/connexion.query';
 import type { IConnextionObject, ILoginReceved } from '../types/connexion.type';
 import { connexionMutation } from './connexion.mutation';
 import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
+import { userService } from '$lib/models/users/user.service';
 
 export const connexionApi = {
 	/**
 	 * connexion user recupere le login
 	 */
-	login: async (data: IConnextionObject, e): Promise<void> => {
+	login: async (data: IConnextionObject, e: MouseEvent): Promise<void> => {
 		try {
+			// connexion
 			const res = await graphqlService.request<ILoginReceved>(connexionQuery.login, data);
+			console.log(res.login.jwt);
+
+			// on set le store currentLogin
 			connexionMutation.setCurrentLogin(res.login);
+			// on set le headers
 			graphqlService.setHeaders({
-				authorization: `Bearer ${res.login.jwt}`
+				Authorization: `Bearer ${res.login.jwt}`
 			});
+
+			// set userCurrent avec le currentLogin
+			// pour les informations du user connecté
+			await userService.getUserCurrent(e);
 		} catch (error) {
 			// config info bulle
 			infoBulleService.setInfoBubbleError(EInfoBulleError.CONNEXION);
 			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
 			infoBulleService.definePositionYInfoBubble(e);
-			throw new Error('Veuillez renseigner des identifiants valide !');
+			throw new Error(EInfoBulleError.CONNEXION);
 		}
 	},
 
@@ -30,6 +40,7 @@ export const connexionApi = {
 	 */
 	logout: (): void => {
 		connexionMutation.resetCurrentLogin();
-		graphqlService.setHeader('authorization', '');
+		userService.resetUserCurrent();
+		graphqlService.setHeader('Authorization', '');
 	}
 };

@@ -30,9 +30,9 @@
 </script>
 
 {#if contact}
-	<form class="mt-12 lg:mt-24 mb-32 flex justify-center" on:submit|preventDefault={handlerForm}>
+	<form class="py-24 flex justify-center" on:submit|preventDefault={handlerForm}>
 		<BoxRubric
-			addStyle="shadow-lg flex flex-col items-center"
+			addStyle="mt-8 shadow-lg flex flex-col items-center"
 			addStyleDiv="w-11/12 sm:w-7/12 lg:w-9/12 xl:w-7/12"
 			padding="p-6 lg:p-24"
 		>
