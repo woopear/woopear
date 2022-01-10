@@ -7,7 +7,10 @@
 	import Input from '$lib/models/input/components/input.svelte';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import TextContentRubric from '$lib/models/text-content-rubric/components/text-content-rubric.svelte';
+	import Textarea from '$lib/models/textarea/textarea.svelte';
 	import TitleRubric from '$lib/models/title-rubric/components/title-rubric.svelte';
+	import { userStore } from '$lib/models/users/stores/user.store';
+	import { userService } from '$lib/models/users/user.service';
 	import { formProvider } from '$lib/providers/form/form.service';
 	import { presentationService } from '../presentation.service';
 	import { presentationGetter } from '../stores/presentation.getter';
@@ -15,6 +18,8 @@
 
 	export let presentation: IPresentation;
 	let event: MouseEvent;
+
+	console.log($userStore.userCurrent.role.name);
 
 	// recuperation du event click sur le btn pour afficher l'info bulle error à l'endroit du click
 	const hanlderClickBtnAction = (e): void => {
@@ -36,7 +41,7 @@
 	}
 </script>
 
-{#if presentation}
+{#if presentation && $userStore.userCurrent.role.name != 'Root'}
 	<!-- partie public -->
 	<BoxRubricColor
 		color="bg-[#DCFFD6] dark:bg-[#062900] transition-all duration-300"
@@ -57,37 +62,40 @@
 			</article>
 		</section>
 	</BoxRubricColor>
-{:else if presentation}
+{:else if presentation && $userStore.userCurrent.role.name === 'Root'}
 	<!-- partie admin -->
-	<form
-		on:submit|preventDefault={updatePresentation}
-		class="mt-12 lg:mt-24 mb-32 flex justify-center"
+	<BoxRubricColor
+		color="bg-[#DCFFD6] dark:bg-[#062900] transition-all duration-300"
+		addStyleDiv="py-24"
 	>
-		<BoxRubric
-			addStyle="shadow-lg flex flex-col items-center"
-			addStyleDiv="w-11/12 sm:w-7/12 lg:w-9/12 xl:w-7/12"
-			padding="p-6 lg:p-24"
+		<form
+			on:submit|preventDefault={updatePresentation}
+			class="mt-12 lg:mt-24 mb-32 flex justify-center"
 		>
-			<div>
-				<h3>titre</h3>
-				<Input value={presentation.title} addDiv="flex" required name="title" />
-			</div>
-			<div>
-				<h3>sous-titre</h3>
-				<Input value={presentation.subTitle} addDiv="flex" required name="subTitle" />
-			</div>
-			<div>
-				<h3>description</h3>
+			<BoxRubric
+				addStyle="shadow-lg flex flex-col items-center"
+				addStyleDiv="w-11/12 sm:w-7/12 lg:w-9/12 xl:w-7/12"
+				padding="p-6 lg:p-24"
+			>
+				<div>
+					<h3>titre</h3>
+					<Input value={presentation.title} required name="title" />
+				</div>
+				<div>
+					<h3>sous-titre</h3>
+					<Input value={presentation.subTitle} required name="subTitle" />
+				</div>
+				<div>
+					<h3>description</h3>
 
-				<textarea
-					bind:value={presentation.description}
-					required
-					name="description"
-					rows="5"
-					placeholder="ici le text de la présentation"
-					class="transition-all duration-300 w-full border-2 border-gray-300 py-2 px-4 rounded-lg focus:outline-none focus:border-colorone dark:bg-fondSecondaireDark"
-				/>
-				<!-- </div>
+					<Textarea
+						bind:value={presentation.description}
+						required
+						name="description"
+						rows="5"
+						placeholder="ici le text de la présentation"
+					/>
+					<!-- </div>
 			<InputFile
 				addDiv="flex"
 				required
@@ -95,15 +103,16 @@
 				class="transition-all duration-300 w-full border-2 border-gray-300 py-2 px-4 rounded-lg focus:outline-none focus:border-colorone dark:bg-fondSecondaireDark"
 			/>
 			<div /> -->
-				<div>
-					<BtnAction
-						textBtn="Modifier"
-						handlerClick={hanlderClickBtnAction}
-						typeBtn={EBtnBgColorAction.VALIDATE}
-						sizeBtn={EBtnSizeAction.MEDIUM}
-					/>
-				</div>
-			</div></BoxRubric
-		>
-	</form>
+					<div>
+						<BtnAction
+							textBtn="Modifier"
+							handlerClick={hanlderClickBtnAction}
+							typeBtn={EBtnBgColorAction.VALIDATE}
+							sizeBtn={EBtnSizeAction.MEDIUM}
+						/>
+					</div>
+				</div></BoxRubric
+			>
+		</form>
+	</BoxRubricColor>
 {/if}
