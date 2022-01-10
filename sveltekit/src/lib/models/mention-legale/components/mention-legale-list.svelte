@@ -2,6 +2,8 @@
 	import { goto } from '$app/navigation';
 	import BtnAction from '$lib/models/btn-action/components/btn-action.svelte';
 	import { EBtnBgColorAction, EBtnSizeAction } from '$lib/models/btn-action/types/btn-action.enum';
+	import LogoPencil from '$lib/models/logo/components/logo-pencil.svelte';
+	import LogoTrash from '$lib/models/logo/components/logo-trash.svelte';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 	import { mentionLegaleStore } from '../stores/mention-legale.store';
@@ -25,6 +27,7 @@
 				<th class="border border-gray-200" scope="col">id</th>
 				<th class="border border-gray-200" scope="col">activé</th>
 				<th class="border border-gray-200" scope="col">articles</th>
+				<th class="border border-gray-200" scope="col">actions</th>
 				<th class="border border-gray-200" scope="col">creation</th>
 				<th class="border border-gray-200" scope="col">publication</th>
 			</tr>
@@ -36,6 +39,12 @@
 						<td class="border border-gray-200">{mention.id}</td>
 						<td class="border border-gray-200">{mention.activate ? 'oui' : 'non'}</td>
 						<td class="border border-gray-200">{mention.articlementions.length}</td>
+						<td class="border border-gray-200">
+							<div class="flex items-center justify-start">
+								<LogoPencil handlerClick={undefined} />
+								<LogoTrash handlerClick={undefined} />
+							</div>
+						</td>
 						<td class="border border-gray-200"
 							>{filterStringService.separateDateOfHours(
 								new Date(mention.created_at).toLocaleString(),
