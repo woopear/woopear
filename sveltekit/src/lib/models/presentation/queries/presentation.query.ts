@@ -31,6 +31,15 @@ export const presentationQuery = {
 				title
 				subTitle
 				description
+				image {
+					id
+					name
+					alternativeText
+					url
+					formats
+				}
+				created_at
+				updated_at
 			}
 		} 
 	}
