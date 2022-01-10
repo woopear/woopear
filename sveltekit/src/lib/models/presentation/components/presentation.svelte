@@ -7,13 +7,11 @@
 	import Input from '$lib/models/input/components/input.svelte';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import TextContentRubric from '$lib/models/text-content-rubric/components/text-content-rubric.svelte';
-	import Textarea from '$lib/models/textarea/textarea.svelte';
+	import Textarea from '$lib/models/textarea/components/textarea.svelte';
 	import TitleRubric from '$lib/models/title-rubric/components/title-rubric.svelte';
 	import { userStore } from '$lib/models/users/stores/user.store';
-	import { userService } from '$lib/models/users/user.service';
 	import { formProvider } from '$lib/providers/form/form.service';
 	import { presentationService } from '../presentation.service';
-	import { presentationGetter } from '../stores/presentation.getter';
 	import type { IPresentation } from '../types/presentation.type';
 
 	export let presentation: IPresentation;
