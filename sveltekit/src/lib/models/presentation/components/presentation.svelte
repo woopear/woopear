@@ -19,8 +19,6 @@
 	export let presentation: IPresentation;
 	let event: MouseEvent;
 
-	console.log($userStore.userCurrent.role.name);
-
 	// recuperation du event click sur le btn pour afficher l'info bulle error à l'endroit du click
 	const hanlderClickBtnAction = (e): void => {
 		event = e;
@@ -41,7 +39,7 @@
 	}
 </script>
 
-{#if presentation && $userStore.userCurrent.role.name != 'Root'}
+{#if (presentation && $userStore.userCurrent) || (presentation && $userStore.userCurrent === null)}
 	<!-- partie public -->
 	<BoxRubricColor
 		color="bg-[#DCFFD6] dark:bg-[#062900] transition-all duration-300"
