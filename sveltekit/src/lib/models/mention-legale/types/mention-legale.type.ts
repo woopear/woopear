@@ -8,7 +8,7 @@ export interface IMention extends IDateModel {
 	id?: string;
 	activate?: boolean;
 	published_at?: string;
-	articlementions?: IArticleMention;
+	articlementions?: IArticleMention[];
 }
 
 /**

@@ -1,14 +1,17 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-
 	import BtnAction from '$lib/models/btn-action/components/btn-action.svelte';
 	import { EBtnBgColorAction, EBtnSizeAction } from '$lib/models/btn-action/types/btn-action.enum';
+	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
+	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 	import { mentionLegaleStore } from '../stores/mention-legale.store';
 </script>
 
 <section class="mt-12 ml-4">
+	<SubTitleRubric subTitle="Mention-légale : " />
+
 	<BtnAction
-		addStyle="mb-8"
+		addStyle="mb-8 mt-8"
 		textBtn="creer une mention"
 		sizeBtn={EBtnSizeAction.SMALL}
 		typeBtn={EBtnBgColorAction.VALIDATE}
@@ -33,8 +36,18 @@
 						<td class="border border-gray-200">{mention.id}</td>
 						<td class="border border-gray-200">{mention.activate ? 'oui' : 'non'}</td>
 						<td class="border border-gray-200">{mention.articlementions.length}</td>
-						<td class="border border-gray-200">{mention.created_at}</td>
-						<td class="border border-gray-200">{mention.published_at}</td>
+						<td class="border border-gray-200"
+							>{filterStringService.separateDateOfHours(
+								new Date(mention.created_at).toLocaleString(),
+								' à'
+							)}</td
+						>
+						<td class="border border-gray-200"
+							>{filterStringService.separateDateOfHours(
+								new Date(mention.published_at).toLocaleString(),
+								' à'
+							)}</td
+						>
 					</tr>
 				{/each}
 			{:else}

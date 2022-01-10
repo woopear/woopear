@@ -23,5 +23,31 @@ export const mentionLegaleQuery = {
 				}
 			}
 		}
+	`,
+
+	/**
+	 * creation mention legale
+	 */
+	addMention: gql`
+		mutation addMention($mentionLegale: MentionlegaleInput) {
+			createMentionlegale(input: { data: $mentionLegale }) {
+				mentionlegale {
+					id
+					created_at
+					updated_at
+					activate
+					published_at
+					articlementions {
+						id
+						created_at
+						updated_at
+						title
+						subTitle
+						content
+						published_at
+					}
+				}
+			}
+		}
 	`
 };

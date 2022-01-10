@@ -10,5 +10,17 @@ export const mentionLegaleMutation = {
 			n.mentionLegales = mentions;
 			return n;
 		});
+	},
+
+	/**
+	 * ajout nouvelle mention legale
+	 */
+	addNewMention: (value: IMention): void => {
+		mentionLegaleStore.update((n) => {
+			// si la mention existe deja on l'enleve
+			n.mentionLegales = n.mentionLegales.filter((el) => el !== value);
+			n.mentionLegales = [...n.mentionLegales, value];
+			return n;
+		});
 	}
 };
