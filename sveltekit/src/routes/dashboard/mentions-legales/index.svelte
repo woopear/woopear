@@ -5,10 +5,14 @@
 	import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
 	import { onMount } from 'svelte';
 	import Loader from '$lib/models/loader/components/loader.svelte';
+	import MentionLegaleList from '$lib/models/mention-legale/components/mention-legale-list.svelte';
+	import { mentionLegaleService } from '$lib/models/mention-legale/mention-legale.service';
+	import ArticleMentionList from '$lib/models/article-mention/components/article-mention-list.svelte';
+	import { articleMentionService } from '$lib/models/article-mention/article-mention.service';
 
 	let loader = true;
 
-	onMount(() => {
+	onMount(async () => {
 		// reset info bulle
 		infoBulleService.resetXAndYInfoBubble();
 		infoBulleService.resetXAndYInfoBubbleText();
@@ -22,6 +26,12 @@
 			return;
 		}
 
+		// recupere les mention legale
+		await mentionLegaleService.getAllMentionLegale();
+
+		// recupere les article mention
+		await articleMentionService.getAllArticleMentions();
+
 		loader = false;
 	});
 </script>
@@ -34,5 +44,6 @@
 {#if loader}
 	<Loader />
 {:else}
-	<p>partie modification mention legales</p>
+	<MentionLegaleList />
+	<ArticleMentionList />
 {/if}
