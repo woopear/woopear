@@ -44,6 +44,8 @@
 {#if loader}
 	<Loader />
 {:else}
-	<MentionLegaleList />
-	<ArticleMentionList />
+	<div class="mb-12">
+		<MentionLegaleList />
+		<ArticleMentionList />
+	</div>
 {/if}

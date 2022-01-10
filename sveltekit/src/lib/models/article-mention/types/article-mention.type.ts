@@ -14,6 +14,13 @@ export interface IArticleMention {
 /**
  * interface de tous les articles mentions reçus
  */
-export interface IArticleMentionReceved {
+export interface IArticleMentionsReceved {
 	articlementions?: IArticleMention[];
+}
+
+/**
+ * interface d'un article reçus
+ */
+export interface IArticleMentionReceved {
+	articlemention?: IArticleMention;
 }

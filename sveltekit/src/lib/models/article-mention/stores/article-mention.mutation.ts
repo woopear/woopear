@@ -10,5 +10,14 @@ export const articleMentionMutation = {
 			n.articleMentions = articleMentions;
 			return n;
 		});
+	},
+
+	addArticleMention: (value: IArticleMention): void => {
+		articleMentionStore.update((n) => {
+			// si la mention existe deja on l'enleve
+			n.articleMentions = n.articleMentions.filter((el) => el !== value);
+			n.articleMentions = [...n.articleMentions, value];
+			return n;
+		});
 	}
 };
