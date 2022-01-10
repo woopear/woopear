@@ -53,7 +53,7 @@
 
 		<!-- input check pour liste article -->
 		{#if $articleMentionStore.articleMentions.length > 0}
-			<TitlePartRubric text="Selectionnez des articles : " />
+			<TitlePartRubric text="Liste des articles : " />
 			{#each $articleMentionStore.articleMentions as article}
 				<div class="mt-2">
 					<label>
@@ -68,9 +68,7 @@
 				</div>
 			{/each}
 		{:else}
-			<div class="mb-4">
-				<label for="">Selectionnez des articles : </label>
-			</div>
+			<TitlePartRubric text="Liste des articles : " />
 			<div>Aucun article</div>
 		{/if}
 
