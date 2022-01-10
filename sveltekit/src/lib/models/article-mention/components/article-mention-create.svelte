@@ -6,7 +6,7 @@
 	import { EBtnBgColorAction, EBtnSizeAction } from '$lib/models/btn-action/types/btn-action.enum';
 	import Input from '$lib/models/input/components/input.svelte';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
-	import Textarea from '$lib/models/textarea/textarea.svelte';
+	import Textarea from '$lib/models/textarea/components/textarea.svelte';
 	import TitlePartRubric from '$lib/models/title-part-rubric/components/title-part-rubric.svelte';
 	import { formProvider } from '$lib/providers/form/form.service';
 	import { articleMentionService } from '../article-mention.service';
