@@ -24,7 +24,12 @@
 		infoBulleService.resetXAndYInfoBubbleText();
 	};
 
-	let pathPartAuth = ['/dashboard'];
+	let pathPartAuth = [
+		'/dashboard',
+		'/dashboard/mentions-legales',
+		'/dashboard/mentions-legales/create-mention',
+		'/dashboard/mentions-legales/create-article-mention'
+	];
 </script>
 
 <nav class="transition-all duration-300 fixed p-6 right-0 top-24 z-30 hover:right-0 lg:-right-12">
@@ -42,22 +47,7 @@
 			</div>
 			<BtnDeconnect addStyleDiv="block mb-4" />
 			<!-- si page dashboard woopear + jwt on affiche btn acces dashboard woopear + accueil + deconnexion-->
-		{:else if $page.path === '/dashboard' && $connexionStore.currentLogin.jwt}
-			<!-- go dashboard -->
-			<div
-				on:mouseenter={mouseEnterDiv}
-				on:mouseleave={mouseOutDiv}
-				on:click={() => goto('/dashboard')}
-				class={`transition-all duration-300 mb-4 shadow-lg cursor-pointer w-fit h-fit p-2 rounded-full bg-white hover:shadow-2xl hover:text-colorone md:p-2 lg:p-3 dark:hover:text-colorone`}
-			>
-				<LogoWoopear />
-			</div>
-			<!-- btn deconnection -->
-			<BtnDeconnect addStyleDiv="block mb-4" />
-			<!-- go accueil -->
-			<BtnReturnHome addStyleDiv="mb-4" />
-			<!-- si page dashboard woopear + jwt + role root => on affiche btn acces dashboard woopear + accueil + deconnexion-->
-		{:else if $page.path === '/dashboard/mentions-legales' && $connexionStore.currentLogin.jwt && $connexionStore.currentLogin.user.role.type === 'root'}
+		{:else if pathPartAuth.includes($page.path) && $connexionStore.currentLogin.jwt}
 			<!-- go dashboard -->
 			<div
 				on:mouseenter={mouseEnterDiv}
