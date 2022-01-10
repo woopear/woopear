@@ -29,7 +29,6 @@
 		if (!formData.articlementions) {
 			formData.articlementions = [] as IArticleMention[];
 		}
-		console.log(formData);
 
 		// on enregistre en bdd
 		await mentionLegaleService.createMention(formData);
