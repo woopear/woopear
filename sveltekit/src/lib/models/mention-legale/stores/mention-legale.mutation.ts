@@ -15,11 +15,22 @@ export const mentionLegaleMutation = {
 	/**
 	 * ajout nouvelle mention legale
 	 */
-	addNewMention: (value: IMention): void => {
+	addNewMentionLegale: (value: IMention): void => {
 		mentionLegaleStore.update((n) => {
 			// si la mention existe deja on l'enleve
 			n.mentionLegales = n.mentionLegales.filter((el) => el !== value);
 			n.mentionLegales = [...n.mentionLegales, value];
+			return n;
+		});
+	},
+
+	/**
+	 * remove mention du store mentionLegale
+	 */
+	removeMentionLegale: (id: string): void => {
+		mentionLegaleStore.update((n) => {
+			// si la mention existe deja on l'enleve
+			n.mentionLegales = n.mentionLegales.filter((el) => el.id !== id);
 			return n;
 		});
 	}

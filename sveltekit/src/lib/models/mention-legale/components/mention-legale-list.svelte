@@ -6,6 +6,7 @@
 	import LogoTrash from '$lib/models/logo/components/logo-trash.svelte';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
+	import { mentionLegaleService } from '../mention-legale.service';
 	import { mentionLegaleStore } from '../stores/mention-legale.store';
 
 	// modification mention
@@ -15,7 +16,7 @@
 
 	// suppression mention
 	const deleteMention = (id: string) => {
-		console.log(id);
+		mentionLegaleService.deleteMentionLegale(id);
 	};
 </script>
 

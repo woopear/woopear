@@ -24,3 +24,10 @@ export interface IMentionsReceved {
 export interface IMentionReceved {
 	mentionlegale?: IMention;
 }
+
+/**
+ * interface delete mention reçus
+ */
+export interface IMentionDeleteReceved {
+	deleteMentionlegale?: IMentionReceved;
+}

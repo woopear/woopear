@@ -1,6 +1,12 @@
 import { graphqlService } from '$lib/models/graphql/graphql.service';
+import { mentionLegaleService } from '../mention-legale.service';
 import { mentionLegaleQuery } from '../queries/mention-legale.query';
-import type { IMention, IMentionReceved, IMentionsReceved } from '../types/mention-legale.type';
+import type {
+	IMention,
+	IMentionDeleteReceved,
+	IMentionReceved,
+	IMentionsReceved
+} from '../types/mention-legale.type';
 import { mentionLegaleMutation } from './mention-legale.mutation';
 
 export const mentionLegaleApi = {
@@ -38,7 +44,7 @@ export const mentionLegaleApi = {
 		}
 
 		// ajout mention dans le store mention
-		mentionLegaleMutation.addNewMention(mentionlegale);
+		mentionLegaleMutation.addNewMentionLegale(mentionlegale);
 	},
 
 	/**
@@ -62,6 +68,25 @@ export const mentionLegaleApi = {
 		}
 
 		// ajout mention dans le store mention, si existe deja cela la remplace
-		mentionLegaleMutation.addNewMention(mentionlegale);
+		mentionLegaleMutation.addNewMentionLegale(mentionlegale);
+	},
+
+	/**
+	 * delte mention legale call api
+	 */
+	deleteMentionLegale: async (id: string): Promise<void> => {
+		// remove de la mention dans api
+		const { deleteMentionlegale } = await graphqlService.request<IMentionDeleteReceved>(
+			mentionLegaleQuery.deleteMentionLegale,
+			{ id: id }
+		);
+
+		// si null ou undefined (vide pas d'erreur)
+		if (!deleteMentionlegale) {
+			// error systeme (alert)
+		}
+
+		// on remove la mention du store
+		mentionLegaleService.removeMentionLegale(deleteMentionlegale.mentionlegale.id);
 	}
 };

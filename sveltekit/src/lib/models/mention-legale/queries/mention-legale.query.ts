@@ -75,5 +75,31 @@ export const mentionLegaleQuery = {
 				}
 			}
 		}
+	`,
+
+	/**
+	 * request pour supprimer une mention
+	 */
+	deleteMentionLegale: gql`
+		mutation deleteMention($id: ID!) {
+			deleteMentionlegale(input: { where: { id: $id } }) {
+				mentionlegale {
+					id
+					created_at
+					updated_at
+					activate
+					published_at
+					articlementions {
+						id
+						created_at
+						updated_at
+						title
+						subTitle
+						content
+						published_at
+					}
+				}
+			}
+		}
 	`
 };
