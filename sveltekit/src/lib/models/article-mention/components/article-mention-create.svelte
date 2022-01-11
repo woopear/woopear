@@ -52,7 +52,7 @@
 		<!-- title -->
 		<div>
 			<TitlePartRubric text="Ajouter un titre : " />
-			<Input required={true} placeholder="Mon titre" name="title" bind:value={valuetitle} />
+			<Input required={false} placeholder="Mon titre" name="title" bind:value={valuetitle} />
 		</div>
 
 		<!-- subtitle -->
