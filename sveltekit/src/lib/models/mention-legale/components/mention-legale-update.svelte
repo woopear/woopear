@@ -37,7 +37,7 @@
 		formData.articlementions = articles;
 
 		// update en bdd
-		await mentionLegaleService.updateMention(mention.id, formData);
+		await mentionLegaleService.updateMentionLegale(mention.id, formData, event);
 
 		// on retourne sur la page mention legale
 		goto('/dashboard/mentions-legales');

@@ -15,8 +15,8 @@
 	};
 
 	// suppression mention
-	const deleteMention = async (id: string) => {
-		await mentionLegaleService.delMentionLegale(id);
+	const deleteMention = async (e, id: string) => {
+		await mentionLegaleService.delMentionLegale(id, e);
 	};
 </script>
 
@@ -53,7 +53,7 @@
 						<td class="border border-gray-200">
 							<div class="flex items-center justify-start">
 								<LogoPencil handlerClick={() => updateMention(mention.id)} />
-								<LogoTrash handlerClick={() => deleteMention(mention.id)} />
+								<LogoTrash handlerClick={(e) => deleteMention(e, mention.id)} />
 							</div>
 						</td>
 						<td class="border border-gray-200"

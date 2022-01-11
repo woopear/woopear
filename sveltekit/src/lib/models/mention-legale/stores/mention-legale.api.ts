@@ -1,4 +1,6 @@
 import { graphqlService } from '$lib/models/graphql/graphql.service';
+import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
+import { EInfoBulleError } from '$lib/models/info-bulle/types/info-bulle.enum';
 import { mentionLegaleService } from '../mention-legale.service';
 import { mentionLegaleQuery } from '../queries/mention-legale.query';
 import type {
@@ -31,7 +33,7 @@ export const mentionLegaleApi = {
 	/**
 	 * creation mention legale
 	 */
-	createMention: async (data: IMention): Promise<void> => {
+	createMentionLegale: async (data: IMention, e: MouseEvent): Promise<void> => {
 		// creation mention
 		const { mentionlegale } = await graphqlService.request<IMentionReceved>(
 			mentionLegaleQuery.addMention,
@@ -40,7 +42,11 @@ export const mentionLegaleApi = {
 
 		// si null ou undefined (vide pas d'erreur)
 		if (!mentionlegale) {
-			// error systeme (alert)
+			// config info bulle
+			infoBulleService.setInfoBubbleError(EInfoBulleError.CREATE_MENTIONLEGALE);
+			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
+			infoBulleService.definePositionYInfoBubble(e);
+			throw new Error(EInfoBulleError.CONNEXION);
 		}
 
 		// ajout mention dans le store mention
@@ -52,7 +58,7 @@ export const mentionLegaleApi = {
 	 * @param id => id de la mention
 	 * @param data => donnée à modifier
 	 */
-	updateMention: async (id: string, data: IMention): Promise<void> => {
+	updateMentionLegale: async (id: string, data: IMention, e: MouseEvent): Promise<void> => {
 		// modification
 		const { mentionlegale } = await graphqlService.request<IMentionReceved>(
 			mentionLegaleQuery.updateMention,
@@ -64,7 +70,11 @@ export const mentionLegaleApi = {
 
 		// si null ou undefined (vide pas d'erreur)
 		if (!mentionlegale) {
-			// error systeme (alert)
+			// config info bulle
+			infoBulleService.setInfoBubbleError(EInfoBulleError.UPDATE_MENTIONLEGALE);
+			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
+			infoBulleService.definePositionYInfoBubble(e);
+			throw new Error(EInfoBulleError.CONNEXION);
 		}
 
 		// ajout mention dans le store mention, si existe deja cela la remplace
@@ -74,7 +84,7 @@ export const mentionLegaleApi = {
 	/**
 	 * delte mention legale call api
 	 */
-	delMentionLegale: async (id: string): Promise<void> => {
+	delMentionLegale: async (id: string, e: MouseEvent): Promise<void> => {
 		// remove de la mention dans api
 		const { deleteMentionlegale } = await graphqlService.request<IMentionDeleteReceved>(
 			mentionLegaleQuery.deleteMentionLegale,
@@ -83,7 +93,11 @@ export const mentionLegaleApi = {
 
 		// si null ou undefined (vide pas d'erreur)
 		if (!deleteMentionlegale) {
-			// error systeme (alert)
+			// config info bulle
+			infoBulleService.setInfoBubbleError(EInfoBulleError.DELETE_MENTIONLEGALE);
+			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
+			infoBulleService.definePositionYInfoBubble(e);
+			throw new Error(EInfoBulleError.CONNEXION);
 		}
 
 		// on remove la mention du store
