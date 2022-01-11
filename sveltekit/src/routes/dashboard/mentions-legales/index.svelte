@@ -9,6 +9,7 @@
 	import { mentionLegaleService } from '$lib/models/mention-legale/mention-legale.service';
 	import ArticleMentionList from '$lib/models/article-mention/components/article-mention-list.svelte';
 	import { articleMentionService } from '$lib/models/article-mention/article-mention.service';
+	import { mentionLegaleStore } from '$lib/models/mention-legale/stores/mention-legale.store';
 
 	let loader = true;
 
