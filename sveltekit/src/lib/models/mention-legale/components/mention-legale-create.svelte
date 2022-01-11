@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { articleMentionStore } from '$lib/models/article-mention/stores/article-mention.store';
-	import type { IArticleMention } from '$lib/models/article-mention/types/article-mention.type';
 	import BoxRubric from '$lib/models/box-rubric/components/box-rubric.svelte';
 	import BtnAction from '$lib/models/btn-action/components/btn-action.svelte';
 	import { EBtnBgColorAction, EBtnSizeAction } from '$lib/models/btn-action/types/btn-action.enum';
+	import BtnLinkText from '$lib/models/btn-link-text/components/btn-link-text.svelte';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import TitlePartRubric from '$lib/models/title-part-rubric/components/title-part-rubric.svelte';
 	import { formProvider } from '$lib/providers/form/form.service';
+	import { beforeUpdate } from 'svelte';
 	import { mentionLegaleService } from '../mention-legale.service';
 	import type { IMention } from '../types/mention-legale.type';
 
@@ -34,6 +35,15 @@
 		goto('/dashboard/mentions-legales');
 	};
 </script>
+
+<div class="mt-8 ml-6">
+	<BtnAction
+		textBtn="retour"
+		sizeBtn={EBtnSizeAction.MEDIUM}
+		typeBtn={EBtnBgColorAction.VALIDATE}
+		handlerClick={() => goto('/dashboard/mentions-legales')}
+	/>
+</div>
 
 <BoxRubric addStyleDiv="my-4 ml-4 mr-16">
 	<!-- title -->

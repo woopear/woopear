@@ -44,6 +44,15 @@
 	};
 </script>
 
+<div class="mt-8 ml-6">
+	<BtnAction
+		textBtn="retour"
+		sizeBtn={EBtnSizeAction.MEDIUM}
+		typeBtn={EBtnBgColorAction.VALIDATE}
+		handlerClick={() => goto('/dashboard/mentions-legales')}
+	/>
+</div>
+
 <BoxRubric addStyleDiv="my-4 ml-4 mr-16">
 	<!-- title -->
 	<SubTitleRubric subTitle="Modification de la mention :" />
