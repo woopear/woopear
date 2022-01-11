@@ -7,6 +7,16 @@
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 	import { articleMentionStore } from '../stores/article-mention.store';
+
+	// modification articleMention
+	const updateArticleMention = (id: string) => {
+		goto(`mentions-legales/create-article-mention/article-mention-${id}`);
+	};
+
+	// suppression articleMention
+	const deleteArticleMention = (id: string) => {
+		console.log(id);
+	};
 </script>
 
 <section class="mt-12 ml-4">
@@ -39,8 +49,16 @@
 						<td class="border border-gray-200">{article.title}</td>
 						<td class="border border-gray-200">
 							<div class="flex items-center justify-start">
-								<LogoPencil handlerClick={undefined} />
-								<LogoTrash handlerClick={undefined} />
+								<LogoPencil
+									handlerClick={() => {
+										updateArticleMention(article.id);
+									}}
+								/>
+								<LogoTrash
+									handlerClick={() => {
+										deleteArticleMention(article.id);
+									}}
+								/>
 							</div>
 						</td>
 						<td class="border border-gray-200"

@@ -12,23 +12,25 @@
 	import { articleMentionService } from '../article-mention.service';
 	import type { IArticleMention } from '../types/article-mention.type';
 
-	let valuetitle = '';
-	let valueSubTitle = '';
-	let valueContent = '';
+	export let articleMention: IArticleMention;
+
+	let valuetitle = articleMention.title;
+	let valueSubTitle = articleMention.subTitle;
+	let valueContent = articleMention.content;
 	let event: MouseEvent;
 
-	// click btn formulaire
-	const hanlderClickBtnAction = (e) => {
+	// recuperation du event click sur le btn pour afficher l'info bulle error à l'endroit du click
+	const hanlderClickBtnAction = (e): void => {
 		event = e;
 	};
 
-	// envoie du formulaire
-	const handlerForm = async (e) => {
+	// envoie du formulaire pour modification
+	const handlerForm = async (e): Promise<void> => {
 		// creation du formData
 		const formData = formProvider.createFormData<IArticleMention>(e.target);
 
 		// on enregistre en bdd
-		await articleMentionService.createArticleMention(formData);
+		await articleMentionService.updateArticleMention(articleMention.id, formData);
 
 		// on retourne sur la page mention legale
 		goto('/dashboard/mentions-legales');
@@ -37,9 +39,9 @@
 
 <BoxRubric addStyleDiv="my-4 ml-4 mr-16">
 	<!-- title -->
-	<SubTitleRubric subTitle="Creation d'un article pour une mention :" />
+	<SubTitleRubric subTitle="Modification de l'article :" />
 
-	<form class="mt-8" on:submit|preventDefault={handlerForm}>
+	<form on:submit|preventDefault={handlerForm}>
 		<!-- title -->
 		<div>
 			<TitlePartRubric text="Ajouter un titre : " />
@@ -66,7 +68,7 @@
 		<!-- btn submit -->
 		<div class="mt-6 text-right">
 			<BtnAction
-				textBtn="enregistrer"
+				textBtn="modifier"
 				sizeBtn={EBtnSizeAction.SMALL}
 				typeBtn={EBtnBgColorAction.VALIDATE}
 				handlerClick={hanlderClickBtnAction}

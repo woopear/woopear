@@ -35,5 +35,24 @@ export const articleMentionQuery = {
 				}
 			}
 		}
+	`,
+
+	/**
+	 * modification article
+	 */
+	updateArticleMention: gql`
+		mutation updateArticleMention($id: ID!, $updateArticleMention: editArticlementionInput) {
+			updateArticlemention(input: { where: { id: $id }, data: $updateArticleMention }) {
+				articlemention {
+					id
+					created_at
+					updated_at
+					title
+					subTitle
+					content
+					published_at
+				}
+			}
+		}
 	`
 };

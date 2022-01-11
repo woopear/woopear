@@ -1,6 +1,7 @@
 import { graphqlService } from '$lib/models/graphql/graphql.service';
 import { articleMentionQuery } from '../queries/article-mention.query';
 import type {
+	IArticleMention,
 	IArticleMentionReceved,
 	IArticleMentionsReceved
 } from '../types/article-mention.type';
@@ -40,7 +41,25 @@ export const articleMentionApi = {
 			// error systeme (alert)
 		}
 
-		// ajoute article au store articleMention
+		// ajoute article au store articleMention si existe il le remplace
+		articleMentionMutation.addArticleMention(articlemention);
+	},
+
+	/**
+	 * modification articleMention call api
+	 */
+	updateArticleMention: async (id: string, data: IArticleMention): Promise<void> => {
+		const { articlemention } = await graphqlService.request<IArticleMentionReceved>(
+			articleMentionQuery.updateArticleMention,
+			{ id: id, updateArticleMention: data }
+		);
+
+		// si null ou undefined (vide pas d'erreur)
+		if (!articlemention) {
+			// error systeme (alert)
+		}
+
+		// ajoute article au store articleMention si existe il le remplace
 		articleMentionMutation.addArticleMention(articlemention);
 	}
 };
