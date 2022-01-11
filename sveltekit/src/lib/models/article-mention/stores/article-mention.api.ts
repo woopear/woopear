@@ -2,6 +2,8 @@ import { graphqlService } from '$lib/models/graphql/graphql.service';
 import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
 import { EInfoBulleError } from '$lib/models/info-bulle/types/info-bulle.enum';
 import { mentionLegaleService } from '$lib/models/mention-legale/mention-legale.service';
+import { notificationService } from '$lib/models/notification/notification.service';
+import { constNotificationArticleMention } from '$lib/models/notification/stores/notification.const';
 import { articleMentionQuery } from '../queries/article-mention.query';
 import type {
 	IArticleMention,
@@ -53,6 +55,9 @@ export const articleMentionApi = {
 
 		// ajoute article au store articleMention si existe il le remplace
 		articleMentionMutation.addArticleMention(createArticlemention.articlemention);
+
+		// on notifie l'utilisateur
+		notificationService.addNewNotification(constNotificationArticleMention.CREATE_ARTICLEMENTION);
 	},
 
 	/**
@@ -75,6 +80,9 @@ export const articleMentionApi = {
 
 		// ajoute article au store articleMention si existe il le remplace
 		articleMentionMutation.addArticleMention(updateArticlemention.articlemention);
+
+		// on notifie l'utilisateur
+		notificationService.addNewNotification(constNotificationArticleMention.UPDATE_ARTICLEMENTION);
 	},
 
 	/**
@@ -101,5 +109,8 @@ export const articleMentionApi = {
 
 		// on remet à jour le store mentionLegale
 		await mentionLegaleService.getAllMentionLegale();
+
+		// on notifie l'utilisateur
+		notificationService.addNewNotification(constNotificationArticleMention.DELETE_ARTICLEMENTION);
 	}
 };

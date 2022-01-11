@@ -1,6 +1,8 @@
 import { graphqlService } from '$lib/models/graphql/graphql.service';
 import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
 import { EInfoBulleError } from '$lib/models/info-bulle/types/info-bulle.enum';
+import { notificationService } from '$lib/models/notification/notification.service';
+import { constNotificationMention } from '$lib/models/notification/stores/notification.const';
 import { mentionLegaleService } from '../mention-legale.service';
 import { mentionLegaleQuery } from '../queries/mention-legale.query';
 import type {
@@ -53,6 +55,9 @@ export const mentionLegaleApi = {
 
 		// ajout mention dans le store mention
 		mentionLegaleMutation.addNewMentionLegale(createMentionlegale.mentionlegale);
+
+		// on notifie l'utilisateur
+		notificationService.addNewNotification(constNotificationMention.CREATE_MENTION);
 	},
 
 	/**
@@ -81,6 +86,9 @@ export const mentionLegaleApi = {
 
 		// ajout mention dans le store mention, si existe deja cela la remplace
 		mentionLegaleMutation.addNewMentionLegale(updateMentionlegale.mentionlegale);
+
+		// on notifie l'utilisateur
+		notificationService.addNewNotification(constNotificationMention.UPDATE_MENTION);
 	},
 
 	/**
@@ -104,5 +112,8 @@ export const mentionLegaleApi = {
 
 		// on remove la mention du store
 		mentionLegaleService.removeMentionLegale(deleteMentionlegale.mentionlegale.id);
+
+		// on notifie l'utilisateur
+		notificationService.addNewNotification(constNotificationMention.DELETE_MENTION);
 	}
 };
