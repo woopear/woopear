@@ -33,5 +33,15 @@ export const mentionLegaleMutation = {
 			n.mentionLegales = n.mentionLegales.filter((el) => el.id !== id);
 			return n;
 		});
+	},
+
+	/**
+	 * set le store mentionLegaleActivate
+	 */
+	setMentionLegaleActivate: (mention: IMention): void => {
+		mentionLegaleStore.update((n) => {
+			n.mentionLegaleActivate = mention;
+			return n;
+		});
 	}
 };

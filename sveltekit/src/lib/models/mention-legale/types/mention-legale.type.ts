@@ -45,3 +45,10 @@ export interface IMentionUpdateReceved {
 export interface IMentionDeleteReceved {
 	deleteMentionlegale?: IMentionReceved;
 }
+
+/**
+ * interface get mention activate reçus
+ */
+export interface IMentionActivateReceved {
+	mentionlegalesConnection?: { values?: IMention[] };
+}
