@@ -11,7 +11,9 @@ export const enum EInfoBulleError {
 	CONNEXION = 'Vos identifiant sont incorrect.',
 	GET_USER_CURRENT = "L'utilisateur n'existe plus, ou l'utilisateur ne corresponds pas aux identifiants",
 	SEND_MAIL_REST_PASSWORD_NOK = "Impossible de faire votre demande, l'email n'existe pas, contacter woopear pour ouvrir un compte.",
-	UPDATE_PASSWORD = 'Une erreur est survenu, impossible de modifier le mot de passe'
+	UPDATE_PASSWORD = 'Une erreur est survenu, impossible de modifier le mot de passe',
+	MODIFICATION_PRESENTATION = 'Une erreur est survenu pendant la modification de la présentation',
+	MODIFICATION_INPUTFILE = "Une erreur est survenu pendant la modification du fichier"
 }
 
 /**
@@ -35,6 +37,6 @@ export const enum EInfoBulleLogo {
  * enum pour dire que l'action effectuer s'est bien passé
  */
 export const enum EInfoBulleValider {
-	PRESENTATION = 'Modification présentation réussi'
-
+	PRESENTATION = 'Modification présentation réussi',
+	INPUTFILE = 'Modification inputFile réussi'
 }
