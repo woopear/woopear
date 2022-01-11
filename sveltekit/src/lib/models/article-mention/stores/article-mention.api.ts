@@ -1,4 +1,6 @@
 import { graphqlService } from '$lib/models/graphql/graphql.service';
+import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
+import { EInfoBulleError } from '$lib/models/info-bulle/types/info-bulle.enum';
 import { mentionLegaleService } from '$lib/models/mention-legale/mention-legale.service';
 import { articleMentionQuery } from '../queries/article-mention.query';
 import type {
@@ -31,7 +33,7 @@ export const articleMentionApi = {
 	/**
 	 * creation article mention
 	 */
-	createArticleMention: async (data): Promise<void> => {
+	createArticleMention: async (data: IArticleMention, e: MouseEvent): Promise<void> => {
 		// creation article
 		const { articlemention } = await graphqlService.request<IArticleMentionReceved>(
 			articleMentionQuery.addArticleMention,
@@ -40,7 +42,11 @@ export const articleMentionApi = {
 
 		// si null ou undefined (vide pas d'erreur)
 		if (!articlemention) {
-			// error systeme (alert)
+			// config info bulle
+			infoBulleService.setInfoBubbleError(EInfoBulleError.CREATE_ARTICLEMENTIONLEGALE);
+			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
+			infoBulleService.definePositionYInfoBubble(e);
+			throw new Error(EInfoBulleError.CONNEXION);
 		}
 
 		// ajoute article au store articleMention si existe il le remplace
@@ -50,7 +56,7 @@ export const articleMentionApi = {
 	/**
 	 * modification articleMention call api
 	 */
-	updateArticleMention: async (id: string, data: IArticleMention): Promise<void> => {
+	updateArticleMention: async (id: string, data: IArticleMention, e: MouseEvent): Promise<void> => {
 		const { articlemention } = await graphqlService.request<IArticleMentionReceved>(
 			articleMentionQuery.updateArticleMention,
 			{ id: id, updateArticleMention: data }
@@ -58,7 +64,11 @@ export const articleMentionApi = {
 
 		// si null ou undefined (vide pas d'erreur)
 		if (!articlemention) {
-			// error systeme (alert)
+			// config info bulle
+			infoBulleService.setInfoBubbleError(EInfoBulleError.UPDATE_ARTICLEMENTIONLEGALE);
+			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
+			infoBulleService.definePositionYInfoBubble(e);
+			throw new Error(EInfoBulleError.CONNEXION);
 		}
 
 		// ajoute article au store articleMention si existe il le remplace
@@ -69,7 +79,7 @@ export const articleMentionApi = {
 	 * supprime articleMention call api
 	 * @param id => id de l'articleMention
 	 */
-	delArticleMention: async (id: string): Promise<void> => {
+	delArticleMention: async (id: string, e: MouseEvent): Promise<void> => {
 		const { deleteArticlemention } = await graphqlService.request<IArticleMentionDeleteReceved>(
 			articleMentionQuery.deleteArticleMention,
 			{ id: id }
@@ -77,7 +87,11 @@ export const articleMentionApi = {
 
 		// si null ou undefined (vide pas d'erreur)
 		if (!deleteArticlemention) {
-			// error systeme (alert)
+			// config info bulle
+			infoBulleService.setInfoBubbleError(EInfoBulleError.DELETE_ARTICLEMENTIONLEGALE);
+			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
+			infoBulleService.definePositionYInfoBubble(e);
+			throw new Error(EInfoBulleError.CONNEXION);
 		}
 
 		// on remove l'articlemention du store

@@ -30,7 +30,7 @@
 		const formData = formProvider.createFormData<IArticleMention>(e.target);
 
 		// on enregistre en bdd
-		await articleMentionService.updateArticleMention(articleMention.id, formData);
+		await articleMentionService.updateArticleMention(articleMention.id, formData, event);
 
 		// on retourne sur la page mention legale
 		goto('/dashboard/mentions-legales');

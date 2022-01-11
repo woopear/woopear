@@ -15,8 +15,8 @@
 	};
 
 	// suppression articleMention
-	const deleteArticleMention = async (id: string) => {
-		await articleMentionService.delArticleMention(id);
+	const deleteArticleMention = async (e, id: string) => {
+		await articleMentionService.delArticleMention(id, e);
 	};
 </script>
 
@@ -56,8 +56,8 @@
 									}}
 								/>
 								<LogoTrash
-									handlerClick={() => {
-										deleteArticleMention(article.id);
+									handlerClick={(e) => {
+										deleteArticleMention(e, article.id);
 									}}
 								/>
 							</div>
