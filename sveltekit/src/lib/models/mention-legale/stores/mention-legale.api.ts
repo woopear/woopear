@@ -39,5 +39,29 @@ export const mentionLegaleApi = {
 
 		// ajout mention dans le store mention
 		mentionLegaleMutation.addNewMention(mentionlegale);
+	},
+
+	/**
+	 * modifie la mention dans l'api et dans le store
+	 * @param id => id de la mention
+	 * @param data => donnée à modifier
+	 */
+	updateMention: async (id: string, data: IMention): Promise<void> => {
+		// modification
+		const { mentionlegale } = await graphqlService.request<IMentionReceved>(
+			mentionLegaleQuery.updateMention,
+			{
+				id: id,
+				updatedMention: data
+			}
+		);
+
+		// si null ou undefined (vide pas d'erreur)
+		if (!mentionlegale) {
+			// error systeme (alert)
+		}
+
+		// ajout mention dans le store mention, si existe deja cela la remplace
+		mentionLegaleMutation.addNewMention(mentionlegale);
 	}
 };

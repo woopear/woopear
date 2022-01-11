@@ -1,34 +1,43 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+
 	import { articleMentionStore } from '$lib/models/article-mention/stores/article-mention.store';
-	import type { IArticleMention } from '$lib/models/article-mention/types/article-mention.type';
+
 	import BoxRubric from '$lib/models/box-rubric/components/box-rubric.svelte';
 	import BtnAction from '$lib/models/btn-action/components/btn-action.svelte';
 	import { EBtnBgColorAction, EBtnSizeAction } from '$lib/models/btn-action/types/btn-action.enum';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import TitlePartRubric from '$lib/models/title-part-rubric/components/title-part-rubric.svelte';
 	import { formProvider } from '$lib/providers/form/form.service';
+	import { onMount } from 'svelte';
 	import { mentionLegaleService } from '../mention-legale.service';
 	import type { IMention } from '../types/mention-legale.type';
 
+	export let mention: IMention;
 	let event: MouseEvent;
 	let articles = [];
-	let check = false;
+
+	let check = mention.activate;
 
 	// recuperation du event click sur le btn pour afficher l'info bulle error à l'endroit du click
 	const hanlderClickBtnAction = (e): void => {
 		event = e;
 	};
 
-	// envoie formulaire creation mention
+	onMount(() => {
+		// on recupere les a id des articles deja affecter pour les mettre dans le tableau relier au checkbox
+		articles = mention.articlementions.map((el) => el.id);
+	});
+
+	// envoie du formulaire pour modification
 	const handlerForm = async (e): Promise<void> => {
 		// creation du formData
 		const formData = formProvider.createFormData<IMention>(e.target);
 		formData.activate = check;
 		formData.articlementions = articles;
 
-		// on enregistre en bdd
-		await mentionLegaleService.createMention(formData);
+		// update en bdd
+		await mentionLegaleService.updateMention(mention.id, formData);
 
 		// on retourne sur la page mention legale
 		goto('/dashboard/mentions-legales');
@@ -37,10 +46,9 @@
 
 <BoxRubric addStyleDiv="my-4 ml-4 mr-16">
 	<!-- title -->
-	<SubTitleRubric subTitle="Creation d'une mention :" />
+	<SubTitleRubric subTitle="Modification de la mention :" />
 
-	<!-- form creation mention -->
-	<form class="mt-8" on:submit|preventDefault={handlerForm}>
+	<form on:submit|preventDefault={handlerForm}>
 		<!-- input activate -->
 		<TitlePartRubric text="Activé / Désactivé la mention-légale : " />
 		<div class="flex justify-start items-center mb-6 mt-2">
@@ -65,6 +73,7 @@
 				</div>
 			{/each}
 		{:else}
+			<!-- si aucun article -->
 			<TitlePartRubric text="Liste des articles : " />
 			<div>Aucun article</div>
 		{/if}
@@ -72,7 +81,7 @@
 		<!-- btn submit -->
 		<div class="mt-6 text-right">
 			<BtnAction
-				textBtn="enregistrer"
+				textBtn="modifier"
 				sizeBtn={EBtnSizeAction.SMALL}
 				typeBtn={EBtnBgColorAction.VALIDATE}
 				handlerClick={hanlderClickBtnAction}

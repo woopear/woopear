@@ -49,5 +49,31 @@ export const mentionLegaleQuery = {
 				}
 			}
 		}
+	`,
+
+	/**
+	 * requete pour modifier une mention
+	 */
+	updateMention: gql`
+		mutation updateMention($id: ID!, $updatedMention: editMentionlegaleInput) {
+			updateMentionlegale(input: { where: { id: $id }, data: $updatedMention }) {
+				mentionlegale {
+					id
+					created_at
+					updated_at
+					activate
+					published_at
+					articlementions {
+						id
+						created_at
+						updated_at
+						title
+						subTitle
+						content
+						published_at
+					}
+				}
+			}
+		}
 	`
 };
