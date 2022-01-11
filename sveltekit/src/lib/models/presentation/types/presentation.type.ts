@@ -18,3 +18,10 @@ export interface IPresentation extends IDateModel {
 export interface IPresentationReceved {
 	presentation?: IPresentation;
 }
+
+/**
+ * interface pour l'objet update reçu par graphql
+ */
+export interface IPresentationUpdateReceved {
+	updatePresentation?:IPresentationReceved;
+}

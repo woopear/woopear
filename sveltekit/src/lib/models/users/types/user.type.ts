@@ -16,6 +16,10 @@ export interface IUser {
 	blocked?: boolean;
 	role?: IRole;
 	avatar?: IImage;
+	adresse?: string;
+	codePost?: string;
+	city?: string;
+	phoneNumber?: string;
 }
 
 /**

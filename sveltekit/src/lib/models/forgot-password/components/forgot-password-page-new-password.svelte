@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-
 	import BoxRubricSans from '$lib/models/box-rubric/components/box-rubric-sans.svelte';
 	import BtnAction from '$lib/models/btn-action/components/btn-action.svelte';
 	import { EBtnBgColorAction, EBtnSizeAction } from '$lib/models/btn-action/types/btn-action.enum';

@@ -1,5 +1,8 @@
-import type { IItemMenuHeader } from '../types/header.type';
+import type { IItemMenuDashboard, IItemMenuHeader } from '../types/header.type';
 
+/**
+ * const pour item menu principal
+ */
 export const constItemMenuHeader: IItemMenuHeader = {
 	home: {
 		libelle: 'Accueil',
@@ -24,5 +27,15 @@ export const constItemMenuHeader: IItemMenuHeader = {
 	contact: {
 		libelle: 'contact',
 		path: '#contact'
+	}
+};
+
+/**
+ * const pour item menu dashboard
+ */
+export const constItemMenuDashbord: IItemMenuDashboard = {
+	mentionlegales: {
+		libelle: 'Mentions légales',
+		path: '/dashboard/mentions-legales'
 	}
 };
