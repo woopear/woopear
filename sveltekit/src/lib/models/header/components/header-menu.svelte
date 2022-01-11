@@ -10,7 +10,7 @@
 	export let handlerClickMenuSandwich;
 
 	// liste des paths où le menu n'apparait pas
-	let pathsMenu = ['/connexion', '/forgot-password'];
+	let pathsMenu = ['/connexion', '/forgot-password', '/mentions-legales'];
 	let pathMenuPrincipal = ['/'];
 	let pathMenuDashboard = [
 		'/dashboard',
