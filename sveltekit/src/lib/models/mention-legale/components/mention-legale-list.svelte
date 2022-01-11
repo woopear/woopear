@@ -32,37 +32,43 @@
 			goto('mentions-legales/create-mention');
 		}}
 	/>
-	<table class="table-auto border-collapse bg-white border border-gray-200">
+	<table
+		class="table-auto border-collapse bg-white  border border-gray-200 dark:bg-fondSecondaireDark dark:border-gray-700"
+	>
 		<thead>
 			<tr>
-				<th class="border border-gray-200" scope="col">id</th>
-				<th class="border border-gray-200" scope="col">activé</th>
-				<th class="border border-gray-200" scope="col">articles</th>
-				<th class="border border-gray-200" scope="col">actions</th>
-				<th class="border border-gray-200" scope="col">creation</th>
-				<th class="border border-gray-200" scope="col">publication</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">id</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">activé</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">articles</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">actions</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">creation</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">publication</th>
 			</tr>
 		</thead>
 		<tbody>
 			{#if $mentionLegaleStore.mentionLegales.length > 0}
 				{#each $mentionLegaleStore.mentionLegales as mention}
 					<tr>
-						<td class="border border-gray-200">{mention.id}</td>
-						<td class="border border-gray-200">{mention.activate ? 'oui' : 'non'}</td>
-						<td class="border border-gray-200">{mention.articlementions.length}</td>
-						<td class="border border-gray-200">
+						<td class="border border-gray-200 dark:border-gray-700">{mention.id}</td>
+						<td class="border border-gray-200 dark:border-gray-700"
+							>{mention.activate ? 'oui' : 'non'}</td
+						>
+						<td class="border border-gray-200 dark:border-gray-700"
+							>{mention.articlementions.length}</td
+						>
+						<td class="border border-gray-200 dark:border-gray-700">
 							<div class="flex items-center justify-start">
 								<LogoPencil handlerClick={() => updateMention(mention.id)} />
 								<LogoTrash handlerClick={(e) => deleteMention(e, mention.id)} />
 							</div>
 						</td>
-						<td class="border border-gray-200"
+						<td class="border border-gray-200 dark:border-gray-700"
 							>{filterStringService.separateDateOfHours(
 								new Date(mention.created_at).toLocaleString(),
 								' à'
 							)}</td
 						>
-						<td class="border border-gray-200"
+						<td class="border border-gray-200 dark:border-gray-700"
 							>{filterStringService.separateDateOfHours(
 								new Date(mention.published_at).toLocaleString(),
 								' à'
@@ -72,7 +78,9 @@
 				{/each}
 			{:else}
 				<tr>
-					<td class="border border-gray-200 p-4" colspan="5"> Aucune mention légale </td>
+					<td class="border border-gray-200 p-4 dark:border-gray-700" colspan="5">
+						Aucune mention légale
+					</td>
 				</tr>
 			{/if}
 		</tbody>

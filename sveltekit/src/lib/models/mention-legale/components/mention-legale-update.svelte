@@ -57,7 +57,7 @@
 	<!-- title -->
 	<SubTitleRubric subTitle="Modification de la mention :" />
 
-	<form on:submit|preventDefault={handlerForm}>
+	<form class="mt-8" on:submit|preventDefault={handlerForm}>
 		<!-- input activate -->
 		<TitlePartRubric text="Activé / Désactivé la mention-légale : " />
 		<div class="flex justify-start items-center mb-6 mt-2">

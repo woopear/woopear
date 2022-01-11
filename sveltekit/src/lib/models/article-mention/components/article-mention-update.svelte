@@ -50,7 +50,7 @@
 	<!-- title -->
 	<SubTitleRubric subTitle="Modification de l'article :" />
 
-	<form on:submit|preventDefault={handlerForm}>
+	<form class="mt-8" on:submit|preventDefault={handlerForm}>
 		<!-- title -->
 		<div>
 			<TitlePartRubric text="Ajouter un titre : " />

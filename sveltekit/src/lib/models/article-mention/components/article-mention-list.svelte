@@ -32,23 +32,25 @@
 			goto('mentions-legales/create-article-mention');
 		}}
 	/>
-	<table class="table-auto border-collapse bg-white border border-gray-200">
+	<table
+		class="table-auto border-collapse bg-white border border-gray-200 dark:bg-fondSecondaireDark dark:border-gray-700"
+	>
 		<thead>
 			<tr>
-				<th class="border border-gray-200" scope="col">id</th>
-				<th class="border border-gray-200" scope="col">title</th>
-				<th class="border border-gray-200" scope="col">actions</th>
-				<th class="border border-gray-200" scope="col">creation</th>
-				<th class="border border-gray-200" scope="col">publication</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">id</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">title</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">actions</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">creation</th>
+				<th class="border border-gray-200 dark:border-gray-700" scope="col">publication</th>
 			</tr>
 		</thead>
 		<tbody>
 			{#if $articleMentionStore.articleMentions.length > 0}
 				{#each $articleMentionStore.articleMentions as article}
 					<tr>
-						<td class="border border-gray-200">{article.id}</td>
-						<td class="border border-gray-200">{article.title}</td>
-						<td class="border border-gray-200">
+						<td class="border border-gray-200 dark:border-gray-700">{article.id}</td>
+						<td class="border border-gray-200 dark:border-gray-700">{article.title}</td>
+						<td class="border border-gray-200 dark:border-gray-700">
 							<div class="flex items-center justify-start">
 								<LogoPencil
 									handlerClick={() => {
@@ -62,13 +64,13 @@
 								/>
 							</div>
 						</td>
-						<td class="border border-gray-200"
+						<td class="border border-gray-200 dark:border-gray-700"
 							>{filterStringService.separateDateOfHours(
 								new Date(article.created_at).toLocaleString(),
 								' à'
 							)}</td
 						>
-						<td class="border border-gray-200"
+						<td class="border border-gray-200 dark:border-gray-700"
 							>{filterStringService.separateDateOfHours(
 								new Date(article.published_at).toLocaleString(),
 								' à'
@@ -78,7 +80,9 @@
 				{/each}
 			{:else}
 				<tr>
-					<td class="border border-gray-200 p-4" colspan="5"> Aucun artice </td>
+					<td class="border border-gray-200 p-4 dark:border-gray-700" colspan="5">
+						Aucun artice
+					</td>
 				</tr>
 			{/if}
 		</tbody>
