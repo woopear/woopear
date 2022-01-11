@@ -26,6 +26,20 @@ export interface IMentionReceved {
 }
 
 /**
+ * interface create mention reçus
+ */
+export interface IMentionCreateReceved {
+	createMentionlegale?: IMentionReceved;
+}
+
+/**
+ * interface update mention reçus
+ */
+export interface IMentionUpdateReceved {
+	updateMentionlegale?: IMentionReceved;
+}
+
+/**
  * interface delete mention reçus
  */
 export interface IMentionDeleteReceved {

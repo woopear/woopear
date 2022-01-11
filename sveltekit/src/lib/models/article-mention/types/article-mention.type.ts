@@ -26,6 +26,20 @@ export interface IArticleMentionReceved {
 }
 
 /**
+ * interface article apres creation reçus
+ */
+export interface IArticleMentionCreateReceved {
+	createArticlemention?: IArticleMentionReceved;
+}
+
+/**
+ * interface article apres modification reçus
+ */
+export interface IArticleMentionUpdateReceved {
+	updateArticlemention?: IArticleMentionReceved;
+}
+
+/**
  * interface suppression article reçus
  */
 export interface IArticleMentionDeleteReceved {

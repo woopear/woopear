@@ -5,9 +5,11 @@ import { mentionLegaleService } from '../mention-legale.service';
 import { mentionLegaleQuery } from '../queries/mention-legale.query';
 import type {
 	IMention,
+	IMentionCreateReceved,
 	IMentionDeleteReceved,
 	IMentionReceved,
-	IMentionsReceved
+	IMentionsReceved,
+	IMentionUpdateReceved
 } from '../types/mention-legale.type';
 import { mentionLegaleMutation } from './mention-legale.mutation';
 
@@ -35,13 +37,13 @@ export const mentionLegaleApi = {
 	 */
 	createMentionLegale: async (data: IMention, e: MouseEvent): Promise<void> => {
 		// creation mention
-		const { mentionlegale } = await graphqlService.request<IMentionReceved>(
+		const { createMentionlegale } = await graphqlService.request<IMentionCreateReceved>(
 			mentionLegaleQuery.addMention,
 			{ mentionLegale: data }
 		);
 
 		// si null ou undefined (vide pas d'erreur)
-		if (!mentionlegale) {
+		if (!createMentionlegale) {
 			// config info bulle
 			infoBulleService.setInfoBubbleError(EInfoBulleError.CREATE_MENTIONLEGALE);
 			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
@@ -50,7 +52,7 @@ export const mentionLegaleApi = {
 		}
 
 		// ajout mention dans le store mention
-		mentionLegaleMutation.addNewMentionLegale(mentionlegale);
+		mentionLegaleMutation.addNewMentionLegale(createMentionlegale.mentionlegale);
 	},
 
 	/**
@@ -60,7 +62,7 @@ export const mentionLegaleApi = {
 	 */
 	updateMentionLegale: async (id: string, data: IMention, e: MouseEvent): Promise<void> => {
 		// modification
-		const { mentionlegale } = await graphqlService.request<IMentionReceved>(
+		const { updateMentionlegale } = await graphqlService.request<IMentionUpdateReceved>(
 			mentionLegaleQuery.updateMention,
 			{
 				id: id,
@@ -69,7 +71,7 @@ export const mentionLegaleApi = {
 		);
 
 		// si null ou undefined (vide pas d'erreur)
-		if (!mentionlegale) {
+		if (!updateMentionlegale) {
 			// config info bulle
 			infoBulleService.setInfoBubbleError(EInfoBulleError.UPDATE_MENTIONLEGALE);
 			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
@@ -78,7 +80,7 @@ export const mentionLegaleApi = {
 		}
 
 		// ajout mention dans le store mention, si existe deja cela la remplace
-		mentionLegaleMutation.addNewMentionLegale(mentionlegale);
+		mentionLegaleMutation.addNewMentionLegale(updateMentionlegale.mentionlegale);
 	},
 
 	/**

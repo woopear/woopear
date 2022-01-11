@@ -5,9 +5,11 @@ import { mentionLegaleService } from '$lib/models/mention-legale/mention-legale.
 import { articleMentionQuery } from '../queries/article-mention.query';
 import type {
 	IArticleMention,
+	IArticleMentionCreateReceved,
 	IArticleMentionDeleteReceved,
 	IArticleMentionReceved,
-	IArticleMentionsReceved
+	IArticleMentionsReceved,
+	IArticleMentionUpdateReceved
 } from '../types/article-mention.type';
 import { articleMentionMutation } from './article-mention.mutation';
 
@@ -35,13 +37,13 @@ export const articleMentionApi = {
 	 */
 	createArticleMention: async (data: IArticleMention, e: MouseEvent): Promise<void> => {
 		// creation article
-		const { articlemention } = await graphqlService.request<IArticleMentionReceved>(
+		const { createArticlemention } = await graphqlService.request<IArticleMentionCreateReceved>(
 			articleMentionQuery.addArticleMention,
 			{ data: data }
 		);
 
 		// si null ou undefined (vide pas d'erreur)
-		if (!articlemention) {
+		if (!createArticlemention) {
 			// config info bulle
 			infoBulleService.setInfoBubbleError(EInfoBulleError.CREATE_ARTICLEMENTIONLEGALE);
 			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
@@ -50,20 +52,20 @@ export const articleMentionApi = {
 		}
 
 		// ajoute article au store articleMention si existe il le remplace
-		articleMentionMutation.addArticleMention(articlemention);
+		articleMentionMutation.addArticleMention(createArticlemention.articlemention);
 	},
 
 	/**
 	 * modification articleMention call api
 	 */
 	updateArticleMention: async (id: string, data: IArticleMention, e: MouseEvent): Promise<void> => {
-		const { articlemention } = await graphqlService.request<IArticleMentionReceved>(
+		const { updateArticlemention } = await graphqlService.request<IArticleMentionUpdateReceved>(
 			articleMentionQuery.updateArticleMention,
 			{ id: id, updateArticleMention: data }
 		);
 
 		// si null ou undefined (vide pas d'erreur)
-		if (!articlemention) {
+		if (!updateArticlemention) {
 			// config info bulle
 			infoBulleService.setInfoBubbleError(EInfoBulleError.UPDATE_ARTICLEMENTIONLEGALE);
 			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
@@ -72,7 +74,7 @@ export const articleMentionApi = {
 		}
 
 		// ajoute article au store articleMention si existe il le remplace
-		articleMentionMutation.addArticleMention(articlemention);
+		articleMentionMutation.addArticleMention(updateArticlemention.articlemention);
 	},
 
 	/**
