@@ -19,3 +19,8 @@ body {
 	display: flex;
 	flex-direction: column;
 }
+
+td,
+th {
+	padding: 10px 15px;
+}

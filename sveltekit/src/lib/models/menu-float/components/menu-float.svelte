@@ -23,6 +23,13 @@
 		infoBulleService.setInfoBubbleText('');
 		infoBulleService.resetXAndYInfoBubbleText();
 	};
+
+	let pathPartAuth = [
+		'/dashboard',
+		'/dashboard/mentions-legales',
+		'/dashboard/mentions-legales/create-mention',
+		'/dashboard/mentions-legales/create-article-mention'
+	];
 </script>
 
 <nav class="transition-all duration-300 fixed p-6 right-0 top-24 z-30 hover:right-0 lg:-right-12">
@@ -40,7 +47,7 @@
 			</div>
 			<BtnDeconnect addStyleDiv="block mb-4" />
 			<!-- si page dashboard woopear + jwt on affiche btn acces dashboard woopear + accueil + deconnexion-->
-		{:else if $page.path === '/dashboard' && $connexionStore.currentLogin.jwt}
+		{:else if pathPartAuth.includes($page.path) && $connexionStore.currentLogin.jwt}
 			<!-- go dashboard -->
 			<div
 				on:mouseenter={mouseEnterDiv}
