@@ -37,7 +37,7 @@
 	}
 </script>
 
-{#if (presentation && $userStore.userCurrent) || (presentation && $userStore.userCurrent === null)}
+{#if (presentation && $userStore.userCurrent.role.name != 'Root') || (presentation && $userStore.userCurrent === null)}
 	<!-- partie public -->
 	<BoxRubricColor
 		color="bg-[#DCFFD6] dark:bg-[#062900] transition-all duration-300"
