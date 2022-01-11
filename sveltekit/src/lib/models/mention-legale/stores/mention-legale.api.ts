@@ -1,3 +1,5 @@
+import { errorService } from '$lib/models/error/error.service';
+import { constErrorMentionLegale } from '$lib/models/error/stores/error.const';
 import { graphqlService } from '$lib/models/graphql/graphql.service';
 import { infoBulleService } from '$lib/models/info-bulle/info-bulle.service';
 import { EInfoBulleError } from '$lib/models/info-bulle/types/info-bulle.enum';
@@ -7,6 +9,7 @@ import { mentionLegaleService } from '../mention-legale.service';
 import { mentionLegaleQuery } from '../queries/mention-legale.query';
 import type {
 	IMention,
+	IMentionActivateReceved,
 	IMentionCreateReceved,
 	IMentionDeleteReceved,
 	IMentionReceved,
@@ -92,7 +95,7 @@ export const mentionLegaleApi = {
 	},
 
 	/**
-	 * delte mention legale call api
+	 * delete mention legale call api
 	 */
 	delMentionLegale: async (id: string, e: MouseEvent): Promise<void> => {
 		// remove de la mention dans api
@@ -115,5 +118,24 @@ export const mentionLegaleApi = {
 
 		// on notifie l'utilisateur
 		notificationService.addNewNotification(constNotificationMention.DELETE_MENTION);
+	},
+
+	/**
+	 * recupere une mention avec la proprieter activate sur true
+	 */
+	getMentionActivated: async (): Promise<void> => {
+		const { mentionlegalesConnection } = await graphqlService.request<IMentionActivateReceved>(
+			mentionLegaleQuery.getMentionActivate,
+			{ activate: true }
+		);
+
+		// test si error
+		if (!mentionlegalesConnection) {
+			errorService.addNewError(constErrorMentionLegale.GET_MENTION_ACTIVATE);
+			throw new Error(constErrorMentionLegale.GET_MENTION_ACTIVATE);
+		}
+
+		// on set le store mentionLegaleActivate
+		mentionLegaleMutation.setMentionLegaleActivate(mentionlegalesConnection.values[0]);
 	}
 };

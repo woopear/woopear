@@ -101,5 +101,31 @@ export const mentionLegaleQuery = {
 				}
 			}
 		}
+	`,
+
+	/**
+	 * request qui recupere la mention avec activate = true
+	 */
+	getMentionActivate: gql`
+		query getMentionActivate($activate: JSON) {
+			mentionlegalesConnection(where: { activate: $activate }) {
+				values {
+					id
+					created_at
+					updated_at
+					activate
+					published_at
+					articlementions {
+						id
+						created_at
+						updated_at
+						title
+						subTitle
+						content
+						published_at
+					}
+				}
+			}
+		}
 	`
 };
