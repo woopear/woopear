@@ -15,8 +15,8 @@
 	};
 
 	// suppression mention
-	const deleteMention = (id: string) => {
-		mentionLegaleService.deleteMentionLegale(id);
+	const deleteMention = async (id: string) => {
+		await mentionLegaleService.delMentionLegale(id);
 	};
 </script>
 

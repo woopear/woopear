@@ -54,5 +54,24 @@ export const articleMentionQuery = {
 				}
 			}
 		}
+	`,
+
+	/**
+	 * request pour supprimer un article mention
+	 */
+	deleteArticleMention: gql`
+		mutation deleteArticleMention($id: ID!) {
+			deleteArticlemention(input: { where: { id: $id } }) {
+				articlemention {
+					id
+					created_at
+					updated_at
+					title
+					subTitle
+					content
+					published_at
+				}
+			}
+		}
 	`
 };

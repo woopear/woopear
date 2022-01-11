@@ -6,6 +6,7 @@
 	import LogoTrash from '$lib/models/logo/components/logo-trash.svelte';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
+	import { articleMentionService } from '../article-mention.service';
 	import { articleMentionStore } from '../stores/article-mention.store';
 
 	// modification articleMention
@@ -14,8 +15,8 @@
 	};
 
 	// suppression articleMention
-	const deleteArticleMention = (id: string) => {
-		console.log(id);
+	const deleteArticleMention = async (id: string) => {
+		await articleMentionService.delArticleMention(id);
 	};
 </script>
 

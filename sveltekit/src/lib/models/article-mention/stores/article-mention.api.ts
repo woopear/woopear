@@ -1,7 +1,9 @@
 import { graphqlService } from '$lib/models/graphql/graphql.service';
+import { mentionLegaleService } from '$lib/models/mention-legale/mention-legale.service';
 import { articleMentionQuery } from '../queries/article-mention.query';
 import type {
 	IArticleMention,
+	IArticleMentionDeleteReceved,
 	IArticleMentionReceved,
 	IArticleMentionsReceved
 } from '../types/article-mention.type';
@@ -61,5 +63,27 @@ export const articleMentionApi = {
 
 		// ajoute article au store articleMention si existe il le remplace
 		articleMentionMutation.addArticleMention(articlemention);
+	},
+
+	/**
+	 * supprime articleMention call api
+	 * @param id => id de l'articleMention
+	 */
+	delArticleMention: async (id: string): Promise<void> => {
+		const { deleteArticlemention } = await graphqlService.request<IArticleMentionDeleteReceved>(
+			articleMentionQuery.deleteArticleMention,
+			{ id: id }
+		);
+
+		// si null ou undefined (vide pas d'erreur)
+		if (!deleteArticlemention) {
+			// error systeme (alert)
+		}
+
+		// on remove l'articlemention du store
+		articleMentionMutation.removeArticleMention(deleteArticlemention.articlemention.id);
+
+		// on remet à jour le store mentionLegale
+		await mentionLegaleService.getAllMentionLegale();
 	}
 };

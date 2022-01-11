@@ -24,3 +24,10 @@ export interface IArticleMentionsReceved {
 export interface IArticleMentionReceved {
 	articlemention?: IArticleMention;
 }
+
+/**
+ * interface suppression article reçus
+ */
+export interface IArticleMentionDeleteReceved {
+	deleteArticlemention?: IArticleMentionReceved;
+}

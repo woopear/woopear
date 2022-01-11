@@ -74,7 +74,7 @@ export const mentionLegaleApi = {
 	/**
 	 * delte mention legale call api
 	 */
-	deleteMentionLegale: async (id: string): Promise<void> => {
+	delMentionLegale: async (id: string): Promise<void> => {
 		// remove de la mention dans api
 		const { deleteMentionlegale } = await graphqlService.request<IMentionDeleteReceved>(
 			mentionLegaleQuery.deleteMentionLegale,
