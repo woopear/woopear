@@ -10,13 +10,11 @@ export interface IInputImageReceved {
   inputImage?: IImage;
 }
 
-/**
- * interface pour l'objet update reçu par graphql
- */
-export interface IInputImageUpdateReceved {
-  updateInputImage: IInputImageReceved;
-}
 
 export interface IInputImageCreateReceved {
-  createImage: IInputImageReceved;
+  upload?: IImage;
+}
+
+export interface IInputImageDeleteReceved {
+  upload?: IImage;
 }

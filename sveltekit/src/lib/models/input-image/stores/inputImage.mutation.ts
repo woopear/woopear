@@ -6,16 +6,18 @@ export const inputImageMutation = {
   /** 
    * set inputImage
   */
-  setInputImage: (value: IImage[]): void => {
-    inputImageStore.update((n) => {
-      n.inputImage = value;
-      return n;
+  setInputImage: (inputImages: IImage[]): void => {
+    inputImageStore.update((i) => {
+      i.inputImages = inputImages;
+      return i;
     });
   },
 
   addImage: (value: IImage): void => {
     inputImageStore.update((i) => {
-      i.inputImage = [...i.inputImage, value];
+      // si la mention existe deja on l'enleve
+      i.inputImages = i.inputImages.filter((el) => el !== value);
+      i.inputImages = [...i.inputImages, value];
       return i;
     })
   }

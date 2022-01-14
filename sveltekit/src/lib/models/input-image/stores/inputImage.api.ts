@@ -1,4 +1,5 @@
-import type { IInputImageCreateReceved, IInputImageUpdateReceved } from './../types/inputFile.type';
+import type { IImage } from './../../image/types/image.type';
+import type { IInputImageCreateReceved, IInputImageDeleteReceved } from './../types/inputFile.type';
 import { inputImageMutation } from './inputImage.mutation';
 import { inputImageGetter } from './inputImage.getter';
 import { EInfoBulleError, EInfoBulleValider } from '$lib/models/info-bulle/types/info-bulle.enum';
@@ -9,30 +10,34 @@ import { inputImageQuery } from '../query/inputImage.query';
 
 export const inputImageApi = {
   /**
-   * 
+   * création de l'image
+   * @param e =>le click de la souris
+   * @param data => le donnée de la nouvelle image
    */
-  createImage: async (e,data):Promise<void> => {
-    try{
+  createImage: async (e: MouseEvent,data: IImage):Promise<void> => {
+    // création de l'image
+    const {upload} = await graphqlService.request<IInputImageCreateReceved>(
+      inputImageQuery.createImage,{file: data}
+    )
       
-
-      const {createImage} = await graphqlService.request<IInputImageCreateReceved>(
-        inputImageQuery.createImage,{data: data}
-      )
-      
+    // si null ou undefined (vide pas d'erreur)
+    if(!upload) {
+      // config info bulle
+      infoBulleService.setInfoBubbleError(EInfoBulleError.CREATION_IMAGE);
+      infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
+      infoBulleService.definePositionYInfoBubble(e);
+      throw new Error(EInfoBulleError.CREATION_IMAGE);
+    }
   
-      // set le store 
-      inputImageMutation.addImage(createImage.inputImage);
-    } catch(error){
-			// config info bulle
-			infoBulleService.setInfoBubbleError(EInfoBulleError.CREATION_IMAGE);
-			infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
-			infoBulleService.definePositionYInfoBubble(e);
-			throw new Error(EInfoBulleError.CREATION_IMAGE);
-		}
-
-  },
+    // ajoute image au store articleMention si existe il le remplace
+    inputImageMutation.addImage(upload);
+	},
 
 
-
+  
 
 }
+
+
+
+

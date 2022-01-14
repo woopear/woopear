@@ -18,33 +18,24 @@
 
 	export let presentation: IPresentation;
 	let event: MouseEvent;
+	let image;
 
 	// recuperation du event click sur le btn pour afficher l'info bulle error à l'endroit du click
 	const hanlderClickBtnAction = (e): void => {
 		event = e;
 	};
 
-	async function UpdateInputFile(dataFile: IImage, e) {
-		// modifer le fichier
-		await inputImageService.createImage(dataFile, e);
-	}
+	const changeInputFile = (e) => {
+		image = e.target.files[0];
+	};
 
 	// fonction pour modifier la presentation
-	async function UpdatePresentation(e) {
+	const UpdatePresentation = async (e) => {
 		// creation du formdata
-		const data: IPresentation = formProvider.createFormData(e.target);
-
-		console.log('data', data);
-
-		await inputImageService.createImage(data.image, e);
-
+		await inputImageService.createImage(e, image);
 		// modifier la presentation
-		await presentationService.updatePresentation(data, event);
-		console.log('presentation', presentation);
-
-		// sub à presentation
-		const p = presentationService.setPresentation;
-	}
+		// await presentationService.updatePresentation(data, event);
+	};
 </script>
 
 {#if (presentation && $userStore.userCurrent.role.name != 'Root') || (presentation && $userStore.userCurrent === null)}
@@ -103,6 +94,7 @@
 					/>
 				</div>
 				<div>
+					<input type="file" on:change={changeInputFile} />
 					<InputFile name="image" />
 					<div />
 					<div>
