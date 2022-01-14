@@ -2,35 +2,23 @@ import { gql } from 'graphql-request';
 
 
 export const inputImageQuery ={
-  /** 
-   * modifier le Image
-  */
-
-  updateInputImage: gql`
-    mutation UpdateImage($id:Id!, $info:fileInfoInput! ){
-    updateImageInfo(id: $id, info: $info){
+  createImage: gql`
+  mutation uploadNewImage($file: Upload!){
+    upload(file: $file){
       id
-      created_at
       name
-      alternativeText
-      caption
-      width
-      height
-      formats
-      hash
+      url
+      size
+      mime
       ext
+      hash
+      formats
+      height
+      width
+      caption
+      alternativeText
     }
   }
   `,
 
-  createImage: gql`
-  mutation uploadNewImage($Image: Upload!){
-    upload(Image: $Image){
-      id
-      name
-      alternativeText
-      formas
-    }
-  }
-  `
 }
