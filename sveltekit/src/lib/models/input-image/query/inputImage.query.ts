@@ -21,4 +21,24 @@ export const inputImageQuery ={
   }
   `,
 
+  deleteImage: gql`
+  mutation deleteImage($id: ID!){
+    deleteFile(input: {where:{id:$id}}){
+      file{
+        id
+        name
+        url
+        size
+        mime
+        ext
+        hash
+        formats
+        height
+        width
+        caption
+        alternativeText
+      }
+    }
+  }
+  `
 }
