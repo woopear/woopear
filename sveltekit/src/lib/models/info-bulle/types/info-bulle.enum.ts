@@ -14,7 +14,8 @@ export const enum EInfoBulleError {
 	UPDATE_PASSWORD = 'Une erreur est survenu, impossible de modifier le mot de passe',
 	MODIFICATION_PRESENTATION = 'Une erreur est survenu pendant la modification de la présentation',
 	MODIFICATION_INPUTIMAGE = "Une erreur est survenu pendant la modification du fichier",
-	CREATION_IMAGE = "Une erreur est survenu pendant la creation de l'image"
+	CREATION_IMAGE = "Une erreur est survenu pendant la creation de l'image",
+	DELETE_IMAGE = "Une erreur est survenu pendant l'effacement de l'image"
 }
 
 /**
