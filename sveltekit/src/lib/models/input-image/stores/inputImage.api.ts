@@ -40,13 +40,13 @@ export const inputImageApi = {
    * @param id => l'id de l'image a effacé
    */
   deleteImage: async (e: MouseEvent, id:string): Promise<void> => {
-    const { upload } = await graphqlService.request<IInputImageDeleteReceved>(
+    const { file } = await graphqlService.request<IInputImageDeleteReceved>(
       inputImageQuery.deleteImage,
       {id: id}
     )
-
+      
     // si null ou undefined (vide pas d'erreur)
-    if(!upload) {
+    if(file) {
       // config info bulle
       infoBulleService.setInfoBubbleError(EInfoBulleError.DELETE_IMAGE);
       infoBulleService.definePositionXInfoBubble(e, window.innerWidth);
@@ -55,10 +55,10 @@ export const inputImageApi = {
     }
 
     // on remove l'image dans le store
-    inputImageService.removeImage(upload.id)
+    inputImageService.removeImage(id)
   }
 
-  
+
 }
 
 

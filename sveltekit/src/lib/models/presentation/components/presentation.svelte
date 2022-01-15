@@ -6,6 +6,7 @@
 	import type { IImage } from '$lib/models/image/types/image.type';
 	import InputFile from '$lib/models/input-image/components/input-image.svelte';
 	import { inputImageService } from '$lib/models/input-image/inputFile.service';
+	import { inputImageStore } from '$lib/models/input-image/stores/inputImage.store';
 	import Input from '$lib/models/input/components/input.svelte';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import TextContentRubric from '$lib/models/text-content-rubric/components/text-content-rubric.svelte';
@@ -18,7 +19,8 @@
 
 	export let presentation: IPresentation;
 	let event: MouseEvent;
-	let image;
+	let image = null;
+	let newImage: IImage;
 
 	// recuperation du event click sur le btn pour afficher l'info bulle error à l'endroit du click
 	const hanlderClickBtnAction = (e): void => {
@@ -32,13 +34,31 @@
 	// fonction pour modifier la presentation
 	const UpdatePresentation = async (e) => {
 		// creation du formdata
-		await inputImageService.createImage(e, image);
+		const formData = formProvider.createFormData<IPresentation>(e.target);
+
+		if (image !== null) {
+			// création de l'image
+			await inputImageService.createImage(e, image);
+			console.log('image[]', $inputImageStore);
+			newImage = $inputImageStore.inputImages[$inputImageStore.inputImages.length - 1];
+		}
+
+		if (presentation.image) {
+			// effacer l'image existante
+			await inputImageService.deleteImage(e, presentation.image.id);
+		}
+
+		if (newImage !== null) {
+			formData.image = newImage;
+		}
+		console.log('formData =>', formData);
+
 		// modifier la presentation
-		// await presentationService.updatePresentation(data, event);
+		await presentationService.updatePresentation(formData, e);
 	};
 </script>
 
-{#if (presentation && $userStore.userCurrent.role.name != 'Root') || (presentation && $userStore.userCurrent === null)}
+{#if presentation}
 	<!-- partie public -->
 	<BoxRubricColor
 		color="bg-[#DCFFD6] dark:bg-[#062900] transition-all duration-300"
@@ -94,8 +114,8 @@
 					/>
 				</div>
 				<div>
-					<input type="file" on:change={changeInputFile} />
-					<InputFile name="image" />
+					<input name="image" type="file" on:change={changeInputFile} />
+
 					<div />
 					<div>
 						<div>
