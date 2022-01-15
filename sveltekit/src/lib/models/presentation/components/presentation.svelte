@@ -3,7 +3,10 @@
 	import BoxRubric from '$lib/models/box-rubric/components/box-rubric.svelte';
 	import BtnAction from '$lib/models/btn-action/components/btn-action.svelte';
 	import { EBtnBgColorAction, EBtnSizeAction } from '$lib/models/btn-action/types/btn-action.enum';
-	import InputFile from '$lib/models/input-file/components/input-file.svelte';
+	import type { IImage } from '$lib/models/image/types/image.type';
+	import InputFile from '$lib/models/input-image/components/input-image.svelte';
+	import { inputImageService } from '$lib/models/input-image/inputFile.service';
+	import { inputImageStore } from '$lib/models/input-image/stores/inputImage.store';
 	import Input from '$lib/models/input/components/input.svelte';
 	import SubTitleRubric from '$lib/models/sub-title-rubric/components/sub-title-rubric.svelte';
 	import TextContentRubric from '$lib/models/text-content-rubric/components/text-content-rubric.svelte';
@@ -16,28 +19,46 @@
 
 	export let presentation: IPresentation;
 	let event: MouseEvent;
+	let image = null;
+	let newImage: IImage;
 
 	// recuperation du event click sur le btn pour afficher l'info bulle error à l'endroit du click
 	const hanlderClickBtnAction = (e): void => {
 		event = e;
 	};
 
+	const changeInputFile = (e) => {
+		image = e.target.files[0];
+	};
+
 	// fonction pour modifier la presentation
-	async function updatePresentation(e) {
+	const UpdatePresentation = async (e) => {
 		// creation du formdata
-		const data: IPresentation = formProvider.createFormData(e.target);
-		console.log('data', data);
+		const formData = formProvider.createFormData<IPresentation>(e.target);
+
+		if (image !== null) {
+			// création de l'image
+			await inputImageService.createImage(e, image);
+			console.log('image[]', $inputImageStore);
+			newImage = $inputImageStore.inputImages[$inputImageStore.inputImages.length - 1];
+		}
+
+		if (presentation.image) {
+			// effacer l'image existante
+			await inputImageService.deleteImage(e, presentation.image.id);
+		}
+
+		if (newImage !== null) {
+			formData.image = newImage;
+		}
+		console.log('formData =>', formData);
 
 		// modifier la presentation
-		await presentationService.updatePresentation(data, event);
-		console.log('presentation', presentation);
-
-		// sub à presentation
-		const p = presentationService.setPresentation;
-	}
+		await presentationService.updatePresentation(formData, e);
+	};
 </script>
 
-{#if (presentation && $userStore.userCurrent) || (presentation && $userStore.userCurrent === null)}
+{#if presentation}
 	<!-- partie public -->
 	<BoxRubricColor
 		color="bg-[#DCFFD6] dark:bg-[#062900] transition-all duration-300"
@@ -65,7 +86,7 @@
 		addStyleDiv="py-24"
 	>
 		<form
-			on:submit|preventDefault={updatePresentation}
+			on:submit|preventDefault={UpdatePresentation}
 			class="mt-12 lg:mt-24 mb-32 flex justify-center"
 		>
 			<BoxRubric
@@ -91,24 +112,23 @@
 						rows="5"
 						placeholder="ici le text de la présentation"
 					/>
-					<!-- </div>
-			<InputFile
-				addDiv="flex"
-				required
-				name="image"
-				class="transition-all duration-300 w-full border-2 border-gray-300 py-2 px-4 rounded-lg focus:outline-none focus:border-colorone dark:bg-fondSecondaireDark"
-			/>
-			<div /> -->
+				</div>
+				<div>
+					<input name="image" type="file" on:change={changeInputFile} />
+
+					<div />
 					<div>
-						<BtnAction
-							textBtn="Modifier"
-							handlerClick={hanlderClickBtnAction}
-							typeBtn={EBtnBgColorAction.VALIDATE}
-							sizeBtn={EBtnSizeAction.MEDIUM}
-						/>
+						<div>
+							<BtnAction
+								textBtn="Modifier"
+								handlerClick={hanlderClickBtnAction}
+								typeBtn={EBtnBgColorAction.VALIDATE}
+								sizeBtn={EBtnSizeAction.MEDIUM}
+							/>
+						</div>
 					</div>
-				</div></BoxRubric
-			>
+				</div>
+			</BoxRubric>
 		</form>
 	</BoxRubricColor>
 {/if}
