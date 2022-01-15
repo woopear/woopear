@@ -1,14 +1,20 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
 
 	export let libelle: string;
 	export let link: string;
 	export let handlerClickA;
+
+	$: textColor =
+		$page.path === link
+			? 'text-colorthree'
+			: 'text-fondPrincipalDark dark:text-fondPrincipalClaire';
 </script>
 
 {#if libelle && link}
 	<li
-		class="transition-all duration-300 border-b border-gray-300 py-6 text-base text-fondPrincipalDark hover:text-colorthree md:text-lg md:px-4 md:border-none dark:text-fondPrincipalClaire dark:hover:text-colorthree"
+		class={`transition-all duration-300 border-b border-gray-300 py-6 text-base ${textColor} hover:text-colorthree md:text-lg md:px-4 md:border-none dark:hover:text-colorthree`}
 	>
 		<a on:click={handlerClickA} href={link}>{filterStringService.firstToUppperCase(libelle)}</a>
 	</li>

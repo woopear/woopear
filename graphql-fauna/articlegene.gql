@@ -1,0 +1,10 @@
+type ArticleGene {
+  title: String!
+  subTitle: String
+  content: String!
+  conditions: [ConditionGeneVente!]
+}
+
+type Query {
+  allArticleGene: [ArticleGene!]
+}

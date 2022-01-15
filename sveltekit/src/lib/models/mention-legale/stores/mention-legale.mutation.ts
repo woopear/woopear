@@ -10,5 +10,38 @@ export const mentionLegaleMutation = {
 			n.mentionLegales = mentions;
 			return n;
 		});
+	},
+
+	/**
+	 * ajout nouvelle mention legale
+	 */
+	addNewMentionLegale: (value: IMention): void => {
+		mentionLegaleStore.update((n) => {
+			// si la mention existe deja on l'enleve
+			n.mentionLegales = n.mentionLegales.filter((el) => el !== value);
+			n.mentionLegales = [...n.mentionLegales, value];
+			return n;
+		});
+	},
+
+	/**
+	 * remove mention du store mentionLegale
+	 */
+	removeMentionLegale: (id: string): void => {
+		mentionLegaleStore.update((n) => {
+			// si la mention existe deja on l'enleve
+			n.mentionLegales = n.mentionLegales.filter((el) => el.id !== id);
+			return n;
+		});
+	},
+
+	/**
+	 * set le store mentionLegaleActivate
+	 */
+	setMentionLegaleActivate: (mention: IMention): void => {
+		mentionLegaleStore.update((n) => {
+			n.mentionLegaleActivate = mention;
+			return n;
+		});
 	}
 };
