@@ -13,9 +13,9 @@ export const enum EInfoBulleError {
 	SEND_MAIL_REST_PASSWORD_NOK = "Impossible de faire votre demande, l'email n'existe pas, contacter woopear pour ouvrir un compte.",
 	UPDATE_PASSWORD = 'Une erreur est survenu, impossible de modifier le mot de passe',
 	MODIFICATION_PRESENTATION = 'Une erreur est survenu pendant la modification de la présentation',
-	MODIFICATION_INPUTIMAGE = "Une erreur est survenu pendant la modification du fichier",
+	MODIFICATION_INPUTIMAGE = 'Une erreur est survenu pendant la modification du fichier',
 	CREATION_IMAGE = "Une erreur est survenu pendant la creation de l'image",
-	DELETE_IMAGE = "Une erreur est survenu pendant l'effacement de l'image"
+	DELETE_IMAGE = "Une erreur est survenu pendant l'effacement de l'image",
 	CREATE_MENTIONLEGALE = 'Impossible de creer la mention légale',
 	UPDATE_MENTIONLEGALE = 'Impossible de modifier la mention légale',
 	DELETE_MENTIONLEGALE = 'Impossible de supprimer cette mention',
@@ -45,8 +45,6 @@ export const enum EInfoBulleLogo {
  * enum pour dire que l'action effectuer s'est bien passé
  */
 export const enum EInfoBulleValider {
-
 	PRESENTATION = 'Modification présentation réussi',
 	INPUTIMAGE = 'Modification inputFile réussi'
-
 }
