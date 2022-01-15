@@ -1,0 +1,9 @@
+type ConditionGeneVente {
+  activate: Boolean!
+  articles: [ArticleGene!]
+}
+
+type Query {
+  allConditionGeneVente: [ConditionGeneVente!]
+  conditionGeneVenteByActivate(activate: Boolean!): ConditionGeneVente
+}

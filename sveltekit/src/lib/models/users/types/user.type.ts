@@ -6,7 +6,11 @@ import type { IRole } from '$lib/models/role/types/role.type';
  */
 export interface IUser {
 	id?: string;
+	firstName?: string;
+	lastName?: string;
 	username?: string;
+	userName?: string;
+	pseudo?: string;
 	email?: string;
 	provider?: string;
 	password?: string;

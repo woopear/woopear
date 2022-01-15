@@ -1,16 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
 	import { filterStringService } from '$lib/providers/filter-string/filter-string.service';
-	import { beforeUpdate } from 'svelte';
 
 	export let libelle: string;
 	export let link: string;
 	export let handlerClickA;
-
-	beforeUpdate(() => {
-		console.log($page.path);
-	});
 
 	$: textColor =
 		$page.path === link

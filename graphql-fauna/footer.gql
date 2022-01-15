@@ -1,0 +1,13 @@
+type Footer {
+  name: String!
+  subTitle: String!
+  address: String!
+  phoneNumber: String!
+  email: String!
+  copyright: String!
+}
+
+type Query {
+  allFooter: [Footer!]
+  footerByName(name: String!): Footer!
+}
