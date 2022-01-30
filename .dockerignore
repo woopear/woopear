@@ -1,7 +1,0 @@
-.git
-./front/.git
-.env
-./front/.env
-*.md
-./front/node_modules
-./api/node_modules
