@@ -1,3 +1,6 @@
-<section>
-  <p>Site de woopears</p>
-</section>
+<script>
+  import Waiting from '$lib/modules/waiting/components/waiting.svelte';
+</script>
+
+<!-- waiting -->
+<Waiting />
