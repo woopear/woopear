@@ -6,11 +6,16 @@
   let waiting_active = true;
 </script>
 
+<!-- head -->
+<svelte:head>
+  <title>Woopear</title>
+</svelte:head>
+
 {#if waiting_active}
   <!-- animation  -->
   <Anime />
   <!-- waiting -->
   <Waiting />
 {:else}
-  <p>woopear</p>
+  <h1>woopear</h1>
 {/if}
