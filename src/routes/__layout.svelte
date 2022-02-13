@@ -1,5 +1,8 @@
 <script>
-	import '../app.css';
+  import '../app.css';
+  import Main from '$lib/modules/main/components/main.svelte';
 </script>
 
-<slot />
+<Main>
+  <slot />
+</Main>
