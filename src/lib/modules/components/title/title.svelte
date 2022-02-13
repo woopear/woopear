@@ -10,9 +10,9 @@
 <!-- si title et type title sont définis -->
 {#if type_title && title}
   {#if type_title === ETypeTitle.H1}
-    <h1 class="text-5xl font-bold">{title}</h1>
+    <h1 class="text-5xl sm:text-6xl font-bold">{title}</h1>
   {:else if type_title === ETypeTitle.H2}
-    <h2 class="text-5xl font-thin">{title}</h2>
+    <h2 class="text-4xl sm:text-5xl font-thin">{title}</h2>
   {:else if type_title === ETypeTitle.H3}
     <h3 class="text-3xl font-bold">{title}</h3>
   {:else if type_title === ETypeTitle.H4}

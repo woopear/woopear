@@ -45,20 +45,21 @@
 <!-- waiting -->
 <section class="w-full h-96 flex flex-col lg:flex-row">
   <!-- partie title -->
-  <section class="text-center flex items-center flex-1">
+  <section class="text-center flex flex-col flex-1 items-center justify-center lg:items-end">
     <!-- title -->
-    <div class="w-full md:w-11/12 lg:w-9/12 xl:w-7/12 md:m-auto">
-      <Title type_title={ETypeTitle.H1} title="woopear.fr est en construction" />
+    <div class="w-full md:w-11/12 lg:w-9/12 xl:w-7/12 md:m-auto lg:m-0 lg:mr-12">
+      <Title type_title={ETypeTitle.H1} title="woopear.fr" />
+      <p class="text-2xl">est en construction</p>
     </div>
   </section>
 
   <!-- partie conteur -->
-  <section class="flex flex-col items-center justify-center flex-1">
+  <section class="flex flex-col items-center lg:mr-32 justify-center flex-1">
     <!-- si compteur est init -->
     {#if load_counter}
       <section transition:fly={{ duration: 500 }}>
         <!-- sub title -->
-        <div class="mb-6 text-center">
+        <div class="mb-2 text-center text-primary">
           <Title type_title={ETypeTitle.H4} title="Bientôt" />
         </div>
 
