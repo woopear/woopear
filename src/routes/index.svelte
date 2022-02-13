@@ -1,3 +1,3 @@
 <section>
-  <p>Site de woopear</p>
+  <p>Site de woopears</p>
 </section>
