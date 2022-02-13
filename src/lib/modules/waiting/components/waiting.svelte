@@ -49,7 +49,6 @@
     <!-- title -->
     <div class="w-full md:w-11/12 lg:w-9/12 xl:w-7/12 md:m-auto lg:m-0 lg:mr-12">
       <Title type_title={ETypeTitle.H1} title="woopear.fr" />
-      <p class="text-2xl">est en construction</p>
     </div>
   </section>
 
