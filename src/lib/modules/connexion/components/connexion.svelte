@@ -19,7 +19,7 @@
 
       if (!user.ok) throw new Error('error');
 
-      $session.user = await user.json();
+      //$session.user = await user.json();
     } catch (error) {
       console.error(error);
     }
