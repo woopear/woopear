@@ -1,4 +1,6 @@
-// interface de l'objet woopear
+/**
+ * interface de l'objet woopear
+ */
 export interface IWoopear {
   id?: string;
   name?: string;
