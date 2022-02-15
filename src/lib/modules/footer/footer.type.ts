@@ -7,5 +7,5 @@ export interface IFooter {
   brand?: string;
   copyright?: string;
   woopear?: IWoopear;
-  menus?: IMenu;
+  menus?: [IMenu];
 }

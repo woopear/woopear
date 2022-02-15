@@ -9,5 +9,5 @@ export interface ILink {
 export interface IMenu {
   id?: string;
   libelle?: string;
-  links?: ILink;
+  links?: [ILink];
 }
