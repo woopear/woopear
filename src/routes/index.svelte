@@ -3,7 +3,7 @@
   import Waiting from '$lib/modules/waiting/components/waiting.svelte';
 
   // pour activer la construction du site
-  let waiting_active = true;
+  let waiting_active = false;
 </script>
 
 <!-- head -->
@@ -18,4 +18,5 @@
   <Waiting />
 {:else}
   <h1>woopear</h1>
+  <a href="/connexion">connection</a>
 {/if}
