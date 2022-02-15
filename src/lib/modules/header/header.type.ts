@@ -4,5 +4,5 @@ import type { IMenu } from '../menu/menu.type';
 export interface IHeader {
   id?: string;
   brand?: string;
-  menus?: IMenu;
+  menus?: [IMenu];
 }
