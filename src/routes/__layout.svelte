@@ -42,13 +42,14 @@
 <script lang="ts">
   import '../app.css';
   import Main from '$lib/modules/main/components/main.svelte';
-  import HeaderHome from '$lib/modules/header/component/header-home.component.svelte';
+  import HeaderHome from '$lib/modules/header/components/header-home.svelte';
   import Footer from '$lib/modules/footer/component/footer.component.svelte';
   import { fire_auth } from '$lib/providers/firebase/firebase.service';
   import { browser } from '$app/env';
   import { onAuthStateChanged } from 'firebase/auth';
   import { public_page } from '$lib/providers/public-page/public-page.service';
   import { onMount } from 'svelte';
+  import Spinner from '$lib/modules/spinner/components/spinner.svelte';
 
   // activation du loader
   let loader: boolean;
@@ -61,19 +62,27 @@
     await promise;
     loader = true;
   });
+
+  // pour activer la construction du site
+  let waiting_active = false;
 </script>
 
-<!-- header -->
-<HeaderHome />
+{#if !waiting_active}
+  <!-- header -->
+  <HeaderHome />
+{/if}
 
 {#if loader}
   <Main>
     <slot />
   </Main>
 {:else}
-  <!-- TODO : implementer loader -->
-  en chargement ...
+  <Main>
+    <Spinner />
+  </Main>
 {/if}
 
-<!-- footer -->
-<Footer />
+{#if !waiting_active}
+  <!-- footer -->
+  <Footer />
+{/if}
