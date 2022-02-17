@@ -43,7 +43,7 @@
   import '../app.css';
   import Main from '$lib/modules/main/components/main.svelte';
   import HeaderHome from '$lib/modules/header/components/header-home.svelte';
-  import Footer from '$lib/modules/footer/component/footer.component.svelte';
+  import Footer from '$lib/modules/footer/components/footer.svelte';
   import { fire_auth } from '$lib/providers/firebase/firebase.service';
   import { browser } from '$app/env';
   import { onAuthStateChanged } from 'firebase/auth';
