@@ -6,16 +6,22 @@
   import { signInWithEmailAndPassword } from 'firebase/auth';
   import type { ILogin } from '../login.type';
 
+  /**
+   * connexion simple utilisateur + affectation de session.user
+   * @param e
+   */
   const login = async (e) => {
     try {
       // creation des datas
       const data = createObjectAsFormData<ILogin>(e.target);
       // connexion firebase
       const user = await signInWithEmailAndPassword(fire_auth, data.email, data.password);
-      // affectation au stuff.user la réponse reçus
+      // affectation au session.user la réponse reçus
       $session.user = user.user;
+      // va sur la page dashboard
       goto('/dashboard');
     } catch (error) {
+      // TODO : gerer les erreurs
       console.error(error);
     }
   };

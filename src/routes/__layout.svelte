@@ -19,7 +19,7 @@
     // execute test connexion
     await testConnexion();
 
-    // si navigateur et si déconnecter et si l'url est non public
+    // si navigateur et si déconnecter et si l'url est non public on redirige
     if (browser) {
       if (!session.user && !public_page.includes(url.pathname)) {
         console.log('deconnecter');
@@ -30,10 +30,9 @@
       }
     }
 
-    // retourne props + promise + stuff
+    // retourne props + promise
     return {
       props: {
-        user_connect: session.user,
         promise: new Promise((res, rej) => res(true))
       }
     };
@@ -50,8 +49,8 @@
   import { onMount } from 'svelte';
 
   // activation du loader
-  let loader;
-  // promise du load
+  let loader: boolean;
+  // promise de la fonction load
   export let promise;
 
   onMount(async () => {
