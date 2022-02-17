@@ -1,4 +1,3 @@
-import type { IUser } from '$lib/modules/user/user.type';
 /// <reference types="@sveltejs/kit" />
 
 // See https://kit.svelte.dev/docs/typescript
@@ -9,7 +8,7 @@ declare namespace App {
   interface Platform {}
 
   interface Session {
-    user: IUser;
+    user: import('firebase/auth').User;
   }
 
   interface Stuff {}

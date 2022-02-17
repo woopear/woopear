@@ -1,7 +1,7 @@
 /**
  * interface de connexion simple (email, pwd)
  */
-export interface IConnexion {
+export interface ILogin {
   email: string;
   password: string;
 }

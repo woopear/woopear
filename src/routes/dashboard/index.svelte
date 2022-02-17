@@ -1,6 +1,7 @@
 <script lang="ts">
+  import Logout from '$lib/modules/logout/components/logout.svelte';
 </script>
 
-<section>
-  <p>je suis connecté</p>
-</section>
+<p>connecter</p>
+
+<Logout />

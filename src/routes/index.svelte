@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Anime from '$lib/modules/waiting/components/anime.svelte';
   import Waiting from '$lib/modules/waiting/components/waiting.svelte';
 
@@ -18,5 +18,5 @@
   <Waiting />
 {:else}
   <h1>woopear</h1>
-  <a href="/connexion">connection</a>
+  <a href="/login" class="btn btn-primary">connection</a>
 {/if}

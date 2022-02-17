@@ -1,4 +1,4 @@
-export const firebaseConfig = {
+export const fire_base_config = {
   apiKey: 'AIzaSyCk3EsBMGuKen3ReU88chxg7tb_7ogS0Gw',
   authDomain: 'woopear-24a22.firebaseapp.com',
   projectId: 'woopear-24a22',
