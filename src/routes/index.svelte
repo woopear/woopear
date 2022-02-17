@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
   import Anime from '$lib/modules/waiting/components/anime.svelte';
   import Waiting from '$lib/modules/waiting/components/waiting.svelte';
 
   // pour activer la construction du site
-  let waiting_active = true;
+  let waiting_active = false;
 </script>
 
 <!-- head -->
@@ -18,4 +18,5 @@
   <Waiting />
 {:else}
   <h1>woopear</h1>
+  <a href="/login" class="btn btn-primary">connection</a>
 {/if}
