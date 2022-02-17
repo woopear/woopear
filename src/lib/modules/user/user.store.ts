@@ -10,6 +10,7 @@ import type { IUser } from './user.type';
 const createCurrentUserStore = () => {
   const { set, subscribe, update } = writable({} as IUser);
 
+  // pour ecouter le document du user connecter
   let lisen_get_user;
 
   return {
