@@ -29,6 +29,7 @@
         <BtnUpdate changeUpdate={() => (seeUpdate = !seeUpdate)} relief={true} />
       {/if}
     </section>
+
     <!-- image profil -->
     <section class="flex justify-center">
       {#if $current_user_store.avatar}
@@ -53,6 +54,7 @@
             $current_user_store.last_name
           )}`}
         </p>
+
         <!-- information -->
         <section class="mt-8">
           <section>
@@ -64,12 +66,14 @@
                 <p>{$current_user_store.code_post} {firstToUppperCase($current_user_store.city)}</p>
               </div>
             </div>
+
             <!-- cadre info divers -->
             <hr class="my-4" />
             <div>
               <p class="text-secondary font-semibold mb-2 text-xl">Infos</p>
               <div class="pl-2 text-lg font-light">
                 <p>{$current_user_store.phone_number}</p>
+
                 <!-- partie email -->
                 <div class="flex">
                   <p class="mr-2">{$session.user ? $session.user.email : ''}</p>
@@ -77,6 +81,7 @@
                     <BtnUpdate changeUpdate={undefined} relief={false} size="h-3 w-3" />
                   </div>
                 </div>
+
                 <!-- partie mot de passe -->
                 <div class="flex">
                   <p class="mr-2">mot de passe ******</p>
@@ -99,6 +104,7 @@
           on:submit|preventDefault={updateUser}
           class="py-8 flex flex-col items-center justify-center w-full"
         >
+          <!-- title -->
           <div class="mb-6">
             <Title type_title={ETypeTitle.H6} title="Modification du profil" />
           </div>
@@ -113,14 +119,17 @@
                 value={$current_user_store.first_name}
               />
             </div>
+
             <!-- last_name -->
             <div class={`mt-${margin_top_input}`}>
               <Input name="last_name" placeholder="Nom" value={$current_user_store.last_name} />
             </div>
+
             <!-- address -->
             <div class={`mt-${margin_top_input}`}>
               <Input name="address" placeholder="Addresse" value={$current_user_store.address} />
             </div>
+
             <!-- code_post -->
             <div class={`mt-${margin_top_input}`}>
               <Input
@@ -129,10 +138,12 @@
                 value={$current_user_store.code_post}
               />
             </div>
+
             <!-- city -->
             <div class={`mt-${margin_top_input}`}>
               <Input name="city" placeholder="Ville" value={$current_user_store.city} />
             </div>
+
             <!-- phone_number -->
             <div class={`mt-${margin_top_input}`}>
               <Input
@@ -142,6 +153,7 @@
               />
             </div>
           </div>
+
           <!-- btn modifier -->
           <button class="btn btn-primary btn-sm mt-8">Modifier</button>
         </form>
