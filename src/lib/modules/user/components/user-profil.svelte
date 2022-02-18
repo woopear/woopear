@@ -1,6 +1,7 @@
 <script lang="ts">
   import { session } from '$app/stores';
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
+  import Card from '$lib/modules/components/card/card.svelte';
 
   import UserSvg from '$lib/modules/components/user-svg/user-svg.svelte';
   import { firstToUppperCase } from '$lib/providers/format/format.service';
@@ -8,9 +9,7 @@
 </script>
 
 {#if $current_user_store && $current_user_store.uid}
-  <section
-    class="my-12 card py-4 px-4 md:px-12 bg-base-200 w-full sm:w-9/12 md:w-6/12 lg:w-4/12 shadow-lg"
-  >
+  <Card>
     <!-- partie btn update -->
     <section class="flex justify-end">
       <BtnUpdate changeUpdate={undefined} relief={true} />
@@ -58,6 +57,5 @@
         </div>
       </section>
     </section>
-    <!-- lien utils changement d'email, changement mot de passe -->
-  </section>
+  </Card>
 {/if}
