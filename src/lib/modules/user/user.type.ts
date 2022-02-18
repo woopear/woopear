@@ -32,7 +32,7 @@ export interface IUser {
   city?: string;
   phone_number?: string;
   avatar?: string;
-  compani?: IUserCompanie;
+  companie?: IUserCompanie;
   role?: IUserRole;
   uid?: string;
 }
