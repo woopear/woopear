@@ -12,6 +12,7 @@
   import { current_user_store } from '../user.store';
 
   let seeUpdate = false;
+  let seeUpdateImg = false;
   const margin_top_input = '4';
 
   const updateUser = () => {
@@ -31,17 +32,68 @@
     </section>
 
     <!-- image profil -->
-    <section class="flex justify-center">
+    <section class="flex flex-col items-center justify-center">
       {#if $current_user_store.avatar}
-        <img src={`${$current_user_store.avatar}`} alt="image profil user" />
-        {#if seeUpdate}
-          <BtnUpdate changeUpdate={undefined} relief={true} size="w-4 h-4" />
+        <!-- section si image est dispo -->
+        {#if !seeUpdateImg}
+          <img src={`${$current_user_store.avatar}`} alt="image profil user" />
+        {/if}
+        {#if seeUpdate && !seeUpdateImg}
+          <BtnUpdate
+            changeUpdate={() => (seeUpdateImg = !seeUpdateImg)}
+            relief={true}
+            size="w-4 h-4"
+          />
+        {:else if seeUpdate && seeUpdateImg}
+          <BtnCloseUpdate
+            changeUpdate={() => (seeUpdateImg = !seeUpdateImg)}
+            relief={true}
+            size="w-4 h-4"
+          />
         {/if}
       {:else}
-        <UserSvg outline={true} />
-        {#if seeUpdate}
-          <BtnUpdate changeUpdate={undefined} relief={true} size="w-4 h-4" />
+        <!-- section si image est pas dispo -->
+        {#if !seeUpdateImg}
+          <UserSvg outline={true} />
         {/if}
+        {#if seeUpdate && !seeUpdateImg}
+          <BtnUpdate
+            changeUpdate={() => (seeUpdateImg = !seeUpdateImg)}
+            relief={true}
+            size="w-4 h-4"
+          />
+        {:else if seeUpdate && seeUpdateImg}
+          <BtnCloseUpdate
+            changeUpdate={() => (seeUpdateImg = !seeUpdateImg)}
+            relief={true}
+            size="w-4 h-4"
+          />
+        {/if}
+      {/if}
+      {#if seeUpdate && seeUpdateImg}
+        <div class="flex justify-center mt-4">
+          <div class="mb-3 w-96">
+            <input
+              class="form-control
+          block
+          w-full
+          px-2
+          py-1
+          text-sm
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              id="formFileSm"
+              type="file"
+            />
+          </div>
+        </div>
       {/if}
     </section>
 
