@@ -1,5 +1,6 @@
 <script lang="ts">
   import { session } from '$app/stores';
+  import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
 
   import UserSvg from '$lib/modules/components/user-svg/user-svg.svelte';
   import { firstToUppperCase } from '$lib/providers/format/format.service';
@@ -10,6 +11,10 @@
   <section
     class="my-12 card py-4 px-4 md:px-12 bg-base-200 w-full sm:w-9/12 md:w-6/12 lg:w-4/12 shadow-lg"
   >
+    <!-- partie btn update -->
+    <section class="flex justify-end">
+      <BtnUpdate changeUpdate={undefined} relief={true} />
+    </section>
     <!-- image profil -->
     <section class="flex justify-center">
       {#if $current_user_store.avatar}
@@ -39,9 +44,17 @@
         <hr class="my-4" />
         <div>
           <p class="text-secondary font-semibold mb-2 text-xl">Infos</p>
-          <p>{$current_user_store.phone_number}</p>
-          <p>{$session.user.email}</p>
-          <p>mot de passe ******</p>
+          <p class="text-lg">{$current_user_store.phone_number}</p>
+          <!-- partie email -->
+          <div class="flex items-center text-lg">
+            <p class="mr-4">{$session.user.email}</p>
+            <BtnUpdate changeUpdate={undefined} relief={false} size="h-4 w-4" />
+          </div>
+          <!-- partie mot de passe -->
+          <div class="flex items-center text-lg">
+            <p class="mr-4">mot de passe ******</p>
+            <BtnUpdate changeUpdate={undefined} relief={false} size="h-4 w-4" />
+          </div>
         </div>
       </section>
     </section>
