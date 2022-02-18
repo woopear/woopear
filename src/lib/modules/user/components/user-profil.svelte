@@ -63,12 +63,12 @@
               <!-- partie email -->
               <div class="flex items-center text-lg">
                 <p class="mr-4">{$session.user ? $session.user.email : ''}</p>
-                <BtnUpdate changeUpdate={undefined} relief={false} size="h-4 w-4" />
+                <BtnUpdate changeUpdate={undefined} relief={true} size="h-4 w-4" />
               </div>
               <!-- partie mot de passe -->
               <div class="flex items-center text-lg">
                 <p class="mr-4">mot de passe ******</p>
-                <BtnUpdate changeUpdate={undefined} relief={false} size="h-4 w-4" />
+                <BtnUpdate changeUpdate={undefined} relief={true} size="h-4 w-4" />
               </div>
             </div>
           </section>
