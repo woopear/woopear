@@ -6,6 +6,7 @@
   import Title from '$lib/modules/components/title/title.svelte';
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
   import UserSvg from '$lib/modules/components/user-svg/user-svg.svelte';
+  import SpinnerLittle from '$lib/modules/spinner/components/spinner-little.svelte';
   import { firstToUppperCase } from '$lib/providers/format/format.service';
   import { current_user_store } from '../user.store';
 
@@ -132,4 +133,6 @@
       </section>
     {/if}
   </Card>
+{:else}
+  <SpinnerLittle />
 {/if}
