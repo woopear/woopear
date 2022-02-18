@@ -1,16 +1,30 @@
 <script lang="ts">
   import BtnCloseUpdate from '$lib/modules/components/btn/btn-close-update.svelte';
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
+  import BtnUser from '$lib/modules/components/btn/btn-user.svelte';
   import Card from '$lib/modules/components/card/card.svelte';
-  import { firstToUppperCase } from '$lib/providers/format/format.service';
+  import Input from '$lib/modules/components/input/input.svelte';
+  import { fire_db } from '$lib/providers/firebase/firebase.service';
+  import { createObjectAsFormData, firstToUppperCase } from '$lib/providers/format/format.service';
   import { current_user_store } from '../user.store';
 
   console.log($current_user_store);
 
   let seeUpdate = false;
+  let value_denomination = '';
+  let value_address = '';
+  let value_code_post = '';
+  let value_city = '';
 
-  const updateUser = () => {
-    console.log('je suis dans modifier user');
+  const updateUser = (e, id) => {
+    // création du formData
+    const form_data = createObjectAsFormData(e.target);
+    console.log('user=>', $current_user_store);
+
+    console.log('form =>', form_data);
+
+    // modifier le user
+    current_user_store.updateUser(id, form_data);
   };
 </script>
 
@@ -87,20 +101,25 @@
         </section>
       </section>
     {:else}
-      <form on:submit|preventDefault={updateUser}>
+      <form
+        on:submit|preventDefault={async (e) => {
+          updateUser(e, $current_user_store.uid);
+        }}
+      >
         <div class="form-control">
           <span>Denomination</span>
-          <input type="text" placeholder="edf" class="input input-bordered" />
+          <Input name="denomination" placeholder="edf" bind:value={value_denomination} />
 
           <span>Adresse</span>
-          <input type="text" placeholder="16 rue louis" class="input input-bordered" />
+          <Input name="address" placeholder="16 rue louis michel" bind:value={value_address} />
 
           <span>Code postal</span>
-          <input type="text" placeholder="62119" class="input input-bordered" />
+          <Input name="code_post" placeholder="62119" bind:value={value_code_post} />
 
           <span>Ville</span>
-          <input type="text" placeholder="Dourges" class="input input-bordered" />
+          <Input name="city" placeholder="Dourges" bind:value={value_city} />
         </div>
+        <button>modifier</button>
       </form>
     {/if}
   </Card>

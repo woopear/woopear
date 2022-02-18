@@ -1,5 +1,5 @@
 import { fire_db } from '$lib/providers/firebase/firebase.service';
-import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { collection, doc, onSnapshot, query, setDoc, updateDoc, where, type Unsubscribe } from 'firebase/firestore';
 import { writable } from 'svelte/store';
 import type { IUser } from './user.type';
 
@@ -11,7 +11,7 @@ const createCurrentUserStore = () => {
   const { set, subscribe, update } = writable({} as IUser);
 
   // pour ecouter le document du user connecter
-  let lisen_get_user;
+  let lisen_get_user: Unsubscribe;
 
   return {
     subscribe,
@@ -39,7 +39,16 @@ const createCurrentUserStore = () => {
      */
     stopLisenGetUser: () => {
       lisen_get_user();
-    }
+    },
+
+    /* 
+    * modifier le document dans la collection users du document de l'utilisateur connecté
+    * @param uid => id de l'utilisateur connecté
+    */
+    updateUser: async (uid: string, data: IUser): Promise<void> => {
+      await updateDoc(doc(fire_db,'users',`alvPtU1VZgfzPh0KgRPO`),{data});
+     
+    } 
   };
 };
 
