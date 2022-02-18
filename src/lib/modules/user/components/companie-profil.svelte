@@ -8,6 +8,10 @@
   console.log($current_user_store);
 
   let seeUpdate = false;
+
+  const updateUser = () => {
+    console.log('je suis dans modifier user');
+  };
 </script>
 
 {#if $current_user_store.companie}
@@ -55,7 +59,7 @@
         <!-- information de l'entreprise -->
         <section class="mt-8">
           <section>
-            <!--  -->
+            <!-- cadre adresse -->
             <div>
               <p class="text-secondary font-semibold mb-2 text-xl">Adresse</p>
               <div class="pl-2 text-lg font-light">
@@ -66,9 +70,38 @@
                 </p>
               </div>
             </div>
+
+            <!-- info divers -->
+            <hr class="my-4" />
+            <div>
+              <p class="text-secondary font-semibold mb-2 text-xl">Infos</p>
+              <p class="text-lg" />
+
+              <!-- siret -->
+              <div class="flex items-center text-lg">
+                <p class="mr-4"><span>Siret: </span>{$current_user_store.companie.siret}</p>
+                <BtnUpdate changeUpdate={undefined} relief={false} size="h-4 w-4" />
+              </div>
+            </div>
           </section>
         </section>
       </section>
+    {:else}
+      <form on:submit|preventDefault={updateUser}>
+        <div class="form-control">
+          <span>Denomination</span>
+          <input type="text" placeholder="edf" class="input input-bordered" />
+
+          <span>Adresse</span>
+          <input type="text" placeholder="16 rue louis" class="input input-bordered" />
+
+          <span>Code postal</span>
+          <input type="text" placeholder="62119" class="input input-bordered" />
+
+          <span>Ville</span>
+          <input type="text" placeholder="Dourges" class="input input-bordered" />
+        </div>
+      </form>
     {/if}
   </Card>
 {/if}
