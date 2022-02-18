@@ -95,6 +95,37 @@
         >
           <Title type_title={ETypeTitle.H6} title="Modification du profil" />
 
+          <!-- partie input -->
+          <div>
+            <!-- first_name -->
+            <div>
+              <input />
+            </div>
+            <!-- last_name -->
+            <div>
+              <input />
+            </div>
+            <!-- username -->
+            <div>
+              <input />
+            </div>
+            <!-- address -->
+            <div>
+              <input />
+            </div>
+            <!-- code_post -->
+            <div>
+              <input />
+            </div>
+            <!-- city -->
+            <div>
+              <input />
+            </div>
+            <!-- phone_number -->
+            <div>
+              <input />
+            </div>
+          </div>
           <!-- btn modifier -->
           <button class="btn btn-primary btn-sm mt-8">Modifier</button>
         </form>
