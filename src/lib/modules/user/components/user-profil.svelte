@@ -59,16 +59,28 @@
             <hr class="my-4" />
             <div>
               <p class="text-secondary font-semibold mb-2 text-xl">Infos</p>
-              <p class="text-lg">{$current_user_store.phone_number}</p>
-              <!-- partie email -->
-              <div class="flex items-center text-lg">
-                <p class="mr-4">{$session.user ? $session.user.email : ''}</p>
-                <BtnUpdate changeUpdate={undefined} relief={true} size="h-4 w-4" />
-              </div>
-              <!-- partie mot de passe -->
-              <div class="flex items-center text-lg">
-                <p class="mr-4">mot de passe ******</p>
-                <BtnUpdate changeUpdate={undefined} relief={true} size="h-4 w-4" />
+              <div class="pl-2 text-lg font-light">
+                <p>{$current_user_store.phone_number}</p>
+                <!-- partie email -->
+                <div class="flex">
+                  <p class="mr-2">{$session.user ? $session.user.email : ''}</p>
+                  <div
+                    data-tip="modifier mon email"
+                    class="tooltip tooltip-bottom tooltip-secondary"
+                  >
+                    <BtnUpdate changeUpdate={undefined} relief={false} size="h-3 w-3" />
+                  </div>
+                </div>
+                <!-- partie mot de passe -->
+                <div class="flex">
+                  <p class="mr-2">mot de passe ******</p>
+                  <div
+                    data-tip="modifier mon mot de passe"
+                    class="tooltip tooltip-bottom tooltip-secondary"
+                  >
+                    <BtnUpdate changeUpdate={undefined} relief={false} size="h-3 w-3" />
+                  </div>
+                </div>
               </div>
             </div>
           </section>
