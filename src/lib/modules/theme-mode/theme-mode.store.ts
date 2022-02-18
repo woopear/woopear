@@ -28,4 +28,4 @@ const createThemeModeStore = () => {
 };
 
 // store themeMode
-export const themeModeStore = createThemeModeStore();
+export const theme_mode_store = createThemeModeStore();

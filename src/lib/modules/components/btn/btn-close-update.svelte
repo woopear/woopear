@@ -2,9 +2,10 @@
   import HoverBtn from '../hover-btn/hover-btn.svelte';
 
   export let changeUpdate;
+  export let relief = false;
 </script>
 
-<HoverBtn>
+<HoverBtn {relief}>
   <button class="text-error" on:click={changeUpdate}>
     <svg
       xmlns="http://www.w3.org/2000/svg"

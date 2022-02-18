@@ -1,25 +1,25 @@
 <script type="ts">
   import WoopearSvg from '$lib/modules/components/woopear-svg/woopear-svg.svelte';
-  import { themeModeStore } from '../../theme-mode/theme-mode.store';
+  import { theme_mode_store } from '../../theme-mode/theme-mode.store';
 
   // boolean mode dark en fonction du themeMode
-  $: btnDark = $themeModeStore === 'woo-claire' ? false : true;
+  $: btnDark = $theme_mode_store === 'woo-claire' ? false : true;
 
   /**
    * fonction pour switch de mode dark a mode light
    */
   const switchTheme = () => {
     // condition qui verifier dans quel théme on se trouve
-    if ($themeModeStore === 'woo-claire') {
-      themeModeStore.set('woo-dark');
+    if ($theme_mode_store === 'woo-claire') {
+      theme_mode_store.set('woo-dark');
       btnDark = true;
-      document.querySelector('#baliseHtml').setAttribute('data-theme', $themeModeStore);
-      localStorage.setItem('woo-dark', $themeModeStore);
+      document.querySelector('#baliseHtml').setAttribute('data-theme', $theme_mode_store);
+      localStorage.setItem('woo-dark', $theme_mode_store);
     } else {
-      themeModeStore.set('woo-claire');
+      theme_mode_store.set('woo-claire');
       btnDark = false;
-      document.querySelector('#baliseHtml').setAttribute('data-theme', $themeModeStore);
-      localStorage.setItem('woo-dark', $themeModeStore);
+      document.querySelector('#baliseHtml').setAttribute('data-theme', $theme_mode_store);
+      localStorage.setItem('woo-dark', $theme_mode_store);
     }
   };
 </script>

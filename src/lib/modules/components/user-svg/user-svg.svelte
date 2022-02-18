@@ -5,7 +5,7 @@
 
 {#if outline}
   <!-- svg pour profil ou autre composant fixe -->
-  <div class="h-fit w-fit p-3 rounded-full flex items-center bg-base-200">
+  <div class="h-fit w-fit p-3 rounded-full flex items-center bg-base-300">
     <svg xmlns="http://www.w3.org/2000/svg" class={`${size}`} viewBox="0 0 24 24" fill="none">
       <path
         d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21"

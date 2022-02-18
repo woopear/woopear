@@ -20,7 +20,26 @@
 <p>connecter</p>
 
 <Logout />
-<BtnCloseUpdate changeUpdate={undefined} />
-<BtnUpdate changeUpdate={undefined} />
-<UserSvg outline={true} />
-<BtnUser changeUpdate={undefined} size="w-6 h-6" color="text-primary" />
+<!-- test sans relief -->
+<div class="card px-12 py-4 bg-base-200 shadow-xl">
+  <div class="card-action">
+    <div class="flex justify-end">
+      <BtnCloseUpdate changeUpdate={undefined} />
+    </div>
+    <BtnUpdate changeUpdate={undefined} />
+    <UserSvg outline={true} />
+    <BtnUser changeUpdate={undefined} size="w-6 h-6" color="text-primary" />
+  </div>
+</div>
+
+<!-- test avec relief -->
+<div class="card mt-12 px-12 py-4 bg-base-200 shadow-xl">
+  <div class="card-action">
+    <div class="flex justify-end">
+      <BtnCloseUpdate relief={true} changeUpdate={undefined} />
+    </div>
+    <BtnUpdate relief={true} changeUpdate={undefined} />
+    <UserSvg outline={true} />
+    <BtnUser relief={true} changeUpdate={undefined} size="w-6 h-6" color="text-primary" />
+  </div>
+</div>
