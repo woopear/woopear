@@ -62,7 +62,7 @@
               <p class="text-lg">{$current_user_store.phone_number}</p>
               <!-- partie email -->
               <div class="flex items-center text-lg">
-                <p class="mr-4">{$session.user.email}</p>
+                <p class="mr-4">{$session.user ? $session.user.email : ''}</p>
                 <BtnUpdate changeUpdate={undefined} relief={false} size="h-4 w-4" />
               </div>
               <!-- partie mot de passe -->
