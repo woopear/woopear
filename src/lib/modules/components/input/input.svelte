@@ -4,4 +4,4 @@
   export let name = '';
 </script>
 
-<input type="text" {name} {placeholder} class="input input-bordered" bind:value />
+<input type="text" {name} {placeholder} class="input text-base w-full" bind:value />

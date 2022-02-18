@@ -12,6 +12,7 @@
   import { current_user_store } from '../user.store';
 
   let seeUpdate = false;
+  const margin_top_input = '4';
 
   const updateUser = () => {
     console.log('je suis dans modifier user');
@@ -93,39 +94,49 @@
       <section>
         <form
           on:submit|preventDefault={updateUser}
-          class="py-8 flex flex-col items-center justify-center"
+          class="py-8 flex flex-col items-center justify-center w-full"
         >
-          <Title type_title={ETypeTitle.H6} title="Modification du profil" />
+          <div class="mb-6">
+            <Title type_title={ETypeTitle.H6} title="Modification du profil" />
+          </div>
 
           <!-- partie input -->
-          <div>
+          <div class="w-full">
             <!-- first_name -->
-            <div class="mt-2">
-              <Input />
+            <div class={`mt-${margin_top_input}`}>
+              <Input
+                name="first_name"
+                placeholder="Prénom"
+                value={$current_user_store.first_name}
+              />
             </div>
             <!-- last_name -->
-            <div class="mt-2">
-              <Input />
-            </div>
-            <!-- username -->
-            <div class="mt-2">
-              <Input />
+            <div class={`mt-${margin_top_input}`}>
+              <Input name="last_name" placeholder="Nom" value={$current_user_store.last_name} />
             </div>
             <!-- address -->
-            <div class="mt-2">
-              <Input />
+            <div class={`mt-${margin_top_input}`}>
+              <Input name="address" placeholder="Addresse" value={$current_user_store.address} />
             </div>
             <!-- code_post -->
-            <div class="mt-2">
-              <Input />
+            <div class={`mt-${margin_top_input}`}>
+              <Input
+                name="code_post"
+                placeholder="Code postal"
+                value={$current_user_store.code_post}
+              />
             </div>
             <!-- city -->
-            <div class="mt-2">
-              <Input />
+            <div class={`mt-${margin_top_input}`}>
+              <Input name="city" placeholder="Ville" value={$current_user_store.city} />
             </div>
             <!-- phone_number -->
-            <div class="mt-2">
-              <Input />
+            <div class={`mt-${margin_top_input}`}>
+              <Input
+                name="Numéro de téléphone"
+                placeholder="prénom"
+                value={$current_user_store.phone_number}
+              />
             </div>
           </div>
           <!-- btn modifier -->
