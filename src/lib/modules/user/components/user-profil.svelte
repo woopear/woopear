@@ -33,8 +33,14 @@
     <section class="flex justify-center">
       {#if $current_user_store.avatar}
         <img src={`${$current_user_store.avatar}`} alt="image profil user" />
+        {#if seeUpdate}
+          <BtnUpdate changeUpdate={undefined} relief={true} size="w-4 h-4" />
+        {/if}
       {:else}
         <UserSvg outline={true} />
+        {#if seeUpdate}
+          <BtnUpdate changeUpdate={undefined} relief={true} size="w-4 h-4" />
+        {/if}
       {/if}
     </section>
 
@@ -67,10 +73,7 @@
                 <!-- partie email -->
                 <div class="flex">
                   <p class="mr-2">{$session.user ? $session.user.email : ''}</p>
-                  <div
-                    data-tip="modifier mon email"
-                    class="tooltip tooltip-bottom tooltip-secondary"
-                  >
+                  <div data-tip="modifier mon email" class="tooltip tooltip-left tooltip-secondary">
                     <BtnUpdate changeUpdate={undefined} relief={false} size="h-3 w-3" />
                   </div>
                 </div>
@@ -79,7 +82,7 @@
                   <p class="mr-2">mot de passe ******</p>
                   <div
                     data-tip="modifier mon mot de passe"
-                    class="tooltip tooltip-bottom tooltip-secondary"
+                    class="tooltip tooltip-left tooltip-secondary"
                   >
                     <BtnUpdate changeUpdate={undefined} relief={false} size="h-3 w-3" />
                   </div>
