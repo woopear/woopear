@@ -37,7 +37,6 @@ const createCurrentUserStore = () => {
         let user: IUser;
         querySnapshot.forEach((doc) => {
           user = { id: doc.id, ...doc.data({ serverTimestamps: 'estimate' }) };
-          console.log(user);
         });
 
         set(user);
@@ -55,8 +54,8 @@ const createCurrentUserStore = () => {
      * modifier le document dans la collection users du document de l'utilisateur connecté
      * @param uid => id de l'utilisateur connecté
      */
-    updateUser: async (uid: string, data: IUser): Promise<void> => {
-      await updateDoc(doc(fire_db, 'users', `alvPtU1VZgfzPh0KgRPO`), { data });
+    updateUser: async (id: string, data: IUser): Promise<void> => {
+      await updateDoc(doc(fire_db, 'users', `${id}`), { ...data });
     }
   };
 };

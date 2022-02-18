@@ -8,15 +8,28 @@
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
   import UserSvg from '$lib/modules/components/user-svg/user-svg.svelte';
   import SpinnerLittle from '$lib/modules/spinner/components/spinner-little.svelte';
-  import { firstToUppperCase } from '$lib/providers/format/format.service';
+  import { createObjectAsFormData, firstToUppperCase } from '$lib/providers/format/format.service';
   import { current_user_store } from '../user.store';
+  import type { IUser } from '../user.type';
 
+  // voir modification update user
   let seeUpdate = false;
+
+  // voir modification image
   let seeUpdateImg = false;
+
+  // taille de la marge du haut des input du formulaire
   const margin_top_input = '4';
 
-  const updateUser = () => {
-    console.log('je suis dans modifier user');
+  const updateUser = async (e, id) => {
+    // creation des données
+    const data = createObjectAsFormData<IUser>(e.target);
+    // creation du user_name
+    data.user_name = data.first_name + ' ' + data.last_name;
+    // modification du user
+    await current_user_store.updateUser(id, data);
+    // on ferme le volet de modification
+    seeUpdate = !seeUpdate;
   };
 </script>
 
@@ -153,7 +166,7 @@
       <!-- section update -->
       <section>
         <form
-          on:submit|preventDefault={updateUser}
+          on:submit|preventDefault={(e) => updateUser(e, $current_user_store.id)}
           class="py-8 flex flex-col items-center justify-center w-full"
         >
           <!-- title -->
@@ -199,8 +212,8 @@
             <!-- phone_number -->
             <div class={`mt-${margin_top_input}`}>
               <Input
-                name="Numéro de téléphone"
-                placeholder="prénom"
+                name="phone_number"
+                placeholder="Numéro de téléphone"
                 value={$current_user_store.phone_number}
               />
             </div>

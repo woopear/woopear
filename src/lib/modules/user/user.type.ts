@@ -26,7 +26,7 @@ export interface IUser {
   id?: string;
   first_name?: string;
   last_name?: string;
-  username?: string;
+  user_name?: string;
   address?: string;
   code_post?: string;
   city?: string;
