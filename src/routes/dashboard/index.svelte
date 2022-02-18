@@ -5,6 +5,7 @@
   import BtnUser from '$lib/modules/components/btn/btn-user.svelte';
   import UserSvg from '$lib/modules/components/user-svg/user-svg.svelte';
   import Logout from '$lib/modules/logout/components/logout.svelte';
+  import UserProfil from '$lib/modules/user/components/user-profil.svelte';
   import { current_user_store } from '$lib/modules/user/user.store';
   import { onMount } from 'svelte';
 
@@ -20,6 +21,7 @@
 <p>connecter</p>
 
 <Logout />
+<UserProfil />
 <!-- test sans relief -->
 <div class="card px-12 py-4 bg-base-200 shadow-xl">
   <div class="card-action">
