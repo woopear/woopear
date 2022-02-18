@@ -1,7 +1,7 @@
 <script lang="ts">
-  export let value;
+  export let value = '';
+  export let placeholder = '';
+  export let name = '';
 </script>
 
-<section class="form-control">
-  <input type="text" class="input input-bordered" bind:value />
-</section>
+<input type="text" {name} {placeholder} class="input input-bordered" bind:value />

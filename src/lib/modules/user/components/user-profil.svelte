@@ -3,6 +3,7 @@
   import BtnCloseUpdate from '$lib/modules/components/btn/btn-close-update.svelte';
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
   import Card from '$lib/modules/components/card/card.svelte';
+  import Input from '$lib/modules/components/input/input.svelte';
   import Title from '$lib/modules/components/title/title.svelte';
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
   import UserSvg from '$lib/modules/components/user-svg/user-svg.svelte';
@@ -99,32 +100,32 @@
           <!-- partie input -->
           <div>
             <!-- first_name -->
-            <div>
-              <input />
+            <div class="mt-2">
+              <Input />
             </div>
             <!-- last_name -->
-            <div>
-              <input />
+            <div class="mt-2">
+              <Input />
             </div>
             <!-- username -->
-            <div>
-              <input />
+            <div class="mt-2">
+              <Input />
             </div>
             <!-- address -->
-            <div>
-              <input />
+            <div class="mt-2">
+              <Input />
             </div>
             <!-- code_post -->
-            <div>
-              <input />
+            <div class="mt-2">
+              <Input />
             </div>
             <!-- city -->
-            <div>
-              <input />
+            <div class="mt-2">
+              <Input />
             </div>
             <!-- phone_number -->
-            <div>
-              <input />
+            <div class="mt-2">
+              <Input />
             </div>
           </div>
           <!-- btn modifier -->
