@@ -1,5 +1,14 @@
 import { fire_db } from '$lib/providers/firebase/firebase.service';
-import { collection, doc, onSnapshot, query, setDoc, updateDoc, where, type Unsubscribe } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  onSnapshot,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+  type Unsubscribe
+} from 'firebase/firestore';
 import { writable } from 'svelte/store';
 import type { IUser } from './user.type';
 
@@ -27,7 +36,8 @@ const createCurrentUserStore = () => {
       lisen_get_user = onSnapshot(q, (querySnapshot) => {
         let user: IUser;
         querySnapshot.forEach((doc) => {
-          user = doc.data();
+          user = { id: doc.id, ...doc.data({ serverTimestamps: 'estimate' }) };
+          console.log(user);
         });
 
         set(user);
@@ -41,14 +51,13 @@ const createCurrentUserStore = () => {
       lisen_get_user();
     },
 
-    /* 
-    * modifier le document dans la collection users du document de l'utilisateur connecté
-    * @param uid => id de l'utilisateur connecté
-    */
+    /**
+     * modifier le document dans la collection users du document de l'utilisateur connecté
+     * @param uid => id de l'utilisateur connecté
+     */
     updateUser: async (uid: string, data: IUser): Promise<void> => {
-      await updateDoc(doc(fire_db,'users',`alvPtU1VZgfzPh0KgRPO`),{data});
-     
-    } 
+      await updateDoc(doc(fire_db, 'users', `alvPtU1VZgfzPh0KgRPO`), { data });
+    }
   };
 };
 

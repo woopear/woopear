@@ -103,7 +103,7 @@
     {:else}
       <form
         on:submit|preventDefault={async (e) => {
-          updateUser(e, $current_user_store.uid);
+          updateUser(e, $current_user_store.id);
         }}
       >
         <div class="form-control">
