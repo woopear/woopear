@@ -1,5 +1,9 @@
 <script lang="ts">
   import { session } from '$app/stores';
+  import BtnCloseUpdate from '$lib/modules/components/btn/btn-close-update.svelte';
+  import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
+  import BtnUser from '$lib/modules/components/btn/btn-user.svelte';
+  import UserSvg from '$lib/modules/components/user-svg/user-svg.svelte';
   import Logout from '$lib/modules/logout/components/logout.svelte';
   import { current_user_store } from '$lib/modules/user/user.store';
   import { onMount } from 'svelte';
@@ -16,3 +20,7 @@
 <p>connecter</p>
 
 <Logout />
+<BtnCloseUpdate changeUpdate={undefined} />
+<BtnUpdate changeUpdate={undefined} />
+<UserSvg outline={true} />
+<BtnUser changeUpdate={undefined} size="w-6 h-6" color="text-primary" />
