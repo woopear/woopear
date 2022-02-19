@@ -6,6 +6,7 @@
   import Input from '$lib/modules/components/input/input.svelte';
   import Title from '$lib/modules/components/title/title.svelte';
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
+  import Tooltip from '$lib/modules/components/tooltip/tooltip.svelte';
   import UserSvg from '$lib/modules/components/user-svg/user-svg.svelte';
   import SpinnerLittle from '$lib/modules/spinner/components/spinner-little.svelte';
   import { createObjectAsFormData, firstToUppperCase } from '$lib/providers/format/format.service';
@@ -188,20 +189,17 @@
                 <!-- partie email -->
                 <div class="flex">
                   <p class="mr-2">{$session.user ? $session.user.email : ''}</p>
-                  <div data-tip="modifier mon email" class="tooltip tooltip-left tooltip-secondary">
+                  <Tooltip data="modifier mon email" direction="tooltip-left">
                     <BtnUpdate changeUpdate={undefined} relief={false} size="h-3 w-3" />
-                  </div>
+                  </Tooltip>
                 </div>
 
                 <!-- partie mot de passe -->
                 <div class="flex">
                   <p class="mr-2">mot de passe ******</p>
-                  <div
-                    data-tip="modifier mon mot de passe"
-                    class="tooltip tooltip-left tooltip-secondary"
-                  >
+                  <Tooltip data="modifier mon mot de passe" direction="tooltip-left">
                     <BtnUpdate changeUpdate={undefined} relief={false} size="h-3 w-3" />
-                  </div>
+                  </Tooltip>
                 </div>
               </div>
             </div>
