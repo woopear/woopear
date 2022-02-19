@@ -1,4 +1,8 @@
-import { fire_db } from '$lib/providers/firebase/firebase.service';
+import {
+  fire_db,
+  fire_storage,
+  ref_storage_avatar
+} from '$lib/providers/firebase/firebase.service';
 import {
   collection,
   doc,
@@ -9,6 +13,7 @@ import {
   where,
   type Unsubscribe
 } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { writable } from 'svelte/store';
 import type { IUser } from './user.type';
 
@@ -31,13 +36,14 @@ const createCurrentUserStore = () => {
      * ecoute le document dans la collection users du document de l'utilisateur connecté
      * @param uid => id de l'utilisateur connecté
      */
-    getUser: (uid: string) => {
+    getUser: (uid: string): void => {
       const q = query(collection(fire_db, 'users'), where('uid', '==', `${uid}`));
       lisen_get_user = onSnapshot(q, (querySnapshot) => {
         let user: IUser;
         querySnapshot.forEach((doc) => {
           user = { id: doc.id, ...doc.data({ serverTimestamps: 'estimate' }) };
         });
+        console.log(user);
 
         set(user);
       });
@@ -46,7 +52,7 @@ const createCurrentUserStore = () => {
     /**
      * arrete l'ecoute de getUser
      */
-    stopLisenGetUser: () => {
+    stopLisenGetUser: (): void => {
       lisen_get_user();
     },
 
@@ -54,8 +60,23 @@ const createCurrentUserStore = () => {
      * modifier le document dans la collection users du document de l'utilisateur connecté
      * @param uid => id de l'utilisateur connecté
      */
-    updateUser: async (id: string, data: IUser): Promise<void> => {
+    async updateUser(id: string, data: IUser): Promise<void> {
       await updateDoc(doc(fire_db, 'users', `${id}`), { ...data });
+    },
+
+    /**
+     * telechargement de l'image avatar du user connecté
+     * upload dans bucket + stockage de l'url dans la proprieter avatar du user
+     */
+    async uploadAvatarUser(file: Blob | Uint8Array | ArrayBuffer, id: string) {
+      // ciblage ou/et creation du nom de fichier
+      const i = ref(fire_storage, `avatars/user-avatar-${id}`);
+      // enregistrement de l'image dans le dossier avatar
+      await uploadBytes(i, file);
+      // creation de l'url pour stocker dans le document user
+      const url_avatar = await getDownloadURL(i);
+      // enregistrement du path de l'image dans le user
+      await this.updateUser(id, { avatar: url_avatar });
     }
   };
 };

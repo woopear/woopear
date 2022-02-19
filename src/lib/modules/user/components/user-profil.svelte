@@ -14,13 +14,20 @@
 
   // voir modification update user
   let seeUpdate = false;
-
   // voir modification image
   let seeUpdateImg = false;
-
+  // change le flex du input file
+  $: flex_img = seeUpdateImg ? 'flex-col items-center' : '';
   // taille de la marge du haut des input du formulaire
   const margin_top_input = '4';
+  // stock le file du input
+  let img_file;
 
+  /**
+   * modification user
+   * @param e => event formulaire
+   * @param id => id du current user
+   */
   const updateUser = async (e, id) => {
     // creation des données
     const data = createObjectAsFormData<IUser>(e.target);
@@ -30,6 +37,24 @@
     await current_user_store.updateUser(id, data);
     // on ferme le volet de modification
     seeUpdate = !seeUpdate;
+  };
+
+  /**
+   * stocke le file dans une varibale
+   * @param e => event change
+   */
+  const loadImage = (e) => {
+    img_file = e.target.files[0];
+    console.log(img_file);
+  };
+
+  /**
+   * upload l'avatar du current user
+   */
+  const uploadImg = async () => {
+    await current_user_store.uploadAvatarUser(img_file, $current_user_store.id);
+    // on ferme le volet de modification image
+    seeUpdateImg = !seeUpdateImg;
   };
 </script>
 
@@ -45,11 +70,16 @@
     </section>
 
     <!-- image profil -->
-    <section class="flex flex-col items-center justify-center">
+
+    <section class={`flex ${flex_img} justify-center`}>
       {#if $current_user_store.avatar}
         <!-- section si image est dispo -->
         {#if !seeUpdateImg}
-          <img src={`${$current_user_store.avatar}`} alt="image profil user" />
+          <img
+            class="w-24 w-24 rounded-full mt-8 mb-2"
+            src={`${$current_user_store.avatar}`}
+            alt="image profil user"
+          />
         {/if}
         {#if seeUpdate && !seeUpdateImg}
           <BtnUpdate
@@ -63,6 +93,7 @@
             relief={true}
             size="w-4 h-4"
           />
+          <h1 class="text-sm font-semibold mt-8">Modification image profil</h1>
         {/if}
       {:else}
         <!-- section si image est pas dispo -->
@@ -81,15 +112,19 @@
             relief={true}
             size="w-4 h-4"
           />
+          <Title type_title={ETypeTitle.H6} title="Modification image profil" />
         {/if}
       {/if}
+      <!-- partie input envoie image -->
       {#if seeUpdate && seeUpdateImg}
-        <div class="flex justify-center mt-4">
-          <div class="mb-3 w-96">
+        <div class="flex justify-center my-6">
+          <div class="w-96">
             <input
               class="form-control
           block
-          w-full
+          w-8/12
+          sm:w-10/12
+          m-auto
           px-2
           py-1
           text-sm
@@ -100,13 +135,14 @@
           rounded
           transition
           ease-in-out
-          m-0
           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="formFileSm"
               type="file"
+              on:change={loadImage}
             />
           </div>
         </div>
+        <button class="btn btn-xs btn-primary" on:click={uploadImg}>Envoyer</button>
       {/if}
     </section>
 
