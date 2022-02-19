@@ -21,13 +21,16 @@
       </a>
       <!--<TooltipCustom text="home" />-->
     </li>
-    {#if $current_user_store.role.libelle === ERole.ADMIN}
-      <li class="relative group">
-        <a href="/dashboard">
-          <UserSvg_2 size="w-7 h-7" />
-        </a>
-        <TooltipCustom text="utilisateurs" />
-      </li>
+
+    {#if $current_user_store?.role}
+      {#if $current_user_store.role.libelle === ERole.ADMIN}
+        <li class="relative group">
+          <a href="/dashboard/users">
+            <UserSvg_2 size="w-7 h-7" />
+          </a>
+          <TooltipCustom text="utilisateurs" />
+        </li>
+      {/if}
     {/if}
   </ul>
 </nav>
