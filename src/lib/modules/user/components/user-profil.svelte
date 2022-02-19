@@ -22,6 +22,10 @@
   const margin_top_input = '4';
   // stock le file du input
   let img_file;
+  // loader pour btn update image avatar
+  let loader_img_avatar = '';
+  // loader pour btn update user
+  let loader_update_user = '';
 
   /**
    * modification user
@@ -29,6 +33,7 @@
    * @param id => id du current user
    */
   const updateUser = async (e, id) => {
+    loader_update_user = 'loading';
     // creation des données
     const data = createObjectAsFormData<IUser>(e.target);
     // creation du user_name
@@ -37,6 +42,7 @@
     await current_user_store.updateUser(id, data);
     // on ferme le volet de modification
     seeUpdate = !seeUpdate;
+    loader_update_user = '';
   };
 
   /**
@@ -52,9 +58,11 @@
    * upload l'avatar du current user
    */
   const uploadImg = async () => {
+    loader_img_avatar = 'loading';
     await current_user_store.uploadAvatarUser(img_file, $current_user_store.id);
     // on ferme le volet de modification image
     seeUpdateImg = !seeUpdateImg;
+    loader_img_avatar = '';
   };
 </script>
 
@@ -142,7 +150,9 @@
             />
           </div>
         </div>
-        <button class="btn btn-xs btn-primary" on:click={uploadImg}>Envoyer</button>
+        <button class={`${loader_img_avatar} btn btn-xs btn-primary`} on:click={uploadImg}
+          >Envoyer</button
+        >
       {/if}
     </section>
 
@@ -256,7 +266,7 @@
           </div>
 
           <!-- btn modifier -->
-          <button class="btn btn-primary btn-sm mt-8">Modifier</button>
+          <button class={`${loader_update_user} btn btn-primary btn-sm mt-8`}>Modifier</button>
         </form>
       </section>
     {/if}

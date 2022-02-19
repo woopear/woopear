@@ -15,6 +15,10 @@
     await signOut(fire_auth);
     // reset session.user
     $session.user = null;
+    // on arrete l'ecouteur de current user
+    current_user_store.stopLisenGetUser();
+    // on efface le current user
+    current_user_store.resetCurrentUser();
     //retourne sur la page login
     goto('/login');
   };

@@ -43,7 +43,6 @@ const createCurrentUserStore = () => {
         querySnapshot.forEach((doc) => {
           user = { id: doc.id, ...doc.data({ serverTimestamps: 'estimate' }) };
         });
-        console.log(user);
 
         set(user);
       });
@@ -54,6 +53,10 @@ const createCurrentUserStore = () => {
      */
     stopLisenGetUser: (): void => {
       lisen_get_user();
+    },
+
+    resetCurrentUser: (): void => {
+      set({});
     },
 
     /**

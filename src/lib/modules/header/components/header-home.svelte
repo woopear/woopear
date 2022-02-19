@@ -1,6 +1,7 @@
 <script type="ts">
   import UserSvg from '$lib/modules/components/user-svg/user-svg.svelte';
   import WoopearSvg from '$lib/modules/components/woopear-svg/woopear-svg.svelte';
+  import { current_user_store } from '$lib/modules/user/user.store';
   import { theme_mode_store } from '../../theme-mode/theme-mode.store';
 
   // boolean mode dark en fonction du themeMode
@@ -80,9 +81,18 @@
       <ul class="flex items-center">
         <div data-tip="mon compte" class="tooltip tooltip-bottom tooltip-secondary">
           <li>
+            <!-- lien page connexion -->
             <a href="/login" class="text-white">
-              <!-- TODO : ici faire le switch entre image pas defaut et image profil -->
-              <UserSvg outline={false} size="w-7 h-7" />
+              <!-- si image avatar existe on affiche sinon on affiche svg par defaut -->
+              {#if $current_user_store.avatar}
+                <img
+                  class="w-7 h-7 rounded-full"
+                  src={`${$current_user_store.avatar}`}
+                  alt="profil user"
+                />
+              {:else}
+                <UserSvg outline={false} size="w-7 h-7" />
+              {/if}
             </a>
           </li>
         </div>
