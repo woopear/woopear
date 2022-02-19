@@ -76,9 +76,9 @@
         <!-- section si image est dispo -->
         {#if !seeUpdateImg}
           <img
-            class="w-24 w-24 rounded-full mt-8 mb-2"
+            class="w-24 h-24 rounded-full mt-8 mb-2"
             src={`${$current_user_store.avatar}`}
-            alt="image profil user"
+            alt="profil user"
           />
         {/if}
         {#if seeUpdate && !seeUpdateImg}
