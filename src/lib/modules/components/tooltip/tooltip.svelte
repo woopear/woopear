@@ -4,7 +4,7 @@
 </script>
 
 {#if data}
-  <div data-tip={data} class={`${direction} tooltip tooltip-secondary`}>
+  <div data-tip={data} class={`${direction} tooltip tooltip-secondary z-50`}>
     <slot />
   </div>
 {/if}

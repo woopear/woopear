@@ -50,6 +50,8 @@
   import { public_page } from '$lib/providers/public-page/public-page.service';
   import { onMount } from 'svelte';
   import Spinner from '$lib/modules/spinner/components/spinner.svelte';
+  import MenuDashboard from '$lib/modules/menu-dashboard/components/menu-dashboard.svelte';
+  import { page, session } from '$app/stores';
 
   // activation du loader
   let loader: boolean;
@@ -74,6 +76,10 @@
 
 {#if loader}
   <Main>
+    <!-- menu du dashbord seulement si on est connecter et que le path n'est pas public -->
+    {#if $session.user && !public_page.includes($page.url.pathname)}
+      <MenuDashboard />
+    {/if}
     <slot />
   </Main>
 {:else}
@@ -82,7 +88,8 @@
   </Main>
 {/if}
 
-{#if !waiting_active}
+<!-- si on est sur une page public on affiche -->
+{#if !waiting_active && public_page.includes($page.url.pathname)}
   <!-- footer -->
   <Footer />
 {/if}
