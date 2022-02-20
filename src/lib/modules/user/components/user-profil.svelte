@@ -221,7 +221,7 @@
           <!-- partie input -->
           <div class="w-full">
             <!-- first_name -->
-            <div class={`mt-${margin_top_input}`}>
+            <div class={`mt-4`}>
               <Input
                 name="first_name"
                 placeholder="Prénom"
@@ -230,17 +230,17 @@
             </div>
 
             <!-- last_name -->
-            <div class={`mt-${margin_top_input}`}>
+            <div class={`mt-4`}>
               <Input name="last_name" placeholder="Nom" value={$current_user_store.last_name} />
             </div>
 
             <!-- address -->
-            <div class={`mt-${margin_top_input}`}>
+            <div class={`mt-4`}>
               <Input name="address" placeholder="Addresse" value={$current_user_store.address} />
             </div>
 
             <!-- code_post -->
-            <div class={`mt-${margin_top_input}`}>
+            <div class={`mt-4`}>
               <Input
                 name="code_post"
                 placeholder="Code postal"
@@ -249,12 +249,12 @@
             </div>
 
             <!-- city -->
-            <div class={`mt-${margin_top_input}`}>
+            <div class={`mt-4`}>
               <Input name="city" placeholder="Ville" value={$current_user_store.city} />
             </div>
 
             <!-- phone_number -->
-            <div class={`mt-${margin_top_input}`}>
+            <div class={`mt-4`}>
               <Input
                 name="phone_number"
                 placeholder="Numéro de téléphone"
