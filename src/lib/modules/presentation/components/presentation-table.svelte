@@ -1,8 +1,18 @@
 <script lang="ts">
+  import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
   import { presentation_store } from '../presentation.store';
+  import type { IPresentation } from '../presentation.type';
+  import PresentationUpdate from './presentation-update.svelte';
+
+  let presentation_selected: IPresentation = {};
+
+  const selectedForPresentation = (id) => {
+    presentation_selected = $presentation_store.find((el) => el.id === id);
+  };
 </script>
 
 <section class="overflow-x-auto">
+  <!-- tableau -->
   <table class="table w-full">
     <!-- head -->
     <thead>
@@ -23,7 +33,9 @@
               <th>{presentation.id}</th>
               <td>{presentation.title}</td>
               <td>{presentation.contents ? presentation.contents.length : ''}</td>
-              <td>btns action</td>
+              <td>
+                <BtnUpdate changeUpdate={() => selectedForPresentation(presentation.id)} />
+              </td>
             </tr>
           {/each}
         {:else}
@@ -32,4 +44,10 @@
       {/if}
     </tbody>
   </table>
+</section>
+<!-- update presentation -->
+<section>
+  {#if 'id' in presentation_selected}
+    <PresentationUpdate {presentation_selected} closeUpdate={() => (presentation_selected = {})} />
+  {/if}
 </section>
