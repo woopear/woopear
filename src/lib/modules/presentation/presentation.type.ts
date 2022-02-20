@@ -16,7 +16,7 @@ export interface IPresentation {
   id?: string;
   title?: string;
   sub_title?: string;
-  contents?: [IPresentationContent];
+  contents?: IPresentationContent[];
   image?: string;
   woopear?: IWoopear;
 }
