@@ -18,5 +18,4 @@
   <Waiting />
 {:else}
   <h1>woopear</h1>
-  <a href="/login" class="btn btn-primary">connection</a>
 {/if}
