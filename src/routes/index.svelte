@@ -14,7 +14,7 @@
 {#if waiting_active}
   <!-- animation  -->
   <Anime />
-  <!-- waiting -->
+  <!-- waitings -->
   <Waiting />
 {:else}
   <h1>woopear</h1>
