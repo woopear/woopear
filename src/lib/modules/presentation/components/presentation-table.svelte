@@ -1,10 +1,5 @@
 <script lang="ts">
-  import { beforeUpdate } from 'svelte';
   import { presentation_store } from '../presentation.store';
-
-  beforeUpdate(() => {
-    console.log($presentation_store);
-  });
 </script>
 
 <section class="overflow-x-auto">
@@ -18,17 +13,21 @@
         <th>Actions</th>
       </tr>
     </thead>
+    <!-- corps -->
     <tbody>
       {#if $presentation_store}
+        <!-- si il y a des entrées on affiche sinon on affiche 0 -->
         {#if $presentation_store.length > 0}
           {#each $presentation_store as presentation}
             <tr>
               <th>{presentation.id}</th>
               <td>{presentation.title}</td>
-              <td>{presentation.contents.length}</td>
+              <td>{presentation.contents ? presentation.contents.length : ''}</td>
               <td>btns action</td>
             </tr>
           {/each}
+        {:else}
+          <tr> 0 </tr>
         {/if}
       {/if}
     </tbody>
