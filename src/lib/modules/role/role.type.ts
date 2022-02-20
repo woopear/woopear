@@ -1,3 +1,4 @@
 export const enum ERole {
-  ADMIN = 'admin'
+  ADMIN = 'admin',
+  CLIENT = 'client'
 }

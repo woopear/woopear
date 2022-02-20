@@ -3,6 +3,8 @@
   import ConditionSvg from '$lib/modules/components/condition-svg/condition-svg.svelte';
 
   import HomeSvg from '$lib/modules/components/home-svg/home-svg.svelte';
+  import MessageSvgUsers from '$lib/modules/components/message-svg/message-svg-users.svelte';
+  import MessageSvg from '$lib/modules/components/message-svg/message-svg.svelte';
   import PresentationSvg from '$lib/modules/components/presentation-svg/presentation-svg.svelte';
   import ProductSvg from '$lib/modules/components/product-svg/product-svg.svelte';
   import TeamSvg from '$lib/modules/components/team-svg/team-svg.svelte';
@@ -71,6 +73,21 @@
             <TeamSvg size="w-7 h-7" />
           </a>
           <TooltipCustom text="équipe" />
+        </li>
+        <!-- message admin -->
+        <li class="relative group">
+          <a href="/dashboard/mess-admin">
+            <MessageSvg size="w-7 h-7" />
+          </a>
+          <TooltipCustom text="messages" />
+        </li>
+      {:else if $current_user_store.role.libelle === ERole.CLIENT}
+        <!-- message admin -->
+        <li class="relative group">
+          <a href="/dashboard/mess">
+            <MessageSvgUsers size="w-7 h-7" />
+          </a>
+          <TooltipCustom text="messages" />
         </li>
       {/if}
     {/if}
