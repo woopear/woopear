@@ -1,34 +1,70 @@
 <script lang="ts">
   import BtnCloseUpdate from '$lib/modules/components/btn/btn-close-update.svelte';
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
-  import BtnUser from '$lib/modules/components/btn/btn-user.svelte';
   import Card from '$lib/modules/components/card/card.svelte';
   import Input from '$lib/modules/components/input/input.svelte';
-  import { fire_db } from '$lib/providers/firebase/firebase.service';
+  import Title from '$lib/modules/components/title/title.svelte';
+  import { ETypeTitle } from '$lib/modules/components/title/title.type';
+  import SpinnerLittle from '$lib/modules/spinner/components/spinner-little.svelte';
   import { createObjectAsFormData, firstToUppperCase } from '$lib/providers/format/format.service';
   import { current_user_store } from '../user.store';
+  import type { IUser } from '../user.type';
 
-  console.log($current_user_store);
-
+  // voir modification de la companie
   let seeUpdate = false;
-  let value_denomination = '';
-  let value_address = '';
-  let value_code_post = '';
-  let value_city = '';
+  // voir modification du logo
+  let seeUpdateImg = false;
+  // change le flex du input file
+  $: flex_img = seeUpdateImg ? 'flex-col items-center' : '';
+  // taille de la marge du haut des input du formulaire
+  const margin_top_input = '4';
+  // stock le file du input
+  let img_file;
+  // loader pour btn update image logo
+  let loader_img_logo = '';
+  // loader pour btn update user
+  let loader_update_user = '';
 
-  const updateUser = (e, id) => {
+  /**
+   * modification de l'entreprise
+   * @param e => event formulaire
+   * @param id => id du current user
+   */
+  const updateUser = async (e, id) => {
+    loader_update_user = 'loading';
     // création du formData
-    const form_data = createObjectAsFormData(e.target);
-    console.log('user=>', $current_user_store);
-
-    console.log('form =>', form_data);
+    const form_data = createObjectAsFormData<IUser>(e.target);
 
     // modifier le user
-    current_user_store.updateUser(id, form_data);
+    await current_user_store.updateUser(id, form_data);
+
+    // on ferme le volet de modification
+    seeUpdate = !seeUpdate;
+    loader_update_user = '';
+  };
+
+  /**
+   * stocke le file dans une varibale
+   * @param e => event change
+   */
+  const loadImage = (e) => {
+    img_file = e.target.files[0];
+    console.log(img_file);
+  };
+
+  /**
+   * upload l'avatar du current user
+   */
+  const uploadImg = async () => {
+    loader_img_logo = 'loading';
+
+    // on ferme le volet de modification image
+    seeUpdateImg = !seeUpdateImg;
+    loader_img_logo = '';
   };
 </script>
 
-{#if $current_user_store.companie}
+{#if $current_user_store?.companie}
   <Card>
     <!-- partie btn update -->
     <section class="flex justify-end">
@@ -40,14 +76,14 @@
     </section>
 
     <!-- logo de l'entreprise -->
-    <section class="flex justify-center">
-      {#if $current_user_store?.companie === ''}
+    <section class={`flex ${flex_img} justify-center`}>
+      {#if $current_user_store?.companie.logo !== ''}
         <img src={`${$current_user_store.companie.logo}`} alt="logo de la companie" />
       {:else}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
-          class="h-16 w-16"
+          class="h-20 w-20"
           style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
           version="1.1"
           viewBox="0 0 846.66 846.66"
@@ -94,33 +130,75 @@
               <!-- siret -->
               <div class="flex items-center text-lg">
                 <p class="mr-4"><span>Siret: </span>{$current_user_store.companie.siret}</p>
-                <BtnUpdate changeUpdate={undefined} relief={false} size="h-4 w-4" />
               </div>
             </div>
           </section>
         </section>
       </section>
     {:else}
+      <!-- partie modification -->
+
       <form
-        on:submit|preventDefault={async (e) => {
-          updateUser(e, $current_user_store.id);
-        }}
+        class="py-8 flex flex-col items-center justify-center w-full"
+        on:submit|preventDefault={(e) => updateUser(e, $current_user_store.id)}
       >
-        <div class="form-control">
-          <span>Denomination</span>
-          <Input name="denomination" placeholder="edf" bind:value={value_denomination} />
-
-          <span>Adresse</span>
-          <Input name="address" placeholder="16 rue louis michel" bind:value={value_address} />
-
-          <span>Code postal</span>
-          <Input name="code_post" placeholder="62119" bind:value={value_code_post} />
-
-          <span>Ville</span>
-          <Input name="city" placeholder="Dourges" bind:value={value_city} />
+        <!-- title -->
+        <div class="mb-6">
+          <Title type_title={ETypeTitle.H6} title="Modification de l'entreprise" />
         </div>
-        <button>modifier</button>
+
+        <!-- partie input -->
+        <div class="w-full">
+          <!-- input denomination -->
+          <div class={`mt-4`}>
+            <Input
+              name="companie.denomination"
+              placeholder="edf"
+              value={$current_user_store.companie.denomination}
+            />
+          </div>
+
+          <!-- input adresse -->
+          <div class={`mt-4`}>
+            <Input
+              name="companie.address"
+              placeholder="16 rue louis michel"
+              value={$current_user_store.companie.address}
+            />
+          </div>
+
+          <!-- input code postal -->
+          <div class={`mt-4`}>
+            <Input
+              name="companie.code_post"
+              placeholder="62119"
+              value={$current_user_store.companie.code_post}
+            />
+          </div>
+
+          <!-- input vile -->
+          <div class={`mt-4`}>
+            <Input
+              name="companie.city"
+              placeholder="Dourges"
+              value={$current_user_store.companie.city}
+            />
+          </div>
+
+          <!-- input siret -->
+          <div class={`mt-4`}>
+            <Input
+              name="companie.siret"
+              placeholder="Dourges"
+              value={$current_user_store.companie.siret}
+            />
+          </div>
+        </div>
+        <!-- btn modifier -->
+        <button class={`${loader_update_user} btn btn-primary btn-sm mt-8`}>Modifier</button>
       </form>
     {/if}
   </Card>
+{:else}
+  <SpinnerLittle />
 {/if}
