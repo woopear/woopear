@@ -4,6 +4,12 @@
   import WoopearSvg from '$lib/modules/components/woopear-svg/woopear-svg.svelte';
   import { current_user_store } from '$lib/modules/user/user.store';
   import { theme_mode_store } from '../../theme-mode/theme-mode.store';
+  import {
+    see_menu_dashboard_store,
+    action_menu_sand_store
+  } from '$lib/modules/menu-dashboard/menu-dashboard.store';
+  import { public_page } from '$lib/providers/public-page/public-page.service';
+  import { page } from '$app/stores';
 
   // boolean mode dark en fonction du themeMode
   $: btnDark = $theme_mode_store === 'woo-claire' ? false : true;
@@ -25,17 +31,48 @@
       localStorage.setItem('woo-dark', $theme_mode_store);
     }
   };
+
+  /**
+   * affiche ou cache le menu dashboard
+   */
+  const switchMenuSand = () => {
+    console.log('coucou');
+
+    if ($action_menu_sand_store === 'active-sand') {
+      // on cache le menu
+      see_menu_dashboard_store.disable();
+      // on désactive le menu sand
+      action_menu_sand_store.disable();
+    } else {
+      // on affiche le menu
+      see_menu_dashboard_store.active();
+      // on active le menu sand
+      action_menu_sand_store.active();
+    }
+  };
 </script>
 
 <header
   class="z-30 fixed w-full h-16 bg-primary flex justify-between items-center px-8 sm:px-24 md:px-36"
 >
   <!-- btn home -->
-  <Tooltip data="accueil">
-    <a href="/" class="text-white">
-      <WoopearSvg size="w-10 h-10" />
-    </a>
-  </Tooltip>
+  <div class="flex items-center">
+    <!-- menu sandwich -->
+    {#if !public_page.includes($page.url.pathname)}
+      <button class="mr-10 cursor-pointer sm:hidden block" on:click={switchMenuSand}>
+        <div class={`${$action_menu_sand_store}`}>
+          <div />
+          <div />
+          <div />
+        </div>
+      </button>
+    {/if}
+    <Tooltip data="accueil">
+      <a href="/" class="text-white">
+        <WoopearSvg size="w-10 h-10" />
+      </a>
+    </Tooltip>
+  </div>
 
   <section class="flex justify-center items-center">
     <!-- switch dark mode -->
@@ -101,3 +138,60 @@
     </nav>
   </section>
 </header>
+
+<style>
+  .sand {
+    width: 50px;
+    height: 50px;
+    position: relative;
+  }
+
+  .sand > div {
+    background-color: white;
+    position: absolute;
+    height: 2px;
+    width: 80%;
+    transition: all 0.3s;
+  }
+
+  .sand :nth-child(1) {
+    top: 14px;
+  }
+
+  .sand :nth-child(2) {
+    top: 24px;
+  }
+
+  .sand :nth-child(3) {
+    top: 34px;
+  }
+
+  .active-sand {
+    width: 50px;
+    height: 50px;
+    position: relative;
+  }
+
+  .active-sand > div {
+    background-color: white;
+    position: absolute;
+    height: 2px;
+    width: 80%;
+    transition: all 0.3s;
+  }
+
+  .active-sand :nth-child(1) {
+    top: 24px;
+    transform: rotate(-225deg);
+  }
+
+  .active-sand :nth-child(2) {
+    opacity: 0;
+    top: 24px;
+  }
+
+  .active-sand :nth-child(3) {
+    top: 24px;
+    transform: rotate(225deg);
+  }
+</style>

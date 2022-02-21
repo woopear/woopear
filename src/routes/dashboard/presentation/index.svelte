@@ -22,7 +22,7 @@
   });
 </script>
 
-<section class="w-full flex-1 pl-6 pt-6 pb-6">
+<section class="w-full flex-1 sm:pl-6 sm:pt-6 sm:pb-6">
   <div class="mb-12">
     <Title title="Liste des présentations de woopear" type_title={ETypeTitle.H4} />
   </div>
