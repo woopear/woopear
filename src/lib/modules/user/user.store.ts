@@ -15,7 +15,7 @@ import {
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { writable } from 'svelte/store';
-import type { IUser } from './user.type';
+import type { IUser, IUserCompanie } from './user.type';
 
 /**
  * creation du writable current user
@@ -80,6 +80,24 @@ const createCurrentUserStore = () => {
       const url_avatar = await getDownloadURL(i);
       // enregistrement du path de l'image dans le user
       await this.updateUser(id, { avatar: url_avatar });
+    },
+
+    /**
+     * telechargement de l'image du logo de l'entreprise du user connecté
+     * upload dans bucket + stockage de l'url dans la proprieter logo de la companie
+     */
+     async uploadLogoCompanie(file: Blob | Uint8Array | ArrayBuffer, id: string) {
+      // ciblage ou/et creation du nom de fichier
+      const i = ref(fire_storage, `logo-companie/companie-logo-${id}`);
+      // enregistrement de l'image dans le dossier logo-companie
+      await uploadBytes(i, file);
+      // creation de l'url pour stocker dans le document user.companie
+      const url_logo = await getDownloadURL(i);
+      // data
+      let data: IUserCompanie;
+      data= {logo: url_logo};
+      // enregistrement du path de l'image dans le user
+      await this.updateUser(id, { ...data });
     }
   };
 };

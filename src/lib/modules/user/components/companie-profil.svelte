@@ -23,7 +23,7 @@
   // loader pour btn update image logo
   let loader_img_logo = '';
   // loader pour btn update user
-  let loader_update_user = '';
+  let loader_update_companie = '';
 
   /**
    * modification de l'entreprise
@@ -31,7 +31,7 @@
    * @param id => id du current user
    */
   const updateUser = async (e, id) => {
-    loader_update_user = 'loading';
+    loader_update_companie = 'loading';
     // création du formData
     const form_data = createObjectAsFormData<IUser>(e.target);
 
@@ -40,7 +40,7 @@
 
     // on ferme le volet de modification
     seeUpdate = !seeUpdate;
-    loader_update_user = '';
+    loader_update_companie = '';
   };
 
   /**
@@ -57,6 +57,8 @@
    */
   const uploadImg = async () => {
     loader_img_logo = 'loading';
+    // upload logo
+    await current_user_store.uploadLogoCompanie(img_file, $current_user_store.id);
 
     // on ferme le volet de modification image
     seeUpdateImg = !seeUpdateImg;
@@ -77,23 +79,92 @@
 
     <!-- logo de l'entreprise -->
     <section class={`flex ${flex_img} justify-center`}>
+      <!-- section si le logo n'est pas présent -->
       {#if $current_user_store?.companie.logo !== ''}
-        <img src={`${$current_user_store.companie.logo}`} alt="logo de la companie" />
+        {#if !seeUpdateImg}
+          <img
+            class="w-24 h-24 rounded-full mt-8 mb-2"
+            src={`${$current_user_store.companie.logo}`}
+            alt="logo de la companie"
+          />
+        {/if}
+        {#if seeUpdate && !seeUpdateImg}
+          <BtnUpdate
+            changeUpdate={() => (seeUpdateImg = !seeUpdateImg)}
+            relief={true}
+            size="w-4 h-4"
+          />
+        {:else if seeUpdate && seeUpdateImg}
+          <BtnCloseUpdate
+            changeUpdate={() => (seeUpdateImg = !seeUpdateImg)}
+            relief={true}
+            size="w-4 h-4"
+          />
+          <h1 class="text-sm font-semibold mt-8">Modification logo entreprise</h1>
+        {/if}
       {:else}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          class="h-20 w-20"
-          style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-          version="1.1"
-          viewBox="0 0 846.66 846.66"
-          xml:space="preserve"
-          ><defs /><g id="Layer_x0020_1"
-            ><path
-              class="fil0"
-              d="M97.17 185.96l343.73 0 0 -102.62c0,-11.49 9.31,-20.81 20.8,-20.81l287.79 0c11.49,0 20.81,9.32 20.81,20.81l0 659.18 48.48 0c27.36,0 27.36,41.61 0,41.61 -263.63,0 -527.27,0 -790.9,0 -27.36,0 -27.36,-41.61 0,-41.61l48.49 0 0 -535.76c0,-11.48 9.31,-20.8 20.8,-20.8zm212.43 556.56l0 -81.83 -60.33 0 0 81.83 60.33 0zm-101.94 0l0 -102.64c0,-11.48 9.31,-20.8 20.8,-20.8l101.95 0c11.49,0 20.8,9.32 20.8,20.8l0 102.64 89.69 0 0 -514.95 -322.92 0 0 514.95 89.68 0zm335.52 -593.64l124.83 0c11.49,0 20.81,9.31 20.81,20.8l0 374.5c0,11.49 -9.32,20.8 -20.81,20.8l-124.83 0c-11.49,0 -20.81,-9.31 -20.81,-20.8l0 -374.5c0,-11.49 9.32,-20.8 20.81,-20.8zm104.03 41.6l-83.23 0 0 332.89 83.23 0 0 -332.89zm-467.12 211.18l68.66 0c11.49,0 20.8,9.32 20.8,20.81l0 68.65c0,11.49 -9.31,20.81 -20.8,20.81l-68.66 0c-11.49,0 -20.81,-9.32 -20.81,-20.81l0 -68.65c0,-11.49 9.32,-20.81 20.81,-20.81zm47.85 41.61l-27.05 0 0 27.05 27.05 0 0 -27.05zm82.19 -41.61l68.65 0c11.49,0 20.81,9.32 20.81,20.81l0 68.65c0,11.49 -9.32,20.81 -20.81,20.81l-68.65 0c-11.49,0 -20.81,-9.32 -20.81,-20.81l0 -68.65c0,-11.49 9.32,-20.81 20.81,-20.81zm47.85 41.61l-27.05 0 0 27.05 27.05 0 0 -27.05zm-177.89 -174.76l68.66 0c11.49,0 20.8,9.31 20.8,20.8l0 68.66c0,11.49 -9.31,20.8 -20.8,20.8l-68.66 0c-11.49,0 -20.81,-9.31 -20.81,-20.8l0 -68.66c0,-11.49 9.32,-20.8 20.81,-20.8zm47.85 41.61l-27.05 0 0 27.04 27.05 0 0 -27.04zm82.19 -41.61l68.65 0c11.49,0 20.81,9.31 20.81,20.8l0 68.66c0,11.49 -9.32,20.8 -20.81,20.8l-68.65 0c-11.49,0 -20.81,-9.31 -20.81,-20.8l0 -68.66c0,-11.49 9.32,-20.8 20.81,-20.8zm47.85 41.61l-27.05 0 0 27.04 27.05 0 0 -27.04zm124.53 432.4l246.18 0 0 -638.38 -246.18 0 0 638.38z"
-            /></g
-          ></svg
+        <!-- section si le logo est présent  -->
+        {#if !seeUpdateImg}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            class="h-20 w-20"
+            style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+            version="1.1"
+            viewBox="0 0 846.66 846.66"
+            xml:space="preserve"
+            ><defs /><g id="Layer_x0020_1"
+              ><path
+                class="fil0"
+                d="M97.17 185.96l343.73 0 0 -102.62c0,-11.49 9.31,-20.81 20.8,-20.81l287.79 0c11.49,0 20.81,9.32 20.81,20.81l0 659.18 48.48 0c27.36,0 27.36,41.61 0,41.61 -263.63,0 -527.27,0 -790.9,0 -27.36,0 -27.36,-41.61 0,-41.61l48.49 0 0 -535.76c0,-11.48 9.31,-20.8 20.8,-20.8zm212.43 556.56l0 -81.83 -60.33 0 0 81.83 60.33 0zm-101.94 0l0 -102.64c0,-11.48 9.31,-20.8 20.8,-20.8l101.95 0c11.49,0 20.8,9.32 20.8,20.8l0 102.64 89.69 0 0 -514.95 -322.92 0 0 514.95 89.68 0zm335.52 -593.64l124.83 0c11.49,0 20.81,9.31 20.81,20.8l0 374.5c0,11.49 -9.32,20.8 -20.81,20.8l-124.83 0c-11.49,0 -20.81,-9.31 -20.81,-20.8l0 -374.5c0,-11.49 9.32,-20.8 20.81,-20.8zm104.03 41.6l-83.23 0 0 332.89 83.23 0 0 -332.89zm-467.12 211.18l68.66 0c11.49,0 20.8,9.32 20.8,20.81l0 68.65c0,11.49 -9.31,20.81 -20.8,20.81l-68.66 0c-11.49,0 -20.81,-9.32 -20.81,-20.81l0 -68.65c0,-11.49 9.32,-20.81 20.81,-20.81zm47.85 41.61l-27.05 0 0 27.05 27.05 0 0 -27.05zm82.19 -41.61l68.65 0c11.49,0 20.81,9.32 20.81,20.81l0 68.65c0,11.49 -9.32,20.81 -20.81,20.81l-68.65 0c-11.49,0 -20.81,-9.32 -20.81,-20.81l0 -68.65c0,-11.49 9.32,-20.81 20.81,-20.81zm47.85 41.61l-27.05 0 0 27.05 27.05 0 0 -27.05zm-177.89 -174.76l68.66 0c11.49,0 20.8,9.31 20.8,20.8l0 68.66c0,11.49 -9.31,20.8 -20.8,20.8l-68.66 0c-11.49,0 -20.81,-9.31 -20.81,-20.8l0 -68.66c0,-11.49 9.32,-20.8 20.81,-20.8zm47.85 41.61l-27.05 0 0 27.04 27.05 0 0 -27.04zm82.19 -41.61l68.65 0c11.49,0 20.81,9.31 20.81,20.8l0 68.66c0,11.49 -9.32,20.8 -20.81,20.8l-68.65 0c-11.49,0 -20.81,-9.31 -20.81,-20.8l0 -68.66c0,-11.49 9.32,-20.8 20.81,-20.8zm47.85 41.61l-27.05 0 0 27.04 27.05 0 0 -27.04zm124.53 432.4l246.18 0 0 -638.38 -246.18 0 0 638.38z"
+              /></g
+            ></svg
+          >
+        {/if}
+        {#if seeUpdate && !seeUpdateImg}
+          <BtnUpdate
+            changeUpdate={() => (seeUpdateImg = !seeUpdateImg)}
+            relief={true}
+            size="w-4 h-4"
+          />
+        {:else if seeUpdate && seeUpdateImg}
+          <BtnCloseUpdate
+            changeUpdate={() => (seeUpdateImg = !seeUpdateImg)}
+            relief={true}
+            size="w-4 h-4"
+          />
+          <Title type_title={ETypeTitle.H6} title="Modification logo entreprise" />
+        {/if}
+      {/if}
+      <!-- partie input envoie image -->
+      {#if seeUpdate && seeUpdateImg}
+        <div class="flex justify-center my-6">
+          <div class="w-96">
+            <input
+              class="form-control
+          block
+          w-8/12
+          sm:w-10/12
+          m-auto
+          px-2
+          py-1
+          text-sm
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              id="formFileSm"
+              type="file"
+              on:change={loadImage}
+            />
+          </div>
+        </div>
+        <button class={`${loader_img_logo} btn btn-xs btn-primary`} on:click={uploadImg}
+          >Envoyer</button
         >
       {/if}
     </section>
@@ -130,6 +201,11 @@
               <!-- siret -->
               <div class="flex items-center text-lg">
                 <p class="mr-4"><span>Siret: </span>{$current_user_store.companie.siret}</p>
+              </div>
+
+              <!-- code naf -->
+              <div class="flex items-center text-lg">
+                <p class="mr-4"><span>Code Naf: </span>{$current_user_store.companie.code_naf}</p>
               </div>
             </div>
           </section>
@@ -187,15 +263,26 @@
 
           <!-- input siret -->
           <div class={`mt-4`}>
+            <span>Siret</span>
             <Input
               name="companie.siret"
-              placeholder="Dourges"
+              placeholder="456465"
               value={$current_user_store.companie.siret}
+            />
+          </div>
+
+          <!-- input code naf -->
+          <div class={`mt-4`}>
+            <span>Code Naf</span>
+            <Input
+              name="companie.code_naf"
+              placeholder="456"
+              value={$current_user_store.companie.code_naf}
             />
           </div>
         </div>
         <!-- btn modifier -->
-        <button class={`${loader_update_user} btn btn-primary btn-sm mt-8`}>Modifier</button>
+        <button class={`${loader_update_companie} btn btn-primary btn-sm mt-8`}>Modifier</button>
       </form>
     {/if}
   </Card>
