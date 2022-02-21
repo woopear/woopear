@@ -1,7 +1,18 @@
-import { fire_db } from '$lib/providers/firebase/firebase.service';
-import { collection, doc, getDocs, onSnapshot, query, type Unsubscribe } from 'firebase/firestore';
+import { fire_app, fire_db } from '$lib/providers/firebase/firebase.service';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  onSnapshot,
+  query,
+  type Unsubscribe
+} from 'firebase/firestore';
 import { writable } from 'svelte/store';
 import type { IPresentation, IPresentationContent } from './presentation.type';
+
+export const presentation_selected_store = writable({} as IPresentation);
 
 const createPresentationStore = () => {
   const { set, update, subscribe } = writable([] as IPresentation[]);
@@ -11,10 +22,26 @@ const createPresentationStore = () => {
     update,
     subscribe,
 
+    async deleteContentPresentation(idPresentation: string, idContent: string): Promise<void> {
+      const refDoc = doc(fire_db, 'presentations', `${idPresentation}/contents/${idContent}`);
+      await deleteDoc(refDoc);
+      await this.getPresentation();
+    },
+
+    async createContentPresentation(idPresentation: string): Promise<void> {
+      const objContent: IPresentationContent = {
+        sub_title: '',
+        text: ''
+      };
+
+      await addDoc(collection(fire_db, 'presentations', `${idPresentation}/contents`), objContent);
+      await this.getPresentation();
+    },
+
     /**
      * fonction qui recupere tous les présentations + leur content
      */
-    async listenPresentation(): Promise<void> {
+    async getPresentation(): Promise<void> {
       // init des variable global
       let presentation: IPresentation[] = [];
       let content: IPresentationContent[] = [];
@@ -39,11 +66,12 @@ const createPresentationStore = () => {
           // on l'ajout au tableau
           content = [...content, content_obj];
           // on l'ajoute à la présentation en cours
-          presentation_obj = { contents: content, ...presentation_obj };
         });
 
+        presentation_obj = { contents: content, ...presentation_obj };
         presentation = [...presentation, presentation_obj];
         set(presentation);
+        console.log(presentation);
       });
     }
   };

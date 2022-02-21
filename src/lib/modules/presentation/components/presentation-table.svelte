@@ -1,19 +1,22 @@
 <script lang="ts">
   import BtnDelete from '$lib/modules/components/btn/btn-delete.svelte';
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
-  import { presentation_store } from '../presentation.store';
-  import type { IPresentation } from '../presentation.type';
+  import { presentation_store, presentation_selected_store } from '../presentation.store';
   import PresentationUpdate from './presentation-update.svelte';
 
-  // presentation selectionné pour modification
-  let presentation_selected: IPresentation = {};
+  let see_update = false;
+
+  const closeUpdate = (e) => {
+    see_update = e.details;
+  };
 
   /**
    * selected presentation pour modification
    * @param id
    */
   const selectedForPresentation = (id: string): void => {
-    presentation_selected = $presentation_store.find((el) => el.id === id);
+    see_update = true;
+    presentation_selected_store.set($presentation_store.find((el) => el.id === id));
   };
 
   /**
@@ -62,7 +65,7 @@
 </section>
 <!-- update presentation -->
 <section>
-  {#if 'id' in presentation_selected}
-    <PresentationUpdate {presentation_selected} closeUpdate={() => (presentation_selected = {})} />
+  {#if see_update}
+    <PresentationUpdate on:close_update={closeUpdate} />
   {/if}
 </section>

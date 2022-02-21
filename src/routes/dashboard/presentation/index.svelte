@@ -17,7 +17,7 @@
 
     // si présentation n'est pas encore request on request
     if ($presentation_store.length === 0) {
-      await presentation_store.listenPresentation();
+      await presentation_store.getPresentation();
     }
   });
 </script>
