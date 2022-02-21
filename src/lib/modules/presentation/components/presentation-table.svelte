@@ -1,13 +1,27 @@
 <script lang="ts">
+  import BtnDelete from '$lib/modules/components/btn/btn-delete.svelte';
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
   import { presentation_store } from '../presentation.store';
   import type { IPresentation } from '../presentation.type';
   import PresentationUpdate from './presentation-update.svelte';
 
+  // presentation selectionné pour modification
   let presentation_selected: IPresentation = {};
 
-  const selectedForPresentation = (id) => {
+  /**
+   * selected presentation pour modification
+   * @param id
+   */
+  const selectedForPresentation = (id: string): void => {
     presentation_selected = $presentation_store.find((el) => el.id === id);
+  };
+
+  /**
+   * delete presentation
+   * @param id
+   */
+  const deletePresentation = (id: string): void => {
+    console.log('coucou');
   };
 </script>
 
@@ -33,8 +47,9 @@
               <th>{presentation.id}</th>
               <td>{presentation.title}</td>
               <td>{presentation.contents ? presentation.contents.length : ''}</td>
-              <td>
+              <td class="flex">
                 <BtnUpdate changeUpdate={() => selectedForPresentation(presentation.id)} />
+                <BtnDelete changeUpdate={() => deletePresentation(presentation.id)} />
               </td>
             </tr>
           {/each}

@@ -1,15 +1,15 @@
 <script lang="ts">
+  import DeleteSvg from '../delete-svg/delete-svg.svelte';
   import HoverBtn from '../hover-btn/hover-btn.svelte';
-  import UserSvg from '../user-svg/user-svg.svelte';
 
   export let changeUpdate;
-  export let size = 'w-16 h-16'; // size du svg
-  export let color = 'text-white'; // color du svg
+  export let size = 'w-6 h-6'; // size du svg
+  export let color = 'text-error'; // color du svg
   export let relief = false;
 </script>
 
 <HoverBtn {relief}>
   <button on:click={changeUpdate} class={`${color}`}>
-    <UserSvg outline={false} bind:size />
+    <DeleteSvg {size} />
   </button>
 </HoverBtn>

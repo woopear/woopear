@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import HoverBtn from '../hover-btn/hover-btn.svelte';
 
   export let changeUpdate;
