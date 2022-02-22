@@ -1,6 +1,8 @@
 <script lang="ts">
   import BtnDelete from '$lib/modules/components/btn/btn-delete.svelte';
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
+  import TooltipCustom from '$lib/modules/components/tooltip/tooltip-custom.svelte';
+  import Tooltip from '$lib/modules/components/tooltip/tooltip.svelte';
   import { presentation_store, presentation_selected_store } from '../presentation.store';
   import PresentationUpdate from './presentation-update.svelte';
 
@@ -30,11 +32,20 @@
   const deletePresentation = (id: string): void => {
     console.log('coucou');
   };
+
+  /**
+   * active ou désactive presentation
+   * @param e => event onChange
+   * @param idPresentation => id de la presentation
+   */
+  async function activeDisablePresentation(e, idPresentation: string) {
+    await presentation_store.updatePresentation(idPresentation, { active: e.target.checked });
+  }
 </script>
 
 <section class="overflow-x-auto">
   <!-- tableau -->
-  <table class="table w-full">
+  <table class="table w-full h-fit">
     <!-- head -->
     <thead>
       <tr>
@@ -54,7 +65,13 @@
               <th>{presentation.id}</th>
               <td>{presentation.title}</td>
               <td>{presentation.contents ? presentation.contents.length : ''}</td>
-              <td class="flex">
+              <td class="flex items-center">
+                <input
+                  type="checkbox"
+                  class="toggle toggle-secondary toggle-xs mx-2"
+                  checked={presentation.active}
+                  on:change={(e) => activeDisablePresentation(e, presentation.id)}
+                />
                 <BtnUpdate changeUpdate={() => selectedForPresentation(presentation.id)} />
                 <BtnDelete changeUpdate={() => deletePresentation(presentation.id)} />
               </td>

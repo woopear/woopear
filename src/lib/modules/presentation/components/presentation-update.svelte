@@ -2,6 +2,7 @@
   import BtnAdd from '$lib/modules/components/btn/btn-add.svelte';
   import BtnCloseUpdate from '$lib/modules/components/btn/btn-close-update.svelte';
   import BtnDelete from '$lib/modules/components/btn/btn-delete.svelte';
+  import ImgEmptySvg from '$lib/modules/components/img-empty-svg/img-empty-svg.svelte';
   import Input from '$lib/modules/components/input/input.svelte';
   import Texarea from '$lib/modules/components/textarea/texarea.svelte';
   import Title from '$lib/modules/components/title/title.svelte';
@@ -11,6 +12,12 @@
   import { createEventDispatcher } from 'svelte';
   import { presentation_selected_store, presentation_store } from '../presentation.store';
   import type { IPresentation } from '../presentation.type';
+
+  // pour le loader des btn
+  let loader_img_avatar = '';
+
+  // stocke file img
+  let img_file;
 
   const dist = createEventDispatcher();
 
@@ -60,6 +67,37 @@
   const deleteContentPresentation = async (idPresentation: string, idContent: string) => {
     await presentation_store.deleteContentPresentation(idPresentation, idContent);
   };
+
+  /**
+   * recuperation du fichier
+   * @param e => envent onChange
+   */
+  function loadImagePresentation(e) {
+    img_file = e.target.files[0];
+  }
+
+  /**
+   * upload img presentation selectionné
+   * @param idPresentation
+   */
+  async function uploadImg(idPresentation: string) {
+    loader_img_avatar = 'loading';
+    // si img file est renseigné sinon error
+    if (img_file) {
+      await presentation_store.uploadImagePresentation(img_file, idPresentation);
+    } else {
+      // TODO : gerer erreur si fichier pas charger
+    }
+    loader_img_avatar = '';
+  }
+
+  /**
+   * supprime l'image de la presentation
+   * @param idPresentation id de la presentation selectionné
+   */
+  async function deleteImage(idPresentation: string): Promise<void> {
+    await presentation_store.deleteImagePresentation(idPresentation);
+  }
 </script>
 
 <section class="mt-16 card bg-base-200 px-6 py-8 md:px-12">
@@ -74,6 +112,60 @@
 
   <!-- corps -->
   <section class="mt-8">
+    <!-- section image -->
+    <section class="flex flex-col items-center justify-center mb-24 mt-2">
+      <div class="flex flex-col items-center">
+        <!-- si pas d'image on affiche svg de remplacement -->
+        {#if $presentation_selected_store.image !== ''}
+          <img
+            class="w-20 h-20 rounded-full mt-8 mb-2"
+            src={`${$presentation_selected_store.image}`}
+            alt="profil user"
+          />
+        {:else}
+          <ImgEmptySvg />
+        {/if}
+        <p class="text-center font-bold mt-4">Modifier l'image</p>
+      </div>
+      <!-- input file -->
+      <div class="flex justify-center my-6">
+        <div class="w-96">
+          <input
+            class="form-control
+        block
+        w-8/12
+        sm:w-10/12
+        m-auto
+        px-2
+        py-1
+        text-sm
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            id="formFileSm"
+            type="file"
+            on:change={loadImagePresentation}
+          />
+        </div>
+      </div>
+      <!-- btn envoie ou suppression img -->
+      <div class="flex">
+        <button
+          class={`${loader_img_avatar} btn btn-xs btn-secondary mr-4`}
+          on:click={() => deleteImage($presentation_selected_store.id)}>Supprimer l'image</button
+        >
+        <button
+          class={`${loader_img_avatar} btn btn-xs btn-primary`}
+          on:click={() => uploadImg($presentation_selected_store.id)}>Envoyer</button
+        >
+      </div>
+    </section>
+
     <!-- form info principal -->
     <form on:submit|preventDefault={(e) => updatePresentation(e, $presentation_selected_store.id)}>
       <!-- title -->

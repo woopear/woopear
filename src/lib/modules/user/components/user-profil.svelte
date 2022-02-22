@@ -52,7 +52,6 @@
    */
   const loadImage = (e) => {
     img_file = e.target.files[0];
-    console.log(img_file);
   };
 
   /**
@@ -60,9 +59,13 @@
    */
   const uploadImg = async () => {
     loader_img_avatar = 'loading';
-    await current_user_store.uploadAvatarUser(img_file, $current_user_store.id);
-    // on ferme le volet de modification image
-    seeUpdateImg = !seeUpdateImg;
+    if (img_file) {
+      await current_user_store.uploadAvatarUser(img_file, $current_user_store.id);
+      // on ferme le volet de modification image
+      seeUpdateImg = !seeUpdateImg;
+    } else {
+      // TODO : gerer erreur de fichier non charger
+    }
     loader_img_avatar = '';
   };
 </script>

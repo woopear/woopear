@@ -1,5 +1,6 @@
-import { fire_db } from '$lib/providers/firebase/firebase.service';
+import { fire_db, fire_storage } from '$lib/providers/firebase/firebase.service';
 import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc } from 'firebase/firestore';
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { writable } from 'svelte/store';
 import type { IPresentation, IPresentationContent } from './presentation.type';
 
@@ -32,6 +33,13 @@ const createPresentationSelectedStore = () => {
         n.contents = n.contents.filter((el) => el.id !== idContent);
         return n;
       });
+    },
+
+    /**
+     * reset store presentation selected
+     */
+    resetPresentationSelected: function (): void {
+      set({} as IPresentation);
     }
   };
 };
@@ -176,9 +184,71 @@ const createPresentationStore = () => {
 
       // on recupere les nouvelles données
       await this.getPresentation();
+    },
+
+    /**
+     * fonction qui upload un fichier pour la présentation selectionnée
+     * @param file => fichier à upload
+     * @param idPresentation => id de la presentation selectionnée
+     */
+    uploadImagePresentation: async function (file, idPresentation: string): Promise<void> {
+      // ciblage ou/et creation du nom de fichier
+      const i = ref(fire_storage, `articles/presentation-${idPresentation}`);
+      // enregistrement de l'image dans le dossier avatar
+      await uploadBytes(i, file);
+      // creation de l'url pour stocker dans le document user
+      const url_img = await getDownloadURL(i);
+
+      // on modifie la presentation
+      await this.updatePresentation(idPresentation, { image: url_img });
+
+      // on modifie la presentation selectionné
+      presentation_selected_store.update((n) => {
+        n.image = url_img;
+        return n;
+      });
+    },
+
+    /**
+     * fonction qui supprime l'image de la presentation selectionné
+     * @param idPresentation => id de la presentation ciblé
+     */
+    deleteImagePresentation: async function (idPresentation): Promise<void> {
+      // suppression de l'image
+      await deleteObject(ref(fire_storage, `articles/presentation-${idPresentation}`));
+
+      // on modifie la presentation
+      await this.updatePresentation(idPresentation, { image: '' });
+
+      // on modifie la presentation selectionné
+      presentation_selected_store.update((n) => {
+        n.image = '';
+        return n;
+      });
+    },
+
+    /**
+     * reset le store des presentations
+     */
+    resetPresentation: function (): void {
+      set([] as IPresentation[]);
     }
   };
 };
 
 // store presentation
 export const presentation_store = createPresentationStore();
+
+// creation du store presentation active
+const createPresentationActiveStore = () => {
+  const { set, update, subscribe } = writable({} as IPresentation);
+
+  return {
+    set,
+    update,
+    subscribe
+  };
+};
+
+// store presentation active
+export const presentation_active_store = createPresentationActiveStore();
