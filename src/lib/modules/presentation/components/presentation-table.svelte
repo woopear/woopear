@@ -6,6 +6,10 @@
 
   let see_update = false;
 
+  /**
+   * fermeture du volet de modification
+   * @param e event venant du composant
+   */
   const closeUpdate = (e) => {
     see_update = e.details;
   };

@@ -11,32 +11,54 @@
   import { createEventDispatcher } from 'svelte';
   import { presentation_selected_store, presentation_store } from '../presentation.store';
   import type { IPresentation } from '../presentation.type';
-  import { fade } from 'svelte/transition';
 
   const dist = createEventDispatcher();
 
+  /**
+   * fermeture du volet de modification de la presentation
+   */
   const closeUpdate = () => {
     dist('close_update', false);
     presentation_selected_store.set({} as IPresentation);
   };
 
+  /**
+   * modification des données racine d'une présentation
+   * @param e => event form
+   * @param id => id de la presentation ciblé
+   */
   const updatePresentation = async (e, id: string) => {
+    // formatage des données
     const data = createObjectAsFormData<IPresentation>(e.target);
-    console.log(data);
+    // modification
+    await presentation_store.updatePresentation(id, data);
   };
 
-  const updateContent = (e) => {
-    console.log('coucou update content');
+  /**
+   * modification du contenu des contents
+   * @param idPresentation id de la presentation selectionné
+   */
+  const updateAllContent = async (idPresentation: string) => {
+    // modification
+    await presentation_store.updateContentOfPresentation(idPresentation);
   };
 
+  /**
+   * ajout de content de la presentation selected
+   * @param idPresentation id de la présentation
+   */
   const addContentPresentation = async (idPresentation: string) => {
+    // creation d'un content à la presentation selectionné
     await presentation_store.createContentPresentation(idPresentation);
-    presentation_selected_store.set($presentation_store.find((el) => el.id === idPresentation));
   };
 
-  const deleteContentPresentation = async (idPresentation, idContent) => {
+  /**
+   * suppression d'un content de la presentation selected
+   * @param idPresentation id de la présentation
+   * @param idContent id du content
+   */
+  const deleteContentPresentation = async (idPresentation: string, idContent: string) => {
     await presentation_store.deleteContentPresentation(idPresentation, idContent);
-    presentation_selected_store.set($presentation_store.find((el) => el.id === idPresentation));
   };
 </script>
 
@@ -158,43 +180,51 @@
       </Tooltip>
     </span>
     <!-- form content -->
-    <form on:submit|preventDefault={updateContent}>
-      {#each $presentation_selected_store.contents as content, index}
-        {#key $presentation_selected_store.contents}
-          <section transition:fade class="mb-12">
-            <p class="font-light mb-4 flex items-center">
-              Contenu du document <span class="font-bold ml-4">{content.id}</span>
-              <span class="ml-4">
-                <Tooltip data="Supprimer le contenu">
-                  <BtnDelete
-                    size="w-5 h-5"
-                    changeUpdate={() =>
-                      deleteContentPresentation($presentation_selected_store.id, content.id)}
-                  />
-                </Tooltip>
-              </span>
-            </p>
-            <div class="mb-4">
-              <label>Content sous titre {index} : </label>
-              <Input name="sub_title" value={content.sub_title} placeholder="Un sous titre" />
-            </div>
-            <div>
-              <label>Texte du contenu {index} : </label>
-              <Texarea name="text" value={content.text} placeholder="Texte de la présentation" />
-            </div>
-          </section>
-        {/key}
+    <div>
+      {#each $presentation_selected_store.contents as content, i (content.id)}
+        <section class="mb-12">
+          <p class="font-light mb-4 flex items-center">
+            Document numéro : {content.id}
+            <span class="ml-4">
+              <Tooltip data="Supprimer le contenu">
+                <BtnDelete
+                  size="w-5 h-5"
+                  changeUpdate={() =>
+                    deleteContentPresentation($presentation_selected_store.id, content.id)}
+                />
+              </Tooltip>
+            </span>
+          </p>
+          <div class="mb-4">
+            <label>Sous titre : </label>
+            <Input name="sub_title" bind:value={content.sub_title} placeholder="Un sous titre" />
+          </div>
+          <div>
+            <label>Texte du contenu : </label>
+            <Texarea name="text" bind:value={content.text} placeholder="Texte de la présentation" />
+          </div>
+        </section>
       {/each}
       <!-- btn modifier content -->
-      <div class="flex justify-end">
-        <button class="btn btn-primary mt-12">Enregistrer</button>
-      </div>
-    </form>
+      {#if $presentation_selected_store.contents.length !== 0}
+        <div class="flex justify-end">
+          <button
+            class="btn btn-primary mt-12"
+            on:click={() => updateAllContent($presentation_selected_store.id)}
+            >Enregistrer le contenu</button
+          >
+        </div>
+      {/if}
+    </div>
   </section>
 </section>
 
 <style>
   form > div {
     margin-top: 15px;
+  }
+
+  label {
+    font-weight: 700;
   }
 </style>
