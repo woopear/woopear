@@ -67,6 +67,9 @@ const createCurrentUserStore = () => {
       await updateDoc(doc(fire_db, 'users', `${id}`), { ...data });
     },
 
+    async updateUserCompanieLogo(id: string, data: IUser): Promise<void> {
+      await updateDoc(doc(fire_db, 'users', `${id}/companie`), { ...data });
+    },
     /**
      * telechargement de l'image avatar du user connecté
      * upload dans bucket + stockage de l'url dans la proprieter avatar du user
@@ -94,8 +97,7 @@ const createCurrentUserStore = () => {
       // creation de l'url pour stocker dans le document user.companie
       const url_logo = await getDownloadURL(i);
       // data
-      let data: IUserCompanie;
-      data= {logo: url_logo};
+      const data = {"companie.logo": url_logo}
       // enregistrement du path de l'image dans le user
       await this.updateUser(id, { ...data });
     }

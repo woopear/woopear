@@ -160,6 +160,7 @@
               id="formFileSm"
               type="file"
               on:change={loadImage}
+              name="companie.logo"
             />
           </div>
         </div>
