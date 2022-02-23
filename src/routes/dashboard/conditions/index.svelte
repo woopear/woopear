@@ -9,6 +9,8 @@
   import { current_user_store } from '$lib/modules/user/user.store';
   import { onMount } from 'svelte';
 
+  let loader = false;
+
   onMount(async () => {
     // si session.user existe
     // on lance l'ecouteur sur le document user
@@ -26,6 +28,9 @@
     // si condition gen n'est pas encore request on request
     if ($condition_gen_store.length === 0) {
       //await condition_gen_store.getPresentation();
+      loader = true;
+    } else {
+      loader = true;
     }
   });
 </script>
@@ -34,7 +39,7 @@
   <div class="mb-12">
     <Title title="Liste des conditions générales" type_title={ETypeTitle.H4} />
   </div>
-  {#if $condition_gen_store.length !== 0}
+  {#if loader}
     <ConditionTable />
   {:else}
     <SpinnerLittle />
