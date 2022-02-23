@@ -1,3 +1,4 @@
+
 export const constNotification = {
   title_notification: 'Nouvelle notification'
 };
@@ -22,3 +23,11 @@ export const constNotificationError = {
     "Veuillez valider les conditions générales à la fin du formulaire d'inscription",
   INIT_PASSWORD: 'Les mots de passe ne correspondent pas !'
 };
+
+export const constNotificationInformation = {
+
+}
+
+export const constNotificationWarning = {
+
+}
