@@ -12,13 +12,18 @@
   import { createEventDispatcher } from 'svelte';
   import { presentation_selected_store, presentation_store } from '../presentation.store';
   import type { IPresentation } from '../presentation.type';
+  import { fade } from 'svelte/transition';
 
   // pour le loader des btn
   let loader_img_avatar = '';
+  let loader_sup_img_avatar = '';
+  let loader_update_presentation = '';
+  let loader_save_content = '';
 
   // stocke file img
   let img_file;
 
+  // creation event dispatch
   const dist = createEventDispatcher();
 
   /**
@@ -26,6 +31,7 @@
    */
   const closeUpdate = () => {
     dist('close_update', false);
+    // on reset le store presentation selected au moment de la fermeture du volet
     presentation_selected_store.set({} as IPresentation);
   };
 
@@ -35,10 +41,12 @@
    * @param id => id de la presentation ciblé
    */
   const updatePresentation = async (e, id: string) => {
+    loader_update_presentation = 'loading';
     // formatage des données
     const data = createObjectAsFormData<IPresentation>(e.target);
     // modification
     await presentation_store.updatePresentation(id, data);
+    loader_update_presentation = '';
   };
 
   /**
@@ -46,8 +54,10 @@
    * @param idPresentation id de la presentation selectionné
    */
   const updateAllContent = async (idPresentation: string) => {
+    loader_save_content = 'loading';
     // modification
     await presentation_store.updateContentOfPresentation(idPresentation);
+    loader_save_content = '';
   };
 
   /**
@@ -65,6 +75,7 @@
    * @param idContent id du content
    */
   const deleteContentPresentation = async (idPresentation: string, idContent: string) => {
+    // suppression
     await presentation_store.deleteContentPresentation(idPresentation, idContent);
   };
 
@@ -96,11 +107,13 @@
    * @param idPresentation id de la presentation selectionné
    */
   async function deleteImage(idPresentation: string): Promise<void> {
+    loader_sup_img_avatar = 'loading';
     await presentation_store.deleteImagePresentation(idPresentation);
+    loader_sup_img_avatar = '';
   }
 </script>
 
-<section class="mt-16 card bg-base-200 px-6 py-8 md:px-12">
+<section transition:fade class="mt-16 card bg-base-200 px-6 py-8 md:px-12">
   <!-- en-tete -->
   <section class="card-title flex items-start md:items-center justify-between">
     <div class="md:flex md:items-end">
@@ -156,7 +169,7 @@
       <!-- btn envoie ou suppression img -->
       <div class="flex">
         <button
-          class={`${loader_img_avatar} btn btn-xs btn-secondary mr-4`}
+          class={`${loader_sup_img_avatar} btn btn-xs btn-secondary mr-4`}
           on:click={() => deleteImage($presentation_selected_store.id)}>Supprimer l'image</button
         >
         <button
@@ -257,7 +270,7 @@
       </div>
       <!-- btn modifier info pincipal -->
       <div class="flex justify-end">
-        <button class="btn btn-primary mt-12">Modifier</button>
+        <button class={`${loader_update_presentation} btn btn-primary mt-12`}>Modifier</button>
       </div>
     </form>
 
@@ -301,7 +314,7 @@
       {#if $presentation_selected_store.contents.length !== 0}
         <div class="flex justify-end">
           <button
-            class="btn btn-primary mt-12"
+            class={`${loader_save_content} btn btn-primary mt-12`}
             on:click={() => updateAllContent($presentation_selected_store.id)}
             >Enregistrer le contenu</button
           >

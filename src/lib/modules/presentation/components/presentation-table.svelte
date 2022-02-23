@@ -1,10 +1,11 @@
 <script lang="ts">
+  import AddSvg from '$lib/modules/components/add-svg/add-svg.svelte';
   import BtnDelete from '$lib/modules/components/btn/btn-delete.svelte';
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
-  import TooltipCustom from '$lib/modules/components/tooltip/tooltip-custom.svelte';
   import Tooltip from '$lib/modules/components/tooltip/tooltip.svelte';
   import { presentation_store, presentation_selected_store } from '../presentation.store';
   import PresentationUpdate from './presentation-update.svelte';
+  import { fade } from 'svelte/transition';
 
   let see_update = false;
 
@@ -23,14 +24,6 @@
   const selectedForPresentation = (id: string): void => {
     see_update = true;
     presentation_selected_store.set($presentation_store.find((el) => el.id === id));
-  };
-
-  /**
-   * delete presentation
-   * @param id
-   */
-  const deletePresentation = (id: string): void => {
-    console.log('coucou');
   };
 
   /**
@@ -60,10 +53,10 @@
       {#if $presentation_store}
         <!-- si il y a des entrées on affiche sinon on affiche 0 -->
         {#if $presentation_store.length > 0}
-          {#each $presentation_store as presentation}
+          {#each $presentation_store as presentation (presentation.id)}
             <tr>
               <th>{presentation.id}</th>
-              <td>{presentation.title}</td>
+              <td>{presentation.title === '' ? 'sans titre' : presentation.title}</td>
               <td>{presentation.contents ? presentation.contents.length : ''}</td>
               <td class="flex items-center">
                 <input
@@ -73,7 +66,10 @@
                   on:change={(e) => activeDisablePresentation(e, presentation.id)}
                 />
                 <BtnUpdate changeUpdate={() => selectedForPresentation(presentation.id)} />
-                <BtnDelete changeUpdate={() => deletePresentation(presentation.id)} />
+                <BtnDelete
+                  changeUpdate={async () =>
+                    await presentation_store.deletePresentation(presentation.id)}
+                />
               </td>
             </tr>
           {/each}
@@ -84,6 +80,17 @@
     </tbody>
   </table>
 </section>
+
+<!-- partie btn ajout presentation -->
+<section
+  on:click={async () => await presentation_store.addPresentation()}
+  class="cursor-pointer mt-6 mb-12 w-full btn btn-primary rounded-lg h-10 flex justify-center items-center"
+>
+  <Tooltip data="ajouter une présentation">
+    <AddSvg style="font-bold text-base-200" />
+  </Tooltip>
+</section>
+
 <!-- update presentation -->
 <section>
   {#if see_update}
