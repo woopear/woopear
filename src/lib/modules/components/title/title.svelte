@@ -16,7 +16,7 @@
   {:else if type_title === ETypeTitle.H3}
     <h3 class="text-3xl font-bold">{title}</h3>
   {:else if type_title === ETypeTitle.H4}
-    <h4 class="text-3xl font-light">{title}</h4>
+    <h4 class="text-2xl md:text-3xl font-light">{title}</h4>
   {:else if type_title === ETypeTitle.H5}
     <h5 class="text-2xl font-bold">{title}</h5>
   {:else if type_title === ETypeTitle.H6}
