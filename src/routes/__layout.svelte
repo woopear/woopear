@@ -66,7 +66,7 @@
   });
 
   // pour activer la construction du site
-  let waiting_active = false;
+  let waiting_active = true;
 </script>
 
 {#if !waiting_active}
