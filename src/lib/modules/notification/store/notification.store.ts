@@ -38,11 +38,17 @@ const createNotificationStore = () => {
       })
     },
 
+    /**
+     * arrete de l'ecoute du document dans la collection notification
+     */
     stopLisenNotificationUser: (): void => {
       lisen_get_notification();
       
     },
 
+    /**
+     * reset le store
+     */
     resetNotification: (): void => {
       set([]);
     }
