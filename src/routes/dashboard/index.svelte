@@ -13,7 +13,7 @@
     // on lance l'ecouteur sur le document user
     if ($session.user) {
       current_user_store.getUser($session.user.uid);
-      store_notification.listenNotificationUser($current_user_store.uid);
+      store_notification.listenNotificationUser($session.user.uid);
     }
   });
 </script>

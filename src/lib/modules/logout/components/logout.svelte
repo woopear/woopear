@@ -2,6 +2,7 @@
   import { goto } from '$app/navigation';
   import { session } from '$app/stores';
   import LogoutSvg from '$lib/modules/components/logout-svg/logout-svg.svelte';
+  import { store_notification } from '$lib/modules/notification/store/notification.store';
   import { current_user_store } from '$lib/modules/user/user.store';
   import { fire_auth } from '$lib/providers/firebase/firebase.service';
   import { signOut } from 'firebase/auth';
@@ -10,6 +11,10 @@
    * deconnexion simple utilisateur
    */
   const deconnect = async () => {
+    // on arrete l'ecouteur sur le document notification du user
+    store_notification.stopLisenNotificationUser();
+    // on reset le store notification
+    store_notification.resetNotification();
     // on arrete l'ecouteur sur le document user du user current
     current_user_store.stopLisenGetUser();
     // deconnection

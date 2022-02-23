@@ -1,5 +1,17 @@
 <script lang="ts">
+  import { session } from '$app/stores';
+
+  import { onMount } from 'svelte';
+
   import { store_notification } from '../store/notification.store';
+
+  onMount(async () => {
+    // si session.user existe
+    // on lance l'ecouteur sur le document user
+    if ($session.user) {
+      store_notification.listenNotificationUser($session.user.uid);
+    }
+  });
 </script>
 
 {#if $store_notification.length > 0}
