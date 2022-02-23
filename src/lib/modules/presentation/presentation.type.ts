@@ -19,4 +19,5 @@ export interface IPresentation {
   contents?: IPresentationContent[];
   image?: string;
   woopear?: IWoopear;
+  active?: boolean;
 }

@@ -13,11 +13,13 @@
     // on lance l'ecouteur sur le document user
     if ($session.user) {
       current_user_store.getUser($session.user.uid);
+    } else {
+      // TODO : gerer probleme de connexion user ou de connexion
     }
 
     // si présentation n'est pas encore request on request
     if ($presentation_store.length === 0) {
-      await presentation_store.listenPresentation();
+      await presentation_store.getPresentation();
     }
   });
 </script>

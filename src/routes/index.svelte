@@ -10,7 +10,7 @@
   onMount(() => {
     // si présentation n'est pas encore écouter, ecoute presentation
     if (!('id' in $presentation_store)) {
-      presentation_store.listenPresentation();
+      presentation_store.getPresentation();
     }
   });
 </script>
