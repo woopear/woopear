@@ -24,5 +24,6 @@ export interface ICondition {
 export interface IConditionGeneral {
   id?: string;
   title?: string;
+  active?: boolean;
   conditions?: ICondition[];
 }
