@@ -5,7 +5,7 @@
   import { onMount } from 'svelte';
 
   // pour activer la construction du site
-  let waiting_active = true;
+  let waiting_active = false;
 
   onMount(() => {
     // si présentation n'est pas encore écouter, ecoute presentation
