@@ -1,7 +1,7 @@
 import type { INotification } from './../notification.type';
 
 import { writable } from 'svelte/store';
-import { query, collection, where, onSnapshot, QuerySnapshot } from 'firebase/firestore';
+import { query, collection, where, onSnapshot, addDoc, deleteDoc, doc } from 'firebase/firestore';
 import { fire_db } from '$lib/providers/firebase/firebase.service';
 import type { Unsubscribe } from 'firebase/auth';
 
@@ -51,12 +51,21 @@ const createNotificationStore = () => {
      */
     resetNotification: (): void => {
       set([]);
-    }
+    },
 
     /**
      * 
      */
-    
+    async addNewNotificationUser(type: string, libelle:string, uid: string): Promise<void> {
+      const notification_ref = await addDoc(collection(fire_db, "notifications"), {type: type, libelle: libelle, uid: uid});
+    },
+
+    /**
+     * 
+     */
+    async removeNotificationUser(id:string): Promise<void> {
+      const notification_delete = await deleteDoc(doc(fire_db, "notifications", id));
+    }
   }
 }
 export const store_notification  = createNotificationStore();
