@@ -8,6 +8,12 @@
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
   import Tooltip from '$lib/modules/components/tooltip/tooltip.svelte';
   import UserSvg from '$lib/modules/components/user-svg/user-svg.svelte';
+  import {
+    constNotificationConfirmation,
+    constNotificationError,
+    constNotificationType
+  } from '$lib/modules/notification/notification.const';
+  import { store_notification } from '$lib/modules/notification/store/notification.store';
   import SpinnerLittle from '$lib/modules/spinner/components/spinner-little.svelte';
   import { createObjectAsFormData, firstToUppperCase } from '$lib/providers/format/format.service';
   import { current_user_store } from '../user.store';
@@ -34,16 +40,30 @@
    * @param id => id du current user
    */
   const updateUser = async (e, id) => {
-    loader_update_user = 'loading';
-    // creation des données
-    const data = createObjectAsFormData<IUser>(e.target);
-    // creation du user_name
-    data.user_name = data.first_name + ' ' + data.last_name;
-    // modification du user
-    await current_user_store.updateUser(id, data);
-    // on ferme le volet de modification
-    seeUpdate = !seeUpdate;
-    loader_update_user = '';
+    try {
+      loader_update_user = 'loading';
+      // creation des données
+      const data = createObjectAsFormData<IUser>(e.target);
+      // creation du user_name
+      data.user_name = data.first_name + ' ' + data.last_name;
+      // modification du user
+      await current_user_store.updateUser(id, data);
+      // on ferme le volet de modification
+      seeUpdate = !seeUpdate;
+      loader_update_user = '';
+      store_notification.addNewNotificationUser(
+        constNotificationType.SUCCESS,
+        constNotificationConfirmation.UPDATE_ACCOUNT,
+        $current_user_store.uid
+      );
+    } catch (error) {
+      store_notification.addNewNotificationUser(
+        constNotificationType.ERROR,
+        constNotificationError.UPDATE_ACCOUNT,
+        $current_user_store.uid
+      );
+      throw new Error('Impossible de modifier le compte, une erreur est survenue');
+    }
   };
 
   /**
