@@ -33,8 +33,8 @@ const createNotificationStore = () => {
         QuerySnapshot.forEach((doc) => {
           notification = { id: doc.id, ...doc.data() }
           notifications =[...notifications, notification]
-          set(notifications);
         })
+        set(notifications);
       })
     },
 
@@ -42,8 +42,9 @@ const createNotificationStore = () => {
      * arrete de l'ecoute du document dans la collection notification
      */
     stopLisenNotificationUser: (): void => {
-      lisen_get_notification();
-      
+      if(lisen_get_notification) {
+        lisen_get_notification();
+      }
     },
 
     /**
@@ -54,17 +55,17 @@ const createNotificationStore = () => {
     },
 
     /**
-     * 
+     * ajouter une notification
      */
     async addNewNotificationUser(type: string, libelle:string, uid: string): Promise<void> {
-      const notification_ref = await addDoc(collection(fire_db, "notifications"), {type: type, libelle: libelle, uid: uid});
+      await addDoc(collection(fire_db, "notifications"), {type: type, libelle: libelle, uid: uid});
     },
 
     /**
-     * 
+     * supprimer une notification
      */
     async removeNotificationUser(id:string): Promise<void> {
-      const notification_delete = await deleteDoc(doc(fire_db, "notifications", id));
+      await deleteDoc(doc(fire_db, "notifications", id));
     }
   }
 }

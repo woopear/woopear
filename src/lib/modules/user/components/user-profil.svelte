@@ -85,12 +85,14 @@
       // on ferme le volet de modification image
       seeUpdateImg = !seeUpdateImg;
       loader_img_avatar = '';
+      // création de la notification
       store_notification.addNewNotificationUser(
         constNotificationType.SUCCESS,
         constNotificationConfirmation.UPDATE_AVATAR,
         $current_user_store.uid
       );
     } catch (error) {
+      // création de la notification
       store_notification.addNewNotificationUser(
         constNotificationType.ERROR,
         constNotificationError.UPDATE_AVATAR,

@@ -84,12 +84,14 @@
       // on ferme le volet de modification image
       seeUpdateImg = !seeUpdateImg;
       loader_img_logo = '';
+      // création de la notification
       store_notification.addNewNotificationUser(
         constNotificationType.SUCCESS,
         constNotificationConfirmation.UPDATE_ACCOUNT_COMPANIE_LOG,
         $current_user_store.uid
       );
     } catch (error) {
+      // création de la notification
       store_notification.addNewNotificationUser(
         constNotificationType.ERROR,
         constNotificationError.UPDATE_ACCOUNT_COMPANIE_LOG,
