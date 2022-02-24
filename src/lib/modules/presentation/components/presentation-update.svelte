@@ -284,6 +284,7 @@
         <BtnAdd changeUpdate={() => addContentPresentation($presentation_selected_store.id)} />
       </Tooltip>
     </span>
+
     <!-- form content -->
     <div>
       {#each $presentation_selected_store.contents as content, i (content.id)}

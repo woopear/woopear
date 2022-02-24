@@ -4,6 +4,7 @@
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
   import Tooltip from '$lib/modules/components/tooltip/tooltip.svelte';
   import { condition_gen_selected_store } from '../store/condition-gen-selected.store';
+  import { condition_gen_type_store } from '../store/condition-gen-type.store';
   import { condition_gen_store } from '../store/condition-gen.store';
   import ConditionGenSelectUpdate from './condition-gen-select-update.svelte';
 
@@ -33,8 +34,11 @@
    * @param idCondition
    */
   function selectedConditionGen(idCondition: string): void {
-    // on ecoute
+    // on ecoute condition gen selectionné
     condition_gen_selected_store.listenConditionGenSelected(idCondition);
+
+    // on ecoute la collection conditions du document condition gen selectionné
+    condition_gen_type_store.listenConditionGenSelectedType(idCondition);
     //on ouvre le volet update
     see_update = true;
   }
@@ -64,7 +68,6 @@
       <tr>
         <th>id</th>
         <th>Titre</th>
-        <th>Nb conditions</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -77,7 +80,6 @@
             <tr>
               <th>{condition.id}</th>
               <td>{condition.title === '' ? 'sans titre' : condition.title}</td>
-              <td>{''}</td>
               <td class="flex items-center">
                 <input
                   type="checkbox"

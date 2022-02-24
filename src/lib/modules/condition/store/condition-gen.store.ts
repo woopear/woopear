@@ -11,6 +11,7 @@ import {
 import { writable } from 'svelte/store';
 import type { IConditionGeneral } from '../condition.type';
 import { condition_gen_selected_store } from './condition-gen-selected.store';
+import { condition_gen_type_store } from './condition-gen-type.store';
 
 // creation store condition gen
 function createStoreConditionGen() {
@@ -68,7 +69,8 @@ function createStoreConditionGen() {
      */
     deleteConditionGen: async function (idCondition: string): Promise<void> {
       try {
-        // TODO : ajouter la suppression des collections du document
+        // delete de tous les type de condition relier à cette condition
+        await condition_gen_type_store.deleteAllTypeConditionGen(idCondition);
 
         // supprime
         await deleteDoc(doc(fire_db, 'conditions_generales', `${idCondition}`));
@@ -104,7 +106,9 @@ function createStoreConditionGen() {
      * stop l'ecouteur de condition gen
      */
     stopListenConditionGen: function (): void {
-      listen_condition_gen();
+      if (listen_condition_gen) {
+        listen_condition_gen();
+      }
     },
 
     /**
