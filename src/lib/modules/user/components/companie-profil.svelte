@@ -5,6 +5,12 @@
   import Input from '$lib/modules/components/input/input.svelte';
   import Title from '$lib/modules/components/title/title.svelte';
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
+  import {
+    constNotificationConfirmation,
+    constNotificationError,
+    constNotificationType
+  } from '$lib/modules/notification/notification.const';
+  import { store_notification } from '$lib/modules/notification/store/notification.store';
   import SpinnerLittle from '$lib/modules/spinner/components/spinner-little.svelte';
   import { createObjectAsFormData, firstToUppperCase } from '$lib/providers/format/format.service';
   import { current_user_store } from '../user.store';
@@ -31,16 +37,30 @@
    * @param id => id du current user
    */
   const updateUser = async (e, id) => {
-    loader_update_companie = 'loading';
-    // création du formData
-    const form_data = createObjectAsFormData<IUser>(e.target);
+    try {
+      loader_update_companie = 'loading';
+      // création du formData
+      const form_data = createObjectAsFormData<IUser>(e.target);
 
-    // modifier le user
-    await current_user_store.updateUser(id, form_data);
+      // modifier le user
+      await current_user_store.updateUser(id, form_data);
 
-    // on ferme le volet de modification
-    seeUpdate = !seeUpdate;
-    loader_update_companie = '';
+      // on ferme le volet de modification
+      seeUpdate = !seeUpdate;
+      loader_update_companie = '';
+      store_notification.addNewNotificationUser(
+        constNotificationType.SUCCESS,
+        constNotificationConfirmation.UPDATE_ACCOUNT_COMPANIE,
+        $current_user_store.uid
+      );
+    } catch (error) {
+      store_notification.addNewNotificationUser(
+        constNotificationType.ERROR,
+        constNotificationError.UPDATE_ACCOUNT_COMPANIE,
+        $current_user_store.uid
+      );
+      throw new Error('Impossible de modifier la compagnie, une erreur est survenue');
+    }
   };
 
   /**

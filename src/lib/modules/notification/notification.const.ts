@@ -16,7 +16,8 @@ export const constNotificationConfirmation = {
   UPDATE_ACCOUNT: 'Votre compte a bien été modifié',
   UPDATE_EMAIL:
     'Un email à été envoyé sur votre nouvelle adresse e-mail, veuillez suivre les instructions',
-  UPDATE_AVATAR: 'votre avatar a bien été modifié'
+  UPDATE_AVATAR: 'votre avatar a bien été modifié',
+  UPDATE_ACCOUNT_COMPANIE: 'Votre compagnie a bien été modifié',
 };
 
 export const constNotificationError = {
@@ -27,7 +28,8 @@ export const constNotificationError = {
   CONNECTION_USER: 'Impossible de vous connecter, une erreur est survenue',
   CREATE_USER_CONDITION:
     "Veuillez valider les conditions générales à la fin du formulaire d'inscription",
-  INIT_PASSWORD: 'Les mots de passe ne correspondent pas !'
+  INIT_PASSWORD: 'Les mots de passe ne correspondent pas !',
+  UPDATE_ACCOUNT_COMPANIE: 'Impossible de modifier la compagnie, une erreur est survenue',
 };
 
 export const constNotificationInformation = {
