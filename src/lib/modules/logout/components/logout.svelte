@@ -2,6 +2,7 @@
   import { goto } from '$app/navigation';
   import { session } from '$app/stores';
   import LogoutSvg from '$lib/modules/components/logout-svg/logout-svg.svelte';
+  import { store_notification } from '$lib/modules/notification/store/notification.store';
   import {
     presentation_selected_store,
     presentation_store
@@ -14,6 +15,10 @@
    * deconnexion simple utilisateur
    */
   const deconnect = async () => {
+    // on arrete l'ecouteur sur le document notification du user
+    store_notification.stopLisenNotificationUser();
+    // on reset le store notification
+    store_notification.resetNotification();
     // on arrete l'ecouteur sur le document user du user current
     current_user_store.stopLisenGetUser();
     // on efface le current user

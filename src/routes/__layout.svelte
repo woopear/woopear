@@ -52,6 +52,7 @@
   import Spinner from '$lib/modules/spinner/components/spinner.svelte';
   import MenuDashboard from '$lib/modules/menu-dashboard/components/menu-dashboard.svelte';
   import { page, session } from '$app/stores';
+  import Notification from '$lib/modules/notification/component/notification.svelte';
 
   // activation du loader
   let loader: boolean;
@@ -93,3 +94,5 @@
   <!-- footer -->
   <Footer />
 {/if}
+
+<Notification />

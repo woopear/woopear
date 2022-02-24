@@ -2,6 +2,7 @@
   import { session } from '$app/stores';
   import Title from '$lib/modules/components/title/title.svelte';
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
+  import { store_notification } from '$lib/modules/notification/store/notification.store';
   import CompanieProfil from '$lib/modules/user/components/companie-profil.svelte';
   import UserProfil from '$lib/modules/user/components/user-profil.svelte';
   import { current_user_store } from '$lib/modules/user/user.store';
@@ -12,6 +13,7 @@
     // on lance l'ecouteur sur le document user
     if ($session.user) {
       current_user_store.getUser($session.user.uid);
+      store_notification.listenNotificationUser($session.user.uid);
     }
   });
 </script>
