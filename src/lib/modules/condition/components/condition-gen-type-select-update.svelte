@@ -1,4 +1,10 @@
 <script lang="ts">
+  import BoxCardEntitiesBody from '$lib/modules/components/boxs/box-card-entities-body.svelte';
+  import BoxCardEntitiesBoxBtnForm from '$lib/modules/components/boxs/box-card-entities-box-btn-form.svelte';
+  import BoxCardEntitiesHead from '$lib/modules/components/boxs/box-card-entities-head.svelte';
+  import BoxCardEntities from '$lib/modules/components/boxs/box-card-entities.svelte';
+  import BoxContentBody from '$lib/modules/components/boxs/box-content-body.svelte';
+  import BoxContentHeader from '$lib/modules/components/boxs/box-content-header.svelte';
   import BtnAdd from '$lib/modules/components/btn/btn-add.svelte';
   import BtnCloseUpdate from '$lib/modules/components/btn/btn-close-update.svelte';
   import BtnDelete from '$lib/modules/components/btn/btn-delete.svelte';
@@ -86,18 +92,21 @@
 </script>
 
 {#if 'id' in $condition_gen_type_selected_store}
-  <section class="card mt-16 card bg-base-200 px-6 py-8 md:px-12">
-    <!-- en-tete -->
-    <section class="card-title flex items-start md:items-center justify-between">
-      <div class="md:flex md:items-end">
-        <Title title="Modification de" type_title={ETypeTitle.H4} />
-        <span class="md:ml-4">{$condition_gen_type_selected_store.title}</span>
-      </div>
-      <BtnCloseUpdate changeUpdate={closeUpdate} relief={true} size="w-4 h-4" />
-    </section>
+  <BoxCardEntities>
+    <!-- en tete -->
+    <BoxCardEntitiesHead>
+      <Title slot="title-1" title="Modification de" type_title={ETypeTitle.H4} />
+      <span slot="title-2" class="md:ml-4">{$condition_gen_type_selected_store.title}</span>
+      <BtnCloseUpdate
+        slot="btn-close-update"
+        changeUpdate={closeUpdate}
+        relief={true}
+        size="w-4 h-4"
+      />
+    </BoxCardEntitiesHead>
 
-    <!-- modification condition generale -->
-    <section class="mt-12">
+    <!-- partie condition gen type selected -->
+    <BoxCardEntitiesBody>
       <form
         on:submit|preventDefault={async (e) =>
           await updateConditionGenTypeSelected(e, $condition_gen_type_selected_store.id)}
@@ -138,81 +147,65 @@
             value={$condition_gen_type_selected_store.type}
           />
         </div>
+
         <!-- btn modifier condition generale -->
-        <div class="flex justify-end">
+        <BoxCardEntitiesBoxBtnForm>
           <button class={`${loader_save_condition_gen_type_selected} btn btn-primary mt-12`}
             >Valider</button
           >
-        </div>
+        </BoxCardEntitiesBoxBtnForm>
       </form>
-    </section>
+    </BoxCardEntitiesBody>
 
     <!-- Partie Content -->
-    <span class="flex mt-16 mb-8">
-      <div class="mr-6">
-        <Title title="Partie contenu" type_title={ETypeTitle.H6} />
-      </div>
+    <!-- en tete -->
+    <BoxContentHeader>
+      <Title slot="title-content" title="Partie contenu" type_title={ETypeTitle.H6} />
       <!-- btn ajout content -->
-      <Tooltip data="ajouter un contenu">
+      <Tooltip slot="add-content" data="ajouter un contenu">
         <BtnAdd
           changeUpdate={() => addContentConditionGenType($condition_gen_type_selected_store.id)}
         />
       </Tooltip>
-    </span>
+    </BoxContentHeader>
 
     <!-- form contents -->
-    <section>
-      {#each $condition_gen_type_content_store as content, i (content.id)}
-        <section class="mb-12">
-          <p class="font-light mb-4 flex items-center">
-            Document numéro : {content.id}
-            <span class="ml-4">
-              <Tooltip data="Supprimer le contenu">
-                <BtnDelete
-                  size="w-5 h-5"
-                  changeUpdate={() =>
-                    deleteContentConditionGenTypeSelected(
-                      $condition_gen_type_selected_store.id,
-                      content.id
-                    )}
-                />
-              </Tooltip>
-            </span>
-          </p>
-          <!-- content -->
-          <div>
-            <!-- svelte-ignore a11y-label-has-associated-control -->
-            <label>Texte du contenu : </label>
-            <Texarea
-              name="content"
-              bind:value={content.content}
-              placeholder="Texte de la présentation"
-            />
-          </div>
-        </section>
-      {/each}
-      <!-- btn modifier content -->
-      {#if $condition_gen_type_content_store.length !== 0}
-        <div class="flex justify-end">
-          <button
-            class={`${loader_save_content} btn btn-primary mt-12`}
-            on:click={() =>
-              updateAllContentConditionGenTypeSelected(
+    {#each $condition_gen_type_content_store as content, i (content.id)}
+      <BoxContentBody id={content.id}>
+        <p slot="title">Document numéro : {content.id}</p>
+        <Tooltip slot="btn-delete" data="Supprimer le contenu">
+          <BtnDelete
+            size="w-5 h-5"
+            changeUpdate={() =>
+              deleteContentConditionGenTypeSelected(
                 $condition_gen_type_selected_store.id,
-                $condition_gen_selected_store.id
-              )}>Enregistrer les contenus</button
-          >
+                content.id
+              )}
+          />
+        </Tooltip>
+        <div slot="input-content">
+          <!-- svelte-ignore a11y-label-has-associated-control -->
+          <label>Texte du contenu : </label>
+          <Texarea
+            name="content"
+            bind:value={content.content}
+            placeholder="Texte de la présentation"
+          />
         </div>
-      {/if}
-    </section>
-  </section>
+      </BoxContentBody>
+    {/each}
+    <!-- btn modifier content -->
+    {#if $condition_gen_type_content_store.length !== 0}
+      <BoxCardEntitiesBoxBtnForm>
+        <button
+          class={`${loader_save_content} btn btn-primary mt-12`}
+          on:click={() =>
+            updateAllContentConditionGenTypeSelected(
+              $condition_gen_type_selected_store.id,
+              $condition_gen_selected_store.id
+            )}>Enregistrer les contenus</button
+        >
+      </BoxCardEntitiesBoxBtnForm>
+    {/if}
+  </BoxCardEntities>
 {/if}
-
-<style>
-  form > div {
-    margin-top: 20px;
-  }
-  label {
-    font-weight: 700;
-  }
-</style>

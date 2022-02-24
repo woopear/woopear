@@ -18,3 +18,10 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+form > div {
+  margin-top: 20px;
+}
+label {
+  font-weight: 700;
+}

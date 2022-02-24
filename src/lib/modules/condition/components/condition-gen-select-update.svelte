@@ -1,4 +1,8 @@
 <script lang="ts">
+  import BoxCardEntitiesBody from '$lib/modules/components/boxs/box-card-entities-body.svelte';
+  import BoxCardEntitiesBoxBtnForm from '$lib/modules/components/boxs/box-card-entities-box-btn-form.svelte';
+  import BoxCardEntitesHead from '$lib/modules/components/boxs/box-card-entities-head.svelte';
+  import BoxCardEntities from '$lib/modules/components/boxs/box-card-entities.svelte';
   import BtnCloseUpdate from '$lib/modules/components/btn/btn-close-update.svelte';
   import Input from '$lib/modules/components/input/input.svelte';
   import Title from '$lib/modules/components/title/title.svelte';
@@ -8,9 +12,6 @@
   import { createEventDispatcher } from 'svelte';
   import type { IConditionGeneral } from '../condition.type';
   import { condition_gen_selected_store } from '../store/condition-gen-selected.store';
-  import { condition_gen_type_content_store } from '../store/condition-gen-type-content.store';
-  import { condition_gen_type_selected_store } from '../store/condition-gen-type-selected.store';
-  import { condition_gen_type_store } from '../store/condition-gen-type.store';
   import ConditionGenTypeTable from './condition-gen-type-table.svelte';
 
   let loader_save_condition_gen_selected = '';
@@ -41,18 +42,21 @@
 </script>
 
 {#if 'id' in $condition_gen_selected_store}
-  <section class="card mt-16 card bg-base-200 px-6 py-8 md:px-12">
+  <BoxCardEntities>
     <!-- en-tete -->
-    <section class="card-title flex items-start md:items-center justify-between">
-      <div class="md:flex md:items-end">
-        <Title title="Modification de" type_title={ETypeTitle.H4} />
-        <span class="md:ml-4">{$condition_gen_selected_store.title}</span>
-      </div>
-      <BtnCloseUpdate changeUpdate={closeUpdate} relief={true} size="w-4 h-4" />
-    </section>
+    <BoxCardEntitesHead>
+      <Title slot="title-1" title="Modification de" type_title={ETypeTitle.H4} />
+      <span slot="title-2" class="md:ml-4">{$condition_gen_selected_store.title}</span>
+      <BtnCloseUpdate
+        slot="btn-close-update"
+        changeUpdate={closeUpdate}
+        relief={true}
+        size="w-4 h-4"
+      />
+    </BoxCardEntitesHead>
 
     <!-- modification condition generale -->
-    <section class="mt-12">
+    <BoxCardEntitiesBody>
       <form
         on:submit|preventDefault={async (e) =>
           await updateConditionGenSelected(e, $condition_gen_selected_store.id)}
@@ -67,23 +71,17 @@
           <Input name="title" placeholder="titre" value={$condition_gen_selected_store.title} />
         </div>
         <!-- btn modifier condition generale -->
-        <div class="flex justify-end">
+        <BoxCardEntitiesBoxBtnForm>
           <button class={`${loader_save_condition_gen_selected} btn btn-primary mt-12`}
             >Valider</button
           >
-        </div>
+        </BoxCardEntitiesBoxBtnForm>
       </form>
-    </section>
-  </section>
+    </BoxCardEntitiesBody>
+  </BoxCardEntities>
 
   <!-- partie condition type -->
   <ConditionGenTypeTable />
 {:else}
   <SpinnerLittle />
 {/if}
-
-<style>
-  label {
-    font-weight: 700;
-  }
-</style>

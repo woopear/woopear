@@ -1,15 +1,12 @@
 <script lang="ts">
   import { session } from '$app/stores';
-  import Title from '$lib/modules/components/title/title.svelte';
-  import { ETypeTitle } from '$lib/modules/components/title/title.type';
+  import BoxGlobalEntities from '$lib/modules/components/boxs/box-global-entities.svelte';
   import ConditionTable from '$lib/modules/condition/components/condition-gen-table.svelte';
-  import ConditionGenTypeTable from '$lib/modules/condition/components/condition-gen-type-table.svelte';
   import { condition_gen_store } from '$lib/modules/condition/condition.store';
-  import { condition_gen_selected_store } from '$lib/modules/condition/store/condition-gen-selected.store';
   import { presentation_store } from '$lib/modules/presentation/presentation.store';
   import SpinnerLittle from '$lib/modules/spinner/components/spinner-little.svelte';
   import { current_user_store } from '$lib/modules/user/user.store';
-  import { beforeUpdate, onMount } from 'svelte';
+  import { onMount } from 'svelte';
 
   let loader = false;
 
@@ -37,14 +34,11 @@
   });
 </script>
 
-<section class="w-full flex-1 sm:pl-6 sm:pt-6 sm:pb-6">
-  <div class="mb-12">
-    <Title title="Liste des conditions générales" type_title={ETypeTitle.H4} />
-  </div>
+<BoxGlobalEntities>
   {#if loader}
     <!-- partie condition gen -->
     <ConditionTable />
   {:else}
     <SpinnerLittle />
   {/if}
-</section>
+</BoxGlobalEntities>
