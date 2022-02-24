@@ -76,13 +76,27 @@
    * upload l'avatar du current user
    */
   const uploadImg = async () => {
-    loader_img_logo = 'loading';
-    // upload logo
-    await current_user_store.uploadLogoCompanie(img_file, $current_user_store.id);
+    try {
+      loader_img_logo = 'loading';
+      // upload logo
+      await current_user_store.uploadLogoCompanie(img_file, $current_user_store.id);
 
-    // on ferme le volet de modification image
-    seeUpdateImg = !seeUpdateImg;
-    loader_img_logo = '';
+      // on ferme le volet de modification image
+      seeUpdateImg = !seeUpdateImg;
+      loader_img_logo = '';
+      store_notification.addNewNotificationUser(
+        constNotificationType.SUCCESS,
+        constNotificationConfirmation.UPDATE_ACCOUNT_COMPANIE_LOG,
+        $current_user_store.uid
+      );
+    } catch (error) {
+      store_notification.addNewNotificationUser(
+        constNotificationType.ERROR,
+        constNotificationError.UPDATE_ACCOUNT_COMPANIE_LOG,
+        $current_user_store.uid
+      );
+      throw new Error('Impossible de modifier la compagnie, une erreur est survenue');
+    }
   };
 </script>
 
