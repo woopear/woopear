@@ -22,7 +22,6 @@ export const constNotificationConfirmation = {
 export const constNotificationError = {
   CREATE_ACCOUNT: 'Impossible de créer votre compte, une erreur est survenue',
   DELETE_ACCOUNT: 'Impossible de supprimer le compte, une erreur est survenue',
-  UPLOAD_AVATAR: "il s'est produit une erreur lors du téléchargement de votre avatar",
   UPDATE_AVATAR: "il s'est produit une erreur lors de la modification de votre avatar",
   UPDATE_ACCOUNT: 'Impossible de modifier le compte, une erreur est survenue',
   CONNECTION_USER: 'Impossible de vous connecter, une erreur est survenue',
@@ -33,8 +32,8 @@ export const constNotificationError = {
 
 export const constNotificationInformation = {
 
-}
+};
 
 export const constNotificationWarning = {
 
-}
+};

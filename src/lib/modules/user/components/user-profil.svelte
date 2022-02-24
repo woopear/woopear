@@ -79,11 +79,25 @@
    * upload l'avatar du current user
    */
   const uploadImg = async () => {
-    loader_img_avatar = 'loading';
-    await current_user_store.uploadAvatarUser(img_file, $current_user_store.id);
-    // on ferme le volet de modification image
-    seeUpdateImg = !seeUpdateImg;
-    loader_img_avatar = '';
+    try {
+      loader_img_avatar = 'loading';
+      await current_user_store.uploadAvatarUser(img_file, $current_user_store.id);
+      // on ferme le volet de modification image
+      seeUpdateImg = !seeUpdateImg;
+      loader_img_avatar = '';
+      store_notification.addNewNotificationUser(
+        constNotificationType.SUCCESS,
+        constNotificationConfirmation.UPDATE_AVATAR,
+        $current_user_store.uid
+      );
+    } catch (error) {
+      store_notification.addNewNotificationUser(
+        constNotificationType.ERROR,
+        constNotificationError.UPDATE_AVATAR,
+        $current_user_store.uid
+      );
+      throw new Error("il s'est produit une erreur lors de la modification de votre avatar");
+    }
   };
 </script>
 
