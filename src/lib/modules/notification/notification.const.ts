@@ -3,6 +3,13 @@ export const constNotification = {
   title_notification: 'Nouvelle notification'
 };
 
+export const constNotificationType = {
+  WARNING: 'warning',
+  SUCCESS: 'success',
+  INFO: 'info',
+  ERROR: 'error'
+};
+
 export const constNotificationConfirmation = {
   CREATE_ACCOUNT: 'Un mail vous a été envoyé pour confirmer la création du compte',
   DELETE_ACCOUNT: 'Votre compte a bien été supprimé',
