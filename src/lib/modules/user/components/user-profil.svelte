@@ -72,7 +72,6 @@
    */
   const loadImage = (e) => {
     img_file = e.target.files[0];
-    console.log(img_file);
   };
 
   /**

@@ -53,7 +53,11 @@
 </script>
 
 <header
+<<<<<<< HEAD
   class="z-40 fixed w-full h-16 bg-primary flex justify-between items-center px-8 sm:px-24 md:px-36"
+=======
+  class="z-50 fixed w-full h-16 bg-primary flex justify-between items-center px-8 sm:px-24 md:px-36"
+>>>>>>> b9905696ac6897023d0e56dd3076f6b096e29c38
 >
   <!-- btn home -->
   <div class="flex items-center">

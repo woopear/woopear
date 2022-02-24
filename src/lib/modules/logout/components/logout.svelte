@@ -3,9 +3,13 @@
   import { session } from '$app/stores';
   import LogoutSvg from '$lib/modules/components/logout-svg/logout-svg.svelte';
   import { store_notification } from '$lib/modules/notification/store/notification.store';
+  import {
+    presentation_selected_store,
+    presentation_store
+  } from '$lib/modules/presentation/presentation.store';
   import { current_user_store } from '$lib/modules/user/user.store';
   import { fire_auth } from '$lib/providers/firebase/firebase.service';
-  import { signOut } from 'firebase/auth';
+  import { signOut, type User } from 'firebase/auth';
 
   /**
    * deconnexion simple utilisateur
@@ -17,14 +21,15 @@
     store_notification.resetNotification();
     // on arrete l'ecouteur sur le document user du user current
     current_user_store.stopLisenGetUser();
+    // on efface le current user
+    current_user_store.resetCurrentUser();
+    // reset store presentation et presentationselected
+    presentation_store.resetPresentation();
+    presentation_selected_store.resetPresentationSelected();
     // deconnection
     await signOut(fire_auth);
     // reset session.user
-    $session.user = null;
-    // on arrete l'ecouteur de current user
-    current_user_store.stopLisenGetUser();
-    // on efface le current user
-    current_user_store.resetCurrentUser();
+    $session.user = {} as User;
   };
 </script>
 

@@ -18,10 +18,10 @@
   });
 </script>
 
+<!-- box profil -->
 <div class="mb-16">
   <Title title={`Bonjour ${$current_user_store.user_name}`} type_title={ETypeTitle.H4} />
 </div>
-<!-- box profil -->
 <section
   class="w-full flex items-center flex-col lg:place-items-stretch lg:flex-row md:justify-evenly"
 >

@@ -1,28 +1,29 @@
-/* 
-* interface content de condition
-*/
+/*
+ * interface content de condition
+ */
 
 export interface IConditionContent {
-  id?: string,
-  text?: string
+  id?: string;
+  content?: string;
 }
 
-/* 
-* interface condition
-*/
+/*
+ * interface condition
+ */
 export interface ICondition {
-  id?: string,
-  type?: string,
-  title?: string,
-  sub_title?: string,
-  content?: IConditionContent[]
+  id?: string;
+  type?: string;
+  title?: string;
+  sub_title?: string;
+  contents?: IConditionContent[];
 }
 
-/* 
-* interface  de condition géneral
-*/
+/*
+ * interface  de condition géneral
+ */
 export interface IConditionGeneral {
-  id?: string,
-  title?: string,
-  conditions?: ICondition[]
+  id?: string;
+  title?: string;
+  active?: boolean;
+  conditions?: ICondition[];
 }
