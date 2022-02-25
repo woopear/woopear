@@ -63,6 +63,10 @@ function createStoreAdvertising() {
           constEnumNotificationType.ERROR,
           constNotificationError.CREATE_ADVERTISING
         );
+        throw new error(store_notification.addNewNotificationUser(
+          constEnumNotificationType.ERROR,
+          constNotificationError.CREATE_ADVERTISING
+        ));
       }
     },
 
@@ -73,9 +77,19 @@ function createStoreAdvertising() {
       try {
         // supprimer
         await deleteDoc(doc(fire_db, 'advertisings', `${idAdvertising}`));
-
+        store_notification.addNewNotificationUser(
+          constEnumNotificationType.SUCCESS,
+          constNotificationConfirmation.DELETE_ADVERTISING,
+        )
       } catch (error) {
-        
+        store_notification.addNewNotificationUser(
+          constEnumNotificationType.ERROR,
+          constNotificationError.DELETE_ADVERTISING,
+        );
+        throw new error(store_notification.addNewNotificationUser(
+          constEnumNotificationType.ERROR,
+          constNotificationError.DELETE_ADVERTISING,
+        ))
       }
     },
 
