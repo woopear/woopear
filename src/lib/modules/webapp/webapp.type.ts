@@ -3,10 +3,12 @@
  */
 export interface IProduct {
   id?: string;
+  title?: string;
   content?: string;
   url?: string;
-  images?: [string];
-  technos?: [string];
+  images?: string[];
+  technos?: string[];
+  listtechnos?: string;
 }
 
 /**

@@ -6,6 +6,7 @@
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
   import Title from '$lib/modules/components/title/title.svelte';
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
+  import { webapp_product_store } from '../store/webapp-products.store';
   import { webapp_selected_store } from '../store/webapp-selected.store';
   import { webapps_store } from '../webapp.store';
   import WebappSelectedUpdate from './webapp-selected-update.svelte';
@@ -29,6 +30,7 @@
    */
   function selectedWebapp(idWebapp: string): void {
     webapp_selected_store.listenWebappSelected(idWebapp);
+    webapp_product_store.listenWebappProducts(idWebapp);
     see_update = true;
   }
 
@@ -50,6 +52,7 @@
    */
   async function deleteWebapp(idWebapp: string): Promise<void> {
     await webapps_store.deleteWebapp(idWebapp);
+    see_update = false;
   }
 </script>
 

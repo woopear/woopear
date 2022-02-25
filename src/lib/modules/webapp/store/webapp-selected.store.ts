@@ -21,8 +21,6 @@ function createStoreWebappSelected() {
     listenWebappSelected: function (idWebapp): void {
       listen_web_app_selected = onSnapshot(doc(fire_db, 'webapp', `${idWebapp}`), (snapShot) => {
         set({ id: snapShot.id, ...snapShot.data() });
-        console.log(snapShot.id);
-        console.log(snapShot.data());
       });
     },
 
