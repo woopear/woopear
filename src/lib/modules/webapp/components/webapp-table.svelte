@@ -6,9 +6,15 @@
   import BtnUpdate from '$lib/modules/components/btn/btn-update.svelte';
   import Title from '$lib/modules/components/title/title.svelte';
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
+  import { webapp_selected_store } from '../store/webapp-selected.store';
   import { webapps_store } from '../webapp.store';
+  import WebappSelectedUpdate from './webapp-selected-update.svelte';
 
   let see_update = false;
+
+  function closeUpdate(e): void {
+    see_update = e.detail;
+  }
 
   /**
    * ajout d'un webapp
@@ -17,7 +23,14 @@
     await webapps_store.addWebApp();
   }
 
-  function selectedWebapp(idWebapp: string): void {}
+  /**
+   * selection d'un webapp
+   * @param idWebapp id du webapp qu'on veux selectionner
+   */
+  function selectedWebapp(idWebapp: string): void {
+    webapp_selected_store.listenWebappSelected(idWebapp);
+    see_update = true;
+  }
 
   /**
    * modification de webapp
@@ -86,5 +99,5 @@
 
 <!-- update condition gen -->
 {#if see_update}
-  <p>coucou</p>
+  <WebappSelectedUpdate on:close_update={closeUpdate} />
 {/if}

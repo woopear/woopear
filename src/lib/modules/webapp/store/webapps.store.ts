@@ -15,6 +15,7 @@ import {
 } from 'firebase/firestore';
 import { writable } from 'svelte/store';
 import type { IWebapp } from '../webapp.type';
+import { webapp_selected_store } from './webapp-selected.store';
 
 function createStoreWebapps() {
   const { set, subscribe, update } = writable([] as IWebapp[]);
@@ -82,6 +83,9 @@ function createStoreWebapps() {
      */
     deleteWebapp: async function (idWebapp: string): Promise<void> {
       try {
+        // supprission de l'image
+        await webapp_selected_store.deleteImageWebappSelected(idWebapp);
+
         // TODO : delete les collections enfants
 
         // delete
