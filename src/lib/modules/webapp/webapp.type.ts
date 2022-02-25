@@ -12,10 +12,11 @@ export interface IProduct {
 /**
  * interface de la partie product
  */
-export interface IProductWoo {
+export interface IWebapp {
   id?: string;
   title?: string;
   description?: string;
   image?: string;
+  active?: boolean;
   products?: [IProduct];
 }

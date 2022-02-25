@@ -75,7 +75,7 @@
         </li>
         <!-- products -->
         <li class="relative group" on:click={closeMenuSand}>
-          <a href="/dashboard/products">
+          <a href="/dashboard/webapp">
             <ProductSvg size="w-7 h-7" />
           </a>
           <TooltipCustom text="productions" />
