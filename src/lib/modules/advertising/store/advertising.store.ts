@@ -1,4 +1,4 @@
-import { onSnapshot, collection, doc, serverTimestamp } from 'firebase/firestore';
+import { onSnapshot, collection, doc, serverTimestamp, addDoc } from 'firebase/firestore';
 import type { IAdverting } from './../advertising.type';
 import { writable } from 'svelte/store';
 import type { Unsubscribe } from 'firebase/auth';
@@ -34,6 +34,29 @@ function createStoreAdvertising() {
         // on set le store
         set(advertisings);
       });
+    },
+
+    /* 
+     * ajouter une advertising
+     */
+    addAdvertissing: async function () {
+      try {
+        const obj_advertising: IAdverting = {
+          active: false,
+          image: '',
+          label: {
+            description: '',
+            libelle: ''
+          },
+          title:''
+        }
+        await addDoc(collection(fire_db, 'advertisings'), obj_advertising);
+        
+      } catch (error) {
+        
+      }
     }
   }
 }
+
+export const advertising_store = createStoreAdvertising();
