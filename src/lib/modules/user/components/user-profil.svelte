@@ -53,14 +53,12 @@
       loader_update_user = '';
       store_notification.addNewNotificationUser(
         constNotificationType.SUCCESS,
-        constNotificationConfirmation.UPDATE_ACCOUNT,
-        $current_user_store.uid
+        constNotificationConfirmation.UPDATE_ACCOUNT
       );
     } catch (error) {
       store_notification.addNewNotificationUser(
         constNotificationType.ERROR,
-        constNotificationError.UPDATE_ACCOUNT,
-        $current_user_store.uid
+        constNotificationError.UPDATE_ACCOUNT
       );
       throw new Error('Impossible de modifier le compte, une erreur est survenue');
     }
@@ -87,15 +85,13 @@
       // création de la notification
       store_notification.addNewNotificationUser(
         constNotificationType.SUCCESS,
-        constNotificationConfirmation.UPDATE_AVATAR,
-        $current_user_store.uid
+        constNotificationConfirmation.UPDATE_AVATAR
       );
     } catch (error) {
       // création de la notification
       store_notification.addNewNotificationUser(
         constNotificationType.ERROR,
-        constNotificationError.UPDATE_AVATAR,
-        $current_user_store.uid
+        constNotificationError.UPDATE_AVATAR
       );
       throw new Error("il s'est produit une erreur lors de la modification de votre avatar");
     }

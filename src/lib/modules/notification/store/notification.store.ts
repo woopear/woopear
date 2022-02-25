@@ -1,9 +1,11 @@
+import type { IUser } from './../../user/user.type';
 import type { INotification } from './../notification.type';
 
 import { writable } from 'svelte/store';
 import { query, collection, where, onSnapshot, addDoc, deleteDoc, doc } from 'firebase/firestore';
 import { fire_db } from '$lib/providers/firebase/firebase.service';
 import type { Unsubscribe } from 'firebase/auth';
+import { current_user_store } from '$lib/modules/user/user.store';
 
 
 /* 
@@ -55,10 +57,19 @@ const createNotificationStore = () => {
     },
 
     /**
-     * ajouter une notification
+     * creation d'une notification
      */
-    async addNewNotificationUser(type: string, libelle:string, uid: string): Promise<void> {
+    async newNotificationUser(type: string, libelle:string, uid?: string): Promise<void> {
       await addDoc(collection(fire_db, "notifications"), {type: type, libelle: libelle, uid: uid});
+    },
+
+    /**
+     * ajoute une notification
+     */
+    async addNewNotificationUser(type: string, libelle: string, uid?: string): Promise<void> {
+      let cu: IUser;
+      current_user_store.subscribe(v => cu = v)
+      await this.newNotificationUser(type, libelle, uid = cu.uid)
     },
 
     /**

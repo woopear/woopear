@@ -50,14 +50,12 @@
       loader_update_companie = '';
       store_notification.addNewNotificationUser(
         constNotificationType.SUCCESS,
-        constNotificationConfirmation.UPDATE_ACCOUNT_COMPANIE,
-        $current_user_store.uid
+        constNotificationConfirmation.UPDATE_ACCOUNT_COMPANIE
       );
     } catch (error) {
       store_notification.addNewNotificationUser(
         constNotificationType.ERROR,
-        constNotificationError.UPDATE_ACCOUNT_COMPANIE,
-        $current_user_store.uid
+        constNotificationError.UPDATE_ACCOUNT_COMPANIE
       );
       throw new Error('Impossible de modifier la compagnie, une erreur est survenue');
     }
@@ -87,15 +85,13 @@
       // création de la notification
       store_notification.addNewNotificationUser(
         constNotificationType.SUCCESS,
-        constNotificationConfirmation.UPDATE_ACCOUNT_COMPANIE_LOG,
-        $current_user_store.uid
+        constNotificationConfirmation.UPDATE_ACCOUNT_COMPANIE_LOG
       );
     } catch (error) {
       // création de la notification
       store_notification.addNewNotificationUser(
         constNotificationType.ERROR,
-        constNotificationError.UPDATE_ACCOUNT_COMPANIE_LOG,
-        $current_user_store.uid
+        constNotificationError.UPDATE_ACCOUNT_COMPANIE_LOG
       );
       throw new Error('Impossible de modifier la compagnie, une erreur est survenue');
     }
