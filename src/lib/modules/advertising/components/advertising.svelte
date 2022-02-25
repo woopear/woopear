@@ -16,6 +16,13 @@
   async function addAdvertising(): Promise<void> {
     await advertising_store.addAdvertissing();
   }
+
+  /**
+   * affacer une publicité
+   */
+  async function deleteAdvertising(idAdvertising): Promise<void> {
+    await advertising_store.deleteAdvertising(idAdvertising);
+  }
 </script>
 
 <BoxTitleTab>
@@ -46,7 +53,7 @@
               checked={advertising.active}
             />
             <BtnUpdate changeUpdate={''} />
-            <BtnDelete changeUpdate={''} />
+            <BtnDelete changeUpdate={() => deleteAdvertising(advertising.id)} />
           </td>
         </tr>
       {/each}

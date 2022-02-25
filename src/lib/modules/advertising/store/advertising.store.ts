@@ -1,8 +1,11 @@
-import { onSnapshot, collection, doc, serverTimestamp, addDoc } from 'firebase/firestore';
+import { constNotificationConfirmation, constNotificationError } from './../../notification/notification.const';
+import { store_notification } from './../../notification/store/notification.store';
+import { onSnapshot, collection, addDoc, deleteDoc, doc } from 'firebase/firestore';
 import type { IAdverting } from './../advertising.type';
 import { writable } from 'svelte/store';
 import type { Unsubscribe } from 'firebase/auth';
 import { fire_db } from '$lib/providers/firebase/firebase.service';
+import { constEnumNotificationType } from '$lib/modules/notification/notification.const';
 
 // création du store advertising
 function createStoreAdvertising() {
@@ -51,10 +54,45 @@ function createStoreAdvertising() {
           title:''
         }
         await addDoc(collection(fire_db, 'advertisings'), obj_advertising);
-        
+        store_notification.addNewNotificationUser(
+          constEnumNotificationType.SUCCESS, 
+          constNotificationConfirmation.CREATE_ADVERTISING
+        );
+      } catch (error) {
+        store_notification.addNewNotificationUser(
+          constEnumNotificationType.ERROR,
+          constNotificationError.CREATE_ADVERTISING
+        );
+      }
+    },
+
+    /**
+     * supprimer la publicité
+     */
+    deleteAdvertising: async function (idAdvertising: string): Promise<void> {
+      try {
+        // supprimer
+        await deleteDoc(doc(fire_db, 'advertisings', `${idAdvertising}`));
+
       } catch (error) {
         
       }
+    },
+
+    /**
+     * stop l'ecouteur de la publicité
+     */
+     stopListenAdvertising: function (): void {
+      if (listen_advertising) {
+        listen_advertising();
+      }
+    },
+
+    /**
+     * reset store de la publicité
+     */
+    resetAdvertising: function (): void {
+      set([] as IAdverting[]);
     }
   }
 }
