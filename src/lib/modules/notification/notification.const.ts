@@ -3,11 +3,11 @@ export const constNotification = {
   title_notification: 'Nouvelle notification'
 };
 
-export const constNotificationType = {
-  WARNING: 'warning',
-  SUCCESS: 'success',
-  INFO: 'info',
-  ERROR: 'error'
+export const enum constEnumNotificationType {
+  WARNING = 'warning',
+  SUCCESS = 'success',
+  INFO = 'info',
+  ERROR = 'error'
 };
 
 export const constNotificationConfirmation = {
