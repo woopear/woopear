@@ -1,8 +1,8 @@
 import {
-  constNotificationConfirmation,
-  constNotificationType
+  ENotificationConfirmation,
+  ENotificationError
 } from '$lib/modules/notification/notification.const';
-import { store_notification } from '$lib/modules/notification/store/notification.store';
+import { fcrud } from '$lib/providers/firebase/firebase-crud';
 import { fire_db } from '$lib/providers/firebase/firebase.service';
 import {
   addDoc,
@@ -27,6 +27,15 @@ function createStoreWebapps() {
     subscribe,
     update,
 
+    createWebapp: function (): IWebapp {
+      return {
+        active: false,
+        description: '',
+        image: '',
+        title: ''
+      };
+    },
+
     /**
      * ecouteur des web app
      */
@@ -45,21 +54,12 @@ function createStoreWebapps() {
      * ajout d'un webapp
      */
     addWebApp: async function (): Promise<void> {
-      try {
-        // creation obj webapp
-        const obj_webapp = {
-          active: false,
-          description: '',
-          image: '',
-          title: ''
-        };
-
-        // ajout
-        await addDoc(collection(fire_db, 'webapp'), obj_webapp);
-      } catch (error) {
-        // TODO : gerer error
-        console.log(error);
-      }
+      fcrud().add(
+        'webapp',
+        this.createWebapp(),
+        ENotificationError.CREATE_WEBAPP,
+        ENotificationConfirmation.CREATE_WEBAPP
+      );
     },
 
     /**
