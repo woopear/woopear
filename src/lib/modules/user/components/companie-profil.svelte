@@ -8,7 +8,7 @@
   import {
     constNotificationConfirmation,
     constNotificationError,
-    constNotificationType
+    constEnumNotificationType
   } from '$lib/modules/notification/notification.const';
   import { store_notification } from '$lib/modules/notification/store/notification.store';
   import SpinnerLittle from '$lib/modules/spinner/components/spinner-little.svelte';
@@ -49,12 +49,12 @@
       seeUpdate = !seeUpdate;
       loader_update_companie = '';
       store_notification.addNewNotificationUser(
-        constNotificationType.SUCCESS,
+        constEnumNotificationType.SUCCESS,
         constNotificationConfirmation.UPDATE_ACCOUNT_COMPANIE
       );
     } catch (error) {
       store_notification.addNewNotificationUser(
-        constNotificationType.ERROR,
+        constEnumNotificationType.ERROR,
         constNotificationError.UPDATE_ACCOUNT_COMPANIE
       );
       throw new Error('Impossible de modifier la compagnie, une erreur est survenue');
@@ -84,13 +84,13 @@
       loader_img_logo = '';
       // création de la notification
       store_notification.addNewNotificationUser(
-        constNotificationType.SUCCESS,
+        constEnumNotificationType.SUCCESS,
         constNotificationConfirmation.UPDATE_ACCOUNT_COMPANIE_LOG
       );
     } catch (error) {
       // création de la notification
       store_notification.addNewNotificationUser(
-        constNotificationType.ERROR,
+        constEnumNotificationType.ERROR,
         constNotificationError.UPDATE_ACCOUNT_COMPANIE_LOG
       );
       throw new Error('Impossible de modifier la compagnie, une erreur est survenue');

@@ -3,11 +3,11 @@ export const constNotification = {
   title_notification: 'Nouvelle notification'
 };
 
-export const constNotificationType = {
-  WARNING: 'warning',
-  SUCCESS: 'success',
-  INFO: 'info',
-  ERROR: 'error'
+export const enum constEnumNotificationType {
+  WARNING = 'warning',
+  SUCCESS = 'success',
+  INFO = 'info',
+  ERROR = 'error'
 };
 
 export const constNotificationConfirmation = {
@@ -18,7 +18,9 @@ export const constNotificationConfirmation = {
     'Un email à été envoyé sur votre nouvelle adresse e-mail, veuillez suivre les instructions',
   UPDATE_AVATAR: 'votre avatar a bien été modifié',
   UPDATE_ACCOUNT_COMPANIE: 'Votre compagnie a bien été modifié',
-  UPDATE_ACCOUNT_COMPANIE_LOG:'le logo de votre compagnie a bien été modifié'
+  UPDATE_ACCOUNT_COMPANIE_LOG:'le logo de votre compagnie a bien été modifié',
+  CREATE_ADVERTISING: 'votre publicité a bien été créée',
+  DELETE_ADVERTISING: 'votre publicité a bien été supprimée',
 };
 
 export const constNotificationError = {
@@ -31,7 +33,9 @@ export const constNotificationError = {
     "Veuillez valider les conditions générales à la fin du formulaire d'inscription",
   INIT_PASSWORD: 'Les mots de passe ne correspondent pas !',
   UPDATE_ACCOUNT_COMPANIE: 'Impossible de modifier la compagnie, une erreur est survenue',
-  UPDATE_ACCOUNT_COMPANIE_LOG: 'Impossible de modifier le logo de votre compagnie, une erreur est survenue'
+  UPDATE_ACCOUNT_COMPANIE_LOG: 'Impossible de modifier le logo de votre compagnie, une erreur est survenue',
+  CREATE_ADVERTISING: 'Impossible de créer votre publicité, une erreur est survenue',
+  DELETE_ADVERTISING: 'Impossible de supprimer votre publicité, une erreur est survenue',
 };
 
 export const constNotificationInformation = {

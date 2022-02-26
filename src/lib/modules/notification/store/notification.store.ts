@@ -1,3 +1,4 @@
+import type { constEnumNotificationType } from './../notification.const';
 import type { IUser } from './../../user/user.type';
 import type { INotification } from './../notification.type';
 
@@ -59,14 +60,14 @@ const createNotificationStore = () => {
     /**
      * creation d'une notification
      */
-    async newNotificationUser(type: string, libelle:string, uid?: string): Promise<void> {
+    async newNotificationUser(type: constEnumNotificationType, libelle:string, uid?: string): Promise<void> {
       await addDoc(collection(fire_db, "notifications"), {type: type, libelle: libelle, uid: uid});
     },
 
     /**
      * ajoute une notification
      */
-    async addNewNotificationUser(type: string, libelle: string, uid?: string): Promise<void> {
+    async addNewNotificationUser(type: constEnumNotificationType, libelle: string, uid?: string): Promise<void> {
       let cu: IUser;
       current_user_store.subscribe(v => cu = v)
       await this.newNotificationUser(type, libelle, uid = cu.uid)

@@ -11,7 +11,7 @@
   import {
     constNotificationConfirmation,
     constNotificationError,
-    constNotificationType
+    constEnumNotificationType
   } from '$lib/modules/notification/notification.const';
   import { store_notification } from '$lib/modules/notification/store/notification.store';
   import SpinnerLittle from '$lib/modules/spinner/components/spinner-little.svelte';
@@ -52,12 +52,12 @@
       seeUpdate = !seeUpdate;
       loader_update_user = '';
       store_notification.addNewNotificationUser(
-        constNotificationType.SUCCESS,
+        constEnumNotificationType.SUCCESS,
         constNotificationConfirmation.UPDATE_ACCOUNT
       );
     } catch (error) {
       store_notification.addNewNotificationUser(
-        constNotificationType.ERROR,
+        constEnumNotificationType.ERROR,
         constNotificationError.UPDATE_ACCOUNT
       );
       throw new Error('Impossible de modifier le compte, une erreur est survenue');
@@ -84,13 +84,13 @@
       loader_img_avatar = '';
       // création de la notification
       store_notification.addNewNotificationUser(
-        constNotificationType.SUCCESS,
+        constEnumNotificationType.SUCCESS,
         constNotificationConfirmation.UPDATE_AVATAR
       );
     } catch (error) {
       // création de la notification
       store_notification.addNewNotificationUser(
-        constNotificationType.ERROR,
+        constEnumNotificationType.ERROR,
         constNotificationError.UPDATE_AVATAR
       );
       throw new Error("il s'est produit une erreur lors de la modification de votre avatar");
