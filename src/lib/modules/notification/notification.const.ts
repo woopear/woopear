@@ -48,7 +48,9 @@ export const enum ENotificationConfirmation {
   UPDATE_ACCOUNT_COMPANIE_LOG = 'le logo de votre compagnie a bien été modifié',
   CREATE_ADVERTISING = 'votre publicité a bien été créée',
   DELETE_ADVERTISING = 'votre publicité a bien été supprimée',
-  CREATE_WEBAPP = 'Creation du webapp avec succès'
+  CREATE_WEBAPP = 'Creation du webapp avec succès',
+  UPDATE_WEBAPP = "L'état du webapp à été modifié avec succès",
+  DELETE_WEBAPP = 'Suppression du webapp avec succès'
 }
 
 export const enum ENotificationError {
@@ -63,7 +65,9 @@ export const enum ENotificationError {
   UPDATE_ACCOUNT_COMPANIE_LOG = 'Impossible de modifier le logo de votre compagnie, une erreur est survenue',
   CREATE_ADVERTISING = 'Impossible de créer votre publicité, une erreur est survenue',
   DELETE_ADVERTISING = 'Impossible de supprimer votre publicité, une erreur est survenue',
-  CREATE_WEBAPP = 'Impossible de creer le webapp'
+  CREATE_WEBAPP = 'Impossible de creer le webapp',
+  UPDATE_WEBAPP = 'Impossible de modifier le webapp',
+  DELETE_WEBAPP = 'Impossible de supprimer le webapp'
 }
 
 export const enum ENotificationInformation {}

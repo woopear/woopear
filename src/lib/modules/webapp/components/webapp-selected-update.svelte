@@ -26,6 +26,7 @@
   let loader_save_condition_gen_selected = '';
   let img;
   let img_product;
+  let value_input_file_webapp_selected;
 
   // creation event dispatch
   const dist = createEventDispatcher();
@@ -134,16 +135,11 @@
    * @param idWebappProduct
    * @param index
    */
-  async function deleteImageProduct(
-    urlForDelete: string,
-    idWebappProduct: string,
-    index
-  ): Promise<void> {
+  async function deleteImageProduct(urlForDelete: string, idWebappProduct: string): Promise<void> {
     await webapp_product_store.deleteImageWebappProduct(
       urlForDelete,
       $webapp_selected_store.id,
-      idWebappProduct,
-      index
+      idWebappProduct
     );
   }
 </script>
@@ -177,7 +173,7 @@
       <div class="flex justify-center my-6">
         <div class="w-96">
           <input
-            class="form-control
+            class="img-webapp-selected form-control
           block
           w-8/12
           sm:w-10/12
@@ -273,7 +269,7 @@
                   <Tooltip slot="btn-delete" data="Supprimer l'image">
                     <BtnDelete
                       size="w-5 h-5"
-                      changeUpdate={() => deleteImageProduct(image, product.id, i)}
+                      changeUpdate={() => deleteImageProduct(image, product.id)}
                     />
                   </Tooltip>
                 </div>

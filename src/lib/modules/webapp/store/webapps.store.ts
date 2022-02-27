@@ -1,40 +1,28 @@
-import {
-  ENotificationConfirmation,
-  ENotificationError
-} from '$lib/modules/notification/notification.const';
-import { fcrud } from '$lib/providers/firebase/firebase-crud';
+import { fcrud, MessageNotif } from '$lib/providers/firebase/firebase-crud';
 import { fire_db } from '$lib/providers/firebase/firebase.service';
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  updateDoc,
-  type Unsubscribe
-} from 'firebase/firestore';
+import { collection, onSnapshot, type Unsubscribe } from 'firebase/firestore';
 import { writable } from 'svelte/store';
+import { createWebapp, EWebappNotif } from '../webapp.const';
 import type { IWebapp } from '../webapp.type';
-import { webapp_selected_store } from './webapp-selected.store';
+import { webapp_product_store } from './webapp-products.store';
 
 function createStoreWebapps() {
   const { set, subscribe, update } = writable([] as IWebapp[]);
 
+  // ecouteur
   let listen_webapps: Unsubscribe;
+
+  // sub
+  function sub(): IWebapp[] {
+    let s: IWebapp[];
+    subscribe((v) => (s = v));
+    return s;
+  }
 
   return {
     set,
     subscribe,
     update,
-
-    createWebapp: function (): IWebapp {
-      return {
-        active: false,
-        description: '',
-        image: '',
-        title: ''
-      };
-    },
 
     /**
      * ecouteur des web app
@@ -54,12 +42,10 @@ function createStoreWebapps() {
      * ajout d'un webapp
      */
     addWebApp: async function (): Promise<void> {
-      fcrud().add(
+      await fcrud(
         'webapp',
-        this.createWebapp(),
-        ENotificationError.CREATE_WEBAPP,
-        ENotificationConfirmation.CREATE_WEBAPP
-      );
+        new MessageNotif(EWebappNotif.ADD_SUCCES, EWebappNotif.ADD_ERROR).get()
+      ).add(createWebapp());
     },
 
     /**
@@ -68,13 +54,10 @@ function createStoreWebapps() {
      * @param idWebapp id de la web app à modifier
      */
     updateWebapp: async function (data: IWebapp, idWebapp: string): Promise<void> {
-      try {
-        // modification
-        await updateDoc(doc(fire_db, 'webapp', `${idWebapp}`), { ...data });
-      } catch (error) {
-        // TODO : gerer error
-        console.log(error);
-      }
+      await fcrud(
+        'webapp',
+        new MessageNotif(EWebappNotif.UPDATE_SUCCES, EWebappNotif.UPDATE_ERROR).get()
+      ).update(data, `${idWebapp}`);
     },
 
     /**
@@ -82,18 +65,44 @@ function createStoreWebapps() {
      * @param idWebapp id de la
      */
     deleteWebapp: async function (idWebapp: string): Promise<void> {
-      try {
-        // supprission de l'image
-        await webapp_selected_store.deleteImageWebappSelected(idWebapp);
-
-        // TODO : delete les collections enfants
-
-        // delete
-        await deleteDoc(doc(fire_db, 'webapp', `${idWebapp}`));
-      } catch (error) {
-        // TODO : gerer error
-        console.log(error);
+      // on supprime les product si il y en a
+      const products = await webapp_product_store.getWebappProduct(idWebapp);
+      if (products.length > 0) {
+        products.forEach(async (el) => {
+          await webapp_product_store.deleteWebappProduct(el.id, idWebapp);
+        });
       }
+
+      // on recupere le webapp concerné
+      const webapps: IWebapp[] = sub();
+      const webapp = webapps.find((el) => el.id === idWebapp);
+
+      // si image supprime image, sinon supprime simple
+      webapp.image !== ''
+        ? await fcrud(
+            'webapp',
+            new MessageNotif(EWebappNotif.DELETE_SUCCES, EWebappNotif.DELETE_ERROR).get()
+          ).delete(`${idWebapp}`, `articles/webapp-${webapp.id}`)
+        : await fcrud(
+            'webapp',
+            new MessageNotif(EWebappNotif.DELETE_SUCCES, EWebappNotif.DELETE_ERROR).get()
+          ).delete(`${idWebapp}`);
+    },
+
+    /**
+     * stop ecouteur
+     */
+    stopListen: function (): void {
+      if (listen_webapps) {
+        listen_webapps();
+      }
+    },
+
+    /**
+     * reset le store
+     */
+    reset: function (): void {
+      set([] as IWebapp[]);
     }
   };
 }

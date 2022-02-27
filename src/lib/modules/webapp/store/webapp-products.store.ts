@@ -1,22 +1,31 @@
-import { fire_db, fire_storage } from '$lib/providers/firebase/firebase.service';
+import { fcrud, MessageNotif } from '$lib/providers/firebase/firebase-crud';
+import { v4 as uuidv4 } from 'uuid';
+import { fire_db } from '$lib/providers/firebase/firebase.service';
 import {
-  addDoc,
   arrayRemove,
-  arrayUnion,
   collection,
-  deleteDoc,
-  doc,
+  getDocs,
   onSnapshot,
-  updateDoc,
+  query,
   type Unsubscribe
 } from 'firebase/firestore';
-import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { writable } from 'svelte/store';
+import { createWebappProduct, EWebappProductNotif } from '../webapp.const';
 import type { IProduct } from '../webapp.type';
 
 function createStoreWebappProductStore() {
   const { set, subscribe, update } = writable([] as IProduct[]);
+
+  // ecouteur
   let listen_web_app_product: Unsubscribe;
+
+  // sub
+  function sub(): IProduct[] {
+    let s: IProduct[];
+    subscribe((v) => (s = v));
+    return s;
+  }
+
   return {
     set,
     subscribe,
@@ -41,23 +50,24 @@ function createStoreWebappProductStore() {
     },
 
     /**
+     * retourne le tableau de products du web app ciblé
+     * @param idWebapp id du web app ciblé
+     * @returns retourne le tableau de products
+     */
+    getWebappProduct: async function (idWebapp: string): Promise<IProduct[]> {
+      const products = await getDocs(query(collection(fire_db, 'webapp', `${idWebapp}/products`)));
+      return products.docs;
+    },
+
+    /**
      * ajoute un product
      * @param idWebAppSelected id de webapp selected
      */
-    addNewWebappProduct: async function (idWebAppSelected): Promise<void> {
-      try {
-        const obj_product: IProduct = {
-          content: '',
-          title: '',
-          url: '',
-          images: [],
-          technos: []
-        };
-        await addDoc(collection(fire_db, 'webapp', `${idWebAppSelected}/products`), obj_product);
-      } catch (error) {
-        // TODO : gestion error
-        console.log(error);
-      }
+    addNewWebappProduct: async function (idWebAppSelected: string): Promise<void> {
+      await fcrud(
+        'webapp',
+        new MessageNotif(EWebappProductNotif.ADD_SUCCES, EWebappProductNotif.ADD_ERROR).get()
+      ).add(createWebappProduct(), `${idWebAppSelected}/products`);
     },
 
     /**
@@ -71,56 +81,39 @@ function createStoreWebappProductStore() {
       idWebappProduct: string,
       idWebappSelected: string
     ): Promise<void> {
-      try {
-        const technos = [...data.technos];
-        delete data.technos;
-
-        // modification donnée simple
-        await updateDoc(doc(fire_db, 'webapp', `${idWebappSelected}/products/${idWebappProduct}`), {
-          ...data
-        });
-
-        // modification du tableau technos
-        if (technos.length > 0) {
-          technos.forEach(async (el) => {
-            await updateDoc(
-              doc(fire_db, 'webapp', `${idWebappSelected}/products/${idWebappProduct}`),
-              {
-                technos: arrayUnion(el)
-              }
-            );
-          });
-        }
-      } catch (error) {
-        // TODO : gestion error
-        console.log(error);
-      }
+      await fcrud(
+        'webapp',
+        new MessageNotif(EWebappProductNotif.UPDATE_SUCCES, EWebappProductNotif.UPDATE_ERROR).get()
+      ).update(data, `${idWebappSelected}/products/${idWebappProduct}`);
     },
 
+    /**
+     * suppression du product + image du product si il y en a
+     * @param idWebappProduct id du product
+     * @param idWebappSelected id du webapp selected
+     */
     deleteWebappProduct: async function (
       idWebappProduct: string,
       idWebappSelected: string
     ): Promise<void> {
-      try {
-        // suppression des images
-        //sub au tab de product
-        let wap: IProduct[];
-        subscribe((v) => (wap = v));
-        // recuperation du product ciblé
-        const webapp_product = wap.find((el) => el.id === idWebappProduct);
-        // si il y a des images on les supprimes
-        if (webapp_product.images.length > 0) {
-          webapp_product.images.forEach(async (el, i) => {
-            await this.deleteImageWebappProduct(el, idWebappSelected, idWebappProduct, i);
-          });
-        }
-
-        // delete produc
-        await deleteDoc(doc(fire_db, 'webapp', `${idWebappSelected}/products/${idWebappProduct}`));
-      } catch (error) {
-        // TODO : gestion error
-        console.log(error);
+      //recupere le products ciblé
+      const wap: IProduct[] = sub();
+      const webapp_product = wap.find((el) => el.id === idWebappProduct);
+      // si il y a des images on les supprimes
+      if (webapp_product.images.length > 0) {
+        webapp_product.images.forEach(async (el, i) => {
+          // on recupere le nom de l'image
+          const name_of_file = el.substring(el.indexOf('_'), el.indexOf('?'));
+          await fcrud('webapp', new MessageNotif('', '').get()).deleteImage(
+            `articles/webappproduct${name_of_file}`
+          );
+        });
       }
+      // delete produc
+      await fcrud(
+        'webapp',
+        new MessageNotif(EWebappProductNotif.DELETE_SUCCES, EWebappProductNotif.DELETE_ERROR).get()
+      ).delete(`${idWebappSelected}/products/${idWebappProduct}`);
     },
 
     /**
@@ -134,35 +127,12 @@ function createStoreWebappProductStore() {
       idWebappSelect: string,
       idWebappSelectedProduct: string
     ): Promise<void> {
-      try {
-        //sub au tab de product
-        let wap: IProduct[];
-        subscribe((v) => (wap = v));
-        // recuperation du product ciblé
-        const webapp_product = wap.find((el) => el.id === idWebappSelectedProduct);
-        // recuperation de la longeur du tableau image pour construire le nom de l'image
-        const position_img = webapp_product.images.length;
-        // ciblage ou/et creation du nom de fichier
-        const i = ref(
-          fire_storage,
-          `articles/webappproduct-${idWebappSelectedProduct}-${position_img}`
-        );
-
-        // enregistrement de l'image dans le dossier articles
-        await uploadBytes(i, file);
-        // creation de l'url pour stocker dans le document webapp product
-        const url_img = await getDownloadURL(i);
-        // ajout de l'url dans le tableau image du document webapp product ciblé
-        await updateDoc(
-          doc(fire_db, 'webapp', `${idWebappSelect}/products/${idWebappSelectedProduct}`),
-          {
-            images: arrayUnion(url_img)
-          }
-        );
-      } catch (error) {
-        // TODO : gestion error
-        console.log(error);
-      }
+      await fcrud('webapp', new MessageNotif('', '').get()).uploadImage(
+        `articles/webappproduct_${idWebappSelectedProduct}_${uuidv4()}`,
+        `${idWebappSelect}/products/${idWebappSelectedProduct}`,
+        file,
+        false
+      );
     },
 
     /**
@@ -175,20 +145,37 @@ function createStoreWebappProductStore() {
     deleteImageWebappProduct: async function (
       urlForDelete: string,
       idWebappSelect: string,
-      idWebappProduct: string,
-      index
+      idWebappProduct: string
     ): Promise<void> {
-      try {
-        // suppression de l'image
-        await deleteObject(ref(fire_storage, `articles/webappproduct-${idWebappProduct}-${index}`));
-        // suppression de l'url dans le tableau image de product
-        await updateDoc(doc(fire_db, 'webapp', `${idWebappSelect}/products/${idWebappProduct}`), {
+      // on recupere le nom de l'image dans l'url
+      const name_of_file = urlForDelete.substring(
+        urlForDelete.indexOf('_'),
+        urlForDelete.indexOf('?')
+      );
+      // on supprime l'images
+      await fcrud('webapp', new MessageNotif('', '').get()).deleteImage(
+        `articles/webappproduct${name_of_file}`,
+        `${idWebappSelect}/products/${idWebappProduct}`,
+        {
           images: arrayRemove(urlForDelete)
-        });
-      } catch (error) {
-        // TODO : gestion error
-        console.log(error);
+        }
+      );
+    },
+
+    /**
+     * stop ecouteur
+     */
+    stopListen: function (): void {
+      if (listen_web_app_product) {
+        listen_web_app_product();
       }
+    },
+
+    /**
+     * reset le store
+     */
+    reset: function (): void {
+      set([] as IProduct[]);
     }
   };
 }

@@ -1,12 +1,14 @@
-import { fire_db, fire_storage } from '$lib/providers/firebase/firebase.service';
-import { doc, onSnapshot, updateDoc, type Unsubscribe } from 'firebase/firestore';
-import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { fcrud, MessageNotif } from '$lib/providers/firebase/firebase-crud';
+import { fire_db } from '$lib/providers/firebase/firebase.service';
+import { doc, onSnapshot, type Unsubscribe } from 'firebase/firestore';
 import { writable } from 'svelte/store';
+import { EWebappSelectedNotif } from '../webapp.const';
 import type { IWebapp } from '../webapp.type';
 
 function createStoreWebappSelected() {
   const { set, subscribe, update } = writable({} as IWebapp);
 
+  // ecouteur
   let listen_web_app_selected: Unsubscribe;
 
   return {
@@ -18,7 +20,7 @@ function createStoreWebappSelected() {
      * ecouteur sur un web app
      * @param idWebapp id du webapp à écouter
      */
-    listenWebappSelected: function (idWebapp): void {
+    listenWebappSelected: function (idWebapp: string): void {
       listen_web_app_selected = onSnapshot(doc(fire_db, 'webapp', `${idWebapp}`), (snapShot) => {
         set({ id: snapShot.id, ...snapShot.data() });
       });
@@ -30,13 +32,13 @@ function createStoreWebappSelected() {
      * @param data les données pour modification
      */
     updateWebappSelected: async function (idWebappSelected: string, data: IWebapp): Promise<void> {
-      try {
-        // modification
-        await updateDoc(doc(fire_db, 'webapp', `${idWebappSelected}`), { ...data });
-      } catch (error) {
-        // TODO : gestion error
-        console.log(error);
-      }
+      await fcrud(
+        'webapp',
+        new MessageNotif(
+          `${EWebappSelectedNotif.UPDATE_SUCCES}`,
+          `${EWebappSelectedNotif.UPDATE_ERROR} N° ${idWebappSelected}`
+        ).get()
+      ).update(data, `${idWebappSelected}`);
     },
 
     /**
@@ -45,19 +47,13 @@ function createStoreWebappSelected() {
      * @param idWebappSelected id de la web app selected
      */
     uploadImageWebappSelected: async function (file, idWebappSelected: string): Promise<void> {
-      try {
-        // ciblage ou/et creation du nom de fichier
-        const i = ref(fire_storage, `articles/webapp-${idWebappSelected}`);
-        // enregistrement de l'image dans le dossier articles
-        await uploadBytes(i, file);
-        // creation de l'url pour stocker dans le document webapp
-        const url_img = await getDownloadURL(i);
-        // modification du web app selected
-        this.updateWebappSelected(idWebappSelected, { image: url_img });
-      } catch (error) {
-        // TODO : gestion error
-        console.log(error);
-      }
+      await fcrud(
+        'webapp',
+        new MessageNotif(
+          EWebappSelectedNotif.UPLOAD_IMAGE_SUCCES,
+          EWebappSelectedNotif.UPLOAD_IMAGE_ERROR
+        ).get()
+      ).uploadImage(`articles/webapp-${idWebappSelected}`, `${idWebappSelected}`, file);
     },
 
     /**
@@ -65,16 +61,29 @@ function createStoreWebappSelected() {
      * @param idWebappSelected id de la webapp selected
      */
     deleteImageWebappSelected: async function (idWebappSelected: string): Promise<void> {
-      try {
-        // suppression de l'image
-        await deleteObject(ref(fire_storage, `articles/webapp-${idWebappSelected}`));
+      await fcrud(
+        'webapp',
+        new MessageNotif(
+          `${EWebappSelectedNotif.DELIMAGE_SUCCES}`,
+          `${EWebappSelectedNotif.DELIMAGE_ERROR} N° ${idWebappSelected}`
+        ).get()
+      ).deleteImage(`articles/webapp-${idWebappSelected}`, `${idWebappSelected}`, { image: '' });
+    },
 
-        // modification
-        this.updateWebappSelected(idWebappSelected, { image: '' });
-      } catch (error) {
-        // TODO : gestion error
-        console.log(error);
+    /**
+     * stop ecouteur
+     */
+    stopListen: function (): void {
+      if (listen_web_app_selected) {
+        listen_web_app_selected();
       }
+    },
+
+    /**
+     * reset le store
+     */
+    reset: function (): void {
+      set({} as IWebapp);
     }
   };
 }

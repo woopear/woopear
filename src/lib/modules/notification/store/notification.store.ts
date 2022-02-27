@@ -64,7 +64,7 @@ const createNotificationStore = () => {
      */
     async newNotificationUser(
       type: constEnumNotificationType,
-      libelle: TAllOfNotification,
+      libelle: string,
       uid?: string
     ): Promise<void> {
       await addDoc(collection(fire_db, 'notifications'), {
@@ -79,7 +79,7 @@ const createNotificationStore = () => {
      */
     async addNewNotificationUser(
       type: constEnumNotificationType,
-      libelle: TAllOfNotification,
+      libelle: string,
       uid?: string
     ): Promise<void> {
       let cu: IUser;

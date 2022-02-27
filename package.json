@@ -37,6 +37,7 @@
   "type": "module",
   "dependencies": {
     "daisyui": "^1.25.4",
-    "firebase": "^9.6.6"
+    "firebase": "^9.6.6",
+    "uuid": "^8.3.2"
   }
 }
