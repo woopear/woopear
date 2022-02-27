@@ -8,7 +8,7 @@
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
   import { webapp_product_store } from '../store/webapp-products.store';
   import { webapp_selected_store } from '../store/webapp-selected.store';
-  import { webapps_store } from '../webapp.store';
+  import { webapps_store } from '../store/webapps.store';
   import WebappSelectedUpdate from './webapp-selected-update.svelte';
 
   let see_update = false;

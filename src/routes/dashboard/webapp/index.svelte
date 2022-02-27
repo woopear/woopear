@@ -7,7 +7,7 @@
   import { onMount } from 'svelte';
   import BoxGlobalEntities from '$lib/modules/components/boxs/box-global-entities.svelte';
   import WebappTable from '$lib/modules/webapp/components/webapp-table.svelte';
-  import { webapps_store } from '$lib/modules/webapp/webapp.store';
+  import { webapps_store } from '$lib/modules/webapp/store/webapps.store';
 
   let loader = false;
 

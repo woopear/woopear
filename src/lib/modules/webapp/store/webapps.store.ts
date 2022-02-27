@@ -77,7 +77,7 @@ function createStoreWebapps() {
       const webapps: IWebapp[] = sub();
       const webapp = webapps.find((el) => el.id === idWebapp);
 
-      // si image supprime image, sinon supprime simple
+      // si image on supprime image, sinon supprime sans image
       webapp.image !== ''
         ? await fcrud(
             'webapp',

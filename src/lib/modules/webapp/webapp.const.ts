@@ -64,7 +64,7 @@ export function createWebapp(): IWebapp {
   };
 }
 
-// creation de l'objet webapp
+// creation de l'objet webapp product
 export function createWebappProduct(): IProduct {
   return {
     content: '',
