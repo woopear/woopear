@@ -7,6 +7,7 @@
   import Title from '$lib/modules/components/title/title.svelte';
   import { ETypeTitle } from '$lib/modules/components/title/title.type';
   import { advertising_store } from '../store/advertising.store';
+  import AdvertisingSelectedUpdate from './advertising-selected-update.svelte';
 
   let see_update = false;
 
@@ -63,3 +64,8 @@
 
 <!-- partie boutton ajouter une publicité -->
 <BtnAddEntities handlerClick={() => addAdvertising()} />
+
+<!--  -->
+{#if see_update}
+  <AdvertisingSelectedUpdate />
+{/if}

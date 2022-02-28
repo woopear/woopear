@@ -1,6 +1,6 @@
 import { constNotificationConfirmation, constNotificationError } from './../../notification/notification.const';
 import { store_notification } from './../../notification/store/notification.store';
-import { onSnapshot, collection, addDoc, deleteDoc, doc } from 'firebase/firestore';
+import { onSnapshot, collection, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import type { IAdverting } from './../advertising.type';
 import { writable } from 'svelte/store';
 import type { Unsubscribe } from 'firebase/auth';
@@ -90,6 +90,23 @@ function createStoreAdvertising() {
           constEnumNotificationType.ERROR,
           constNotificationError.DELETE_ADVERTISING,
         ))
+      }
+    },
+
+    /**
+     * modification de la publicité selectionné
+     * @param idAdvertising => id de la condition ciblé
+     * @param data => les données pour modification
+     */
+    updateAdvertisingSelected: async function (
+      idAdvertising: string,
+      data: IAdverting,
+    ): Promise<void> {
+      try {
+        // modification
+        await updateDoc(doc(fire_db, 'advertisings', `${idAdvertising}`), { ...data});
+      } catch (error) {
+        
       }
     },
 

@@ -33,5 +33,6 @@ export interface IAdverting {
   title?: string,
   image?: string,
   label?: IAdvertingLabel,
-  active?: boolean
+  article?: IAdvertingArticle[],
+  active?: boolean,
 }
