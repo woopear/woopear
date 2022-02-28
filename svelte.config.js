@@ -1,6 +1,7 @@
 //import adapter from '@sveltejs/adapter-auto';
 //import adapter from '@sveltejs/adapter-static';
-import adapter from '@sveltejs/adapter-node';
+//import adapter from '@sveltejs/adapter-node';
+import adapter from 'svelte-adapter-firebase';
 import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
