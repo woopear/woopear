@@ -1,3 +1,4 @@
+import { fcrud, MessageNotif } from '$lib/providers/firebase/firebase-crud';
 import { constNotificationConfirmation, constNotificationError } from './../../notification/notification.const';
 import { store_notification } from './../../notification/store/notification.store';
 import { onSnapshot, collection, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
@@ -6,6 +7,7 @@ import { writable } from 'svelte/store';
 import type { Unsubscribe } from 'firebase/auth';
 import { fire_db } from '$lib/providers/firebase/firebase.service';
 import { constEnumNotificationType } from '$lib/modules/notification/notification.const';
+import { createAdvertisingObject, EAdvertisingNotif } from '../advertising.const';
 
 // création du store advertising
 function createStoreAdvertising() {
@@ -43,54 +45,21 @@ function createStoreAdvertising() {
      * ajouter une advertising
      */
     addAdvertissing: async function () {
-      try {
-        const obj_advertising: IAdverting = {
-          active: false,
-          image: '',
-          label: {
-            description: '',
-            libelle: ''
-          },
-          title:''
-        }
-        await addDoc(collection(fire_db, 'advertisings'), obj_advertising);
-        store_notification.addNewNotificationUser(
-          constEnumNotificationType.SUCCESS, 
-          constNotificationConfirmation.CREATE_ADVERTISING
-        );
-      } catch (error) {
-        store_notification.addNewNotificationUser(
-          constEnumNotificationType.ERROR,
-          constNotificationError.CREATE_ADVERTISING
-        );
-        throw new error(store_notification.addNewNotificationUser(
-          constEnumNotificationType.ERROR,
-          constNotificationError.CREATE_ADVERTISING
-        ));
-      }
+        await fcrud('advertisings', new MessageNotif(
+          EAdvertisingNotif.ADD_SUCCES, 
+          EAdvertisingNotif.ADD_ERROR
+        ).get()).add(createAdvertisingObject()); 
+        
     },
 
     /**
      * supprimer la publicité
      */
     deleteAdvertising: async function (idAdvertising: string): Promise<void> {
-      try {
-        // supprimer
-        await deleteDoc(doc(fire_db, 'advertisings', `${idAdvertising}`));
-        store_notification.addNewNotificationUser(
-          constEnumNotificationType.SUCCESS,
-          constNotificationConfirmation.DELETE_ADVERTISING,
-        )
-      } catch (error) {
-        store_notification.addNewNotificationUser(
-          constEnumNotificationType.ERROR,
-          constNotificationError.DELETE_ADVERTISING,
-        );
-        throw new error(store_notification.addNewNotificationUser(
-          constEnumNotificationType.ERROR,
-          constNotificationError.DELETE_ADVERTISING,
-        ))
-      }
+      await fcrud('advertisings', new MessageNotif(
+        EAdvertisingNotif.DELETE_SUCCES,
+        EAdvertisingNotif.DELETE_ERROR
+      ).get()).delete(`${idAdvertising}`);
     },
 
     /**
@@ -102,12 +71,10 @@ function createStoreAdvertising() {
       idAdvertising: string,
       data: IAdverting,
     ): Promise<void> {
-      try {
-        // modification
-        await updateDoc(doc(fire_db, 'advertisings', `${idAdvertising}`), { ...data});
-      } catch (error) {
-        
-      }
+      await fcrud('advertisings', new MessageNotif(
+        EAdvertisingNotif.UPDATE_SUCCES,
+        EAdvertisingNotif.UPDATE_ERROR
+      ).get()).update(data, `${idAdvertising}`)
     },
 
     /**

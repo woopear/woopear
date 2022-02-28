@@ -12,6 +12,16 @@
   let see_update = false;
 
   /**
+   * retour de fonction du composant
+   * advertising-select-update
+   * permet de fermer le volet update
+   * @param e event click
+   */
+  function closeUpdate(e) {
+    see_update = e.details;
+  }
+
+  /**
    * ajouter une publicité
    */
   async function addAdvertising(): Promise<void> {
