@@ -40,7 +40,12 @@
       <Input name="email" placeholder="Email" />
     </div>
     <div>
-      <Input name="password" placeholder="mot de passe" />
+      <input
+        class="input text-base w-full"
+        type="password"
+        name="password"
+        placeholder="Mot de passe"
+      />
     </div>
     <div class="flex justify-center mt-12">
       <button class="btn btn-primary">Se connecter</button>
