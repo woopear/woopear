@@ -8,12 +8,8 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
-        "source": "/dashboard/**",
-        "dynamicLinks": true
-      },
-      {
         "source": "**",
-        "dynamicLinks": true
+        "destination": "src/app.html"
       }
     ]
   },
