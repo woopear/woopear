@@ -20,6 +20,10 @@
         "destination": "/dashboard/users.html"
       },
       {
+        "source": "/dashboard/conditions",
+        "destination": "/dashboard/conditions.html"
+      },
+      {
         "source": "/dashboard/advertisings",
         "destination": "/dashboard/advertisings.html"
       },
