@@ -10,6 +10,34 @@
       {
         "source": "/dashboard",
         "destination": "/dashboard.html"
+      },
+      {
+        "source": "/login",
+        "destination": "/login.html"
+      },
+      {
+        "source": "/dashboard/users",
+        "destination": "/dashboard/users.html"
+      },
+      {
+        "source": "/dashboard/advertisings",
+        "destination": "/dashboard/advertisings.html"
+      },
+      {
+        "source": "/dashboard/presentation",
+        "destination": "/dashboard/presentation.html"
+      },
+      {
+        "source": "/dashboard/webapp",
+        "destination": "/dashboard/webapp.html"
+      },
+      {
+        "source": "/dashboard/teams",
+        "destination": "/dashboard/teams.html"
+      },
+      {
+        "source": "/dashboard/mess-admin",
+        "destination": "/dashboard/mess-admin.html"
       }
     ]
   },
