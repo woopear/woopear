@@ -3,7 +3,7 @@
 */
 export interface IAdvertingArticleContent {
   id?: string,
-  sub_title: string,
+  sub_title?: string,
   text?: string
 }
 
@@ -14,7 +14,8 @@ export interface IAdvertingArticle {
   id?: string,
   title?: string,
   image?: string,
-  content?: IAdvertingArticleContent[]
+  content?: IAdvertingArticleContent[],
+  active?: boolean,
 }
 
 /* 
