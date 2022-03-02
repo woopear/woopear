@@ -22,7 +22,7 @@ function createStoreAdvertisingArticle() {
      */
     listenAdvertisingSelectedArticle: function (idAdvertising: string): void {
       listen_advertising_article = onSnapshot(
-        collection(fire_db, 'advertising', `${idAdvertising}/articles`),
+        collection(fire_db, 'advertisings', `${idAdvertising}/articles`),
         (snapShot) => {
           let advertising_articles: IAdvertingArticle[] = [];
           snapShot.forEach((doc) => {
@@ -36,15 +36,98 @@ function createStoreAdvertisingArticle() {
     
     /**
      * ajout d'un article a la publicité selectionné
+     * @param idAdvertisingSelected id de la publicité selectionné
      */
     addArticleAdvertisingSelected: async function (idAdvertisingSelected: string): Promise<void> {
       fcrud(
-        'advertising',
+        'advertisings',
         new MessageNotif(
           EAdvertisingArticleSelectedNotif.ADD_SUCCES,
           EAdvertisingArticleSelectedNotif.ADD_ERROR
         ).get()
       ).add(createAdvertisingArticleObject(),`${idAdvertisingSelected}/articles`);
+    },
+
+    /**
+     * fonction qui upload une image pour la publicité selected
+     * @param file fichier à telecharger
+     * @param idAdvertising id de la publicité selected
+     * @param idAdvertisingArticle id de l'article de publicité selected
+     */
+     uploadImageAdvertisingArticleSelected: async function (file, idAdvertising: string, idAdvertisingArticle:string): Promise<void> {
+      await fcrud(
+        'advertisings',
+        new MessageNotif(
+          EAdvertisingArticleSelectedNotif.UPLOAD_IMAGE_SUCCES,
+          EAdvertisingArticleSelectedNotif.UPLOAD_IMAGE_ERROR
+        ).get()
+      ).uploadImage(
+        `articles/advertising-article-${idAdvertising}`, 
+        `${idAdvertising}/articles/${idAdvertisingArticle}`, 
+        file
+      );
+    },
+
+
+    /**
+     * suppression de l'image publicité selected
+     * @param idAdvertising id de la publicité selected
+     * @param idAdvertisingArticle id de l'article de publicité selected
+     */
+     deleteImageAdvertisingArticleSelected: async function (idAdvertising: string, idAdvertisingArticle:string): Promise<void> {
+      await fcrud(
+        'advertisings',
+        new MessageNotif(
+          `${EAdvertisingArticleSelectedNotif.DELIMAGE_SUCCES}`,
+          `${EAdvertisingArticleSelectedNotif.DELIMAGE_ERROR} N° ${idAdvertising}`
+        ).get()
+      ).deleteImage(`articles/advertising-article-${idAdvertising}`, `${idAdvertising}/articles/${idAdvertisingArticle}`, { image: '' });
+    },
+
+    /**
+     * fonction qui supprime un article selectionné
+     */
+    deleteArticleAdvertisingSelected: async function (
+      idAdvertising: string,
+      idAdvertisingArticle: string
+    ): Promise<void> {
+      // suppretion des content de l'article selectionné
+      fcrud(
+        'advertisings',
+        new MessageNotif(
+          EAdvertisingArticleSelectedNotif.DELETE_SUCCES,
+          EAdvertisingArticleSelectedNotif.DELETE_ERROR
+        ).get()
+      ).delete(`${idAdvertising}/articles/${idAdvertisingArticle}`);
+    },
+
+    /**
+     * supprimer tous les article de la publicité
+     */
+    deleteAllArticleAdvertisingSelected: async function (idAdvertising: string): Promise<void> {
+      let allArticles: IAdvertingArticle[];
+      subscribe((v) => (allArticles = v));
+
+      // map pour delete chaque article
+      allArticles.map(async (el) => {
+        await this.deleteArticleAdvertisingSelected(el.id, idAdvertising);
+      });
+    },
+
+    /**
+     * stop l'ecouteur de la publicité
+     */
+     stopListenAdvertisingArticle: function (): void {
+      if (listen_advertising_article) {
+        listen_advertising_article();
+      }
+    },
+
+    /**
+     * reset store de la publicité
+     */
+    resetAdvertising: function (): void {
+      set([] as IAdvertingArticle[]);
     }
   }
 }

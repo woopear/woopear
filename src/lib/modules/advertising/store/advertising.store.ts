@@ -8,6 +8,7 @@ import type { Unsubscribe } from 'firebase/auth';
 import { fire_db } from '$lib/providers/firebase/firebase.service';
 import { constEnumNotificationType } from '$lib/modules/notification/notification.const';
 import { createAdvertisingObject, EAdvertisingNotif } from '../advertising.const';
+import { advertising_article_store } from './advertising-article.store';
 
 // création du store advertising
 function createStoreAdvertising() {
@@ -56,6 +57,10 @@ function createStoreAdvertising() {
      * supprimer la publicité
      */
     deleteAdvertising: async function (idAdvertising: string): Promise<void> {
+      // delete le article de la publicité
+      await advertising_article_store.deleteAllArticleAdvertisingSelected(idAdvertising);
+
+      // delete la publicité selectionné
       await fcrud('advertisings', new MessageNotif(
         EAdvertisingNotif.DELETE_SUCCES,
         EAdvertisingNotif.DELETE_ERROR

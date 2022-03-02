@@ -4,7 +4,7 @@ import type { IAdverting } from './../advertising.type';
 import { writable } from 'svelte/store';
 import type { Unsubscribe } from 'firebase/auth';
 import { fire_db } from '$lib/providers/firebase/firebase.service';
-import { EAdvertisingSelectedNotif } from '../advertising.const';
+import { EAdvertisingNotif } from '../advertising.const';
 
 
 function createStoreAdvertisingSelected() {
@@ -41,10 +41,40 @@ function createStoreAdvertisingSelected() {
       fcrud(
         'advertisings',
         new MessageNotif(
-          EAdvertisingSelectedNotif.UPDATE_SUCCES,
-          EAdvertisingSelectedNotif.UPDATE_ERROR
+          EAdvertisingNotif.UPDATE_SUCCES,
+          EAdvertisingNotif.UPDATE_ERROR
         ).get()
       ).update(data, `${idAdvertisingselected}`)
+    },
+
+    /**
+     * fonction qui upload une image pour la publicité selected
+     * @param file fichier à telecharger
+     * @param idAdvertising id de la publicité selected
+     */
+     uploadImageAdvertisingSelected: async function (file, idAdvertising: string): Promise<void> {
+      await fcrud(
+        'advertisings',
+        new MessageNotif(
+          EAdvertisingNotif.UPLOAD_IMAGE_SUCCES,
+          EAdvertisingNotif.UPLOAD_IMAGE_ERROR
+        ).get()
+      ).uploadImage(`articles/advertising-${idAdvertising}`, `${idAdvertising}`, file);
+    },
+
+
+    /**
+     * suppression de l'image publicité selected
+     * @param idAdvertising id de la publicité selected
+     */
+     deleteImageAdvertisingSelected: async function (idAdvertising: string): Promise<void> {
+      await fcrud(
+        'advertisings',
+        new MessageNotif(
+          `${EAdvertisingNotif.DELIMAGE_SUCCES}`,
+          `${EAdvertisingNotif.DELIMAGE_ERROR} N° ${idAdvertising}`
+        ).get()
+      ).deleteImage(`articles/advertising-${idAdvertising}`, `${idAdvertising}`, { image: '' });
     },
 
     /**
