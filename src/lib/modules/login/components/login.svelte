@@ -1,6 +1,10 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import { session } from '$app/stores';
+  import Card from '$lib/modules/components/card/card.svelte';
+  import Input from '$lib/modules/components/input/input.svelte';
+  import Title from '$lib/modules/components/title/title.svelte';
+  import { ETypeTitle } from '$lib/modules/components/title/title.type';
   import { fire_auth } from '$lib/providers/firebase/firebase.service';
   import { createObjectAsFormData } from '$lib/providers/format/format.service';
   import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -27,16 +31,24 @@
   };
 </script>
 
-<section>
-  <a href="/" class="block mb-12">Retourne accueil</a>
-
+<Card>
+  <div class="m-auto mt-12 mb-8 text-center">
+    <Title title="Connexion Woopear" type_title={ETypeTitle.H4} />
+  </div>
   <form on:submit|preventDefault={login}>
     <div>
-      <input name="email" placeholder="email" />
+      <Input name="email" placeholder="Email" />
     </div>
     <div>
-      <input name="password" placeholder="mot de passe" />
+      <input
+        class="input text-base w-full"
+        type="password"
+        name="password"
+        placeholder="Mot de passe"
+      />
     </div>
-    <button>Se connecter</button>
+    <div class="flex justify-center mt-12">
+      <button class="btn btn-primary">Se connecter</button>
+    </div>
   </form>
-</section>
+</Card>
