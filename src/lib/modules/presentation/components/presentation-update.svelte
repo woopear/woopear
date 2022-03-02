@@ -178,102 +178,104 @@
         >
       </div>
     </section>
+    {#if $presentation_selected_store.woopear}
+      <!-- form info principal -->
+      <form
+        on:submit|preventDefault={(e) => updatePresentation(e, $presentation_selected_store.id)}
+      >
+        <!-- title -->
+        <div>
+          <label>Titre de la présentation : </label>
+          <Input name="title" placeholder="titre" value={$presentation_selected_store.title} />
+        </div>
+        <!-- sub_title -->
+        <div>
+          <label>Sous-titre de la présentation : </label>
+          <Input
+            name="sub_title"
+            placeholder="sous titre"
+            value={$presentation_selected_store.sub_title}
+          />
+        </div>
 
-    <!-- form info principal -->
-    <form on:submit|preventDefault={(e) => updatePresentation(e, $presentation_selected_store.id)}>
-      <!-- title -->
-      <div>
-        <label>Titre de la présentation : </label>
-        <Input name="title" placeholder="titre" value={$presentation_selected_store.title} />
-      </div>
-      <!-- sub_title -->
-      <div>
-        <label>Sous-titre de la présentation : </label>
-        <Input
-          name="sub_title"
-          placeholder="sous titre"
-          value={$presentation_selected_store.sub_title}
-        />
-      </div>
-
-      <!-- WOOPEAR -->
-      <span class=" block mt-12 mb-4">
-        <Title title="Partie entreprise" type_title={ETypeTitle.H6} />
-      </span>
-      <!-- email -->
-      <div>
-        <label>E-mail de l'entreprise : </label>
-        <Input
-          name="woopear.email"
-          placeholder="E-mail de l'entreprise"
-          value={$presentation_selected_store.woopear.email}
-        />
-      </div>
-      <!-- phone_number -->
-      <div>
-        <label>Numero de téléphone : </label>
-        <Input
-          name="woopear.phone_number"
-          placeholder="Numero de téléphone"
-          value={$presentation_selected_store.woopear.phone_number}
-        />
-      </div>
-      <!-- name -->
-      <div>
-        <label>Le nom de l'entreprise : </label>
-        <Input
-          name="woopear.name"
-          placeholder="le nom de l'entreprise à présenter"
-          value={$presentation_selected_store.woopear.name}
-        />
-      </div>
-      <!-- address -->
-      <div>
-        <label>L'addresse de l'entreprise : </label>
-        <Input
-          name="woopear.address"
-          placeholder="L'addresse de l'entreprise"
-          value={$presentation_selected_store.woopear.address}
-        />
-      </div>
-      <!-- code_post -->
-      <div>
-        <label>Code postal de l'entreprise : </label>
-        <Input
-          name="woopear.code_post"
-          placeholder="Code postal"
-          value={$presentation_selected_store.woopear.code_post}
-        />
-      </div>
-      <!-- city -->
-      <div>
-        <label>Ville de l'entreprise : </label>
-        <Input
-          name="woopear.city"
-          placeholder="Ville de l'entreprise"
-          value={$presentation_selected_store.woopear.city}
-        />
-      </div>
-      <!-- map -->
-      <div>
-        <label>Coordonnées : </label>
-        <Input
-          name="woopear.map"
-          placeholder="Coordonnée"
-          value={$presentation_selected_store.woopear.map}
-        />
-      </div>
-      <!-- info -->
-      <div>
-        <label>Info suplémentaire : </label>
-        <Texarea name="woopear.info" value={$presentation_selected_store.woopear.info} />
-      </div>
-      <!-- btn modifier info pincipal -->
-      <div class="flex justify-end">
-        <button class={`${loader_update_presentation} btn btn-primary mt-12`}>Modifier</button>
-      </div>
-    </form>
-
+        <!-- WOOPEAR -->
+        <span class=" block mt-12 mb-4">
+          <Title title="Partie entreprise" type_title={ETypeTitle.H6} />
+        </span>
+        <!-- email -->
+        <div>
+          <label>E-mail de l'entreprise : </label>
+          <Input
+            name="woopear.email"
+            placeholder="E-mail de l'entreprise"
+            value={$presentation_selected_store.woopear.email}
+          />
+        </div>
+        <!-- phone_number -->
+        <div>
+          <label>Numero de téléphone : </label>
+          <Input
+            name="woopear.phone_number"
+            placeholder="Numero de téléphone"
+            value={$presentation_selected_store.woopear.phone_number}
+          />
+        </div>
+        <!-- name -->
+        <div>
+          <label>Le nom de l'entreprise : </label>
+          <Input
+            name="woopear.name"
+            placeholder="le nom de l'entreprise à présenter"
+            value={$presentation_selected_store.woopear.name}
+          />
+        </div>
+        <!-- address -->
+        <div>
+          <label>L'addresse de l'entreprise : </label>
+          <Input
+            name="woopear.address"
+            placeholder="L'addresse de l'entreprise"
+            value={$presentation_selected_store.woopear.address}
+          />
+        </div>
+        <!-- code_post -->
+        <div>
+          <label>Code postal de l'entreprise : </label>
+          <Input
+            name="woopear.code_post"
+            placeholder="Code postal"
+            value={$presentation_selected_store.woopear.code_post}
+          />
+        </div>
+        <!-- city -->
+        <div>
+          <label>Ville de l'entreprise : </label>
+          <Input
+            name="woopear.city"
+            placeholder="Ville de l'entreprise"
+            value={$presentation_selected_store.woopear.city}
+          />
+        </div>
+        <!-- map -->
+        <div>
+          <label>Coordonnées : </label>
+          <Input
+            name="woopear.map"
+            placeholder="Coordonnée"
+            value={$presentation_selected_store.woopear.map}
+          />
+        </div>
+        <!-- info -->
+        <div>
+          <label>Info suplémentaire : </label>
+          <Texarea name="woopear.info" value={$presentation_selected_store.woopear.info} />
+        </div>
+        <!-- btn modifier info pincipal -->
+        <div class="flex justify-end">
+          <button class={`${loader_update_presentation} btn btn-primary mt-12`}>Modifier</button>
+        </div>
+      </form>
+    {/if}
     <!-- Partie Content -->
     <span class="flex mt-16 mb-8">
       <div class="mr-6">
