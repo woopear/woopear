@@ -9,7 +9,7 @@
 
 1. le sdk flutter doit etre installer  
 2. android studio doit etre installer (émulateur)  
-3. la commande `flutter doctor` doit retourner des résultat positif  
+3. la commande `flutter doctor` doit retourner des résultats positif  
 sinon regler les erreurs.  
 
 - Install  
@@ -22,3 +22,4 @@ sinon regler les erreurs.
 
 1. [structure](https://github.com/woopear/welcome/blob/main/structure-flutter.md)   
 2. [nommage](https://github.com/woopear/welcome/blob/main/regles-nommage.md)  
+3. [init projet](https://github.com/woopear/welcome/blob/main/init-projet-flutter.md)
