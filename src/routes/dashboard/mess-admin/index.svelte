@@ -1,1 +1,0 @@
-<p>message admin</p>
