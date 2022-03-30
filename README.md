@@ -1,40 +1,24 @@
-# create-svelte
+# Woopear  
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+> Association regroupant developpeur web, mobile, desktop  
+> Création d'application en tous genres.
 
-## Creating a project
+## Installation du projet  
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Vérification
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
+1. le sdk flutter doit etre installer  
+2. android studio doit etre installer (émulateur)  
+3. la commande `flutter doctor` doit retourner des résultat positif  
+sinon regler les erreurs.  
 
-# create a new project in my-app
-npm init svelte@next my-app
-```
+- Install  
 
-> Note: the `@next` is temporary
+1. cloner le projet  
+2. executer la commande `flutter pub get` à la racine du projet  
+3. executer l'émulateur de votre choix et executer le projet  
 
-## Developing
+## lien utils  
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+1. [structure](https://github.com/woopear/welcome/blob/main/structure-flutter.md)   
+2. [nommage](https://github.com/woopear/welcome/blob/main/regles-nommage.md)  
