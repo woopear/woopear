@@ -20,5 +20,5 @@ sinon regler les erreurs.
 
 ## lien utils  
 
-1. [structure](https://github.com/woopear/welcome/blob/main/structure-flutter.md )   
+1. [structure](https://github.com/woopear/welcome/blob/main/structure-flutter.md)   
 2. [nommage](https://github.com/woopear/welcome/blob/main/regles-nommage.md)  
