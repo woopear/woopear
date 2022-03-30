@@ -18,4 +18,7 @@ sinon regler les erreurs.
 2. executer la commande `flutter pub get` à la racine du projet  
 3. executer l'émulateur de votre choix et executer le projet  
 
+## lien utils  
 
+1. [structure](https://github.com/woopear/welcome/blob/main/structure-flutter.md )   
+2. [nommage](https://github.com/woopear/welcome/blob/main/regles-nommage.md)  
