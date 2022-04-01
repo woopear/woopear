@@ -7,10 +7,13 @@ import 'package:woopear/utils/config/theme/theme.dart';
 import 'package:woopear/utils/fire/firebase_options.dart';
 
 void main() async {
+  /// pour les widgets android
   WidgetsFlutterBinding.ensureInitialized();
+  /// init firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  /// entrer de l'appli
   runApp(const ProviderScope(child: App()));
 }
 
@@ -25,15 +28,10 @@ class _AppState extends ConsumerState<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, /// pas de banniere debug
       title: 'Woopear',
-      // utilisation du context pour recuperer
-      // le themeMode qui ce charge de modifier votre theme
-      // via votre bouton switch ou du theme du systeme 
       themeMode: ref.watch(wooThemeChange).themeMode,
-      // nom de votre variable dans le fichier themes.dart
       theme: themeClaire,
-      // nom de votre variable dans le fichier themes.dart
       darkTheme: themeDark,
       initialRoute: Routes().home,
       routes: Routes().urls(),
