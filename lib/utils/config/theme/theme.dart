@@ -21,11 +21,11 @@ final themeClaire = WooTheme.modeClair(
   tPrincipalBoxDialogue: GoogleFonts.nunito(),
   tButton: GoogleFonts.nunito(),
   tBoxDialogue: GoogleFonts.nunito(),
-  t1: GoogleFonts.nunito(),
-  t2: GoogleFonts.nunito(),
-  t3: GoogleFonts.nunito(),
-  t4: GoogleFonts.nunito(),
-  tsmall: GoogleFonts.nunito(),
+  t1: GoogleFonts.nunito(color: Colors.black),
+  t2: GoogleFonts.nunito(color: Colors.black),
+  t3: GoogleFonts.nunito(color: Colors.black),
+  t4: GoogleFonts.nunito(color: Colors.black),
+  tsmall: GoogleFonts.nunito(color: Colors.black),
 
   /// button
   textButtonStyle: textButtonStyleClaire,
@@ -53,11 +53,11 @@ final themeDark = WooTheme.modeDark(
   tPrincipalBoxDialogue: GoogleFonts.nunito(),
   tButton: GoogleFonts.nunito(),
   tBoxDialogue: GoogleFonts.nunito(),
-  t1: GoogleFonts.nunito(),
-  t2: GoogleFonts.nunito(),
-  t3: GoogleFonts.nunito(),
-  t4: GoogleFonts.nunito(),
-  tsmall: GoogleFonts.nunito(),
+  t1: GoogleFonts.nunito(color: Colors.white),
+  t2: GoogleFonts.nunito(color: Colors.white),
+  t3: GoogleFonts.nunito(color: Colors.white),
+  t4: GoogleFonts.nunito(color: Colors.white),
+  tsmall: GoogleFonts.nunito(color: Colors.white),
 
   /// button
   textButtonStyle: textButtonStyleDark,
