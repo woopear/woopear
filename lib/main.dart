@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woo_theme_mode/woo_theme_mode.dart';
 import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/utils/config/theme/theme.dart';
+import 'package:woopear/utils/constants/globals.dart';
 import 'package:woopear/utils/fire/firebase_options.dart';
 
 void main() async {
@@ -29,7 +30,7 @@ class _AppState extends ConsumerState<App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, /// pas de banniere debug
-      title: 'Woopear',
+      title: Globals.titleApp,
       themeMode: ref.watch(wooThemeChange).themeMode,
       theme: themeClaire,
       darkTheme: themeDark,
