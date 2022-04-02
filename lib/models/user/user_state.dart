@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/profil/profil_schema.dart';
+import 'package:woopear/models/profil/profil_state.dart';
 
 class UserState extends ChangeNotifier {
   final FirebaseAuth _user = FirebaseAuth.instance;
-  final ProfilState profil = PrifilState();
+  final ProfilState profil = ProfilState();
 
   /// fonction de connection du user
   Future<void> connexionUser(
