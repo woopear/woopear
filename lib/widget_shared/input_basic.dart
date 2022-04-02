@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InputBasic extends ConsumerStatefulWidget {
-  EdgeInsetsGeometry margin = const EdgeInsets.only(top: 10.0);
+  EdgeInsetsGeometry margin = const EdgeInsets.only(top: 20.0);
   EdgeInsetsGeometry padding = const EdgeInsets.all(0.0);
   String labelText;
   void Function(String)? onChanged;
   String? Function(String?)? validator;
+  TextEditingController controller;
+  String? initialValue;
 
   InputBasic({
     Key? key,
-    this.margin = const EdgeInsets.only(top: 10.0),
+    this.margin = const EdgeInsets.only(top: 20.0),
     this.padding = const EdgeInsets.all(0.0),
     required this.labelText,
     this.onChanged,
     this.validator,
+    required this.controller,
+    this.initialValue,
   }) : super(key: key);
 
   @override
@@ -44,6 +49,9 @@ class _InputBasicState extends ConsumerState<InputBasic> {
       margin: _margin,
       padding: _padding,
       child: TextFormField(
+        initialValue: widget.initialValue,
+        controller: widget.controller,
+        style: GoogleFonts.nunito(fontSize: 20.0),
         decoration: InputDecoration(
           labelText: _labelText,
         ),

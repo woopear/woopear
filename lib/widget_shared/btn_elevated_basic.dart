@@ -5,12 +5,14 @@ class BtnElevatedBasic extends ConsumerStatefulWidget {
   EdgeInsetsGeometry? margin;
   void Function() onPressed;
   String textBtn;
+  String message;
 
   BtnElevatedBasic({
     Key? key,
     this.margin = const EdgeInsets.only(top: 20.0),
     required this.onPressed,
     required this.textBtn,
+    this.message = '',
   }) : super(key: key);
 
   @override
@@ -22,6 +24,7 @@ class _BtnElevatedBasicState extends ConsumerState<BtnElevatedBasic> {
   EdgeInsetsGeometry? _margin;
   String? _textBtn;
   void Function()? _onPressed;
+  String? _message;
 
   @override
   void initState() {
@@ -29,15 +32,20 @@ class _BtnElevatedBasicState extends ConsumerState<BtnElevatedBasic> {
     _margin = widget.margin;
     _onPressed = widget.onPressed;
     _textBtn = widget.textBtn;
+    _message = widget.message;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: _margin,
-      child: ElevatedButton(
-        onPressed: _onPressed,
-        child: Text(_textBtn!),
+      child: Tooltip(
+        message: _message,
+        verticalOffset: 30,
+        child: ElevatedButton(
+          onPressed: _onPressed,
+          child: Text(_textBtn!),
+        ),
       ),
     );
   }

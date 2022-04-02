@@ -9,19 +9,22 @@ class UserConst {
   static String labelInputPassword = "Votre mot de passe";
   static String btnConnexion = "Se connecter";
 
-  /// inscription user
-  static String inscriptionUserMessageSucces = 'Inscription reussi';
-  static String inscriptionUserEmailError = "L'email existe déjà";
-  static String inscriptionUserPasswordError =
+  /// creation user
+  static String createMessageSucces = 'Création avec succès';
+  static String createMessageEmailError = "L'email existe déjà";
+  static String createMessagePasswordError =
       'Le mot de passe fourni est trop faible';
-  static String? inscriptionError = "Erreur de connexion";
-  static String? labelCreateInputEmail = "Votre adresse email *";
-  static String? labelCreateInputPassword = "Votre mot de passe *";
-  static String? labelInputPseudo = "Votre pseudo";
-  static String? labelInputLastName = "Votre nom";
-  static String? labelInputFirstName = "Votre prénom";
-  static String? btnCreateUser = "S'inscrire";
-  static String? titlePageCreate = "Créer mon compte";
-  static String? infoFormCreate = "* Ce champs est obligatoire";
+  static String createMessageError = "Impossible de creer l'utilisateur";
+  static String createLabelInputEmail = "Adresse email *";
+  static String createLabelInputPassword = "Mot de passe *";
+  static String createLabelInputFirstName = "Prénom *";
+  static String createLabelInputLastName = "Nom *";
+  static String createLabelInputAddress = "Addresse *";
+  static String createLabelInputCodePost = "Code postal *";
+  static String createLabelInputCity = "Ville *";
+  static String createLabelInputPhoneNumber = "Téléphone";
+  static String createBtn = "CREER";
+  static String createTooltipBtn = "Créer un utilisateur";
+  static String createInfoForm = "* Ce champs est obligatoire";
   
 }
