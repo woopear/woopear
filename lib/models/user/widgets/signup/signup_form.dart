@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/user/user_const.dart';
+import 'package:woopear/models/user/widgets/signup/signup_dropdown_role.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
@@ -56,6 +57,10 @@ class _SignupFormState extends ConsumerState<SignupForm> {
 
   Future<void> createUser(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
+      /// TODO: creation role
+
+      /// TODO: si companie creer companie
+
       /// TODO: creation fonction de creation user + profil
 
       // rest le form
@@ -90,6 +95,28 @@ class _SignupFormState extends ConsumerState<SignupForm> {
         key: _formKey,
         child: Column(
           children: [
+            /// select role
+            Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 10.0, bottom: 10.0),
+                    child: const Text(
+                      'Roles :',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ),
+                ),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: SignupDropdownRole(),
+                ),
+              ],
+            ),
+
             /// email
             InputBasic(
               controller: _email,

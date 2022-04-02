@@ -11,3 +11,10 @@ class RoleSchema {
     };
   }
 }
+
+List<RoleSchema> rolesBase = [
+  RoleSchema(
+      libelle: 'public', description: 'utilisateur avec le minimum de droit'),
+  RoleSchema(libelle: 'root', description: 'utilisateur créateur du site'),
+  RoleSchema(libelle: 'auth', description: 'utilisateur authentifier'),
+];
