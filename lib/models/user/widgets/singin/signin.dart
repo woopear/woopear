@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/user/user_const.dart';
-import 'package:woopear/models/user/widgets/signup/signup_form.dart';
 import 'package:woopear/widget_shared/card_basic.dart';
 import 'package:woopear/widget_shared/title_page_auth.dart';
 
-class Signup extends ConsumerStatefulWidget {
-  const Signup({Key? key}) : super(key: key);
+class Signin extends ConsumerStatefulWidget {
+  const Signin({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SignupState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SigninState();
 }
 
-class _SignupState extends ConsumerState<Signup> {
+class _SigninState extends ConsumerState<Signin> {
+
   @override
   Widget build(BuildContext context) {
     /// on recupere la largeur de l'ecran
@@ -34,12 +34,11 @@ class _SignupState extends ConsumerState<Signup> {
                         ? const EdgeInsets.only(bottom: 50.0)
                         : const EdgeInsets.only(bottom: 20.0),
                     child: TitlePageAuth(
-                      text: UserConst.createTitle,
+                      text: UserConst.connexionTitle,
                     ),
                   ),
 
-                  /// formulaire de creation user
-                  const SignupForm(),
+                  /// formulaire de connexion user
                 ],
               ),
             ),
