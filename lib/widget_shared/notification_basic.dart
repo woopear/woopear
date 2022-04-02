@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class Notification {
+class NotificationBasic {
   String? text;
   bool? error;
 
-  Notification({
+  NotificationBasic({
     Key? key,
     required this.text,
     required this.error,

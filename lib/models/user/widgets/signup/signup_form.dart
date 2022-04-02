@@ -5,6 +5,7 @@ import 'package:woopear/utils/constants/validator/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
 import 'package:woopear/widget_shared/input_password.dart';
+import 'package:woopear/widget_shared/notification_basic.dart';
 
 class SignupForm extends ConsumerStatefulWidget {
   const SignupForm({Key? key}) : super(key: key);
@@ -32,6 +33,20 @@ class _SignupFormState extends ConsumerState<SignupForm> {
     _obscureText = true;
   }
 
+  /// reset des controllers des inputs
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    _firstName.dispose();
+    _lastName.dispose();
+    _address.dispose();
+    _codePost.dispose();
+    _city.dispose();
+    _phoneNumber.dispose();
+    super.dispose();
+  }
+
   /// afficher / cacher password
   void seePassword() {
     setState(() {
@@ -39,7 +54,34 @@ class _SignupFormState extends ConsumerState<SignupForm> {
     });
   }
 
-  Future<void> createUser() async {}
+  Future<void> createUser(BuildContext context) async {
+    if (_formKey.currentState!.validate()){
+      /// TODO: creation fonction de creation user + profil
+      
+      // rest le form
+      _formKey.currentState!.reset();
+      _email.clear();
+      _password.clear();
+      _firstName.clear();
+      _lastName.clear();
+      _address.clear();
+      _codePost.clear();
+      _city.clear();
+      _phoneNumber.clear();
+      
+      // notification succés
+      NotificationBasic(
+        text: UserConst.createMessageSucces,
+        error: false,
+      ).notification(context);
+    }else {
+      // notification error
+      NotificationBasic(
+        text: UserConst.createMessageError,
+        error: true,
+      ).notification(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +174,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
               child: BtnElevatedBasic(
                   message: UserConst.createTooltipBtn,
                   onPressed: () async {
-                    await createUser();
+                    await createUser(context);
                   },
                   textBtn: UserConst.createBtn),
             ),
