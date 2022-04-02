@@ -1,14 +1,17 @@
 class UserConst {
   /// connexion user
   static String connexionTitle = "Connexion Woopear";
-  static String connexionUserEmailMessageError = "l'email n'existe pas";
-  static String connexionUserPasswordError = "le mot de passe n'est pas bon";
-  static String connexionSucces = "Connexion réussis";
-  static String connexionError = "Erreur de connexion";
-  static String labelInputEmail = "Votre identifiant";
-  static String labelInputPassword = "Votre mot de passe";
-  static String btnConnexion = "Se connecter";
-
+  static String connexionMessageSucces = 'Connexion avec réussis';
+  static String connexionMessageEmailError = "Erreur identifiant";
+  static String connexionMessagePasswordError = 'Erreur mot de passe';
+  static String connexionMessageError = "Impossible de vous connecter";
+    static String connexionLabelInputEmail = "Identifiant *";
+  static String connexionLabelInputPassword = "Mot de passe *";
+    static String connexionBtn = "SE CONNECTER";
+    static String connexionBtnPasswordForgot = "Mot de passe oublié";
+  static String connexionTooltipBtn = "Connecter vous";
+  static String connexionInfoForm = "* Ce champs est obligatoire";
+  
   /// creation user
   static String createTitle = 'Création utilisateur';
   static String createMessageSucces = 'Création avec succès';
@@ -27,5 +30,4 @@ class UserConst {
   static String createBtn = "CREER";
   static String createTooltipBtn = "Créer un utilisateur";
   static String createInfoForm = "* Ce champs est obligatoire";
-  
 }

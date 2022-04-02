@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/user/user_const.dart';
+import 'package:woopear/models/user/widgets/signin/signin_form.dart';
 import 'package:woopear/widget_shared/card_basic.dart';
 import 'package:woopear/widget_shared/title_page_auth.dart';
 
@@ -39,6 +40,7 @@ class _SigninState extends ConsumerState<Signin> {
                   ),
 
                   /// formulaire de connexion user
+                  const SigninForm(),
                 ],
               ),
             ),
