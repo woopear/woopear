@@ -53,5 +53,6 @@ class UserState extends ChangeNotifier {
   }
 }
 
-final userState = ChangeNotifierProvider<UserState>((ref) => UserState());
+/// state de la cass UserState
+final userChange = ChangeNotifierProvider<UserState>((ref) => UserState());
 
