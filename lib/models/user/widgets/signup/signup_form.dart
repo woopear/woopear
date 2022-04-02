@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/user/user_const.dart';
-import 'package:woopear/utils/constants/validator/woo_validator.dart';
+import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
 import 'package:woopear/widget_shared/input_password.dart';
@@ -55,9 +55,9 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   }
 
   Future<void> createUser(BuildContext context) async {
-    if (_formKey.currentState!.validate()){
+    if (_formKey.currentState!.validate()) {
       /// TODO: creation fonction de creation user + profil
-      
+
       // rest le form
       _formKey.currentState!.reset();
       _email.clear();
@@ -68,13 +68,13 @@ class _SignupFormState extends ConsumerState<SignupForm> {
       _codePost.clear();
       _city.clear();
       _phoneNumber.clear();
-      
+
       // notification succés
       NotificationBasic(
         text: UserConst.createMessageSucces,
         error: false,
       ).notification(context);
-    }else {
+    } else {
       // notification error
       NotificationBasic(
         text: UserConst.createMessageError,
@@ -177,6 +177,18 @@ class _SignupFormState extends ConsumerState<SignupForm> {
                     await createUser(context);
                   },
                   textBtn: UserConst.createBtn),
+            ),
+
+            /// text info formulaire
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                margin: const EdgeInsets.only(top: 50.0),
+                child: Text(
+                  UserConst.createInfoForm,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ),
             ),
           ],
         ),

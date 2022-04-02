@@ -10,6 +10,7 @@ class UserConst {
   static String btnConnexion = "Se connecter";
 
   /// creation user
+  static String createTitle = 'Création utilisateur';
   static String createMessageSucces = 'Création avec succès';
   static String createMessageEmailError = "L'email existe déjà";
   static String createMessagePasswordError =

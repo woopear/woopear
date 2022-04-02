@@ -30,10 +30,10 @@ final themeClaire = WooTheme.modeClair(
   /// button
   textButtonStyle: textButtonStyleClaire,
   elevatedButtonTheme: elevatedButtonClaire,
-  
+
   /// icon
   iconTheme: iconThemeClaire,
-  
+
   /// input
   inputDecorationTheme: inputDecorationClaire,
 );
@@ -68,4 +68,13 @@ final themeDark = WooTheme.modeDark(
 
   /// input
   inputDecorationTheme: inputDecorationDark,
+
+  cardTheme: const CardTheme(
+    color: Color(0XFF2F3136),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(20.0),
+      ),
+    ),
+  ),
 );
