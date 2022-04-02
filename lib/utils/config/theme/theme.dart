@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:woo_theme_mode/woo_theme_mode.dart';
+import 'package:woopear/utils/config/theme/card_theme.dart';
 import 'package:woopear/utils/config/theme/elevated_button_theme.dart';
 import 'package:woopear/utils/config/theme/icon_theme.dart';
 import 'package:woopear/utils/config/theme/input_decoration_theme.dart';
@@ -36,6 +37,9 @@ final themeClaire = WooTheme.modeClair(
 
   /// input
   inputDecorationTheme: inputDecorationClaire,
+
+  /// card
+  cardTheme: cardThemeClaire,
 );
 
 /// theme mode dark
@@ -69,12 +73,6 @@ final themeDark = WooTheme.modeDark(
   /// input
   inputDecorationTheme: inputDecorationDark,
 
-  cardTheme: const CardTheme(
-    color: Color(0XFF2F3136),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(20.0),
-      ),
-    ),
-  ),
+  /// card
+  cardTheme: cardThemeDark,
 );
