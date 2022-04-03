@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:woopear/models/role/role_schema.dart';
+import 'package:woopear/models/profil/role/role_schema.dart';
 import 'package:woopear/models/user/user_const.dart';
 
 class SignupDropdownRole extends ConsumerStatefulWidget {

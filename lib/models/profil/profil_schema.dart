@@ -1,5 +1,5 @@
-import 'package:woopear/models/companie/companie_schema.dart';
-import 'package:woopear/models/role/role_schema.dart';
+import 'package:woopear/models/profil/companie/companie_schema.dart';
+import 'package:woopear/models/profil/role/role_schema.dart';
 
 class ProfilSchema {
   String? id;

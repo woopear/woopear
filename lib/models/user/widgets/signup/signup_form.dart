@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:woopear/models/role/role_schema.dart';
+import 'package:woopear/models/profil/role/role_schema.dart';
 import 'package:woopear/models/user/user_const.dart';
 import 'package:woopear/models/user/widgets/signup/signup_dropdown_role.dart';
 import 'package:woopear/models/user/widgets/signup/signup_form_companie.dart';
