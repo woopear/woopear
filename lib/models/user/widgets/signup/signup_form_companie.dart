@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/user/user_const.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
+import 'package:woopear/widget_shared/sub_title_auth.dart';
 
 class SignupFormCompanie extends ConsumerStatefulWidget {
   TextEditingController denomination;
@@ -36,6 +37,9 @@ class _SignupFormCompanieState extends ConsumerState<SignupFormCompanie> {
       margin: const EdgeInsets.only(bottom: 40.0),
       child: Column(
         children: [
+          /// title  
+          const SubTitlePageAuth(text: "Ajout d'une entreprise"),
+          
           /// input denomination
           InputBasic(
             controller: widget.denomination,
