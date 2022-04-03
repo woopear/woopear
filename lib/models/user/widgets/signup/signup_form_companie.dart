@@ -7,7 +7,7 @@ import 'package:woopear/widget_shared/input_basic.dart';
 class SignupFormCompanie extends ConsumerStatefulWidget {
   TextEditingController denomination;
   TextEditingController siret;
-  TextEditingController? codeNaf;
+  TextEditingController codeNaf;
   TextEditingController? addressCompanie;
   TextEditingController? codePostCompanie;
   TextEditingController? cityCompanie;
@@ -17,7 +17,7 @@ class SignupFormCompanie extends ConsumerStatefulWidget {
     Key? key,
     required this.denomination,
     required this.siret,
-    this.codeNaf,
+    required this.codeNaf,
     this.addressCompanie,
     this.cityCompanie,
     this.codePostCompanie,
@@ -47,16 +47,46 @@ class _SignupFormCompanieState extends ConsumerState<SignupFormCompanie> {
           ),
 
           /// input siret
+          InputBasic(
+            controller: widget.siret,
+            labelText: UserConst.createCompanieInputSiret,
+            validator: (value) => WooValidator.validatorInputTextBasic(
+              textError: WooValidator.errorInputSiret,
+              value: value,
+            ),
+          ),
 
           /// input codeNaf
+          InputBasic(
+            controller: widget.codeNaf,
+            labelText: UserConst.createCompanieInputCodeNaf,
+            validator: (value) => WooValidator.validatorInputTextBasic(
+              textError: WooValidator.errorInputCodeNaf,
+              value: value,
+            ),
+          ),
 
           /// input addresse
+          InputBasic(
+            controller: widget.codeNaf,
+            labelText: UserConst.createCompanieInputAddressCompanie,
+          ),
 
           /// input codePost
+          InputBasic(
+            controller: widget.codeNaf,
+            labelText: UserConst.createCompanieInputCodePostCompanie,
+          ),
 
           /// input city
+          InputBasic(
+            controller: widget.codeNaf,
+            labelText: UserConst.createCompanieInputCityCompanie,
+          ),
 
           /// input logo
+          /// ? n'est pas important ici
+          /// ? sera set avec '' pour avoir la clef coté BDD
         ],
       ),
     );

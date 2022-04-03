@@ -36,8 +36,10 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   final TextEditingController _denomination = TextEditingController(text: '');
   final TextEditingController _siret = TextEditingController(text: '');
   final TextEditingController _codeNaf = TextEditingController(text: '');
-  final TextEditingController _addressCompanie = TextEditingController(text: '');
-  final TextEditingController _codePostCompanie = TextEditingController(text: '');
+  final TextEditingController _addressCompanie =
+      TextEditingController(text: '');
+  final TextEditingController _codePostCompanie =
+      TextEditingController(text: '');
   final TextEditingController _cityCompanie = TextEditingController(text: '');
   final TextEditingController _logoCompanie = TextEditingController(text: '');
   RoleSchema? _role;
@@ -80,6 +82,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   /// reset input
   void _resetAllInput() {
     // rest le form
+    /// user
     _formKey.currentState!.reset();
     _email.clear();
     _password.clear();
@@ -92,6 +95,15 @@ class _SignupFormState extends ConsumerState<SignupForm> {
     setState(() {
       _role = null;
     });
+
+    /// companie
+    _denomination.clear();
+    _addressCompanie.clear();
+    _cityCompanie.clear();
+    _codeNaf.clear();
+    _siret.clear();
+    _codePostCompanie.clear();
+    _logoCompanie.clear();
   }
 
   /// afficher / cacher formulaire companie
@@ -251,9 +263,9 @@ class _SignupFormState extends ConsumerState<SignupForm> {
                     denomination: _denomination,
                     siret: _siret,
                     addressCompanie: _addressCompanie,
-                    cityCompanie: _cityCompanie, 
-                    codeNaf: _codeNaf, 
-                    codePostCompanie: _codePostCompanie, 
+                    cityCompanie: _cityCompanie,
+                    codeNaf: _codeNaf,
+                    codePostCompanie: _codePostCompanie,
                     logoCompanie: _logoCompanie,
                   )
                 : Container(),

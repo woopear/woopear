@@ -39,4 +39,10 @@ class UserConst {
 
   /// creation companie
   static String createCompanieInputDenomination = "Dénomination *";
+  static String createCompanieInputSiret = "Numéro de siret *";
+  static String createCompanieInputCodeNaf = "Code naf *";
+  static String createCompanieInputAddressCompanie = "Addresse";
+  static String createCompanieInputCodePostCompanie = "Code postal";
+  static String createCompanieInputCityCompanie = "Ville";
+  static String createCompanieInputLogoCompanie = "Image entreprise";
 }
