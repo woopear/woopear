@@ -38,7 +38,7 @@ class _SignupFormCompanieState extends ConsumerState<SignupFormCompanie> {
       child: Column(
         children: [
           /// title  
-          const SubTitlePageAuth(text: "Ajout d'une entreprise"),
+          SubTitlePageAuth(text: UserConst.createCompanieTitleForm),
           
           /// input denomination
           InputBasic(

@@ -10,7 +10,7 @@ class UserConst {
   static String connexionBtn = "SE CONNECTER";
   static String connexionBtnPasswordForgot = "Mot de passe oublié ?";
   static String connexionTooltipBtn = "Connecter vous";
-  static String connexionInfoForm = "* Ce champs est obligatoire";
+  static String connexionInfoForm = "* Champs obligatoire";
 
   /// creation user
   static String createTitle = 'Création utilisateur';
@@ -32,12 +32,13 @@ class UserConst {
   static String createTooltipBtn = "Créer un utilisateur";
   static String createBtnResetInput = "EFFACER";
   static String createTooltipBtnResetInput = "Effacer tous le formulaire";
-  static String createInfoForm = "* Ce champs est obligatoire";
+  static String createInfoForm = "* Champs obligatoire";
   static String createPlaceholderDropdownRole = "Selectionnez un role *";
   static String createBtnSeeFormCompanie = "Ajouter une entreprise";
   static String createBtnCloseFormCompanie = "Fermer";
 
   /// creation companie
+  static String createCompanieTitleForm = "Ajout d'une entreprise";
   static String createCompanieInputDenomination = "Dénomination *";
   static String createCompanieInputSiret = "Numéro de siret *";
   static String createCompanieInputCodeNaf = "Code naf *";
