@@ -9,7 +9,7 @@ class Routes {
   /// les routes
   final String _home = '/';
   final String _appAcces = '/app';
-  final String _createUser = '/createaccount';
+  final String _createUser = '/create/account';
   final String _createProfil = '/app/profil/create';
   final String _john = '/john';
 
