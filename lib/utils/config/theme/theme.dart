@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:woo_theme_mode/woo_theme_mode.dart';
+import 'package:woopear/utils/config/theme/app_bar_theme.dart';
 import 'package:woopear/utils/config/theme/card_theme.dart';
 import 'package:woopear/utils/config/theme/elevated_button_theme.dart';
 import 'package:woopear/utils/config/theme/icon_theme.dart';
@@ -40,6 +41,9 @@ final themeClaire = WooTheme.modeClair(
 
   /// card
   cardTheme: cardThemeClaire,
+
+  /// app bar
+  appBarTheme: appBarThemeClaire,
 );
 
 /// theme mode dark
@@ -75,4 +79,7 @@ final themeDark = WooTheme.modeDark(
 
   /// card
   cardTheme: cardThemeDark,
+
+  /// app bar
+  appBarTheme: appBarThemeDark,
 );

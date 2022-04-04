@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:woopear/utils/config/routes.dart';
+import 'package:woopear/widget_shared/app_bar_basic.dart';
 
 class Home extends ConsumerStatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,16 +14,12 @@ class _HomeState extends ConsumerState<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBarBasic(text: 'Woopear', automaticallyImplyLeading: false,),
         body: SingleChildScrollView(
           child: Container(
             child: Column(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, Routes().appAcces);
-                  },
-                  child: const Text('Connexion'),
-                ),
+              children: const [
+                
               ],
             ),
           ),
