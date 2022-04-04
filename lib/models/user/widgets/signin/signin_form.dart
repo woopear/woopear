@@ -48,7 +48,7 @@ class _SigninFormState extends ConsumerState<SigninForm> {
   /// mot de passe oublié
   void forgotPassword(BuildContext context) {
     /// go to page mot de passe oublié
-    Navigator.popAndPushNamed(context, Routes().forgotPassword);
+    Navigator.pushNamed(context, Routes().forgotPassword);
   }
 
   /// reset all input

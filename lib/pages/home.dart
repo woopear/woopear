@@ -14,13 +14,15 @@ class _HomeState extends ConsumerState<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBarBasic(text: 'Woopear', automaticallyImplyLeading: false,),
+        appBar: AppBarBasic(
+          seeConnexion: true,
+          text: 'Woopear',
+          automaticallyImplyLeading: false,
+        ),
         body: SingleChildScrollView(
           child: Container(
             child: Column(
-              children: const [
-                
-              ],
+              children: const [],
             ),
           ),
         ),

@@ -6,6 +6,7 @@ import 'package:woopear/models/user/user_const.dart';
 import 'package:woopear/models/user/user_state.dart';
 import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
+import 'package:woopear/widget_shared/app_bar_basic.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/card_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
@@ -80,6 +81,11 @@ class _ForgotPasswordState extends ConsumerState<ForgotPassword> {
 
     return SafeArea(
       child: Scaffold(
+        appBar: AppBarBasic(
+          seeConnexion: false,
+          text: 'Mot de passe oublié',
+          automaticallyImplyLeading: true,
+        ),
         body: Center(
           child: Container(
             padding: const EdgeInsets.all(20.0),
