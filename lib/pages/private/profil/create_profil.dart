@@ -10,18 +10,19 @@ class CreateProfil extends ConsumerStatefulWidget {
 }
 
 class _CreateProfilState extends ConsumerState<CreateProfil> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: const [
-                /// creation profil
-                ProfilCreate(),
-              ],
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                children: const [
+                  /// creation profil
+                  ProfilCreate(),
+                ],
+              ),
             ),
           ),
         ),

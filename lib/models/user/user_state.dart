@@ -65,6 +65,10 @@ class UserState extends ChangeNotifier {
     await _auth.sendSignInLinkToEmail(email: email, actionCodeSettings: action);
   }
 
+  /// envoie email pour reset mot de passe
+  Future<void> sendMailResetPassword(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
 }
 
 /// state de la cass UserState

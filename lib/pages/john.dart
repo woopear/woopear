@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:woopear/models/user/widgets/signup/signup.dart';
-import 'package:woopear/models/user/widgets/signin/signin.dart';
 
 class John extends ConsumerStatefulWidget {
   const John({Key? key}) : super(key: key);
@@ -18,10 +16,7 @@ class _JohnState extends ConsumerState<John> {
         body: SingleChildScrollView(
           child: Container(
             child: Column(
-              children: const [
-                Signup(),
-                Signin(),
-              ],
+              children: const [],
             ),
           ),
         ),

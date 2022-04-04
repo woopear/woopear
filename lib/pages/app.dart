@@ -18,8 +18,9 @@ class _ConnexionState extends ConsumerState<AppAcces> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
               child: ref.watch(userCurrentStream).when(
                     data: (data) {
                       if (data != null) {
@@ -32,7 +33,9 @@ class _ConnexionState extends ConsumerState<AppAcces> {
                     },
                     error: (error, stack) => const WaitingError(),
                     loading: () => const WaitingData(),
-                  )),
+                  ),
+            ),
+          ),
         ),
       ),
     );

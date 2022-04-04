@@ -17,7 +17,8 @@ class UserConst {
   static String createMessageSucces = 'Création réussis';
   static String createMessageRoleError = "Vous devez selectionner un role";
   static String createMessageEmailError = "L'email existe déjà";
-  static String createMessageSendEmailError = "Impossible d'envoyer l'email de connexion";
+  static String createMessageSendEmailError =
+      "Impossible d'envoyer l'email de connexion";
   static String createMessagePasswordError =
       'Le mot de passe fourni est trop faible';
   static String createMessageError = "Impossible de creer l'utilisateur";
@@ -37,7 +38,8 @@ class UserConst {
   static String createPlaceholderDropdownRole = "Selectionnez un role *";
   static String createBtnSeeFormCompanie = "Ajouter une entreprise";
   static String createBtnCloseFormCompanie = "Fermer";
-  static String createUrlRedirectSendMail = "http://localhost:52271/#/createaccount";
+  static String createUrlRedirectSendMail =
+      "http://localhost:52271/#/createaccount";
 
   /// creation companie
   static String createCompanieTitleForm = "Ajout d'une entreprise";
@@ -48,4 +50,12 @@ class UserConst {
   static String createCompanieInputCodePostCompanie = "Code postal";
   static String createCompanieInputCityCompanie = "Ville";
   static String createCompanieInputLogoCompanie = "Image entreprise";
+
+  /// mot de passe oublier
+  static String forgotMessageError = "Une erreur est suvenue rééssayer !";
+  static String forgotMessageSucces = "Email envoyé avec succès !";
+  static String forgotInputEmail = "Votre addresse e-mail *";
+  static String forgotTextInfoForm = "Recevez un e-mail, pour modiifer votre mot de passe.";
+  static String forgotInfoForm = "* Champs obligatoire";
+  static String forgotBtn= "ENVOYER";
 }

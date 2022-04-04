@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/user/user_const.dart';
@@ -61,8 +62,33 @@ class _SigninFormState extends ConsumerState<SigninForm> {
   /// connexion utilisateur + ecoute profil
   Future<void> connexionUser(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      /// connexion user
-      await ref.watch(userChange).connexionUser(_email, _password);
+      try {
+        /// connexion user
+        await ref.watch(userChange).connexionUser(_email, _password);
+
+        /// * l'acces à la partie app ce fait toute seul
+        /// * car il ecoute la connexion et affiche le widget
+        /// * en fonction
+      } on FirebaseAuthException catch (e) {
+        /// email errorné
+        if (e.code == 'user-not-found') {
+          NotificationBasic(
+            text: UserConst.connexionMessageEmailError,
+            error: true,
+          ).notification(context);
+          Navigator.of(context, rootNavigator: true).pop();
+          throw Exception(UserConst.connexionMessageEmailError);
+        } else if (e.code == 'wrong-password') {
+          /// mot de passe érroné
+          NotificationBasic(
+            text: UserConst.connexionMessagePasswordError,
+            error: true,
+          ).notification(context);
+          Navigator.of(context, rootNavigator: true).pop();
+          throw Exception(UserConst.connexionMessagePasswordError);
+        }
+        Navigator.of(context, rootNavigator: true).pop();
+      }
 
       // rest le form
       resetInput();
@@ -78,6 +104,7 @@ class _SigninFormState extends ConsumerState<SigninForm> {
         text: UserConst.connexionMessageError,
         error: true,
       ).notification(context);
+       Navigator.of(context, rootNavigator: true).pop();
     }
   }
 
