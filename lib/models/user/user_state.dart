@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woo_firestore_crud/woo_firestore_crud.dart';
 import 'package:woopear/models/profil/profil_schema.dart';
 import 'package:woopear/models/profil/profil_state.dart';
 import 'package:woopear/models/user/user_const.dart';
 
 class UserState extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final WooFirestore _firestore = WooFirestore.instance;
   final ProfilState profil = ProfilState();
   late Stream<User?> _userCurrent;
 
@@ -68,6 +70,12 @@ class UserState extends ChangeNotifier {
   /// envoie email pour reset mot de passe
   Future<void> sendMailResetPassword(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
+  }
+
+  /// suppression user auth firebase
+  Future<void> deleteUser(String uid, String idProfil) async {
+    await _auth.currentUser!.delete();
+    await profil.deleteProfil(idProfil);
   }
 }
 

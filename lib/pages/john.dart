@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/models/profil/widgets/profil_list/profil_list.dart';
 
 class John extends ConsumerStatefulWidget {
   const John({Key? key}) : super(key: key);
@@ -16,7 +17,9 @@ class _JohnState extends ConsumerState<John> {
         body: SingleChildScrollView(
           child: Container(
             child: Column(
-              children: const [],
+              children: const [
+                ProfilList(),
+              ],
             ),
           ),
         ),

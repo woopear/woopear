@@ -39,7 +39,7 @@ class UserConst {
   static String createBtnSeeFormCompanie = "Ajouter une entreprise";
   static String createBtnCloseFormCompanie = "Fermer";
   static String createUrlRedirectSendMail =
-      "http://localhost:52271/#/createaccount";
+      "http://localhost:60589/#/create/account";
 
   /// creation companie
   static String createCompanieTitleForm = "Ajout d'une entreprise";

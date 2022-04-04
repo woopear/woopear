@@ -22,8 +22,8 @@ class _ConnexionState extends ConsumerState<AppAcces> {
           child: SingleChildScrollView(
             child: Container(
               child: ref.watch(userCurrentStream).when(
-                    data: (data) {
-                      if (data != null) {
+                    data: (user) {
+                      if (user != null) {
                         /// dashboard
                         return const Dashboard();
                       } else {
