@@ -72,7 +72,7 @@ class _ProfilCreateFormState extends ConsumerState<ProfilCreateForm> {
               libelle: _role!.libelle, description: _role!.description));
 
       /// creation profil
-      await ref.watch(ProfilChange).addProfil(newProfil);
+      await ref.watch(profilChange).addProfil(newProfil);
 
       /// envoie mail
       await ref.watch(userChange).sendMailForFinishAccount(_email.text.trim());

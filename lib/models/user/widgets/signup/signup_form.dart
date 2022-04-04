@@ -116,7 +116,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
     if (_formKey.currentState!.validate()) {
       /// recupere profi par rapport à l'email fournis
       final profil = await ref
-          .watch(ProfilChange)
+          .watch(profilChange)
           .getProfilForCreateAuthForTestEmail(_email.text);
 
       if (profil == null || profil.uid != '') {

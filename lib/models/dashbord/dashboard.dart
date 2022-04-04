@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/models/profil/profil_state.dart';
 import 'package:woopear/models/user/user_state.dart';
 import 'package:woopear/utils/config/routes.dart';
 
@@ -13,10 +14,11 @@ class Dashboard extends ConsumerStatefulWidget {
 class _DashboardState extends ConsumerState<Dashboard> {
   @override
   Widget build(BuildContext context) {
+  final user = ref.watch(profilCurrentProvider);
     return Container(
       child: Column(
         children: [
-          const Text('dashboard'),
+          Text(user?.firstName ?? ''),
           ElevatedButton(
             onPressed: () async {
               await ref.watch(userChange).disconnectUser();

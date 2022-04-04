@@ -62,8 +62,6 @@ class _SigninFormState extends ConsumerState<SigninForm> {
       /// connexion user
       await ref.watch(userChange).connexionUser(_email, _password);
 
-      /// TODO: recuperation et ecoute profil
-
       // rest le form
       resetInput();
 
