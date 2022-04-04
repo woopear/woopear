@@ -13,11 +13,7 @@ class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, Routes().connexion);
-          },
-          child: const Text('Connexion')),
+      child: const Text('home')
     );
   }
 }

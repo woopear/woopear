@@ -43,8 +43,26 @@ class ProfilSchema {
     String phoneNumber = data['phoneNumber'] ?? '';
     String avatar = data['avatar'] ?? '';
     String uid = data['uid'];
-    CompanieSchema companie = data['companie'] ?? '';
-    RoleSchema role = data['role'];
+    CompanieSchema companie = data['companie'] != null
+        ? CompanieSchema(
+            codeNaf: data['companie']['codeNaf'],
+            siret: data['companie']['siret'],
+            denomination: data['companie']['denomination'],
+            address: data['companie']['address'],
+            city: data['companie']['city'],
+            codePost: data['companie']['codePost'],
+            logo: data['companie']['logo'],
+          )
+        : CompanieSchema(codeNaf: '', siret: '', denomination: '');
+    RoleSchema role = data['role'] != null
+        ? RoleSchema(
+            libelle: data['role']['libelle'],
+            description: data['role']['description'],
+          )
+        : RoleSchema(
+            libelle: '',
+            description: '',
+          );
 
     return ProfilSchema(
       id: documentId,
@@ -74,7 +92,6 @@ class ProfilSchema {
       'codePost': codePost,
       'phoneNumber': phoneNumber ?? '',
       'avatar': avatar ?? '',
-      /// TODO: companie en test si à la récuperation cela bug nous changerons
       'companie': companie?.toMap(),
       'role': role.toMap(),
       'uid': uid,

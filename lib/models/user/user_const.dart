@@ -13,7 +13,7 @@ class UserConst {
   static String connexionInfoForm = "* Champs obligatoire";
 
   /// creation user
-  static String createTitle = 'Création utilisateur';
+  static String createTitle = 'Créer mon compte Woopear';
   static String createMessageSucces = 'Création avec succès et email envoyé avec succès';
   static String createMessageRoleError = "Vous devez selectionner un role";
   static String createMessageEmailError = "L'email existe déjà";
@@ -37,7 +37,7 @@ class UserConst {
   static String createPlaceholderDropdownRole = "Selectionnez un role *";
   static String createBtnSeeFormCompanie = "Ajouter une entreprise";
   static String createBtnCloseFormCompanie = "Fermer";
-  static String createUrlRedirectSendMail = "http://localhost:52271/#/john";
+  static String createUrlRedirectSendMail = "http://localhost:52271/#/createaccount";
 
   /// creation companie
   static String createCompanieTitleForm = "Ajout d'une entreprise";

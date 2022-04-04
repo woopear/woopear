@@ -6,9 +6,23 @@ import 'package:woopear/utils/fire/firestore_path.dart';
 
 class ProfilState extends ChangeNotifier {
   final WooFirestore _firestore = WooFirestore.instance;
-  ProfilSchema? _profil;
+  ProfilSchema? _profilCurrent;
 
-  ProfilSchema? get profil => _profil;
+  ProfilSchema? get profilCurrent => _profilCurrent;
+
+  /// recuperation du profil par rapport à l'email que l'utilisateur
+  /// va utiliser pour creer son compte il doit correspondre
+  Future<ProfilSchema?> getProfilForCreateAuthForTestEmail(String email) async {
+    final profil = await _firestore.getCol(
+      path: FirestorePath.profils(),
+      builder: (data, documentId) => ProfilSchema.fromMap(data, documentId),
+      queryBuilder: (query) => query.where('email', isEqualTo: email),
+    );
+    if (profil == null) {
+      return null;
+    }
+    return profil[0];
+  }
 
   /// ajoute un profil
   Future<void> addProfil(ProfilSchema profil) async {
@@ -18,9 +32,17 @@ class ProfilState extends ChangeNotifier {
     );
   }
 
+  /// modifie profil
+  Future<void> updateProfil(ProfilSchema profil, String idProfil) async {
+    await _firestore.update(
+      path: FirestorePath.profil(idProfil),
+      data: profil.toMap(),
+    );
+  }
+
   /// reset le stockage du profil du user connecté
   void resetProfil() {
-    _profil = null;
+    _profilCurrent = null;
   }
 }
 

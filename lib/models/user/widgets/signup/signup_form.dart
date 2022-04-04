@@ -7,11 +7,11 @@ import 'package:woopear/models/profil/profil_state.dart';
 import 'package:woopear/models/profil/role/role_schema.dart';
 import 'package:woopear/models/user/user_const.dart';
 import 'package:woopear/models/user/user_state.dart';
-import 'package:woopear/models/user/widgets/signup/signup_dropdown_role.dart';
 import 'package:woopear/models/user/widgets/signup/signup_form_companie.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
+import 'package:woopear/widget_shared/input_password.dart';
 import 'package:woopear/widget_shared/notification_basic.dart';
 
 class SignupForm extends ConsumerStatefulWidget {
@@ -34,6 +34,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   final TextEditingController _codePost = TextEditingController(text: '');
   final TextEditingController _city = TextEditingController(text: '');
   final TextEditingController _phoneNumber = TextEditingController(text: '');
+  final TextEditingController _password = TextEditingController(text: '');
 
   /// companie
   final TextEditingController _denomination = TextEditingController(text: '');
@@ -58,6 +59,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   @override
   void dispose() {
     _email.dispose();
+    _password.dispose();
     _firstName.dispose();
     _lastName.dispose();
     _address.dispose();
@@ -65,13 +67,6 @@ class _SignupFormState extends ConsumerState<SignupForm> {
     _city.dispose();
     _phoneNumber.dispose();
     super.dispose();
-  }
-
-  /// selected role
-  void _selectedRole(RoleSchema? value) {
-    setState(() {
-      _role = value;
-    });
   }
 
   /// afficher / cacher password
@@ -87,6 +82,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
     /// user
     _formKey.currentState!.reset();
     _email.clear();
+    _password.clear();
     _firstName.clear();
     _lastName.clear();
     _address.clear();
@@ -117,19 +113,21 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   /// creation d'un utilisateur
   Future<void> _createUser(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      /// si role est nul throw erreur
-      if (_role == null) {
+      /// recupere profi par rapport à l'email fournis
+      final profil = await ref.watch(ProfilChange).getProfilForCreateAuthForTestEmail(_email.text);
+
+      if(profil == null || profil.uid != '') {
         // notification error
-        NotificationBasic(
-          text: UserConst.createMessageRoleError,
-          error: true,
-        ).notification(context);
-        throw Exception(UserConst.createMessageRoleError);
+      NotificationBasic(
+        text: UserConst.createMessageError,
+        error: true,
+      ).notification(context);
+      throw Exception(UserConst.createMessageError);
       }
 
       /// creation profil
       ProfilSchema newProfil = ProfilSchema(
-        email: _email.text.trim(),
+        email: profil.email,
         firstName: _firstName.text.trim(),
         lastName: _lastName.text.trim(),
         userName: _firstName.text.trim() + ' ' + _lastName.text.trim(),
@@ -137,10 +135,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
         city: _city.text.trim(),
         codePost: _codePost.text.trim(),
         uid: '',
-        role: RoleSchema(
-          libelle: _role!.libelle,
-          description: _role!.description,
-        ),
+        role: profil.role
       );
 
       /// si companie creer companie
@@ -171,13 +166,10 @@ class _SignupFormState extends ConsumerState<SignupForm> {
 
       /// creation fonction de creation user + profil
       try {
-        /// creation profil
-        ref.watch(ProfilChange).addProfil(newProfil);
-
-        /// envoie connexion user avec email
-        await ref.watch(userChange).SendConnexionUser(_email);
+        /// creation user + profil
+        await ref.watch(userChange).createAuth(_email, _password, newProfil, profil.id!);
       } on FirebaseAuthException catch (e) {
-        if(e.code == 'invalid-email'){
+        if (e.code == 'invalid-email') {
           NotificationBasic(
             text: UserConst.createMessageEmailError,
             error: true,
@@ -185,6 +177,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
           Navigator.of(context, rootNavigator: true).pop();
           throw Exception(UserConst.createMessageEmailError);
         }
+
         /// email errorné
         if (e.code == 'user-not-found') {
           NotificationBasic(
@@ -229,19 +222,24 @@ class _SignupFormState extends ConsumerState<SignupForm> {
         key: _formKey,
         child: Column(
           children: [
-            /// select role
-            Align(
-              alignment: Alignment.centerLeft,
-              child: SignupDropdownRole(
-                  dropdownValue: _role, onChanged: _selectedRole),
-            ),
-
             /// email
             InputBasic(
               controller: _email,
               labelText: UserConst.createLabelInputEmail,
               validator: (value) => WooValidator.validateEmail(
                 textError: WooValidator.errorInputEmail,
+                value: value,
+              ),
+            ),
+
+            /// input password
+            InputPassword(
+              obscureText: _obscureText!,
+              labelText: UserConst.connexionLabelInputPassword,
+              controller: _password,
+              onTap: _seePassword,
+              validator: (value) => WooValidator.validatePassword(
+                textError: WooValidator.errorInputPassword,
                 value: value,
               ),
             ),
