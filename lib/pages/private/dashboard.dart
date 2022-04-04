@@ -12,6 +12,18 @@ class _DashboardState extends ConsumerState<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: const [
+                Text('dashboard')
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
