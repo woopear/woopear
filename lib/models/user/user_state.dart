@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:woopear/models/profil/profil_schema.dart';
 import 'package:woopear/models/profil/profil_state.dart';
+import 'package:woopear/models/user/user_const.dart';
 
 class UserState extends ChangeNotifier {
   final FirebaseAuth _user = FirebaseAuth.instance;
@@ -19,17 +19,16 @@ class UserState extends ChangeNotifier {
   }
 
   // fonction création user
-  Future<void> createUser(TextEditingController email,
-      TextEditingController password, ProfilSchema profilSchema) async {
-    // création du user de firebase
-    final usercurrent = await _user.createUserWithEmailAndPassword(
-      email: email.text.trim(),
-      password: password.text.trim(),
+  Future<void> SendConnexionUser(TextEditingController email) async {
+    /// creation config envoie email
+    ActionCodeSettings acs = ActionCodeSettings(
+      url: UserConst.createUrlRedirectSendMail,
+      handleCodeInApp: true,
     );
 
-    /// creation user data firestore
-    profilSchema.uid = usercurrent.user!.uid;
-    profil.addProfil(profilSchema);
+    /// envoie email de connection
+    await _user.sendSignInLinkToEmail(
+        email: email.text.trim(), actionCodeSettings: acs);
     notifyListeners();
   }
 
@@ -55,4 +54,3 @@ class UserState extends ChangeNotifier {
 
 /// state de la cass UserState
 final userChange = ChangeNotifierProvider<UserState>((ref) => UserState());
-

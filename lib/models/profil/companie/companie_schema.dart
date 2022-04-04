@@ -19,9 +19,9 @@ class CompanieSchema {
 
   Map<String, dynamic> toMap() {
     return {
-      codeNaf: codeNaf,
-      siret: siret,
-      denomination: denomination,
+      'codeNaf': codeNaf,
+      'siret': siret,
+      'denomination': denomination,
       'address': address ?? '',
       'codePost': codePost ?? '',
       'city': city ?? '',

@@ -1,13 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/models/profil/companie/companie_schema.dart';
+import 'package:woopear/models/profil/profil_schema.dart';
+import 'package:woopear/models/profil/profil_state.dart';
 import 'package:woopear/models/profil/role/role_schema.dart';
 import 'package:woopear/models/user/user_const.dart';
+import 'package:woopear/models/user/user_state.dart';
 import 'package:woopear/models/user/widgets/signup/signup_dropdown_role.dart';
 import 'package:woopear/models/user/widgets/signup/signup_form_companie.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
-import 'package:woopear/widget_shared/input_password.dart';
 import 'package:woopear/widget_shared/notification_basic.dart';
 
 class SignupForm extends ConsumerStatefulWidget {
@@ -24,7 +28,6 @@ class _SignupFormState extends ConsumerState<SignupForm> {
 
   /// user
   final TextEditingController _email = TextEditingController(text: '');
-  final TextEditingController _password = TextEditingController(text: '');
   final TextEditingController _firstName = TextEditingController(text: '');
   final TextEditingController _lastName = TextEditingController(text: '');
   final TextEditingController _address = TextEditingController(text: '');
@@ -55,7 +58,6 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   @override
   void dispose() {
     _email.dispose();
-    _password.dispose();
     _firstName.dispose();
     _lastName.dispose();
     _address.dispose();
@@ -85,7 +87,6 @@ class _SignupFormState extends ConsumerState<SignupForm> {
     /// user
     _formKey.currentState!.reset();
     _email.clear();
-    _password.clear();
     _firstName.clear();
     _lastName.clear();
     _address.clear();
@@ -116,7 +117,6 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   /// creation d'un utilisateur
   Future<void> _createUser(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      /// TODO: creation role
       /// si role est nul throw erreur
       if (_role == null) {
         // notification error
@@ -127,11 +127,82 @@ class _SignupFormState extends ConsumerState<SignupForm> {
         throw Exception(UserConst.createMessageRoleError);
       }
 
-      /// TODO: si companie creer companie
-      /// TODO: si addresse de la companie n'est pas renseigner
-      /// TODO: mettre addresse user
+      /// creation profil
+      ProfilSchema newProfil = ProfilSchema(
+        email: _email.text.trim(),
+        firstName: _firstName.text.trim(),
+        lastName: _lastName.text.trim(),
+        userName: _firstName.text.trim() + ' ' + _lastName.text.trim(),
+        address: _address.text.trim(),
+        city: _city.text.trim(),
+        codePost: _codePost.text.trim(),
+        uid: '',
+        role: RoleSchema(
+          libelle: _role!.libelle,
+          description: _role!.description,
+        ),
+      );
 
-      /// TODO: creation fonction de creation user + profil
+      /// si companie creer companie
+      /// si addresse de la companie n'est pas renseigner
+      /// mettre addresse user
+      if (_denomination.text != '' &&
+          _siret.text != '' &&
+          _codeNaf.text != '') {
+        /// on creer la companie
+        CompanieSchema newCompanie = CompanieSchema(
+            codeNaf: _codeNaf.text.trim(),
+            siret: _siret.text.trim(),
+            denomination: _denomination.text.trim(),
+            address: _addressCompanie.text != ''
+                ? _addressCompanie.text.trim()
+                : newProfil.address,
+            codePost: _codePostCompanie.text != ''
+                ? _codePostCompanie.text.trim()
+                : newProfil.codePost,
+            city: _cityCompanie.text != ''
+                ? _cityCompanie.text.trim()
+                : newProfil.city,
+            logo: '');
+
+        /// on affecte la companie au user
+        newProfil.companie = newCompanie;
+      }
+
+      /// creation fonction de creation user + profil
+      try {
+        /// creation profil
+        ref.watch(ProfilChange).addProfil(newProfil);
+
+        /// envoie connexion user avec email
+        await ref.watch(userChange).SendConnexionUser(_email);
+      } on FirebaseAuthException catch (e) {
+        if(e.code == 'invalid-email'){
+          NotificationBasic(
+            text: UserConst.createMessageEmailError,
+            error: true,
+          ).notification(context);
+          Navigator.of(context, rootNavigator: true).pop();
+          throw Exception(UserConst.createMessageEmailError);
+        }
+        /// email errorné
+        if (e.code == 'user-not-found') {
+          NotificationBasic(
+            text: UserConst.createMessageEmailError,
+            error: true,
+          ).notification(context);
+          Navigator.of(context, rootNavigator: true).pop();
+          throw Exception(UserConst.createMessageEmailError);
+        } else if (e.code == 'wrong-password') {
+          /// mot de passe érroné
+          NotificationBasic(
+            text: UserConst.createMessagePasswordError,
+            error: true,
+          ).notification(context);
+          Navigator.of(context, rootNavigator: true).pop();
+          throw Exception(UserConst.createMessagePasswordError);
+        }
+      }
 
       /// reset input form
       _resetAllInput();
@@ -171,18 +242,6 @@ class _SignupFormState extends ConsumerState<SignupForm> {
               labelText: UserConst.createLabelInputEmail,
               validator: (value) => WooValidator.validateEmail(
                 textError: WooValidator.errorInputEmail,
-                value: value,
-              ),
-            ),
-
-            /// password
-            InputPassword(
-              controller: _password,
-              obscureText: _obscureText!,
-              labelText: UserConst.createLabelInputPassword,
-              onTap: _seePassword,
-              validator: (value) => WooValidator.validatePassword(
-                textError: WooValidator.errorInputPassword,
                 value: value,
               ),
             ),

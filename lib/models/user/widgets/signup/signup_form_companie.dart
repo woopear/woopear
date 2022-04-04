@@ -72,19 +72,19 @@ class _SignupFormCompanieState extends ConsumerState<SignupFormCompanie> {
 
           /// input addresse
           InputBasic(
-            controller: widget.codeNaf,
+            controller: widget.addressCompanie!,
             labelText: UserConst.createCompanieInputAddressCompanie,
           ),
 
           /// input codePost
           InputBasic(
-            controller: widget.codeNaf,
+            controller: widget.codePostCompanie!,
             labelText: UserConst.createCompanieInputCodePostCompanie,
           ),
 
           /// input city
           InputBasic(
-            controller: widget.codeNaf,
+            controller: widget.cityCompanie!,
             labelText: UserConst.createCompanieInputCityCompanie,
           ),
 

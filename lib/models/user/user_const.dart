@@ -14,9 +14,10 @@ class UserConst {
 
   /// creation user
   static String createTitle = 'Création utilisateur';
-  static String createMessageSucces = 'Création avec succès';
+  static String createMessageSucces = 'Création avec succès et email envoyé avec succès';
   static String createMessageRoleError = "Vous devez selectionner un role";
   static String createMessageEmailError = "L'email existe déjà";
+  static String createMessageSendEmailError = "Impossible d'envoyer l'email de connexion";
   static String createMessagePasswordError =
       'Le mot de passe fourni est trop faible';
   static String createMessageError = "Impossible de creer l'utilisateur";
@@ -36,6 +37,7 @@ class UserConst {
   static String createPlaceholderDropdownRole = "Selectionnez un role *";
   static String createBtnSeeFormCompanie = "Ajouter une entreprise";
   static String createBtnCloseFormCompanie = "Fermer";
+  static String createUrlRedirectSendMail = "http://localhost:52271/#/john";
 
   /// creation companie
   static String createCompanieTitleForm = "Ajout d'une entreprise";
