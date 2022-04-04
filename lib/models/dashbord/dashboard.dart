@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/models/user/user_state.dart';
+import 'package:woopear/utils/config/routes.dart';
+
+class Dashboard extends ConsumerStatefulWidget {
+  const Dashboard({Key? key}) : super(key: key);
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _DashboardState();
+}
+
+class _DashboardState extends ConsumerState<Dashboard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          const Text('dashboard'),
+          ElevatedButton(
+            onPressed: () async {
+              await ref.watch(userChange).disconnectUser();
+            },
+            child: const Text('deconnection'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              Navigator.popAndPushNamed(context, Routes().createProfil);
+            },
+            child: const Text('creation profil'),
+          ),
+        ],
+      ),
+    );
+  }
+}

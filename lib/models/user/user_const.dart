@@ -1,7 +1,7 @@
 class UserConst {
   /// connexion user
   static String connexionTitle = "Connexion Woopear";
-  static String connexionMessageSucces = 'Connexion avec réussis';
+  static String connexionMessageSucces = 'Connexion réussis';
   static String connexionMessageEmailError = "Erreur identifiant";
   static String connexionMessagePasswordError = 'Erreur mot de passe';
   static String connexionMessageError = "Impossible de vous connecter";
@@ -14,7 +14,7 @@ class UserConst {
 
   /// creation user
   static String createTitle = 'Créer mon compte Woopear';
-  static String createMessageSucces = 'Création avec succès et email envoyé avec succès';
+  static String createMessageSucces = 'Création réussis';
   static String createMessageRoleError = "Vous devez selectionner un role";
   static String createMessageEmailError = "L'email existe déjà";
   static String createMessageSendEmailError = "Impossible d'envoyer l'email de connexion";

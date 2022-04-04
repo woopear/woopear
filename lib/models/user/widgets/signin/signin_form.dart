@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/user/user_const.dart';
+import 'package:woopear/models/user/user_state.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
@@ -58,7 +59,10 @@ class _SigninFormState extends ConsumerState<SigninForm> {
   /// connexion utilisateur + ecoute profil
   Future<void> connexionUser(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      /// TODO: creation fonction de connexion user et ecoute profil
+      /// connexion user
+      await ref.watch(userChange).connexionUser(_email, _password);
+
+      /// TODO: recuperation et ecoute profil
 
       // rest le form
       resetInput();

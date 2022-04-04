@@ -8,6 +8,7 @@ import 'package:woopear/models/profil/role/role_schema.dart';
 import 'package:woopear/models/user/user_const.dart';
 import 'package:woopear/models/user/user_state.dart';
 import 'package:woopear/models/user/widgets/signup/signup_form_companie.dart';
+import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
@@ -114,29 +115,30 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   Future<void> _createUser(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       /// recupere profi par rapport à l'email fournis
-      final profil = await ref.watch(ProfilChange).getProfilForCreateAuthForTestEmail(_email.text);
+      final profil = await ref
+          .watch(ProfilChange)
+          .getProfilForCreateAuthForTestEmail(_email.text);
 
-      if(profil == null || profil.uid != '') {
+      if (profil == null || profil.uid != '') {
         // notification error
-      NotificationBasic(
-        text: UserConst.createMessageError,
-        error: true,
-      ).notification(context);
-      throw Exception(UserConst.createMessageError);
+        NotificationBasic(
+          text: UserConst.createMessageError,
+          error: true,
+        ).notification(context);
+        throw Exception(UserConst.createMessageError);
       }
 
       /// creation profil
       ProfilSchema newProfil = ProfilSchema(
-        email: profil.email,
-        firstName: _firstName.text.trim(),
-        lastName: _lastName.text.trim(),
-        userName: _firstName.text.trim() + ' ' + _lastName.text.trim(),
-        address: _address.text.trim(),
-        city: _city.text.trim(),
-        codePost: _codePost.text.trim(),
-        uid: '',
-        role: profil.role
-      );
+          email: profil.email,
+          firstName: _firstName.text.trim(),
+          lastName: _lastName.text.trim(),
+          userName: _firstName.text.trim() + ' ' + _lastName.text.trim(),
+          address: _address.text.trim(),
+          city: _city.text.trim(),
+          codePost: _codePost.text.trim(),
+          uid: '',
+          role: profil.role);
 
       /// si companie creer companie
       /// si addresse de la companie n'est pas renseigner
@@ -167,7 +169,12 @@ class _SignupFormState extends ConsumerState<SignupForm> {
       /// creation fonction de creation user + profil
       try {
         /// creation user + profil
-        await ref.watch(userChange).createAuth(_email, _password, newProfil, profil.id!);
+        await ref
+            .watch(userChange)
+            .createAuth(_email, _password, newProfil, profil.id!);
+
+        /// on va sur la page d'acces du compte
+        Navigator.popAndPushNamed(context, Routes().appAcces);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'invalid-email') {
           NotificationBasic(

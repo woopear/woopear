@@ -8,6 +8,15 @@ import 'package:woopear/models/user/user_const.dart';
 class UserState extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final ProfilState profil = ProfilState();
+  late Stream<User?> _userCurrent;
+
+  Stream<User?> get userCurrent => _userCurrent;
+
+  /// ecouteur si user est connecter
+  Stream<void>? lisenChangeAuth() {
+    _userCurrent = _auth.authStateChanges();
+    return null;
+  }
 
   /// fonction de connection du user
   Future<void> connexionUser(
@@ -25,13 +34,13 @@ class UserState extends ChangeNotifier {
       TextEditingController password,
       ProfilSchema profilSchema,
       String idProfil) async {
-    // création du user de firebase
+    // création du user de firebase + connexion
     final usercurrent = await _auth.createUserWithEmailAndPassword(
       email: email.text.trim(),
       password: password.text.trim(),
     );
 
-    /// creation user data firestore
+    /// update profil avec le uid recupere du currentUser
     profilSchema.uid = usercurrent.user!.uid;
     profil.updateProfil(profilSchema, idProfil);
     notifyListeners();
@@ -51,22 +60,18 @@ class UserState extends ChangeNotifier {
       url: UserConst.createUrlRedirectSendMail,
       handleCodeInApp: true,
     );
+
     /// envoie mail
     await _auth.sendSignInLinkToEmail(email: email, actionCodeSettings: action);
   }
 
-  /// fonction pour effacer un user
-  Future<void> deleteUser() async {
-    try {
-      await FirebaseAuth.instance.currentUser!.delete();
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'requires-recent-login') {
-        print(
-            'The user must reauthenticate before this operation can be executed.');
-      }
-    }
-  }
 }
 
 /// state de la cass UserState
 final userChange = ChangeNotifierProvider<UserState>((ref) => UserState());
+
+/// state du currentUser de auth
+final userCurrentStream = StreamProvider<User?>((ref) {
+  ref.watch(userChange).lisenChangeAuth();
+  return ref.watch(userChange).userCurrent;
+});
