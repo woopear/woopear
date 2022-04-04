@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:woopear/models/profil/profil_schema.dart';
 import 'package:woopear/models/profil/profil_state.dart';
 
@@ -35,7 +36,20 @@ class _ProfilListItemState extends ConsumerState<ProfilListItem> {
         children: [
           /// nom prenom
           Expanded(
-            child: Text(widget.item.firstName + ' ' + widget.item.lastName),
+            child: Text(
+              widget.item.userName != ''
+                  ? widget.item.userName!
+                  : 'Pas encore de nom',
+              style: GoogleFonts.nunito(fontSize: 14.0),
+            ),
+          ),
+          /// email
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Text(
+              widget.item.email != '' ? widget.item.email : "Pas d'email",
+              style: GoogleFonts.nunito(fontSize: 14.0),
+            ),
           ),
 
           /// action
