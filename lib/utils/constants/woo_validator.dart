@@ -7,6 +7,9 @@ class WooValidator {
   static String errorInputAddresse = "Veuillez entrer une addresse valide";
   static String errorInputCodePost = "Veuillez entrer un code postal valide";
   static String errorInputCity = "Veuillez entrer une ville valide";
+  static String errorInputDenomination = "Veuillez entrer une dénomination valide";
+  static String errorInputSiret = "Veuillez entrer un numero de siret valide";
+  static String errorInputCodeNaf = "Veuillez entrer un code naf valide";
 
   /// regex pour validator email
   static final RegExp _emailRegex =

@@ -47,15 +47,21 @@ class _SigninFormState extends ConsumerState<SigninForm> {
     /// TODO: faire mot de passe oublié
   }
 
+  /// reset all input
+  void resetInput() {
+    // rest le form
+    _formKey.currentState!.reset();
+    _email.clear();
+    _password.clear();
+  }
+
   /// connexion utilisateur + ecoute profil
   Future<void> connexionUser(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       /// TODO: creation fonction de connexion user et ecoute profil
 
       // rest le form
-      _formKey.currentState!.reset();
-      _email.clear();
-      _password.clear();
+      resetInput();
 
       // notification succés
       NotificationBasic(
@@ -119,10 +125,11 @@ class _SigninFormState extends ConsumerState<SigninForm> {
             Align(
               alignment: Alignment.centerRight,
               child: BtnElevatedBasic(
-                  onPressed: () async {
-                    await connexionUser(context);
-                  },
-                  textBtn: UserConst.connexionBtn,),
+                onPressed: () async {
+                  await connexionUser(context);
+                },
+                textBtn: UserConst.connexionBtn,
+              ),
             ),
 
             /// text info formulaire
