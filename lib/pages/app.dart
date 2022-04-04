@@ -24,7 +24,7 @@ class _ConnexionState extends ConsumerState<AppAcces> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBarBasic(
-          seeConnexion: false,
+          seeConnexion: ref.watch(profilCurrentProvider) != null ? true : false,
           text: user != null ? 'Tableau de bord' : 'Connexion',
           automaticallyImplyLeading: true,
         ),
