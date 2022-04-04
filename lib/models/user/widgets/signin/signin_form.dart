@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/user/user_const.dart';
 import 'package:woopear/models/user/user_state.dart';
+import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
@@ -44,8 +45,9 @@ class _SigninFormState extends ConsumerState<SigninForm> {
   }
 
   /// mot de passe oublié
-  void forgotPassword() {
-    /// TODO: faire mot de passe oublié
+  void forgotPassword(BuildContext context) {
+    /// go to page mot de passe oublié
+    Navigator.popAndPushNamed(context, Routes().forgotPassword);
   }
 
   /// reset all input
@@ -114,7 +116,7 @@ class _SigninFormState extends ConsumerState<SigninForm> {
               child: Container(
                 margin: const EdgeInsets.only(bottom: 40.0, top: 20.0),
                 child: TextButton(
-                  onPressed: forgotPassword,
+                  onPressed: () => forgotPassword(context),
                   child: Text(
                     UserConst.connexionBtnPasswordForgot,
                     style: const TextStyle(fontSize: 12.0),
