@@ -38,6 +38,22 @@ class _DrawerBasicState extends ConsumerState<DrawerBasic> {
               colorText: Colors.white,
               onTap: () {},
             ),
+
+            /// separation avec info compte
+            SeparateItem(
+              heighTop: 20.0,
+              heighBottom: 20.0,
+              colorSeparate: Colors.white60,
+            ),
+
+            /// mon compte
+            ItemMenu(
+              text: 'Mon compte',
+              icon: Icons.account_circle_rounded,
+              colorIcon: Colors.white,
+              colorText: Colors.white,
+              onTap: () {},
+            ),
           ],
         ),
       ),
