@@ -23,7 +23,7 @@ class _ProfilListState extends ConsumerState<ProfilList> {
         /// title
         Container(
           margin: const EdgeInsets.only(bottom: 50.0),
-          child: const SubTitlePageAuth(text: 'liste des clients'),
+          child: const SubTitlePageAuth(text: 'Liste des clients'),
         ),
 
         /// liste clients

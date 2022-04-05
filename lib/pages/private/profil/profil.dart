@@ -18,6 +18,7 @@ class _CreateProfilState extends ConsumerState<ProfilPage> {
   bool _seeListProfil = true;
   bool _seeCreateProfil = false;
 
+  /// affiche la liste des clients
   void seeList() {
     setState(() {
       _seeListProfil = true;
@@ -25,6 +26,7 @@ class _CreateProfilState extends ConsumerState<ProfilPage> {
     });
   }
 
+  /// affiche la creation d'un profil
   void seeCreate() {
     setState(() {
       _seeListProfil = false;
