@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/models/content/widgets/content_cart.dart';
 
 class David extends ConsumerStatefulWidget {
   const David({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _DavidState extends ConsumerState<David> {
           child: Container(
             child: Column(
               children: const [
+                ContentCart()
               ],
             ),
           ),

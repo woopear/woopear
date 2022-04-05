@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:woopear/pages/app.dart';
 import 'package:woopear/pages/create_user.dart';
+import 'package:woopear/pages/david.dart';
 import 'package:woopear/pages/forgot_password.dart';
 import 'package:woopear/pages/home.dart';
 import 'package:woopear/pages/john.dart';
@@ -14,6 +15,7 @@ class Routes {
   final String _createProfil = '/app/profil/create';
   final String _forgotPassword = '/forgot/password';
   final String _john = '/john';
+  final String _david = '/david';
 
   /// les getters des routes
   String get home => _home;
@@ -22,6 +24,7 @@ class Routes {
   String get createProfil => _createProfil;
   String get forgotPassword => _forgotPassword;
   String get john => _john;
+  String get david => _david;
 
   /// retourne un widget en fonction de la routes
   Map<String, Widget Function(BuildContext)> urls() {
@@ -32,6 +35,7 @@ class Routes {
       _createProfil: (context) => const CreateProfil(),
       _forgotPassword: (context) => const ForgotPassword(),
       _john: (context) => const John(),
+      _david: (context) => const David(),
     };
   }
 }
