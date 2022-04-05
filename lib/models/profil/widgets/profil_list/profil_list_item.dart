@@ -58,7 +58,6 @@ class _ProfilListItemState extends ConsumerState<ProfilListItem> {
           /// voir
           IconButton(
             onPressed: () {
-              ///TODO : aller sur page profil
               Navigator.push(
                 context,
                 MaterialPageRoute(

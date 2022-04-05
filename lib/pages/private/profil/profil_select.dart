@@ -19,25 +19,30 @@ class _ProfilSelectState extends ConsumerState<ProfilSelect> {
       child: Scaffold(
         appBar: AppBarBasic(
           seeConnexion: false,
-          text: widget.profil.userName != '' ? widget.profil.userName! : 'Sans nom',
+          text: widget.profil.userName != ''
+              ? widget.profil.userName!
+              : 'Sans nom',
           automaticallyImplyLeading: true,
         ),
         body: SingleChildScrollView(
-            child: Center(
-              child: Container(
+          child: Center(
+            child: Container(
               child: Column(
                 children: [
                   /// image + nom prenom
-                  ProfilImage(urlAvatar: widget.profil.avatar!,)
-                  
+                  ProfilImage(
+                    urlAvatar: widget.profil.avatar!,
+                    profil: widget.profil,
+                  ),
+
                   /// les infos du profil
-                  
+
                   /// btn supprimer + modifier mot de passe
                 ],
               ),
             ),
-            ), 
           ),
+        ),
       ),
     );
   }
