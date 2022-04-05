@@ -59,15 +59,6 @@ class _ProfilListItemState extends ConsumerState<ProfilListItem> {
             icon: const Icon(Icons.visibility_rounded),
           ),
 
-          ///modification
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.edit_rounded,
-              color: Theme.of(context).colorScheme.tertiary,
-            ),
-          ),
-
           ///suppression
           IconButton(
             onPressed: () async {
