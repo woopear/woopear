@@ -5,6 +5,7 @@ import 'package:woopear/models/user/user_state.dart';
 import 'package:woopear/models/user/widgets/signin/signin.dart';
 import 'package:woopear/models/dashbord/dashboard.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
+import 'package:woopear/widget_shared/drawer_basic.dart';
 import 'package:woopear/widget_shared/waiting_data.dart';
 import 'package:woopear/widget_shared/waiting_error.dart';
 
@@ -23,6 +24,7 @@ class _ConnexionState extends ConsumerState<AppAcces> {
 
     return SafeArea(
       child: Scaffold(
+        drawer: user != null ? const DrawerBasic() : null,
         appBar: AppBarBasic(
           seeConnexion: ref.watch(profilCurrentProvider) != null ? true : false,
           text: user != null ? 'Tableau de bord' : 'Connexion',
