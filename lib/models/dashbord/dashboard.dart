@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/profil/profil_state.dart';
-import 'package:woopear/utils/config/routes.dart';
 
 class Dashboard extends ConsumerStatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -19,12 +18,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
         children: [
           Text(user?.firstName ?? ''),
           
-          ElevatedButton(
-            onPressed: () async {
-              Navigator.popAndPushNamed(context, Routes().createProfil);
-            },
-            child: const Text('creation profil'),
-          ),
+          
         ],
       ),
     );

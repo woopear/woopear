@@ -39,7 +39,9 @@ class _DrawerBasicState extends ConsumerState<DrawerBasic> {
               icon: Icons.people,
               colorIcon: Colors.white,
               colorText: Colors.white,
-              onTap: () {},
+              onTap: () {
+                 Navigator.pushNamed(context, Routes().profil);
+              },
             ),
 
             /// separation avec info compte

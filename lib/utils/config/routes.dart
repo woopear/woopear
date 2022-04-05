@@ -5,13 +5,13 @@ import 'package:woopear/pages/forgot_password.dart';
 import 'package:woopear/pages/home.dart';
 import 'package:woopear/pages/john.dart';
 import 'package:woopear/pages/private/account/account.dart';
-import 'package:woopear/pages/private/profil/create_profil.dart';
+import 'package:woopear/pages/private/profil/profil.dart';
 
 class Routes {
   /// les routes
   final String _home = '/';
   final String _appAcces = '/app';
-  final String _createProfil = '/app/profil/create';
+  final String _profil = '/app/profil';
   final String _account = '/app/account';
   final String _createUser = '/create/account';
   final String _forgotPassword = '/forgot/password';
@@ -21,7 +21,7 @@ class Routes {
   String get home => _home;
   String get appAcces => _appAcces;
   String get createUser => _createUser;
-  String get createProfil => _createProfil;
+  String get profil => _profil;
   String get forgotPassword => _forgotPassword;
   String get account => _account;
   String get john => _john;
@@ -32,7 +32,7 @@ class Routes {
       _home: (context) => const Home(),
       _appAcces: (context) => const AppAcces(),
       _createUser: (context) => const CreateUser(),
-      _createProfil: (context) => const CreateProfil(),
+      _profil: (context) => const ProfilPage(),
       _forgotPassword: (context) => const ForgotPassword(),
       _account: (context) => const Account(),
       _john: (context) => const John(),
