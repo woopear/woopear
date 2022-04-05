@@ -8,5 +8,7 @@ class FirestorePath {
   static String user(String uid) => 'users/$uid';
 
   /// content
+  static String contents() => 'contents';
   static String content(String idContent) => 'contents/$idContent';
+
 }
