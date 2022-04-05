@@ -4,6 +4,7 @@ import 'package:woopear/models/profil/profil_schema.dart';
 import 'package:woopear/models/profil/widgets/profil_image/profil_image.dart';
 import 'package:woopear/models/profil/widgets/profil_info.dart/profil_info.dart';
 import 'package:woopear/models/profil/widgets/profil_info_companie/profil_info_companie.dart';
+import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
 
 class ProfilSelect extends ConsumerStatefulWidget {
@@ -17,6 +18,9 @@ class ProfilSelect extends ConsumerStatefulWidget {
 class _ProfilSelectState extends ConsumerState<ProfilSelect> {
   @override
   Widget build(BuildContext context) {
+    /// on recupere la largeur de l'ecran
+    double _width = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBarBasic(
@@ -29,6 +33,7 @@ class _ProfilSelectState extends ConsumerState<ProfilSelect> {
         body: SingleChildScrollView(
           child: Center(
             child: Container(
+              width: _width > 700 ? 700.0 : double.infinity,
               margin: const EdgeInsets.only(bottom: 50.0),
               child: Column(
                 children: [
@@ -41,13 +46,32 @@ class _ProfilSelectState extends ConsumerState<ProfilSelect> {
                   /// info profil
                   ProfilInfo(profil: widget.profil),
 
+                  /// separateur
+                  Container(
+                    width: _width / 2,
+                    margin: const EdgeInsets.only(top: 50.0),
+                    child: const Divider(
+                      color: Colors.grey,
+                    ),
+                  ),
+
                   /// partie entreprise
-                  /// si entreprise on affiche sinon 
-                  /// btn ajouter entreprise, qui enverra sur la modification 
-                  /// profil où il y aura la creation/update companie
                   ProfilInfoCompanie(profil: widget.profil),
 
-                  /// btn supprimer + modifier mot de passe
+                  /// btn modifier mot de passe
+                  Container(
+                    margin: const EdgeInsets.only(top: 40.0),
+                    child: Column(
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, Routes().forgotPassword);
+                            },
+                            child: const Text('Modifier le mot de passe'))
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
