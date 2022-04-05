@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:woopear/models/profil/profil_schema.dart';
 import 'package:woopear/models/profil/profil_state.dart';
+import 'package:woopear/pages/private/profil/profil_select.dart';
 
 class ProfilListItem extends ConsumerStatefulWidget {
   ProfilSchema item;
@@ -43,6 +44,7 @@ class _ProfilListItemState extends ConsumerState<ProfilListItem> {
               style: GoogleFonts.nunito(fontSize: 14.0),
             ),
           ),
+
           /// email
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -55,7 +57,15 @@ class _ProfilListItemState extends ConsumerState<ProfilListItem> {
           /// action
           /// voir
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              ///TODO : aller sur page profil
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfilSelect(profil: widget.item),
+                ),
+              );
+            },
             icon: const Icon(Icons.visibility_rounded),
           ),
 
