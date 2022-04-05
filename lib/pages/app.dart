@@ -26,7 +26,7 @@ class _ConnexionState extends ConsumerState<AppAcces> {
       child: Scaffold(
         drawer: user != null ? const DrawerBasic() : null,
         appBar: AppBarBasic(
-          seeConnexion: ref.watch(profilCurrentProvider) != null ? true : false,
+          seeConnexion: user != null ? true : false,
           text: user != null ? 'Tableau de bord' : 'Connexion',
           automaticallyImplyLeading: true,
         ),

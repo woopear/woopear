@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/utils/config/routes.dart';
 
 class DrawerBasic extends ConsumerStatefulWidget {
   const DrawerBasic({Key? key}) : super(key: key);
@@ -27,7 +28,9 @@ class _DrawerBasicState extends ConsumerState<DrawerBasic> {
               icon: Icons.home_rounded,
               colorIcon: Colors.white,
               colorText: Colors.white,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, Routes().appAcces);
+              },
             ),
 
             /// client
@@ -52,7 +55,9 @@ class _DrawerBasicState extends ConsumerState<DrawerBasic> {
               icon: Icons.account_circle_rounded,
               colorIcon: Colors.white,
               colorText: Colors.white,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, Routes().account);
+              },
             ),
           ],
         ),
