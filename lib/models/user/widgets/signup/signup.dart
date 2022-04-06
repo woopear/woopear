@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/user/user_const.dart';
 import 'package:woopear/models/user/widgets/signup/signup_form.dart';
-import 'package:woopear/widget_shared/card_basic.dart';
+import 'package:woopear/widget_shared/container_basic.dart';
 import 'package:woopear/widget_shared/title_page_auth.dart';
 
 class Signup extends ConsumerStatefulWidget {
@@ -20,12 +20,12 @@ class _SignupState extends ConsumerState<Signup> {
 
     return Center(
       child: Container(
-        width: _width > 700 ? 700.0 : double.infinity,
+        width: _width > 700 ? 500.0 : double.infinity,
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             /// Card
-            CardBasic(
+            ContainerBasic(
               child: Column(
                 children: [
                   /// title de la card

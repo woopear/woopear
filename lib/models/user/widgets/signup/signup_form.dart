@@ -334,33 +334,20 @@ class _SignupFormState extends ConsumerState<SignupForm> {
                   )
                 : Container(),
 
-            /// groupe btn formulaire creation
-            Row(
-              children: [
-                /// pousse les boutons à droite
-                Expanded(child: Container()),
+            BtnElevatedBasic(
+              margin: const EdgeInsets.only(top: 30.0),
+              message: UserConst.createTooltipBtnResetInput,
+              onPressed: _resetAllInput,
+              textBtn: UserConst.createBtnResetInput,
+            ),
 
-                /// btn reset input
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: BtnElevatedBasic(
-                      margin: const EdgeInsets.only(right: 20.0, top: 20.0),
-                      message: UserConst.createTooltipBtnResetInput,
-                      onPressed: _resetAllInput,
-                      textBtn: UserConst.createBtnResetInput),
-                ),
-
-                /// btn create user
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: BtnElevatedBasic(
-                      message: UserConst.createTooltipBtn,
-                      onPressed: () async {
-                        await _createUser(context);
-                      },
-                      textBtn: UserConst.createBtn),
-                ),
-              ],
+            BtnElevatedBasic(
+              margin: const EdgeInsets.only(top: 20.0),
+              message: UserConst.createTooltipBtn,
+              onPressed: () async {
+                await _createUser(context);
+              },
+              textBtn: UserConst.createBtn,
             ),
 
             /// text info formulaire

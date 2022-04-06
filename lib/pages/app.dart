@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:woopear/models/profil/profil_state.dart';
 import 'package:woopear/models/user/user_state.dart';
 import 'package:woopear/models/user/widgets/signin/signin.dart';
 import 'package:woopear/models/dashbord/dashboard.dart';
@@ -20,8 +20,8 @@ class _ConnexionState extends ConsumerState<AppAcces> {
   @override
   Widget build(BuildContext context) {
     /// on recupere le user
-    final user = ref.watch(profilCurrentProvider);
-
+    final user = FirebaseAuth.instance.currentUser;
+    
     return SafeArea(
       child: Scaffold(
         drawer: user != null ? const DrawerBasic() : null,

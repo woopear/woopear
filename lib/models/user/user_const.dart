@@ -30,9 +30,9 @@ class UserConst {
   static String createLabelInputCodePost = "Code postal *";
   static String createLabelInputCity = "Ville *";
   static String createLabelInputPhoneNumber = "Téléphone";
-  static String createBtn = "CREER";
+  static String createBtn = "CREER MON COMPTE";
   static String createTooltipBtn = "Créer un utilisateur";
-  static String createBtnResetInput = "EFFACER";
+  static String createBtnResetInput = "EFFACER LE FORMULAIRE";
   static String createTooltipBtnResetInput = "Effacer tous le formulaire";
   static String createInfoForm = "* Champs obligatoire";
   static String createPlaceholderDropdownRole = "Selectionnez un role *";

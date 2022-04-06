@@ -38,6 +38,7 @@ class _BtnElevatedBasicState extends ConsumerState<BtnElevatedBasic> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       margin: _margin,
       child: Tooltip(
         message: _message,

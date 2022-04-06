@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/profil/profil_schema.dart';
+import 'package:woopear/models/profil/widgets/profil_info.dart/label.dart';
+import 'package:woopear/widget_shared/container_basic.dart';
 
 class ProfilInfo extends ConsumerStatefulWidget {
   ProfilSchema profil;
@@ -29,31 +31,10 @@ class _ProfilInfoState extends ConsumerState<ProfilInfo> {
           Stack(
             children: [
               /// label
-              Container(
-                margin: const EdgeInsets.only(
-                  left: 30.0,
-                  right: 20.0,
-                ),
-                child: Text(
-                  'Mes infos',
-                  style:
-                      const TextStyle().copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
+              buildLabelProfilInfo(),
 
-              /// info
-              Container(
-                margin:
-                    const EdgeInsets.only(left: 30.0, right: 30.0, top: 40.0),
-                padding: const EdgeInsets.all(40.0),
-                decoration: BoxDecoration(
-                  color: idModeDark
-                      ? const Color(0XFF363636)
-                      : const Color(0XFFF5F5F5),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20.0),
-                  ),
-                ),
+              ContainerBasic(
+                margin: const EdgeInsets.only(left: 30.0, right: 30.0, top: 40.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -117,7 +98,7 @@ class _ProfilInfoState extends ConsumerState<ProfilInfo> {
                 top: 20,
                 right: 20,
                 child: Tooltip(
-                  message: widget.seeUpdate ? 'Fermer' : 'Modifier mon profil',
+                  message: 'Modifier mon profil',
                   child: Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.tertiary,
@@ -128,7 +109,7 @@ class _ProfilInfoState extends ConsumerState<ProfilInfo> {
                         widget.onPressed!();
                       },
                       icon: Icon(
-                        widget.seeUpdate ? Icons.close : Icons.mode_edit_rounded,
+                        Icons.mode_edit_rounded,
                         color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),

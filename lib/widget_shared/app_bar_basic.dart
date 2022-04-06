@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woo_theme_mode/woo_theme_mode.dart';
+import 'package:woopear/models/profil/profil_state.dart';
 import 'package:woopear/models/user/user_state.dart';
 import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/widget_shared/waiting_data.dart';
@@ -40,21 +41,33 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
                     data: (data) {
                       if (widget.seeConnexion) {
                         return data != null
-                            /// icon deconnection
-                            ? IconButton(
-                                onPressed: () async {
-                                  /// petit load à la deconnection
-                                  showDialog(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (context) => const Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  );
-                                  await ref.watch(userChange).disconnectUser();
-                                  Navigator.pushNamed(context, Routes().home);
-                                },
-                                icon: const Icon(Icons.logout),
+                            ? Row(
+                                children: [
+                                  /// icon goto tableau de bord
+                                  /// seulement visible si il est sur la page du site
+                                  widget.text != 'Woopear'
+                                      ? Container()
+                                      : IconButton(
+                                          tooltip: 'Retour tableau de bord',
+                                          onPressed: () async {
+                                            Navigator.pushNamed(
+                                                context, Routes().appAcces);
+                                          },
+                                          icon: const Icon(
+                                              Icons.dashboard_rounded),
+                                        ),
+
+                                  /// icon deconnection
+                                  IconButton(
+                                    onPressed: () async {
+                                      await ref
+                                          .watch(userChange)
+                                          .disconnectUser();
+                                      ref.watch(profilChange).resetProfil();
+                                    },
+                                    icon: const Icon(Icons.logout),
+                                  ),
+                                ],
                               )
 
                             /// icon connexion

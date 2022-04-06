@@ -5,7 +5,6 @@ import 'package:woopear/utils/config/theme/app_bar_theme.dart';
 import 'package:woopear/utils/config/theme/card_theme.dart';
 import 'package:woopear/utils/config/theme/elevated_button_theme.dart';
 import 'package:woopear/utils/config/theme/icon_theme.dart';
-import 'package:woopear/utils/config/theme/input_decoration_theme.dart';
 import 'package:woopear/utils/config/theme/text_button_style.dart';
 
 /// theme mode claire
@@ -37,7 +36,7 @@ final themeClaire = WooTheme.modeClair(
   iconTheme: iconThemeClaire,
 
   /// input
-  inputDecorationTheme: inputDecorationClaire,
+  ///inputDecorationTheme: inputDecorationClaire,
 
   /// card
   cardTheme: cardThemeClaire,
@@ -75,7 +74,7 @@ final themeDark = WooTheme.modeDark(
   iconTheme: iconThemeDark,
 
   /// input
-  inputDecorationTheme: inputDecorationDark,
+  ///inputDecorationTheme: inputDecorationDark,
 
   /// card
   cardTheme: cardThemeDark,

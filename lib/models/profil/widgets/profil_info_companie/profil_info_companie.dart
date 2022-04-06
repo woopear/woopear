@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/profil/companie/companie_schema.dart';
+import 'package:woopear/models/profil/widgets/profil_info_companie/label.dart';
+import 'package:woopear/widget_shared/container_basic.dart';
 
 class ProfilInfoCompanie extends ConsumerStatefulWidget {
   CompanieSchema companie;
@@ -20,8 +22,6 @@ class ProfilInfoCompanie extends ConsumerStatefulWidget {
 class _ProfilInfoCompanieState extends ConsumerState<ProfilInfoCompanie> {
   @override
   Widget build(BuildContext context) {
-    /// si mode dark ou pas
-    bool idModeDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       margin: const EdgeInsets.only(top: 40.0, left: 30.0, right: 30.0),
@@ -29,26 +29,11 @@ class _ProfilInfoCompanieState extends ConsumerState<ProfilInfoCompanie> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// label
-          Container(
-            child: Text(
-              'Mon entreprise',
-              style: const TextStyle().copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
+          buildLabelInfoCompanie(),
 
           /// info entreprise
-          Container(
+          ContainerBasic(
             margin: const EdgeInsets.only(top: 15.0),
-            padding: const EdgeInsets.all(40.0),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: idModeDark
-                  ? const Color(0XFF363636)
-                  : const Color(0XFFF5F5F5),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(20.0),
-              ),
-            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -113,7 +98,7 @@ class _ProfilInfoCompanieState extends ConsumerState<ProfilInfoCompanie> {
                     : Container(),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

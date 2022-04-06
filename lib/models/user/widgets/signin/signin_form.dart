@@ -104,7 +104,7 @@ class _SigninFormState extends ConsumerState<SigninForm> {
         text: UserConst.connexionMessageError,
         error: true,
       ).notification(context);
-       Navigator.of(context, rootNavigator: true).pop();
+      Navigator.of(context, rootNavigator: true).pop();
     }
   }
 
@@ -137,29 +137,26 @@ class _SigninFormState extends ConsumerState<SigninForm> {
               ),
             ),
 
-            /// mot de passe oublié
-            Align(
-              alignment: Alignment.centerRight,
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 40.0, top: 20.0),
-                child: TextButton(
-                  onPressed: () => forgotPassword(context),
-                  child: Text(
-                    UserConst.connexionBtnPasswordForgot,
-                    style: const TextStyle(fontSize: 12.0),
-                  ),
-                ),
-              ),
-            ),
-
             /// btn connexion
-            Align(
-              alignment: Alignment.centerRight,
+            Container(
+              margin: const EdgeInsets.only(top: 30.0),
               child: BtnElevatedBasic(
                 onPressed: () async {
                   await connexionUser(context);
                 },
                 textBtn: UserConst.connexionBtn,
+              ),
+            ),
+
+            /// mot de passe oublié
+            Container(
+              margin: const EdgeInsets.only(bottom: 20.0, top: 10.0),
+              child: TextButton(
+                onPressed: () => forgotPassword(context),
+                child: Text(
+                  UserConst.connexionBtnPasswordForgot,
+                  style: const TextStyle(fontSize: 12.0),
+                ),
               ),
             ),
 

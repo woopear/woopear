@@ -4,6 +4,7 @@ import 'package:woopear/models/profil/profil_schema.dart';
 import 'package:woopear/models/profil/widgets/profil_image/profil_image.dart';
 import 'package:woopear/models/profil/widgets/profil_info.dart/profil_info.dart';
 import 'package:woopear/models/profil/widgets/profil_info_companie/profil_info_companie.dart';
+import 'package:woopear/models/profil/widgets/profil_update/profil_update.dart';
 import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
 
@@ -52,18 +53,25 @@ class _ProfilSelectState extends ConsumerState<ProfilSelect> {
                     profil: widget.profil,
                   ),
 
-                  /// info profil
-                  ProfilInfo(
-                    profil: widget.profil,
-                    onPressed: _openCloseUpdateInfo,
-                    seeUpdate: _seeUpdate,
-                  ),
+                  /// si true on affiche update
+                  _seeUpdate
+                      ? ProfilUpdate(profil: widget.profil,)
+                      : Column(
+                          children: [
+                            /// info profil
+                            ProfilInfo(
+                              profil: widget.profil,
+                              onPressed: _openCloseUpdateInfo,
+                              seeUpdate: _seeUpdate,
+                            ),
 
-                  /// partie entreprise
-                  ProfilInfoCompanie(
-                    companie: widget.profil.companie!,
-                    seeUpdate: _seeUpdate,
-                  ),
+                            /// partie entreprise
+                            ProfilInfoCompanie(
+                              companie: widget.profil.companie!,
+                              seeUpdate: _seeUpdate,
+                            ),
+                          ],
+                        ),
 
                   /// btn modifier mot de passe
                   Container(

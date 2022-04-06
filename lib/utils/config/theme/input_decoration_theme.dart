@@ -6,7 +6,7 @@ const inputDecorationDark = InputDecorationTheme(
       EdgeInsets.only(top: 20.0, bottom: 15.0, left: 30.0, right: 20.0),
   isCollapsed: true,
   filled: true,
-  fillColor: Color(0xFF202225),
+  fillColor: Color(0xFF36393F),
   enabledBorder: OutlineInputBorder(
     borderSide: BorderSide(
       color: Colors.transparent,
@@ -31,7 +31,7 @@ const inputDecorationClaire = InputDecorationTheme(
       EdgeInsets.only(top: 20.0, bottom: 15.0, left: 30.0, right: 20.0),
   isCollapsed: true,
   filled: true,
-  fillColor: Color(0xFFE1E1E1),
+  fillColor: Color(0xFFFFFFFF),
   enabledBorder: OutlineInputBorder(
     borderSide: BorderSide(
       color: Colors.transparent,

@@ -22,6 +22,17 @@ class _DrawerBasicState extends ConsumerState<DrawerBasic> {
               height: 50.0,
             ),
 
+            /// site
+            ItemMenu(
+              text: 'Retour sur le site',
+              icon: Icons.web,
+              colorIcon: Colors.white,
+              colorText: Colors.white,
+              onTap: () {
+                Navigator.pushNamed(context, Routes().home);
+              },
+            ),
+
             /// home
             ItemMenu(
               text: 'Tableau de bord',
