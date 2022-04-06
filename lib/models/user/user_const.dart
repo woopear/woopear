@@ -42,7 +42,7 @@ class UserConst {
       "http://localhost:60589/#/create/account";
 
   /// creation companie
-  static String createCompanieTitleForm = "Ajout d'une entreprise";
+  static String createCompanieTitleForm = "Entreprise";
   static String createCompanieInputDenomination = "Dénomination *";
   static String createCompanieInputSiret = "Numéro de siret *";
   static String createCompanieInputCodeNaf = "Code naf *";

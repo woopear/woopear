@@ -55,7 +55,10 @@ class _ProfilSelectState extends ConsumerState<ProfilSelect> {
 
                   /// si true on affiche update
                   _seeUpdate
-                      ? ProfilUpdate(profil: widget.profil,)
+                      ? ProfilUpdate(
+                          profil: widget.profil,
+                          onPressed: _openCloseUpdateInfo,
+                        )
                       : Column(
                           children: [
                             /// info profil
