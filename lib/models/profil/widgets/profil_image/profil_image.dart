@@ -118,7 +118,6 @@ class _ProfilImageState extends ConsumerState<ProfilImage> {
                 child: Tooltip(
                   message: 'Modifier mon image de profil',
                   child: Container(
-                    padding: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.tertiary,
                       shape: BoxShape.circle,
@@ -129,7 +128,6 @@ class _ProfilImageState extends ConsumerState<ProfilImage> {
                       },
                       icon: Icon(
                         Icons.photo_library,
-                        size: 30,
                         color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),

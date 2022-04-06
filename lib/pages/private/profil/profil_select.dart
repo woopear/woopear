@@ -16,6 +16,15 @@ class ProfilSelect extends ConsumerStatefulWidget {
 }
 
 class _ProfilSelectState extends ConsumerState<ProfilSelect> {
+  bool _seeUpdate = false;
+
+  /// affiche / cache update info
+  void _openCloseUpdateInfo() {
+    setState(() {
+      _seeUpdate = !_seeUpdate;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     /// on recupere la largeur de l'ecran
@@ -44,19 +53,17 @@ class _ProfilSelectState extends ConsumerState<ProfilSelect> {
                   ),
 
                   /// info profil
-                  ProfilInfo(profil: widget.profil),
-
-                  /// separateur
-                  Container(
-                    width: _width / 2,
-                    margin: const EdgeInsets.only(top: 50.0),
-                    child: const Divider(
-                      color: Colors.grey,
-                    ),
+                  ProfilInfo(
+                    profil: widget.profil,
+                    onPressed: _openCloseUpdateInfo,
+                    seeUpdate: _seeUpdate,
                   ),
 
                   /// partie entreprise
-                  ProfilInfoCompanie(profil: widget.profil),
+                  ProfilInfoCompanie(
+                    companie: widget.profil.companie!,
+                    seeUpdate: _seeUpdate,
+                  ),
 
                   /// btn modifier mot de passe
                   Container(
