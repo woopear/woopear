@@ -18,8 +18,8 @@ class _DavidState extends ConsumerState<David> {
         body: SingleChildScrollView(
           child: Container(
             child: Column(
-              children: const [
-                ContentCart()
+              children: [
+                ContentCart(idContent: 'mjJV1TmWOjyWqpyiyQFf')
               ],
             ),
           ),

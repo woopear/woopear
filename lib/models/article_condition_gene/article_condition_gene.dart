@@ -2,30 +2,30 @@ import 'package:woopear/models/article_condition_gene/condition_gene/condition_g
 
 class ArticleGeneSchema {
   String? id;
-  String? sub_title;
-  ConditionGeneSchema? conditionGene;
+  String? subTitle;
+  List<ConditionGeneSchema>? conditionGene;
 
   ArticleGeneSchema({
     this.id,
-    required this.sub_title,
+    required this.subTitle,
     required this.conditionGene,
   });
 
   factory ArticleGeneSchema.fromMap(
       Map<String, dynamic> data, documentId) {
-    String subTitle = data['sub_title'];
-    ConditionGeneSchema conditionGene = data['conditionGene'];
+    String subTitle = data['subTitle'];
+    List<ConditionGeneSchema> conditionGene = data['conditionGene'];
 
     return ArticleGeneSchema(
       id: documentId,
-      sub_title: subTitle,
+      subTitle: subTitle,
       conditionGene: conditionGene,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'sub_title': sub_title,
+      'subTitle': subTitle,
       'conditionGene': conditionGene,
     };
   }

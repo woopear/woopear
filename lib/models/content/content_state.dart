@@ -7,17 +7,23 @@ import 'package:woopear/utils/fire/firestore_path.dart';
 class ContentState extends ChangeNotifier {
   /// variables
   final WooFirestore _firebaseService = WooFirestore.instance;
-  late Stream<List<ContentSchema>> _content;
+  late Stream<ContentSchema> _contents;
+  ContentSchema? _content;
 
-  Stream<List<ContentSchema?>?>? get content => _content;
+  Stream<ContentSchema> get contents => _contents;
+  ContentSchema? get content => _content;
 
   /// ecouteur du content
-  Future<void> streamContentById(String idContent) async {
-    _content = _firebaseService.streamCol(
+  Stream<void>? streamContentById(String idContent) {
+    _contents = _firebaseService.streamDoc(
       path: FirestorePath.content(idContent),
       builder: (data, documentId) => ContentSchema.fromMap(data, documentId),
-      queryBuilder: (query) => query.where('id', isEqualTo: idContent),
     );
+    return null;
+  }
+
+  void setContent(ContentSchema contentSchema) {
+    _content = contentSchema;
   }
 
   /// ajouter un content
@@ -48,8 +54,14 @@ class ContentState extends ChangeNotifier {
 final contentChange =
     ChangeNotifierProvider<ContentState>((ref) => ContentState());
 
-/* /// state du content
-final contentStream = StreamProvider<void>((ref) {
+final contentAllStream = StreamProvider((ref) {
+  return ref.watch(contentChange).contents;
+});
+
+final contentStreamById = Provider.family((ref, String idContent) {
   ref.watch(contentChange).streamContentById(idContent);
-  return ref.watch(contentChange)._content;
-}); */
+  ref.watch(contentAllStream).whenData((value) {
+    ref.watch(contentChange).setContent(value);
+  });
+  return ref.watch(contentChange).content;
+});
