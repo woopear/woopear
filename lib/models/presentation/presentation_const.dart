@@ -23,5 +23,9 @@ class PresentationConst {
   static String creationPresentationBtnAjouterImage = "Ajouter une image";
   static String creationPresentationBtnCreer = "CREER";
   static String creationPresentationInfoform = "* Champs obligatoire";
+
+  /// partie list presentation
+  static String listPresentationTitle = "Liste des présentations";
+  
   
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:woopear/models/presentation/presentation_const.dart';
 import 'package:woopear/widget_shared/sub_title_auth.dart';
 
