@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/models/presentation/presentation_const.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
 import 'package:woopear/widget_shared/drawer_basic.dart';
 
@@ -22,7 +23,7 @@ class _PresentationState extends ConsumerState<Presentation> {
         drawer: user != null ? const DrawerBasic() : null,
         appBar: AppBarBasic(
           seeConnexion: user != null ? true : false,
-          text: 'Gestion présentation',
+          text: PresentationConst.pageTitle,
           automaticallyImplyLeading: true,
         ),
         body: SingleChildScrollView(
