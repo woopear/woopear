@@ -11,10 +11,39 @@ class PresentationState extends ChangeNotifier {
   Stream<List<PresentationSchema>>? _presentations;
   Stream<List<PresentationSchema>>? get presentations => _presentations;
 
+  Stream<PresentationSchema>? _presentationSelectForUpdate;
+  Stream<PresentationSchema>? get presentationSelectForUpdate =>
+      _presentationSelectForUpdate;
+
+    Stream<PresentationSchema>? _presentationSelect;
+  Stream<PresentationSchema>? get presentationSelect =>
+      _presentationSelect;
+
+
   /// ecoute toutes les presentations
   Stream<void>? streamPresentations() {
     _presentations = _firestore.streamCol(
       path: FirestorePath.presentations(),
+      builder: (data, documentId) =>
+          PresentationSchema.formMap(data, documentId),
+    );
+    return null;
+  }
+
+  /// ecoute une presentation pour modification
+  Stream<void>? streamPresentationUpdate(String idPresentation) {
+    _presentationSelectForUpdate = _firestore.streamDoc(
+      path: FirestorePath.presentation(idPresentation),
+      builder: (data, documentId) =>
+          PresentationSchema.formMap(data, documentId),
+    );
+    return null;
+  }
+
+  /// ecoute une presentation pour affichage page d'accueil
+  Stream<void>? streamPresentationSelect(String idPresentation) {
+    _presentationSelect = _firestore.streamDoc(
+      path: FirestorePath.presentation(idPresentation),
       builder: (data, documentId) =>
           PresentationSchema.formMap(data, documentId),
     );
@@ -55,3 +84,8 @@ final onePresentationProvider = Provider<List<PresentationSchema>?>((ref) {
   });
   return list;
 });
+
+/// TODO
+/// state presentation selectionné pour update
+
+/// state presentation selectionné pour affichage page d'accueil

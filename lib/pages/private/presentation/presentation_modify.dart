@@ -23,6 +23,8 @@ class _PresentationModifyState extends ConsumerState<PresentationModify> {
     /// on recupere le user
     final user = FirebaseAuth.instance.currentUser;
 
+    /// on ecoute la présentation selectionné
+
     return SafeArea(
       child: Scaffold(
         //drawer: user != null ? const DrawerBasic() : null,
