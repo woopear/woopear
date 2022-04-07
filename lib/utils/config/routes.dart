@@ -5,6 +5,7 @@ import 'package:woopear/pages/forgot_password.dart';
 import 'package:woopear/pages/home.dart';
 import 'package:woopear/pages/john.dart';
 import 'package:woopear/pages/private/account/account.dart';
+import 'package:woopear/pages/private/presentation/presentation.dart';
 import 'package:woopear/pages/private/profil/profil.dart';
 
 class Routes {
@@ -13,6 +14,7 @@ class Routes {
   final String _appAcces = '/app';
   final String _profil = '/app/profil';
   final String _account = '/app/account';
+  final String _presentation = '/app/presentation';
   final String _createUser = '/create/account';
   final String _forgotPassword = '/forgot/password';
   final String _john = '/john';
@@ -24,6 +26,7 @@ class Routes {
   String get profil => _profil;
   String get forgotPassword => _forgotPassword;
   String get account => _account;
+  String get presentation => _presentation;
   String get john => _john;
 
   /// retourne un widget en fonction de la routes
@@ -35,6 +38,7 @@ class Routes {
       _profil: (context) => const ProfilPage(),
       _forgotPassword: (context) => const ForgotPassword(),
       _account: (context) => const Account(),
+      _presentation: (context) => const Presentation(),
       _john: (context) => const John(),
     };
   }

@@ -55,6 +55,17 @@ class _DrawerBasicState extends ConsumerState<DrawerBasic> {
               },
             ),
 
+            /// presentation
+            ItemMenu(
+              text: 'Gestion présentation',
+              icon: Icons.subtitles_rounded,
+              colorIcon: Colors.white,
+              colorText: Colors.white,
+              onTap: () {
+                Navigator.pushNamed(context, Routes().presentation);
+              },
+            ),
+
             /// separation avec info compte
             SeparateItem(
               heighTop: 20.0,

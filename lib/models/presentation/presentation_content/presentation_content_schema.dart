@@ -1,32 +1,30 @@
-import 'package:woopear/models/presentation/presentation_schema.dart';
-
 class PresentationContentSchema {
   String? id;
-  String? content;
-  PresentationSchema? presentation;
+  String text;
+  String? subTitle;
 
   PresentationContentSchema({
     this.id,
-    required this.content,
-    required this.presentation,
+    required this.text,
+    this.subTitle,
   });
 
   factory PresentationContentSchema.fromMap(
       Map<String, dynamic> data, documentId) {
-    String content = data['content'];
-    PresentationSchema presentation = data['presentation'];
+    String text = data['content'];
+    String subTitle = data['subTitle'] ?? '';
 
     return PresentationContentSchema(
       id: documentId,
-      content: content,
-      presentation: presentation,
+      text: text,
+      subTitle: subTitle,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'content': content,
-      'presentation': presentation,
+      'text': text,
+      'subTitle': subTitle,
     };
   }
 }
