@@ -8,7 +8,7 @@ import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
-import 'package:woopear/widget_shared/card_basic.dart';
+import 'package:woopear/widget_shared/container_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
 import 'package:woopear/widget_shared/notification_basic.dart';
 import 'package:woopear/widget_shared/text_information.dart';
@@ -93,7 +93,7 @@ class _ForgotPasswordState extends ConsumerState<ForgotPassword> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CardBasic(
+                ContainerBasic(
                   child: Column(
                     children: [
                       Form(
@@ -105,6 +105,7 @@ class _ForgotPasswordState extends ConsumerState<ForgotPassword> {
 
                             /// input email
                             InputBasic(
+                              margin: const EdgeInsets.only(top: 30.0),
                               labelText: UserConst.forgotInputEmail,
                               controller: _email,
                               validator: (value) => WooValidator.validateEmail(
@@ -117,6 +118,7 @@ class _ForgotPasswordState extends ConsumerState<ForgotPassword> {
                             Align(
                               alignment: Alignment.centerRight,
                               child: BtnElevatedBasic(
+                                margin: const EdgeInsets.only(top: 30.0),
                                 onPressed: () async {
                                   await resetPassword();
                                 },

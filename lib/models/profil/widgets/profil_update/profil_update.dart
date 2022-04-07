@@ -17,11 +17,13 @@ import 'package:woopear/widget_shared/notification_basic.dart';
 
 class ProfilUpdate extends ConsumerStatefulWidget {
   ProfilSchema profil;
+  bool updateRole;
   void Function()? onPressed;
 
   ProfilUpdate({
     Key? key,
     required this.profil,
+    required this.updateRole,
     required this.onPressed,
   }) : super(key: key);
 
@@ -130,6 +132,7 @@ class _ProfilUpdateState extends ConsumerState<ProfilUpdate> {
         codePost: _codePost.text.trim(),
         phoneNumber: _phoneNumber.text.trim(),
         uid: widget.profil.uid,
+        avatar: widget.profil.avatar,
         role: RoleSchema(
             libelle: _role!.libelle, description: _role!.description),
       );
@@ -221,6 +224,7 @@ class _ProfilUpdateState extends ConsumerState<ProfilUpdate> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      widget.updateRole ?
                       /// input role
                       Align(
                         alignment: Alignment.centerLeft,
@@ -230,7 +234,7 @@ class _ProfilUpdateState extends ConsumerState<ProfilUpdate> {
                             onChanged: (value) => setRole(value),
                           ),
                         ),
-                      ),
+                      ) : Container(),
 
                       /// first name
                       InputBasic(
