@@ -50,6 +50,7 @@ class _PresentationState extends ConsumerState<Presentation> {
         ),
         body: SingleChildScrollView(
           child: Container(
+            margin: const EdgeInsets.only(bottom: 50.0),
             child: Column(
               children: [
                 /// list presentation

@@ -4,10 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ContainerBasic extends ConsumerWidget {
   Widget child;
   EdgeInsetsGeometry? margin;
+  EdgeInsetsGeometry? padding;
   double? width;
 
-  ContainerBasic({Key? key, required this.child, this.margin, this.width = double.infinity})
-      : super(key: key);
+  ContainerBasic({
+    Key? key,
+    required this.child,
+    this.margin,
+    this.width = double.infinity,
+    this.padding = const EdgeInsets.all(40.0),
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,7 +22,7 @@ class ContainerBasic extends ConsumerWidget {
 
     return Container(
       margin: margin,
-      padding: const EdgeInsets.all(40.0),
+      padding: padding,
       width: width,
       decoration: BoxDecoration(
         color: idModeDark ? const Color(0XFF363636) : const Color(0XFFF5F5F5),

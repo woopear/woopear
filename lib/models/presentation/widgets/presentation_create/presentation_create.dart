@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/models/presentation/widgets/presentation_create/presentation_create_form.dart';
 import 'package:woopear/models/presentation/widgets/presentation_create/title.dart';
 
 class PresentationCreate extends ConsumerStatefulWidget {
@@ -20,9 +21,10 @@ class _PresentationCreateState extends ConsumerState<PresentationCreate> {
       child: Column(
         children: [
           /// title 
-          buildTitleCreatePresentation()
+          buildTitleCreatePresentation(),
           
           /// form create
+          const PresentationCreateForm(),
         ],
       ),
     );
