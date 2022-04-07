@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/models/presentation/presentation_const.dart';
 import 'package:woopear/models/presentation/presentation_schema.dart';
 import 'package:woopear/models/presentation/presentation_state.dart';
 import 'package:woopear/models/presentation/widgets/presentation_create/label.dart';
@@ -95,10 +96,10 @@ class _PresentationCreateFormState
       if (_picker == null) {
         /// notification error
         NotificationBasic(
-          text: "Modification de l'image annulée",
+          text: PresentationConst.creationPresentationMessagePickerNull,
           error: true,
         ).notification(context);
-        throw Exception("Modification de l'image annulée");
+        throw Exception(PresentationConst.creationPresentationMessagePickerNull);
       }
 
       /// on recupere le path
@@ -149,9 +150,9 @@ class _PresentationCreateFormState
       /// creation bdd de la présentation
       await ref.watch(presentationChange).createPresentation(newPresentation);
 
-      /// notification error
+      /// notification succes
       NotificationBasic(
-        text: 'Creation de la présentation réussis',
+        text: PresentationConst.creationPresentationMessageSucces,
         error: false,
       ).notification(context);
 
@@ -159,7 +160,7 @@ class _PresentationCreateFormState
     } else {
       /// notification error
       NotificationBasic(
-        text: 'Impossible de creer la présentation',
+        text: PresentationConst.creationPresentationMessageError,
         error: true,
       ).notification(context);
     }
@@ -183,7 +184,7 @@ class _PresentationCreateFormState
                     children: [
                       /// label cadre
                       buildLabelPartieFormulairePresentation(
-                        'Information de base',
+                        PresentationConst.creationPresentationTitleLabel1,
                         null,
                         context,
                       ),
@@ -191,7 +192,7 @@ class _PresentationCreateFormState
                       /// input title
                       InputBasic(
                         controller: _title,
-                        labelText: 'Titre de la présentation *',
+                        labelText: PresentationConst.creationPresentationInputTitle,
                         validator: (value) =>
                             WooValidator.validatorInputTextBasic(
                           textError: WooValidator.errorInputTitlePresentation,
@@ -202,7 +203,7 @@ class _PresentationCreateFormState
                       /// input sub title
                       InputBasic(
                         controller: _subTitle,
-                        labelText: 'Sous titre de la présentation',
+                        labelText: PresentationConst.creationPresentationInputSubTitle,
                       ),
                     ],
                   ),
@@ -213,7 +214,7 @@ class _PresentationCreateFormState
                     children: [
                       /// label cadre
                       buildLabelPartieFormulairePresentation(
-                        'Information entreprise',
+                        PresentationConst.creationPresentationTitleLabel2,
                         const EdgeInsets.only(top: 70.0),
                         context,
                       ),
@@ -221,7 +222,7 @@ class _PresentationCreateFormState
                       /// input email
                       InputBasic(
                         controller: _email,
-                        labelText: "Email de l'entreprise *",
+                        labelText: PresentationConst.creationPresentationInputEmail,
                         validator: (value) => WooValidator.validateEmail(
                           textError: WooValidator.errorInputEmail,
                           value: value,
@@ -231,7 +232,7 @@ class _PresentationCreateFormState
                       /// input addresse
                       InputBasic(
                         controller: _address,
-                        labelText: 'Adresse *',
+                        labelText: PresentationConst.creationPresentationInputAddress,
                         validator: (value) =>
                             WooValidator.validatorInputTextBasic(
                           textError: WooValidator.errorInputAddresse,
@@ -242,7 +243,7 @@ class _PresentationCreateFormState
                       /// input code postal
                       InputBasic(
                         controller: _codePost,
-                        labelText: 'Code postal *',
+                        labelText: PresentationConst.creationPresentationInputCodePost,
                         validator: (value) =>
                             WooValidator.validatorInputTextBasic(
                           textError: WooValidator.errorInputCodePost,
@@ -253,7 +254,7 @@ class _PresentationCreateFormState
                       /// input ville
                       InputBasic(
                         controller: _city,
-                        labelText: 'Ville *',
+                        labelText: PresentationConst.creationPresentationInputCity,
                         validator: (value) =>
                             WooValidator.validatorInputTextBasic(
                           textError: WooValidator.errorInputCity,
@@ -264,7 +265,7 @@ class _PresentationCreateFormState
                       /// input phoneNumber
                       InputBasic(
                         controller: _phoneNumber,
-                        labelText: 'Numéro de téléphone *',
+                        labelText: PresentationConst.creationPresentationInputPhoneNumber,
                         validator: (value) =>
                             WooValidator.validatorInputTextBasic(
                           textError: WooValidator.errorInputPhoneNumber,
@@ -280,7 +281,7 @@ class _PresentationCreateFormState
                     children: [
                       /// label cadre
                       buildLabelPartieFormulairePresentation(
-                        'Information supplémentaire',
+                        PresentationConst.creationPresentationTitleLabel3,
                         const EdgeInsets.only(top: 70.0),
                         context,
                       ),
@@ -288,7 +289,7 @@ class _PresentationCreateFormState
                       /// input info
                       InputBasic(
                         controller: _infoSup,
-                        labelText: 'Information supplémentaire',
+                        labelText: PresentationConst.creationPresentationInputInfoSup,
                       )
 
                       /// input image
@@ -309,7 +310,7 @@ class _PresentationCreateFormState
                                 height: 100.0,
                                 width: double.infinity,
                               )
-                            : const Text("Pas d'image selectionnée"),
+                            : Text(PresentationConst.creationPresentationPickerNull),
                       ),
                       Container(
                         margin: const EdgeInsets.only(bottom: 40.0, top: 20.0),
@@ -323,15 +324,15 @@ class _PresentationCreateFormState
                                     _picker = null;
                                   });
                                 },
-                                icon: const Icon(Icons.add),
-                                label: const Text('Supprimer image'),
+                                icon: const Icon(Icons.delete),
+                                label: Text(PresentationConst.creationPresentationBtnSupImage),
                               )
                             : TextButton.icon(
                                 onPressed: () async {
                                   await _selectImage();
                                 },
                                 icon: const Icon(Icons.add),
-                                label: const Text('Ajouter une image'),
+                                label: Text(PresentationConst.creationPresentationBtnAjouterImage),
                               ),
                       ),
                     ],
@@ -343,7 +344,7 @@ class _PresentationCreateFormState
                     onPressed: () async {
                       await _creationPresentation(context);
                     },
-                    textBtn: 'CREER',
+                    textBtn: PresentationConst.creationPresentationBtnCreer,
                   ),
 
                   /// text info formulaire
@@ -352,7 +353,7 @@ class _PresentationCreateFormState
                     child: Container(
                       margin: const EdgeInsets.only(top: 70.0),
                       child: Text(
-                        '* Champs obligatoire',
+                        PresentationConst.creationPresentationInfoform,
                         style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ),
