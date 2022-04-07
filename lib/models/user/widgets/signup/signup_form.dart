@@ -114,7 +114,7 @@ class _SignupFormState extends ConsumerState<SignupForm> {
   /// creation d'un utilisateur
   Future<void> _createUser(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      /// recupere profi par rapport à l'email fournis
+      /// recupere profil par rapport à l'email fournis
       final profil = await ref
           .watch(profilChange)
           .getProfilForCreateAuthForTestEmail(_email.text);

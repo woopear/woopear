@@ -29,17 +29,14 @@ class _SignupDropdownRoleState extends ConsumerState<SignupDropdownRole> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-
       /// couleur et forme
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: Theme.of(context).inputDecorationTheme.fillColor,
       ),
       child: DropdownButtonHideUnderline(
         /// list selectionnable
         child: DropdownButton<RoleSchema>(
-          value: widget.dropdownValue,
+          value: widget.dropdownValue == null ? widget.dropdownValue : rolesBase.where((el) => el.libelle == widget.dropdownValue!.libelle).first,
           icon: const Icon(Icons.arrow_drop_down),
           elevation: 16,
           onChanged: _onChanged,

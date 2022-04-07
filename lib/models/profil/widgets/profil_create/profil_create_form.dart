@@ -56,6 +56,7 @@ class _ProfilCreateFormState extends ConsumerState<ProfilCreateForm> {
           text: ProfilConst.errorRole,
           error: true,
         ).notification(context);
+        throw Exception(ProfilConst.errorRole);
       }
 
       /// creation profil
