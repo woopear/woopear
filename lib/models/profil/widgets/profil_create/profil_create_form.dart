@@ -97,6 +97,7 @@ class _ProfilCreateFormState extends ConsumerState<ProfilCreateForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 20.0),
       child: Form(
         key: _formKey,
         child: Column(
@@ -126,6 +127,7 @@ class _ProfilCreateFormState extends ConsumerState<ProfilCreateForm> {
             Align(
               alignment: Alignment.centerRight,
               child: BtnElevatedBasic(
+                margin: const EdgeInsets.only(top: 50.0),
                 onPressed: () async {
                   await _creationProfil(context);
                 },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/profil/profil_const.dart';
 import 'package:woopear/models/profil/widgets/profil_create/profil_create_form.dart';
-import 'package:woopear/widget_shared/card_basic.dart';
+import 'package:woopear/widget_shared/container_basic.dart';
 import 'package:woopear/widget_shared/title_page_auth.dart';
 
 class ProfilCreate extends ConsumerStatefulWidget {
@@ -25,7 +25,7 @@ class _ProfilCreateState extends ConsumerState<ProfilCreate> {
         child: Column(
           children: [
             /// Card
-            CardBasic(
+            ContainerBasic(
               child: Column(
                 children: [
                   // title de la card
