@@ -28,6 +28,13 @@ class PresentationState extends ChangeNotifier {
       data: newPresentation.toMap(),
     );
   }
+
+  /// delete présentation
+  Future<void> deletePresentation(String idPresentation) async {
+    await _firestore.delete(
+      path: FirestorePath.presentation(idPresentation),
+    );
+  }
 }
 
 /// state de la class presentationState
@@ -38,4 +45,12 @@ final presentationChange =
 final allPresentationStream = StreamProvider((ref) {
   ref.watch(presentationChange).streamPresentations();
   return ref.watch(presentationChange).presentations!;
+});
+
+/// state de la liste des presentations
+final onePresentationProvider = Provider<List<PresentationSchema>?>((ref) {
+  ref.watch(allPresentationStream).whenData((value) {
+    return value;
+  });
+  return null;
 });

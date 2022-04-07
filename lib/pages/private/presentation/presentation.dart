@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:woopear/models/presentation/presentation_const.dart';
+import 'package:woopear/models/presentation/presentation_state.dart';
 import 'package:woopear/models/presentation/widgets/presentation_create/presentation_create.dart';
 import 'package:woopear/models/presentation/widgets/presentation_list/presentation_list.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
@@ -40,6 +41,9 @@ class _PresentationState extends ConsumerState<Presentation> {
     /// on recupere le user
     final user = FirebaseAuth.instance.currentUser;
 
+    /// on ecoute le tableau des presentations
+    final presentations = ref.watch(onePresentationProvider);
+
     return SafeArea(
       child: Scaffold(
         drawer: user != null ? const DrawerBasic() : null,
@@ -57,15 +61,17 @@ class _PresentationState extends ConsumerState<Presentation> {
                 _seePresentationList ? const PresentationList() : Container(),
 
                 /// creation presentation
-                _seePresentationCreate ? const PresentationCreate() : Container(),
-                
+                _seePresentationCreate
+                    ? const PresentationCreate()
+                    : Container(),
               ],
             ),
           ),
         ),
 
         /// menu de la page
-        floatingActionButton: SpeedDial(
+        /// si il y a une presentation
+        floatingActionButton: presentations != null && presentations.isNotEmpty ? SpeedDial(
           animatedIcon: AnimatedIcons.menu_close,
           spacing: 20.0,
           spaceBetweenChildren: 20.0,
@@ -87,7 +93,7 @@ class _PresentationState extends ConsumerState<Presentation> {
                   _openCloseSeePresentationList();
                 }),
           ],
-        ),
+        ) : Container(),
       ),
     );
   }

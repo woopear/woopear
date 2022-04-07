@@ -19,6 +19,7 @@ class _PresentationListState extends ConsumerState<PresentationList> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
           /// title de la page
@@ -27,7 +28,9 @@ class _PresentationListState extends ConsumerState<PresentationList> {
           /// liste de presentation
           ref.watch(allPresentationStream).when(
                 data: (presentations) {
+                  /// si pas vide
                   if (presentations.isNotEmpty) {
+                    /// on retourne liste des presentations
                     return ListView.builder(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
@@ -37,6 +40,7 @@ class _PresentationListState extends ConsumerState<PresentationList> {
                       },
                     );
                   } else {
+                    /// on affiche text de remplacement si le tableau est vide
                     return ContainerBasic(
                       child: const Text('Aucune présentation ajoutez en une !'),
                     );

@@ -27,5 +27,7 @@ class PresentationConst {
   /// partie list presentation
   static String listPresentationTitle = "Liste des présentations";
   
+  /// partie update
+  static String pageUpdatePresentationTitle = "Modification présentation";
   
 }
