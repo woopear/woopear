@@ -49,8 +49,9 @@ final allPresentationStream = StreamProvider((ref) {
 
 /// state de la liste des presentations
 final onePresentationProvider = Provider<List<PresentationSchema>?>((ref) {
+  List<PresentationSchema>? list;
   ref.watch(allPresentationStream).whenData((value) {
-    return value;
+    list = value;
   });
-  return null;
+  return list;
 });

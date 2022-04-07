@@ -9,6 +9,7 @@ import 'package:woopear/models/presentation/presentation_schema.dart';
 import 'package:woopear/models/presentation/presentation_state.dart';
 import 'package:woopear/models/presentation/widgets/presentation_create/label.dart';
 import 'package:woopear/models/upload/upload_state.dart';
+import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/container_basic.dart';
@@ -99,7 +100,8 @@ class _PresentationCreateFormState
           text: PresentationConst.creationPresentationMessagePickerNull,
           error: true,
         ).notification(context);
-        throw Exception(PresentationConst.creationPresentationMessagePickerNull);
+        throw Exception(
+            PresentationConst.creationPresentationMessagePickerNull);
       }
 
       /// on recupere le path
@@ -149,6 +151,7 @@ class _PresentationCreateFormState
 
       /// creation bdd de la présentation
       await ref.watch(presentationChange).createPresentation(newPresentation);
+      Navigator.pushNamed(context, Routes().presentation);
 
       /// notification succes
       NotificationBasic(
@@ -192,7 +195,8 @@ class _PresentationCreateFormState
                       /// input title
                       InputBasic(
                         controller: _title,
-                        labelText: PresentationConst.creationPresentationInputTitle,
+                        labelText:
+                            PresentationConst.creationPresentationInputTitle,
                         validator: (value) =>
                             WooValidator.validatorInputTextBasic(
                           textError: WooValidator.errorInputTitlePresentation,
@@ -203,7 +207,8 @@ class _PresentationCreateFormState
                       /// input sub title
                       InputBasic(
                         controller: _subTitle,
-                        labelText: PresentationConst.creationPresentationInputSubTitle,
+                        labelText:
+                            PresentationConst.creationPresentationInputSubTitle,
                       ),
                     ],
                   ),
@@ -222,7 +227,8 @@ class _PresentationCreateFormState
                       /// input email
                       InputBasic(
                         controller: _email,
-                        labelText: PresentationConst.creationPresentationInputEmail,
+                        labelText:
+                            PresentationConst.creationPresentationInputEmail,
                         validator: (value) => WooValidator.validateEmail(
                           textError: WooValidator.errorInputEmail,
                           value: value,
@@ -232,7 +238,8 @@ class _PresentationCreateFormState
                       /// input addresse
                       InputBasic(
                         controller: _address,
-                        labelText: PresentationConst.creationPresentationInputAddress,
+                        labelText:
+                            PresentationConst.creationPresentationInputAddress,
                         validator: (value) =>
                             WooValidator.validatorInputTextBasic(
                           textError: WooValidator.errorInputAddresse,
@@ -243,7 +250,8 @@ class _PresentationCreateFormState
                       /// input code postal
                       InputBasic(
                         controller: _codePost,
-                        labelText: PresentationConst.creationPresentationInputCodePost,
+                        labelText:
+                            PresentationConst.creationPresentationInputCodePost,
                         validator: (value) =>
                             WooValidator.validatorInputTextBasic(
                           textError: WooValidator.errorInputCodePost,
@@ -254,7 +262,8 @@ class _PresentationCreateFormState
                       /// input ville
                       InputBasic(
                         controller: _city,
-                        labelText: PresentationConst.creationPresentationInputCity,
+                        labelText:
+                            PresentationConst.creationPresentationInputCity,
                         validator: (value) =>
                             WooValidator.validatorInputTextBasic(
                           textError: WooValidator.errorInputCity,
@@ -265,7 +274,8 @@ class _PresentationCreateFormState
                       /// input phoneNumber
                       InputBasic(
                         controller: _phoneNumber,
-                        labelText: PresentationConst.creationPresentationInputPhoneNumber,
+                        labelText: PresentationConst
+                            .creationPresentationInputPhoneNumber,
                         validator: (value) =>
                             WooValidator.validatorInputTextBasic(
                           textError: WooValidator.errorInputPhoneNumber,
@@ -289,7 +299,8 @@ class _PresentationCreateFormState
                       /// input info
                       InputBasic(
                         controller: _infoSup,
-                        labelText: PresentationConst.creationPresentationInputInfoSup,
+                        labelText:
+                            PresentationConst.creationPresentationInputInfoSup,
                       )
 
                       /// input image
@@ -310,7 +321,8 @@ class _PresentationCreateFormState
                                 height: 100.0,
                                 width: double.infinity,
                               )
-                            : Text(PresentationConst.creationPresentationPickerNull),
+                            : Text(PresentationConst
+                                .creationPresentationPickerNull),
                       ),
                       Container(
                         margin: const EdgeInsets.only(bottom: 40.0, top: 20.0),
@@ -324,15 +336,24 @@ class _PresentationCreateFormState
                                     _picker = null;
                                   });
                                 },
-                                icon: const Icon(Icons.delete),
-                                label: Text(PresentationConst.creationPresentationBtnSupImage),
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                                label: Text(
+                                  PresentationConst
+                                      .creationPresentationBtnSupImage,
+                                  style: const TextStyle()
+                                      .copyWith(color: Colors.red),
+                                ),
                               )
                             : TextButton.icon(
                                 onPressed: () async {
                                   await _selectImage();
                                 },
                                 icon: const Icon(Icons.add),
-                                label: Text(PresentationConst.creationPresentationBtnAjouterImage),
+                                label: Text(PresentationConst
+                                    .creationPresentationBtnAjouterImage),
                               ),
                       ),
                     ],

@@ -71,7 +71,7 @@ class _PresentationState extends ConsumerState<Presentation> {
 
         /// menu de la page
         /// si il y a une presentation
-        floatingActionButton: presentations != null && presentations.isNotEmpty ? SpeedDial(
+        floatingActionButton: presentations != null ? presentations.isEmpty ? SpeedDial(
           animatedIcon: AnimatedIcons.menu_close,
           spacing: 20.0,
           spaceBetweenChildren: 20.0,
@@ -93,7 +93,7 @@ class _PresentationState extends ConsumerState<Presentation> {
                   _openCloseSeePresentationList();
                 }),
           ],
-        ) : Container(),
+        ) : Container() : null,
       ),
     );
   }
