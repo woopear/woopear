@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/presentation/presentation_const.dart';
+import 'package:woopear/models/presentation/presentation_state.dart';
+import 'package:woopear/models/presentation/widgets/presentation_update/presentation_update.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
 
 class PresentationModify extends ConsumerStatefulWidget {
@@ -24,6 +26,7 @@ class _PresentationModifyState extends ConsumerState<PresentationModify> {
     final user = FirebaseAuth.instance.currentUser;
 
     /// on ecoute la présentation selectionné
+    ref.watch(presentationChange).streamPresentationUpdate(widget.idPresentation);
 
     return SafeArea(
       child: Scaffold(
@@ -33,7 +36,16 @@ class _PresentationModifyState extends ConsumerState<PresentationModify> {
           text: PresentationConst.pageUpdatePresentationTitle,
           automaticallyImplyLeading: true,
         ),
-        body: const SingleChildScrollView(),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: const [
+                /// presentation update
+                PresentationUpdate(),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -42,7 +42,7 @@ class _PresentationState extends ConsumerState<Presentation> {
     final user = FirebaseAuth.instance.currentUser;
 
     /// on ecoute le tableau des presentations
-    final presentations = ref.watch(onePresentationProvider);
+    final presentations = ref.watch(presentationsProvider);
 
     return SafeArea(
       child: Scaffold(

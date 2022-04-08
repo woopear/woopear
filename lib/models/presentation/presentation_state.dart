@@ -15,10 +15,8 @@ class PresentationState extends ChangeNotifier {
   Stream<PresentationSchema>? get presentationSelectForUpdate =>
       _presentationSelectForUpdate;
 
-    Stream<PresentationSchema>? _presentationSelect;
-  Stream<PresentationSchema>? get presentationSelect =>
-      _presentationSelect;
-
+  Stream<PresentationSchema>? _presentationSelect;
+  Stream<PresentationSchema>? get presentationSelect => _presentationSelect;
 
   /// ecoute toutes les presentations
   Stream<void>? streamPresentations() {
@@ -77,7 +75,7 @@ final allPresentationStream = StreamProvider((ref) {
 });
 
 /// state de la liste des presentations
-final onePresentationProvider = Provider<List<PresentationSchema>?>((ref) {
+final presentationsProvider = Provider<List<PresentationSchema>?>((ref) {
   List<PresentationSchema>? list;
   ref.watch(allPresentationStream).whenData((value) {
     list = value;
@@ -85,7 +83,12 @@ final onePresentationProvider = Provider<List<PresentationSchema>?>((ref) {
   return list;
 });
 
-/// TODO
 /// state presentation selectionné pour update
+final presentationUpdateStream = StreamProvider((ref) {
+  return ref.watch(presentationChange).presentationSelectForUpdate!;
+});
 
 /// state presentation selectionné pour affichage page d'accueil
+final presentationSelectStream = StreamProvider((ref) {
+  return ref.watch(presentationChange).presentationSelect!;
+});

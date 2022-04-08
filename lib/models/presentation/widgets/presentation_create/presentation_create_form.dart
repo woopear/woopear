@@ -303,10 +303,10 @@ class _PresentationCreateFormState
                             PresentationConst.creationPresentationInputInfoSup,
                       )
 
-                      /// input image
                     ],
                   ),
 
+                  /// input image
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
