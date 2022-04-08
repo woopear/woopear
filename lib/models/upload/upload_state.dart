@@ -67,6 +67,14 @@ class UploadFile extends ChangeNotifier {
     return url;
 
   }
+
+  /// delete image presentation
+  Future<void> deleteImage(String pathImage) async {
+    /// on creer la reference de l'image (nom)
+    final ref = _firebaseStorage.ref().child(pathImage);
+    /// on delete
+    await ref.delete();
+  }
 }
 
 /// state de la class uploadFile

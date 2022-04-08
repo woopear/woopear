@@ -56,6 +56,14 @@ class PresentationState extends ChangeNotifier {
     );
   }
 
+  /// update presentation
+  Future<void> updatePresentation(PresentationSchema newPresentation) async {
+    await _firestore.update(
+      path: FirestorePath.presentation(newPresentation.id!),
+      data: newPresentation.toMap(),
+    );
+  }
+
   /// delete présentation
   Future<void> deletePresentation(String idPresentation) async {
     await _firestore.delete(
