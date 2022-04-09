@@ -11,7 +11,7 @@ class PresentationContentSchema {
 
   factory PresentationContentSchema.fromMap(
       Map<String, dynamic> data, documentId) {
-    String text = data['content'];
+    String text = data['text'];
     String subTitle = data['subTitle'] ?? '';
 
     return PresentationContentSchema(
@@ -24,7 +24,7 @@ class PresentationContentSchema {
   Map<String, dynamic> toMap() {
     return {
       'text': text,
-      'subTitle': subTitle,
+      'subTitle': subTitle ?? '',
     };
   }
 }

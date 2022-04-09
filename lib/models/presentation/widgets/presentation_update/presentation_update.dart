@@ -5,9 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/presentation/presentation_const.dart';
+import 'package:woopear/models/presentation/presentation_content/presentation_content_schema.dart';
+import 'package:woopear/models/presentation/presentation_content/presentation_content_state.dart';
 import 'package:woopear/models/presentation/presentation_schema.dart';
 import 'package:woopear/models/presentation/presentation_state.dart';
 import 'package:woopear/models/presentation/widgets/presentation_create/label.dart';
+import 'package:woopear/models/presentation/widgets/presentation_update/presentation_update_list_content.dart';
 import 'package:woopear/models/presentation/widgets/presentation_update/title.dart';
 import 'package:woopear/models/upload/upload_state.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
@@ -15,6 +18,7 @@ import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/container_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
 import 'package:woopear/widget_shared/notification_basic.dart';
+import 'package:woopear/widget_shared/separate.dart';
 import 'package:woopear/widget_shared/waiting_data.dart';
 import 'package:woopear/widget_shared/waiting_error.dart';
 
@@ -227,6 +231,10 @@ class _PresentationUpdateState extends ConsumerState<PresentationUpdate> {
           /// ecoute de la présentation selectionné pour update
           ref.watch(presentationUpdateStream).when(
                 data: (presentation) {
+                  /// on ecoute les contents de la presentation
+                  final contents =
+                      ref.watch(contentsOfPresentationStream(presentation.id!));
+
                   _title = TextEditingController(text: presentation.title);
                   _subTitle =
                       TextEditingController(text: presentation.subTitle);
@@ -243,6 +251,7 @@ class _PresentationUpdateState extends ConsumerState<PresentationUpdate> {
                     child: Form(
                       key: _formKey,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           /// cadre info de base
                           Column(
@@ -493,13 +502,78 @@ class _PresentationUpdateState extends ConsumerState<PresentationUpdate> {
                             ],
                           ),
 
-                          /// btn ajouter content
-                          /// TODO : ajoute un content dans la BDD
-                          /// TODO : vérifier que l'ecouteur met à jour la list
+                          Separate(
+                            margin: const EdgeInsets.symmetric(vertical: 20.0),
+                          ),
 
-                          /// list des contents
-                          /// TODO : list des contents sous forme de input
-                          /// TODO : sinon on affiche le message pas de content
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              /// label partie contenu
+                              buildLabelPartieFormulairePresentation(
+                                'Contenu de la présentation',
+                                const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                                context,
+                              ),
+
+                              /// btn ajouter content
+                              /// TODO : ajoute un content dans la BDD
+                              /// TODO : vérifier que l'ecouteur met à jour la list
+                              TextButton.icon(
+                                onPressed: () async {
+                                  ref
+                                      .watch(presentationContentChange)
+                                      .addContentOfPresentation(
+                                        presentation.id!,
+                                        PresentationContentSchema(text: ''),
+                                      );
+                                },
+                                icon: Icon(Icons.add,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
+                                label: Text(
+                                  'Ajouter un contenu',
+                                  style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary),
+                                ),
+                              ),
+
+                              /// list des contents
+                              /// TODO : list des contents sous forme de input
+                              /// TODO : sinon on affiche le message pas de content
+                              Container(
+                                margin: const EdgeInsets.only(top: 30.0),
+                                child: Column(children: [
+                                  contents.when(
+                                    data: (contents) {
+                                      return ListView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        itemCount: contents.length,
+                                        itemBuilder: (context, index) {
+                                          return PresentationUpdateListContent(
+                                            content: contents[index],
+                                            idPresentation: presentation.id!,
+                                          );
+                                        },
+                                      );
+                                    },
+                                    error: (error, stack) =>
+                                        const WaitingError(),
+                                    loading: () => const WaitingData(),
+                                  )
+                                ]),
+                              ),
+                            ],
+                          ),
+
+                          Separate(
+                            margin:
+                                const EdgeInsets.only(bottom: 20.0, top: 50.0),
+                          ),
 
                           /// btn save modification présentation
                           /// btn creer

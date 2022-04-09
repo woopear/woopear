@@ -10,10 +10,11 @@ class WooValidator {
   static String errorInputDenomination = "Veuillez entrer une dénomination valide";
   static String errorInputSiret = "Veuillez entrer un numero de siret valide";
   static String errorInputCodeNaf = "Veuillez entrer un code naf valide";
-  static String errorInputPhoneNumber = "Veuillez entrer un numéro de téléphone";
+  static String errorInputPhoneNumber = "Veuillez entrer un numéro de téléphone"; 
 
   /// text error de validation input presentation + presentation content
   static String errorInputTitlePresentation = "Veuillez entrer un titre valide";
+  static String errorInputTextContent = "Veuillez entrer un text valide"; 
 
   /// regex pour validator email
   static final RegExp _emailRegex =

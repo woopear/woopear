@@ -9,5 +9,9 @@ class FirestorePath {
 
   /// presentation
   static String presentations() => 'presentations';
-  static String presentation(String idPresentation) => 'presentations/$idPresentation';
+  static String presentation(String idPresentation) =>
+      'presentations/$idPresentation';
+  static String presentationContents(String idPresentation) =>
+      'presentations/$idPresentation/contents';
+  static String presentationContent(String idPresentation, String idContent) => 'presentations/$idPresentation/contents/$idContent';
 }
