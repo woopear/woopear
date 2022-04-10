@@ -4,6 +4,7 @@ import 'package:woopear/models/presentation/presentation_content/presentation_co
 import 'package:woopear/models/presentation/presentation_content/presentation_content_state.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
+import 'package:woopear/widget_shared/notification_basic.dart';
 
 class PresentationUpdateListContent extends ConsumerStatefulWidget {
   PresentationContentSchema content;
@@ -49,6 +50,12 @@ class _PresentationUpdateListContentState
 
     await ref.watch(presentationContentChange).updateContentOfPresentation(
         widget.idPresentation, widget.content.id!, newContent);
+
+    /// notification error
+    NotificationBasic(
+      text: 'Paragraphe enregistré',
+      error: false,
+    ).notification(context);
   }
 
   @override
@@ -86,15 +93,14 @@ class _PresentationUpdateListContentState
           Container(
             margin: const EdgeInsets.only(top: 30.0),
             child: TextField(
-            controller: _text,
-            maxLines: 4,
-            decoration: InputDecoration(
-              hintText: "Ecrire mon text",
-              errorText: _validate ? "Veuillez remplir le champs" : null,
+              controller: _text,
+              maxLines: 4,
+              decoration: InputDecoration(
+                hintText: "Ecrire mon text",
+                errorText: _validate ? "Veuillez remplir le champs" : null,
+              ),
             ),
           ),
-          ),
-          
 
           /// btn enregistrer
           BtnElevatedBasic(
