@@ -14,7 +14,13 @@ class WooValidator {
 
   /// text error de validation input presentation + presentation content
   static String errorInputTitlePresentation = "Veuillez entrer un titre valide";
-  static String errorInputTextContent = "Veuillez entrer un text valide"; 
+  static String errorInputTextContent = "Veuillez entrer un text valide";
+
+  /// text error pour info de utilisateur root
+  static String errorInputPostRoleRoot = "Veuillez entrer un poste valide";
+  static String errorInputDescitionRoleRoot = "Veuillez entrer une description valide";
+  static String errorInputTechnoRoleRoot = "Veuillez entrer une/des techno(s) valide";
+  static String errorInputInfoRoleRoot = "Veuillez entrer des infos valide";
 
   /// regex pour validator email
   static final RegExp _emailRegex =

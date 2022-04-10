@@ -15,6 +15,10 @@ class ProfilSchema {
   String uid;
   CompanieSchema? companie;
   RoleSchema role;
+  String? post;
+  String? description;
+  String? techno;
+  String? infoComplementary;
 
   ProfilSchema({
     this.id,
@@ -30,6 +34,10 @@ class ProfilSchema {
     required this.uid,
     this.companie,
     required this.role,
+    this.post,
+    this.description,
+    this.techno,
+    this.infoComplementary,
   });
 
   factory ProfilSchema.fromMap(Map<String, dynamic> data, documentId) {
@@ -63,6 +71,10 @@ class ProfilSchema {
             libelle: '',
             description: '',
           );
+    String post = data['post'] ?? '';
+    String description = data['description'] ?? '';
+    String techno = data['techno'] ?? '';
+    String infoComplementary = data['infoComplementary'] ?? '';
 
     return ProfilSchema(
       id: documentId,
@@ -78,6 +90,10 @@ class ProfilSchema {
       companie: companie,
       role: role,
       uid: uid,
+      description: description,
+      infoComplementary: infoComplementary,
+      post: post,
+      techno: techno,
     );
   }
 
@@ -95,6 +111,10 @@ class ProfilSchema {
       'companie': companie?.toMap(),
       'role': role.toMap(),
       'uid': uid,
+      'description': description ?? '',
+      'infoComplementary': infoComplementary ?? '',
+      'post': post ?? '',
+      'techno': techno ?? '',
     };
   }
 }

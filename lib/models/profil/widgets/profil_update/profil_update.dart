@@ -43,6 +43,12 @@ class _ProfilUpdateState extends ConsumerState<ProfilUpdate> {
   TextEditingController _city = TextEditingController(text: '');
   TextEditingController _phoneNumber = TextEditingController(text: '');
 
+  /// info pour role root
+  TextEditingController _post = TextEditingController(text: '');
+  TextEditingController _description = TextEditingController(text: '');
+  TextEditingController _techno = TextEditingController(text: '');
+  TextEditingController _infoComplementaire = TextEditingController(text: '');
+
   /// companie
   TextEditingController _denomination = TextEditingController(text: '');
   TextEditingController _siret = TextEditingController(text: '');
@@ -75,6 +81,13 @@ class _ProfilUpdateState extends ConsumerState<ProfilUpdate> {
     _cityCompanie = TextEditingController(text: widget.profil.companie!.city);
     _logoCompanie = TextEditingController(text: widget.profil.companie!.logo);
     _role = widget.profil.role;
+
+    /// info pour role root
+    _post = TextEditingController(text: widget.profil.post);
+    _description = TextEditingController(text: widget.profil.description);
+    _techno = TextEditingController(text: widget.profil.techno);
+    _infoComplementaire =
+        TextEditingController(text: widget.profil.infoComplementary);
   }
 
   @override
@@ -136,6 +149,14 @@ class _ProfilUpdateState extends ConsumerState<ProfilUpdate> {
         role: RoleSchema(
             libelle: _role!.libelle, description: _role!.description),
       );
+
+      if (_role!.libelle == 'root') {
+        /// ajout des info pour role root
+        newProfil.post = _post.text.trim();
+        newProfil.description = _description.text.trim();
+        newProfil.techno = _techno.text.trim();
+        newProfil.infoComplementary = _infoComplementaire.text.trim();
+      }
 
       /// si companie creer companie
       /// si addresse de la companie n'est pas renseigner
@@ -224,17 +245,20 @@ class _ProfilUpdateState extends ConsumerState<ProfilUpdate> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      widget.updateRole ?
-                      /// input role
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          child: SignupDropdownRole(
-                            dropdownValue: _role,
-                            onChanged: (value) => setRole(value),
-                          ),
-                        ),
-                      ) : Container(),
+                      widget.updateRole
+                          ?
+
+                          /// input role
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                child: SignupDropdownRole(
+                                  dropdownValue: _role,
+                                  onChanged: (value) => setRole(value),
+                                ),
+                              ),
+                            )
+                          : Container(),
 
                       /// first name
                       InputBasic(
@@ -295,6 +319,53 @@ class _ProfilUpdateState extends ConsumerState<ProfilUpdate> {
                       InputBasic(
                         controller: _phoneNumber,
                         labelText: UserConst.createLabelInputPhoneNumber,
+                      ),
+
+                      /// input post
+                      InputBasic(
+                        labelText: 'Métier, poste, emploi *',
+                        controller: _post,
+                        validator: (value) =>
+                            WooValidator.validatorInputTextBasic(
+                          textError: WooValidator.errorInputPostRoleRoot,
+                          value: value,
+                        ),
+                      ),
+
+                      /// input description
+                      InputBasic(
+                        margin: const EdgeInsets.only(top: 10.0),
+                        labelText: 'Description de vous *',
+                        controller: _description,
+                        validator: (value) =>
+                            WooValidator.validatorInputTextBasic(
+                          textError: WooValidator.errorInputDescitionRoleRoot,
+                          value: value,
+                        ),
+                      ),
+
+                      /// input techno
+                      InputBasic(
+                        margin: const EdgeInsets.only(top: 10.0),
+                        labelText: 'Les technos pratiquées *',
+                        controller: _techno,
+                        validator: (value) =>
+                            WooValidator.validatorInputTextBasic(
+                          textError: WooValidator.errorInputTechnoRoleRoot,
+                          value: value,
+                        ),
+                      ),
+
+                      /// input infoComplementaire
+                      InputBasic(
+                        margin: const EdgeInsets.only(top: 10.0),
+                        labelText: 'Des infos supplémentaire*',
+                        controller: _infoComplementaire,
+                        validator: (value) =>
+                            WooValidator.validatorInputTextBasic(
+                          textError: WooValidator.errorInputInfoRoleRoot,
+                          value: value,
+                        ),
                       ),
 
                       /// btn affiche / cache formualire companie
