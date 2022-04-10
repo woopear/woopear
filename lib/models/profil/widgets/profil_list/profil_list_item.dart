@@ -17,8 +17,9 @@ class ProfilListItem extends ConsumerStatefulWidget {
 }
 
 class _ProfilListItemState extends ConsumerState<ProfilListItem> {
-  Future<void> deleteProfilAndUser(String idProfil) async {
-    await ref.watch(profilChange).deleteProfil(idProfil);
+  /// suppression utilisateur
+  Future<void> deleteProfilAndUser(String uid, String idProfil) async {
+    await ref.watch(profilChange).deleteProfil(uid, idProfil);
   }
 
   @override
@@ -71,7 +72,7 @@ class _ProfilListItemState extends ConsumerState<ProfilListItem> {
           ///suppression
           IconButton(
             onPressed: () async {
-              await deleteProfilAndUser(widget.item.id!);
+              await deleteProfilAndUser(widget.item.uid, widget.item.id!);
             },
             icon: const Icon(Icons.delete_rounded, color: Colors.red),
           ),

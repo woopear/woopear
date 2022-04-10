@@ -74,7 +74,8 @@ class UserState extends ChangeNotifier {
   /// suppression user auth firebase
   Future<void> deleteUser(String uid, String idProfil) async {
     await _auth.currentUser!.delete();
-    await profil.deleteProfil(idProfil);
+    await profil.deleteProfil(uid, idProfil);
+    await disconnectUser();
   }
 }
 

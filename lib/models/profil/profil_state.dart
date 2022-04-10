@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woo_firestore_crud/woo_firestore_crud.dart';
 import 'package:woopear/models/profil/profil_schema.dart';
+import 'package:woopear/models/upload/upload_state.dart';
 import 'package:woopear/models/user/user_state.dart';
 import 'package:woopear/utils/fire/firestore_path.dart';
 
@@ -10,6 +11,7 @@ class ProfilState extends ChangeNotifier {
   ProfilSchema? _profilCurrent;
   late Stream<List<ProfilSchema>> _profilsCurrent;
   late Stream<List<ProfilSchema>> _profils;
+  final UploadFile _upload = UploadFile();
 
   ProfilSchema? get profilCurrent => _profilCurrent;
   Stream<List<ProfilSchema>> get profilsCurrent => _profilsCurrent;
@@ -60,10 +62,12 @@ class ProfilState extends ChangeNotifier {
   }
 
   /// suppression profil
-  Future<void> deleteProfil(String idProfil) async {
+  Future<void> deleteProfil(String uid, String idProfil) async {
     await _firestore.delete(
       path: FirestorePath.profil(idProfil),
     );
+    /// faire passé uid pour supprimer image avatar
+    await _upload.deleteImage('avatars/user-$uid');
   }
 
   /// affecte le profil recuperer
