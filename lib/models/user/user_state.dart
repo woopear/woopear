@@ -52,7 +52,6 @@ class UserState extends ChangeNotifier {
   Future<void> disconnectUser() async {
     await _auth.signOut();
     profil.resetProfil();
-    notifyListeners();
   }
 
   /// send email pour terminer l'inscription
