@@ -17,8 +17,6 @@ class _DashboardState extends ConsumerState<Dashboard> {
       child: Column(
         children: [
           Text(user?.firstName ?? ''),
-          
-          
         ],
       ),
     );
