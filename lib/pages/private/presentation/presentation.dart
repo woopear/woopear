@@ -26,11 +26,11 @@ class _PresentationState extends ConsumerState<Presentation> {
     super.initState();
 
     /// si deconnecter retour sur la page app (connexion ou dashboard)
-    if(FirebaseAuth.instance.currentUser == null){
-    WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
-      Navigator.pop(context);
-          Navigator.pushNamed(context, Routes().appAcces);
-        }));
+    if (FirebaseAuth.instance.currentUser == null) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, Routes().appAcces);
+          }));
     }
   }
 

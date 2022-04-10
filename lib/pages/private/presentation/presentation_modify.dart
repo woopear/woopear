@@ -26,11 +26,11 @@ class _PresentationModifyState extends ConsumerState<PresentationModify> {
     super.initState();
 
     /// si deconnecter retour sur la page app (connexion ou dashboard)
-    if(FirebaseAuth.instance.currentUser == null){
-    WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
-      Navigator.pop(context);
-          Navigator.pushNamed(context, Routes().appAcces);
-        }));
+    if (FirebaseAuth.instance.currentUser == null) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, Routes().appAcces);
+          }));
     }
   }
 
@@ -40,7 +40,9 @@ class _PresentationModifyState extends ConsumerState<PresentationModify> {
     final user = FirebaseAuth.instance.currentUser;
 
     /// on ecoute la présentation selectionné
-    ref.watch(presentationChange).streamPresentationUpdate(widget.idPresentation);
+    ref
+        .watch(presentationChange)
+        .streamPresentationUpdate(widget.idPresentation);
 
     return SafeArea(
       child: Scaffold(

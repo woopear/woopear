@@ -25,11 +25,11 @@ class _ProfilSelectState extends ConsumerState<ProfilSelect> {
     super.initState();
 
     /// si deconnecter retour sur la page app (connexion ou dashboard)
-    if(FirebaseAuth.instance.currentUser == null){
-    WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
-      Navigator.pop(context);
-          Navigator.pushNamed(context, Routes().appAcces);
-        }));
+    if (FirebaseAuth.instance.currentUser == null) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, Routes().appAcces);
+          }));
     }
   }
 
@@ -70,7 +70,7 @@ class _ProfilSelectState extends ConsumerState<ProfilSelect> {
                   /// si true on affiche update
                   _seeUpdate
                       ? ProfilUpdate(
-                        updateRole: true,
+                          updateRole: true,
                           profil: widget.profil,
                           onPressed: _openCloseUpdateInfo,
                         )
