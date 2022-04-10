@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/presentation/presentation_const.dart';
 import 'package:woopear/models/presentation/presentation_state.dart';
 import 'package:woopear/models/presentation/widgets/presentation_update/presentation_update.dart';
+import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
 
 class PresentationModify extends ConsumerStatefulWidget {
@@ -20,6 +21,19 @@ class PresentationModify extends ConsumerStatefulWidget {
 }
 
 class _PresentationModifyState extends ConsumerState<PresentationModify> {
+  @override
+  void initState() {
+    super.initState();
+
+    /// si deconnecter retour sur la page app (connexion ou dashboard)
+    if(FirebaseAuth.instance.currentUser == null){
+    WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
+      Navigator.pop(context);
+          Navigator.pushNamed(context, Routes().appAcces);
+        }));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     /// on recupere le user

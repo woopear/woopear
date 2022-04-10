@@ -6,6 +6,7 @@ import 'package:woopear/models/presentation/presentation_const.dart';
 import 'package:woopear/models/presentation/presentation_state.dart';
 import 'package:woopear/models/presentation/widgets/presentation_create/presentation_create.dart';
 import 'package:woopear/models/presentation/widgets/presentation_list/presentation_list.dart';
+import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
 import 'package:woopear/widget_shared/drawer_basic.dart';
 
@@ -19,6 +20,19 @@ class Presentation extends ConsumerStatefulWidget {
 class _PresentationState extends ConsumerState<Presentation> {
   bool _seePresentationList = true;
   bool _seePresentationCreate = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// si deconnecter retour sur la page app (connexion ou dashboard)
+    if(FirebaseAuth.instance.currentUser == null){
+    WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
+      Navigator.pop(context);
+          Navigator.pushNamed(context, Routes().appAcces);
+        }));
+    }
+  }
 
   /// affiche / cache list presentation
   void _openCloseSeePresentationList() {
@@ -71,29 +85,33 @@ class _PresentationState extends ConsumerState<Presentation> {
 
         /// menu de la page
         /// si il y a une presentation
-        floatingActionButton: presentations != null ? presentations.isEmpty ? SpeedDial(
-          animatedIcon: AnimatedIcons.menu_close,
-          spacing: 20.0,
-          spaceBetweenChildren: 20.0,
-          foregroundColor: Colors.white,
-          children: [
-            /// icon menu ajouter un profil
-            SpeedDialChild(
-                child: const Icon(Icons.add),
-                label: 'Créer une présentation',
-                onTap: () {
-                  _openCloseSeePresentationCreate();
-                }),
+        floatingActionButton: presentations != null
+            ? presentations.isEmpty
+                ? SpeedDial(
+                    animatedIcon: AnimatedIcons.menu_close,
+                    spacing: 20.0,
+                    spaceBetweenChildren: 20.0,
+                    foregroundColor: Colors.white,
+                    children: [
+                      /// icon menu ajouter un profil
+                      SpeedDialChild(
+                          child: const Icon(Icons.add),
+                          label: 'Créer une présentation',
+                          onTap: () {
+                            _openCloseSeePresentationCreate();
+                          }),
 
-            /// icon menu liste des profils
-            SpeedDialChild(
-                child: const Icon(Icons.list),
-                label: 'Liste des présentations',
-                onTap: () {
-                  _openCloseSeePresentationList();
-                }),
-          ],
-        ) : Container() : null,
+                      /// icon menu liste des profils
+                      SpeedDialChild(
+                          child: const Icon(Icons.list),
+                          label: 'Liste des présentations',
+                          onTap: () {
+                            _openCloseSeePresentationList();
+                          }),
+                    ],
+                  )
+                : Container()
+            : null,
       ),
     );
   }

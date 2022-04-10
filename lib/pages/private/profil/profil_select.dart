@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/profil/profil_schema.dart';
@@ -18,6 +19,19 @@ class ProfilSelect extends ConsumerStatefulWidget {
 
 class _ProfilSelectState extends ConsumerState<ProfilSelect> {
   bool _seeUpdate = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// si deconnecter retour sur la page app (connexion ou dashboard)
+    if(FirebaseAuth.instance.currentUser == null){
+    WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
+      Navigator.pop(context);
+          Navigator.pushNamed(context, Routes().appAcces);
+        }));
+    }
+  }
 
   /// affiche / cache update info
   void _openCloseUpdateInfo() {
