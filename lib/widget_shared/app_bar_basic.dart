@@ -94,11 +94,12 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
       flexibleSpace: Container(
         height: double.infinity,
       ),
+      /// menu affichage team
       bottom: widget.seeMenuProfil && allProfil != null
           ? TabBar(
               labelPadding: const EdgeInsets.only(
                   top: 10.0, bottom: 10.0, left: 30.0, right: 30.0),
-              indicatorColor: Theme.of(context).colorScheme.tertiary,
+              indicatorColor: Theme.of(context).colorScheme.secondary,
               indicatorWeight: 5,
               tabs: allProfil
                   .map(

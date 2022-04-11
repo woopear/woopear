@@ -6,12 +6,14 @@ class BtnElevatedBasic extends ConsumerStatefulWidget {
   void Function() onPressed;
   String textBtn;
   String message;
+  bool isLoading;
 
   BtnElevatedBasic({
     Key? key,
     this.margin = const EdgeInsets.only(top: 20.0),
     required this.onPressed,
     required this.textBtn,
+    this.isLoading = false,
     this.message = '',
   }) : super(key: key);
 
@@ -45,7 +47,11 @@ class _BtnElevatedBasicState extends ConsumerState<BtnElevatedBasic> {
         verticalOffset: 30,
         child: ElevatedButton(
           onPressed: _onPressed,
-          child: Text(_textBtn!),
+          child: widget.isLoading
+              ? CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.secondary,
+                )
+              : Text(_textBtn!),
         ),
       ),
     );
