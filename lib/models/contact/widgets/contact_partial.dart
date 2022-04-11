@@ -29,7 +29,7 @@ class _ContactPartialState extends ConsumerState<ContactPartial> {
                 Container(
                   margin: const EdgeInsets.only(top: 20.0),
                   child: Text(
-                    'Nous vous répondrons dans les plus brefs délai.',
+                    'Nous vous répondrons dans les plus brefs délais.',
                     style: const TextStyle().copyWith(
                       fontWeight: FontWeight.w100,
                     ),

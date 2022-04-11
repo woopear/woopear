@@ -112,7 +112,7 @@ class _ContactFormState extends ConsumerState<ContactForm> {
                     decoration: InputDecoration(
                       hintText: "Votre message *",
                       errorText:
-                          _validate ? "Veuillez remplir le champs" : null,
+                          _validate ? "Veuillez remplir le champ" : null,
                     ),
                   ),
                 ),
@@ -139,7 +139,7 @@ class _ContactFormState extends ConsumerState<ContactForm> {
                   child: Container(
                     margin: const EdgeInsets.only(top: 70.0),
                     child: Text(
-                      '* Champs obligatoire',
+                      '* Champ obligatoire',
                       style: Theme.of(context).textTheme.labelSmall,
                     ),
                   ),

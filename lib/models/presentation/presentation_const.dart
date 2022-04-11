@@ -6,7 +6,7 @@ class PresentationConst {
   static String creationPresentationTitle = "Creation d'une présentation";
   static String creationPresentationMessagePickerNull = "Modification de l'image annulée";
   static String creationPresentationMessageSucces = 'Creation de la présentation réussis';
-  static String creationPresentationMessageError = 'Impossible de creer la présentation';
+  static String creationPresentationMessageError = 'Impossible de créer la présentation';
   static String creationPresentationTitleLabel1 = 'Information de base';
   static String creationPresentationTitleLabel2 = 'Information entreprise';
   static String creationPresentationTitleLabel3 = 'Information supplémentaire';
@@ -22,7 +22,7 @@ class PresentationConst {
   static String creationPresentationBtnSupImage = "Supprimer l'image";
   static String creationPresentationBtnAjouterImage = "Ajouter une image";
   static String creationPresentationBtnCreer = "CREER";
-  static String creationPresentationInfoform = "* Champs obligatoire";
+  static String creationPresentationInfoform = "* Champ obligatoire";
 
   /// partie list presentation
   static String listPresentationTitle = "Liste des présentations";

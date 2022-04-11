@@ -94,6 +94,7 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
       flexibleSpace: Container(
         height: double.infinity,
       ),
+
       /// menu affichage team
       bottom: widget.seeMenuProfil && allProfil != null
           ? TabBar(
@@ -105,8 +106,16 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
                   .map(
                     (profil) => Tab(
                       icon: profil != null && profil.avatar != ''
-                          ? Image.network(profil.avatar!, width: double.infinity, height: 40.0,)
-                          : const Icon(Icons.person, size: 40.0,),
+                          ? CircleAvatar(
+                              radius: 40 / 2,
+                              backgroundImage: NetworkImage(
+                                profil.avatar!,
+                              ),
+                            )
+                          : const Icon(
+                              Icons.person,
+                              size: 40.0,
+                            ),
                       text: profil!.firstName.toUpperCase(),
                     ),
                   )

@@ -31,7 +31,7 @@ class _PresentationDetailsState extends ConsumerState<PresentationDetails> {
         appBar: AppBarBasic(
           seeMenuProfil: true,
           seeConnexion: user != null ? true : false,
-          text: 'Woopear team',
+          text: "L'équipe woopear",
           automaticallyImplyLeading: true,
         ),
         body: TabBarView(
@@ -92,25 +92,24 @@ class _PresentationDetailsState extends ConsumerState<PresentationDetails> {
                               ),
 
                               /// post
-                              buildLabel('Emploi actuel : ', _width),
+                              buildLabel('Expertise ', _width),
                               profil != null
                                   ? buildInfo(profil.post!, _width)
                                   : const WaitingData(),
 
                               /// description
-                              buildLabel('Bio : ', _width),
+                              buildLabel('Présentation ', _width),
                               profil != null
                                   ? buildInfo(profil.description!, _width)
                                   : const WaitingData(),
 
                               /// infos complementary
-                              buildLabel('Info supplémentaire : ', _width),
                               profil != null
                                   ? buildInfo(profil.infoComplementary!, _width)
                                   : const WaitingData(),
 
                               /// techno
-                              buildLabel('Technos : ', _width),
+                              buildLabel('Technos utilisées : ', _width),
                               profil != null
                                   ? buildInfo(profil.techno!, _width)
                                   : const WaitingData(),
@@ -142,6 +141,7 @@ class _PresentationDetailsState extends ConsumerState<PresentationDetails> {
 
   /// paragraphe
   Widget buildInfo(String text, double largeur) => Container(
+    margin: const EdgeInsets.only(bottom: 20.0),
         padding: const EdgeInsets.only(left: 30.0, right: 30.0),
         width: largeur > 700 ? 600 : double.infinity,
         child: Text(
