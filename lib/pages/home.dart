@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/models/contact/widgets/contact_partial.dart';
 import 'package:woopear/models/presentation/widgets/presentation_display/presentation_display.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
 
@@ -34,8 +35,8 @@ class _HomeState extends ConsumerState<Home> {
                   child: const PresentationDisplay(),
                 ),  
                 
-
                 /// affichage partie contact (envoie mail + info woopear) 
+                const ContactPartial(),
               ],
             ),
           ),

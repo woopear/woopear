@@ -8,11 +8,14 @@ class TitlePageAuth extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    /// on recupere la largeur de l'ecran
+    double _width = MediaQuery.of(context).size.width;
+
     return Container(
       child: Text(
         text,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headline4,
+        style: _width > 700 ? Theme.of(context).textTheme.headline2 : Theme.of(context).textTheme.headline3,
       ),
     );
   }
