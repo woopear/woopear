@@ -1,4 +1,4 @@
-import 'package:woopear/models/producer/team_woo/team_woo.dart';
+import 'package:woopear/models/producer/team_woo/team_woo_schema.dart';
 
 class ProducerSchema {
   String? id;

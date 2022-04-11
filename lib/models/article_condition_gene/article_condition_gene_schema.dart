@@ -1,4 +1,4 @@
-import 'package:woopear/models/article_condition_gene/condition_gene/condition_gene.dart';
+import 'package:woopear/models/article_condition_gene/condition_gene/condition_gene_schema.dart';
 
 class ArticleGeneSchema {
   String? id;

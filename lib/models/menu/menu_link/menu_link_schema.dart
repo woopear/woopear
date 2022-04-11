@@ -1,5 +1,5 @@
-import 'package:woopear/models/menu/menu.dart';
-import 'package:woopear/models/menu/menu_link/link/link.dart';
+import 'package:woopear/models/menu/menu_schema.dart';
+import 'package:woopear/models/menu/menu_link/link/link_schema.dart';
 
 class MenuLinkSchema {
   String? id;
