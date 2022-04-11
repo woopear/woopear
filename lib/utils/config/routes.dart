@@ -4,6 +4,7 @@ import 'package:woopear/pages/create_user.dart';
 import 'package:woopear/pages/forgot_password.dart';
 import 'package:woopear/pages/home.dart';
 import 'package:woopear/pages/john.dart';
+import 'package:woopear/pages/presentation_details.dart';
 import 'package:woopear/pages/private/account/account.dart';
 import 'package:woopear/pages/private/presentation/presentation.dart';
 import 'package:woopear/pages/private/profil/profil.dart';
@@ -17,6 +18,7 @@ class Routes {
   final String _presentation = '/app/presentation';
   final String _createUser = '/create/account';
   final String _forgotPassword = '/forgot/password';
+  final String _presentationDetail = '/presentation/detail';
   final String _john = '/john';
 
   /// les getters des routes
@@ -27,6 +29,7 @@ class Routes {
   String get forgotPassword => _forgotPassword;
   String get account => _account;
   String get presentation => _presentation;
+  String get presentationDetail => _presentationDetail;
   String get john => _john;
 
   /// retourne un widget en fonction de la routes
@@ -39,6 +42,7 @@ class Routes {
       _forgotPassword: (context) => const ForgotPassword(),
       _account: (context) => const Account(),
       _presentation: (context) => const Presentation(),
+      _presentationDetail: (context) => const PresentationDetails(),
       _john: (context) => const John(),
     };
   }

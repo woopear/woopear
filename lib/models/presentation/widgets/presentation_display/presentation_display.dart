@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/presentation/presentation_state.dart';
+import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/widget_shared/waiting_data.dart';
 
 class PresentationDisplay extends ConsumerStatefulWidget {
@@ -78,6 +79,7 @@ class _PresentationDisplayState extends ConsumerState<PresentationDisplay> {
                         ),
                       ),
 
+                      /// btn en savoir plus
                       Align(
                         alignment: _width > 700
                             ? Alignment.centerRight
@@ -85,7 +87,10 @@ class _PresentationDisplayState extends ConsumerState<PresentationDisplay> {
                         child: Directionality(
                           textDirection: TextDirection.rtl,
                           child: TextButton.icon(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, Routes().presentationDetail);
+                            },
                             label: const Text(
                               'En savoir plus',
                             ),
@@ -98,8 +103,6 @@ class _PresentationDisplayState extends ConsumerState<PresentationDisplay> {
                     ],
                   ),
                 ),
-
-                /// entete de la presentation
               ],
             )
           : const WaitingData(),

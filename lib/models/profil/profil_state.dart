@@ -66,6 +66,7 @@ class ProfilState extends ChangeNotifier {
     await _firestore.delete(
       path: FirestorePath.profil(idProfil),
     );
+
     /// faire passé uid pour supprimer image avatar
     await _upload.deleteImage('avatars/user-$uid');
   }
@@ -105,4 +106,13 @@ final profilCurrentProvider = Provider((ref) {
     ref.watch(profilChange).setProfilCurrent(value[0]);
   });
   return ref.watch(profilChange).profilCurrent;
+});
+
+/// state allprofil
+final allProfilProvider = Provider((ref) {
+  List<ProfilSchema?>? listProfil;
+  ref.watch(allProfilsStream).whenData((value) {
+    listProfil = value;
+  });
+  return listProfil;
 });
