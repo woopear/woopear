@@ -39,7 +39,7 @@ class UserConst {
   static String createBtnSeeFormCompanie = "Ajouter une entreprise";
   static String createBtnCloseFormCompanie = "Fermer";
   static String createUrlRedirectSendMail =
-      "http://localhost:60589/#/create/account";
+      "https://woopear.fr/#/create/account";
 
   /// creation companie
   static String createCompanieTitleForm = "Entreprise";

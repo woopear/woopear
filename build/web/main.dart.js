@@ -77383,7 +77383,7 @@ ud(a){return this.Tz(a)},
 Tz(a){var s=0,r=A.z(t.H),q=this
 var $async$ud=A.t(function(b,c){if(b===1)return A.w(c,r)
 while(true)switch(s){case 0:s=2
-return A.u(q.a.uf(0,new A.y7(!0,"http://localhost:60589/#/create/account"),a),$async$ud)
+return A.u(q.a.uf(0,new A.y7(!0,"https://woopear.fr/#/create/account"),a),$async$ud)
 case 2:return A.x(null,r)}})
 return A.y($async$ud,r)},
 ue(a){return this.TA(a)},
