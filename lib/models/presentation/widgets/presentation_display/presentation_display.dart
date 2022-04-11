@@ -32,22 +32,27 @@ class _PresentationDisplayState extends ConsumerState<PresentationDisplay> {
                 SizedBox(
                   width: _width > 700 ? 800 : double.infinity,
                   child: Column(
-                    crossAxisAlignment: _width > 700 ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+                    crossAxisAlignment: _width > 700
+                        ? CrossAxisAlignment.start
+                        : CrossAxisAlignment.center,
                     children: [
                       /// image
                       Align(
-                        alignment: _width > 700 ? Alignment.centerLeft : Alignment.center,
+                        alignment: _width > 700
+                            ? Alignment.centerLeft
+                            : Alignment.center,
                         child: Container(
-                        margin: const EdgeInsets.only(top: 40.0),
-                        child: Image.network(
-                          presentation.image!,
-                          alignment: _width > 700 ? Alignment.centerLeft : Alignment.center,
-                          width: double.infinity,
-                          height: _width > 700 ? 250 : 200,
+                          margin: const EdgeInsets.only(top: 40.0),
+                          child: Image.network(
+                            presentation.image!,
+                            alignment: _width > 700
+                                ? Alignment.centerLeft
+                                : Alignment.center,
+                            width: double.infinity,
+                            height: _width > 700 ? 250 : 200,
+                          ),
                         ),
                       ),
-                      ),
-                      
 
                       /// title
                       Container(
@@ -66,27 +71,30 @@ class _PresentationDisplayState extends ConsumerState<PresentationDisplay> {
                         margin: const EdgeInsets.only(bottom: 40.0),
                         child: Text(
                           presentation.subTitle!,
-                          textAlign: _width > 700 ? TextAlign.left : TextAlign.center,
+                          textAlign:
+                              _width > 700 ? TextAlign.left : TextAlign.center,
                           style: const TextStyle()
                               .copyWith(fontWeight: FontWeight.w100),
                         ),
                       ),
 
                       Align(
-                        alignment: _width > 700 ? Alignment.centerRight : Alignment.center,
+                        alignment: _width > 700
+                            ? Alignment.centerRight
+                            : Alignment.center,
                         child: Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: TextButton.icon(
+                          textDirection: TextDirection.rtl,
+                          child: TextButton.icon(
                             onPressed: () {},
                             label: const Text(
                               'En savoir plus',
                             ),
                             icon: const Icon(
                               Icons.keyboard_arrow_right,
-                            ),),
+                            ),
+                          ),
+                        ),
                       ),
-                      ),
-                      
                     ],
                   ),
                 ),
