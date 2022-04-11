@@ -15,7 +15,7 @@ class _HomeState extends ConsumerState<Home> {
   Widget build(BuildContext context) {
     /// si mode dark ou pas
     bool idModeDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBarBasic(
@@ -29,6 +29,7 @@ class _HomeState extends ConsumerState<Home> {
               children: [
                 /// presentation
                 Container(
+                  width: double.infinity,
                   color: idModeDark ? const Color(0XFF363636) : const Color(0XFFF5F5F5),
                   child: const PresentationDisplay(),
                 ),  

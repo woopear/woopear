@@ -24,60 +24,74 @@ class _PresentationDisplayState extends ConsumerState<PresentationDisplay> {
     bool idModeDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 50.0, bottom: 80.0),
+      padding: const EdgeInsets.only(
+          left: 30.0, right: 30.0, top: 50.0, bottom: 80.0),
       child: presentation != null
           ? Column(
               children: [
-                /// entete de la presentation
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    /// image
-                    Container(
-                      margin: const EdgeInsets.only(top: 40.0),
-                      child: Image.network(
-                        presentation.image!,
-                        width: double.infinity,
-                        height: 200,
-                      ),
-                    ),
-
-                    /// title
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10.0, top: 30.0),
-                      child: Text(
-                        presentation.title,
-                        style: const TextStyle().copyWith(
-                          fontSize: 60.0,
-                          fontWeight: FontWeight.bold,
+                SizedBox(
+                  width: _width > 700 ? 800 : double.infinity,
+                  child: Column(
+                    crossAxisAlignment: _width > 700 ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+                    children: [
+                      /// image
+                      Align(
+                        alignment: _width > 700 ? Alignment.centerLeft : Alignment.center,
+                        child: Container(
+                        margin: const EdgeInsets.only(top: 40.0),
+                        child: Image.network(
+                          presentation.image!,
+                          alignment: _width > 700 ? Alignment.centerLeft : Alignment.center,
+                          width: double.infinity,
+                          height: _width > 700 ? 250 : 200,
                         ),
                       ),
-                    ),
-
-                    /// sub title
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 40.0),
-                      child: Text(
-                        presentation.subTitle!,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle()
-                            .copyWith(fontWeight: FontWeight.w100),
                       ),
-                    ),
+                      
 
-                    Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: TextButton.icon(
-                          onPressed: () {},
-                          label: const Text(
-                            'En savoir plus',
+                      /// title
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 10.0, top: 30.0),
+                        child: Text(
+                          presentation.title,
+                          style: const TextStyle().copyWith(
+                            fontSize: _width > 700 ? 80.0 : 60.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                          icon: const Icon(
-                            Icons.keyboard_arrow_right,
-                          )),
-                    ),
-                  ],
-                )
+                        ),
+                      ),
+
+                      /// sub title
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 40.0),
+                        child: Text(
+                          presentation.subTitle!,
+                          textAlign: _width > 700 ? TextAlign.left : TextAlign.center,
+                          style: const TextStyle()
+                              .copyWith(fontWeight: FontWeight.w100),
+                        ),
+                      ),
+
+                      Align(
+                        alignment: _width > 700 ? Alignment.centerRight : Alignment.center,
+                        child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: TextButton.icon(
+                            onPressed: () {},
+                            label: const Text(
+                              'En savoir plus',
+                            ),
+                            icon: const Icon(
+                              Icons.keyboard_arrow_right,
+                            ),),
+                      ),
+                      ),
+                      
+                    ],
+                  ),
+                ),
+
+                /// entete de la presentation
               ],
             )
           : const WaitingData(),
