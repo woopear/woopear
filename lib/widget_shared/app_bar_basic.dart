@@ -24,7 +24,8 @@ class AppBarBasic extends ConsumerStatefulWidget with PreferredSizeWidget {
   _AppBarFlutooState createState() => _AppBarFlutooState();
 
   @override
-  Size get preferredSize => Size.fromHeight(seeMenuProfil ? 180.0 : kToolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(seeMenuProfil ? 180.0 : kToolbarHeight);
 }
 
 class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
@@ -90,20 +91,25 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
           ),
         ),
       ],
-      flexibleSpace: Container(height: double.infinity,),
+      flexibleSpace: Container(
+        height: double.infinity,
+      ),
       bottom: widget.seeMenuProfil && allProfil != null
           ? TabBar(
-            labelPadding: const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 30.0, right: 30.0),
-            indicatorColor: Theme.of(context).colorScheme.tertiary,
-            indicatorWeight: 5,
+              labelPadding: const EdgeInsets.only(
+                  top: 10.0, bottom: 10.0, left: 30.0, right: 30.0),
+              indicatorColor: Theme.of(context).colorScheme.tertiary,
+              indicatorWeight: 5,
               tabs: allProfil
                   .map(
                     (profil) => Tab(
-                      icon: const Icon(Icons.person, size: 40,),
+                      icon: profil != null && profil.avatar != ''
+                          ? Image.network(profil.avatar!, width: double.infinity, height: 40.0,)
+                          : const Icon(Icons.person, size: 40.0,),
                       text: profil!.firstName.toUpperCase(),
                     ),
-                  ).toList()
-            )
+                  )
+                  .toList())
           : null,
     );
   }
