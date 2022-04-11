@@ -97,6 +97,10 @@ final presentationUpdateStream = StreamProvider((ref) {
 });
 
 /// state presentation selectionné pour affichage page d'accueil
-final presentationSelectStream = StreamProvider((ref) {
-  return ref.watch(presentationChange).presentationSelect!;
+final presentationSelectProvider = Provider<PresentationSchema?>((ref) {
+  PresentationSchema? presentation;
+  ref.watch(allPresentationStream).whenData((value) {
+    presentation = value[0];
+  });
+  return presentation;
 });
