@@ -1,4 +1,4 @@
-import 'package:woopear/models/menu/menu.dart';
+import 'package:woopear/models/menu/menu_schema.dart';
 
 class FooterSchema {
   String? id;

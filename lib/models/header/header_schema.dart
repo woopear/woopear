@@ -1,4 +1,4 @@
-import 'package:woopear/models/menu/menu.dart';
+import 'package:woopear/models/menu/menu_schema.dart';
 
 class HeaderSchema {
   String? id;

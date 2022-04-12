@@ -1,4 +1,4 @@
-import 'package:woopear/models/advertising/article_advers/article_advers.dart';
+import 'package:woopear/models/advertising/article_advers/article_advers_schema.dart';
 import 'package:woopear/models/content/content_schema.dart';
 
 class ArticleAdversContentSchema {

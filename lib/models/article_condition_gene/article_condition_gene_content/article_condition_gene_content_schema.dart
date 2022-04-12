@@ -1,4 +1,4 @@
-import 'package:woopear/models/article_condition_gene/article_condition_gene.dart';
+import 'package:woopear/models/article_condition_gene/article_condition_gene_schema.dart';
 import 'package:woopear/models/content/content_schema.dart';
 
 class ArticleGeneContentSchema {
