@@ -23,7 +23,6 @@ class FooterMenuState extends ChangeNotifier {
       path: FirestorePath.footerMenus(idFooter),
       data: newFooterMenu.toMap(),
     );
-    notifyListeners();
   }
 
   /// update FooterMenu
@@ -33,7 +32,6 @@ class FooterMenuState extends ChangeNotifier {
       path: FirestorePath.footerMenu(idFooter, idFooterMenu),
       data: newFooterMenu.toMap(),
     );
-    notifyListeners();
   }
 
   /// delete un FooterMenu
@@ -41,7 +39,6 @@ class FooterMenuState extends ChangeNotifier {
     await _firestore.delete(
       path: FirestorePath.footerMenu(idFooter, idFooterMenu),
     );
-    notifyListeners();
   }
 
   /// delete plusieurs FooterMenu

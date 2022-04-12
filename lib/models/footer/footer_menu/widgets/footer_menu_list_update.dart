@@ -45,13 +45,13 @@ class _FooterMenuListUpdateState extends ConsumerState<FooterMenuListUpdate> {
 
       /// notification succes
       NotificationBasic(
-        text: 'Modification du footer réussis',
+        text: "Modification de l'item réussis",
         error: false,
       ).notification(context);
     } else {
       /// notification succes
       NotificationBasic(
-        text: 'Impossible de modifier le footer',
+        text: "Impossible de modifier l'item",
         error: true,
       ).notification(context);
     }
@@ -83,7 +83,7 @@ class _FooterMenuListUpdateState extends ConsumerState<FooterMenuListUpdate> {
                         children: [
                           /// title avec id
                           buildTitleItemMenu(
-                              'Item : ${index + 1}', widget.footer.id!),
+                              'Item : ${index + 1}', widget.footer.id!, menu.id!),
 
                           /// input libelle
                           InputBasic(
@@ -131,7 +131,7 @@ class _FooterMenuListUpdateState extends ConsumerState<FooterMenuListUpdate> {
   }
 
   /// title de l'item du menu
-  Widget buildTitleItemMenu(String title, String idFooter) {
+  Widget buildTitleItemMenu(String title, String idFooter, String idFooterMenu) {
     return Container(
       child: Row(
         children: [
@@ -146,7 +146,7 @@ class _FooterMenuListUpdateState extends ConsumerState<FooterMenuListUpdate> {
                 /// delete menu avec son id
                 await ref
                     .watch(footerMenuChange)
-                    .deleteFooterMenu(idFooter, title);
+                    .deleteFooterMenu(idFooter, idFooterMenu);
               },
               icon: const Icon(
                 Icons.delete_rounded,

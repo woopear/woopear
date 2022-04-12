@@ -23,7 +23,6 @@ class FooterState extends ChangeNotifier {
       path: FirestorePath.footers(),
       data: newFooter.toMap(),
     );
-    notifyListeners();
   }
 
   /// update footer
@@ -32,7 +31,6 @@ class FooterState extends ChangeNotifier {
       path: FirestorePath.footer(idFooter),
       data: newFooter.toMap(),
     );
-    notifyListeners();
   }
 
   /// delete footer
@@ -44,7 +42,6 @@ class FooterState extends ChangeNotifier {
     await _firestore.delete(
       path: FirestorePath.footer(idFooter),
     );
-    notifyListeners();
   }
 }
 
