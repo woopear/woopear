@@ -48,17 +48,20 @@ class _FooterPageState extends ConsumerState<FooterPage> {
           automaticallyImplyLeading: true,
         ),
         body: SingleChildScrollView(
-          child: Container(
-            width: _width > 700 ? 600 : double.infinity,
-            padding: const EdgeInsets.all(30.0),
-            child: ref.watch(footersStream).when(
-                  data: (footers) {
-                    /// si vide on affiche create sinon on affiche update
-                    return footers.isEmpty ? const FooterCreate() : const FooterUpdate();
-                  },
-                  error: (error, stack) => const WaitingError(),
-                  loading: () => const WaitingData(),
-                ),
+          child: Center(
+            child: Container(
+              padding: const EdgeInsets.all(30.0),
+              child: ref.watch(footersStream).when(
+                    data: (footers) {
+                      /// si vide on affiche create sinon on affiche update
+                      return footers.isEmpty
+                          ? const FooterCreate()
+                          : const FooterUpdate();
+                    },
+                    error: (error, stack) => const WaitingError(),
+                    loading: () => const WaitingData(),
+                  ),
+            ),
           ),
         ),
       ),

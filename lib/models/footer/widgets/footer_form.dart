@@ -9,6 +9,7 @@ import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
 import 'package:woopear/widget_shared/container_basic.dart';
 import 'package:woopear/widget_shared/input_basic.dart';
+import 'package:woopear/widget_shared/notification_basic.dart';
 
 class FooterForm extends ConsumerStatefulWidget {
   String titleBtn;
@@ -54,9 +55,17 @@ class _FooterFormState extends ConsumerState<FooterForm> {
       /// creation en BDD
       await ref.watch(footerChange).addFooter(newFooter);
 
-      /// TODO : message succes
+      /// notification succes
+      NotificationBasic(
+        text: "Creation du footer réussis",
+        error: false,
+      ).notification(context);
     } else {
-      /// TODO : message error
+      /// notification error
+      NotificationBasic(
+        text: "Impossible de créer le footer",
+        error: true,
+      ).notification(context);
     }
   }
 
@@ -69,14 +78,26 @@ class _FooterFormState extends ConsumerState<FooterForm> {
       /// update en BDD
       await ref.watch(footerChange).updateFooter(idFooter, newFooter);
 
-      /// TODO : message succes
+      /// notification succes
+      NotificationBasic(
+        text: "Modification du footer réussis",
+        error: false,
+      ).notification(context);
     } else {
-      /// TODO : message error
+      /// notification error
+      NotificationBasic(
+        text: "Impossible de modifier le footer",
+        error: true,
+      ).notification(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    /// on recupere la largeur
+    final _width = MediaQuery.of(context).size.width;
+
+    /// on ecoute le footer
     final footer = ref.watch(footerProvider);
 
     /// si footer existe (dans le cas de update)
@@ -85,6 +106,7 @@ class _FooterFormState extends ConsumerState<FooterForm> {
         : _copy = TextEditingController(text: '');
 
     return ContainerBasic(
+      width: _width > 700 ? 600 : double.infinity,
       margin: const EdgeInsets.only(top: 70.0),
       child: Column(
         children: [

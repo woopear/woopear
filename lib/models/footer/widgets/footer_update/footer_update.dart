@@ -11,16 +11,16 @@ class FooterUpdate extends ConsumerStatefulWidget {
 }
 
 class _FooterUpdateState extends ConsumerState<FooterUpdate> {
-
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: Column(
         children: [
           /// title + subTitle
           buildTitleCreateFooter(
             title: 'Modifier le footer',
-            subTitle: "Modifier le copyright ou ajouter, modifier, supprimer des liens de menu.",
+            subTitle:
+                "Modifier le copyright ou ajouter, modifier, supprimer des liens de menu.",
           ),
 
           /// formulaire

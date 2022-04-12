@@ -13,7 +13,7 @@ class FooterCreate extends ConsumerStatefulWidget {
 class _FooterCreateState extends ConsumerState<FooterCreate> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: Column(
         children: [
           /// title + subTitle
