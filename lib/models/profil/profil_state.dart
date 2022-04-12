@@ -116,3 +116,12 @@ final allProfilProvider = Provider((ref) {
   });
   return listProfil;
 });
+
+/// state profil avec role root
+final allProfilRootProvider = Provider((ref) {
+  List<ProfilSchema?>? listProfil;
+  ref.watch(allProfilsStream).whenData((value) {
+    listProfil = value?.takeWhile((value) => value?.role.libelle == 'root').toList();
+  });
+  return listProfil;
+});

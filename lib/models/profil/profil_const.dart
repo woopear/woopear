@@ -1,10 +1,10 @@
 class ProfilConst {
   /// creation profil
-  static String titlePage = "Creer un profil";
-  static String errorRole = "Veuillez renseigner le role";
-  static String messageSucces = "Profil creer et email envoyé";
-  static String messageError = "Impossible de creer le profil";
-  static String placeholder = "Addresse-Email *";
+  static String titlePage = "Créer un profil";
+  static String errorRole = "Veuillez renseigner le rôle";
+  static String messageSucces = "Profil créer et email envoyé";
+  static String messageError = "Impossible de créer le profil";
+  static String placeholder = "Adresse-Email *";
   static String btnCreationProfil = "CREER";
-  static String infoFormulaire = "* Champs obligatoire";
+  static String infoFormulaire = "* Champ obligatoire";
 }

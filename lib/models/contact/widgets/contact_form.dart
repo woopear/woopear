@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:woopear/models/contact/contact_state.dart';
 import 'package:woopear/utils/constants/woo_validator.dart';
 import 'package:woopear/widget_shared/btn_elevated_basic.dart';
@@ -42,9 +43,8 @@ class _ContactFormState extends ConsumerState<ContactForm> {
 
   /// envoie email de contact
   Future<void> _sendMailForWoopear(BuildContext context) async {
-   setState(() => _isLoading = true); 
-
     if (_formKey.currentState!.validate()) {
+      setState(() => _isLoading = true);
       const subject = "Demande de contact accueil woopear";
       await ref
           .watch(contactChange)
@@ -107,12 +107,12 @@ class _ContactFormState extends ConsumerState<ContactForm> {
                 Container(
                   margin: const EdgeInsets.only(top: 30.0),
                   child: TextField(
+                    style: GoogleFonts.nunito(fontSize: 20.0),
                     controller: _message,
                     maxLines: 6,
                     decoration: InputDecoration(
                       hintText: "Votre message *",
-                      errorText:
-                          _validate ? "Veuillez remplir le champs" : null,
+                      errorText: _validate ? "Veuillez remplir le champ" : null,
                     ),
                   ),
                 ),
@@ -139,7 +139,7 @@ class _ContactFormState extends ConsumerState<ContactForm> {
                   child: Container(
                     margin: const EdgeInsets.only(top: 70.0),
                     child: Text(
-                      '* Champs obligatoire',
+                      '* Champ obligatoire',
                       style: Theme.of(context).textTheme.labelSmall,
                     ),
                   ),

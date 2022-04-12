@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:woo_theme_mode/woo_theme_mode.dart';
 import 'package:woopear/models/profil/profil_state.dart';
 import 'package:woopear/models/user/user_state.dart';
@@ -40,6 +41,8 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
     return AppBar(
       automaticallyImplyLeading: widget.automaticallyImplyLeading,
       title: Text(widget.text),
+      centerTitle: true,
+      toolbarTextStyle: GoogleFonts.nunito(),
       actions: [
         Container(
           padding: const EdgeInsets.only(right: 20.0),
@@ -67,6 +70,7 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
                               onPressed: () async {
                                 await ref.watch(userChange).disconnectUser();
                                 Navigator.pop(context, true);
+                                Navigator.pushNamed(context, Routes().home);
                               },
                               icon: const Icon(Icons.logout),
                             ),
@@ -94,6 +98,7 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
       flexibleSpace: Container(
         height: double.infinity,
       ),
+
       /// menu affichage team
       bottom: widget.seeMenuProfil && allProfil != null
           ? TabBar(
@@ -105,8 +110,16 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
                   .map(
                     (profil) => Tab(
                       icon: profil != null && profil.avatar != ''
-                          ? Image.network(profil.avatar!, width: double.infinity, height: 40.0,)
-                          : const Icon(Icons.person, size: 40.0,),
+                          ? CircleAvatar(
+                              radius: 40 / 2,
+                              backgroundImage: NetworkImage(
+                                profil.avatar!,
+                              ),
+                            )
+                          : const Icon(
+                              Icons.person,
+                              size: 40.0,
+                            ),
                       text: profil!.firstName.toUpperCase(),
                     ),
                   )
