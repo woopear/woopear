@@ -34,7 +34,7 @@ class _AppState extends ConsumerState<App> {
       themeMode: ref.watch(wooThemeChange).themeMode,
       theme: themeClaire,
       darkTheme: themeDark,
-      initialRoute: Routes().david,
+      initialRoute: Routes().home,
       routes: Routes().urls(),
     );
   }
