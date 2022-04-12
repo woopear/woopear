@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woo_firestore_crud/woo_firestore_crud.dart';
 import 'package:woopear/models/footer/footer_menu/footer_menu_schema.dart';
 import 'package:woopear/utils/fire/firestore_path.dart';
@@ -8,12 +9,11 @@ class FooterMenuState extends ChangeNotifier {
   final _firestore = WooFirestore.instance;
 
   /// ecoute tous les FooterMenu d'un footer
-  Stream? streamFooterMenus(String idFooter) {
-    _firestore.streamCol(
+  Stream<List<FooterMenuSchema>> streamFooterMenus(String idFooter) {
+    return _firestore.streamCol<FooterMenuSchema>(
       path: FirestorePath.footerMenus(idFooter),
       builder: (data, documentId) => FooterMenuSchema.fromMap(data, documentId),
     );
-    return null;
   }
 
   /// add FooterMenu
@@ -55,7 +55,7 @@ class FooterMenuState extends ChangeNotifier {
     );
 
     /// boucle pour delete FooterMenu
-    return ref.get().then((querySnapshot){
+    return ref.get().then((querySnapshot) {
       for (var doc in querySnapshot.docs) {
         batch.delete(doc.reference);
       }
@@ -65,3 +65,13 @@ class FooterMenuState extends ChangeNotifier {
     });
   }
 }
+
+/// state de la class FooterMenu
+final footerMenuChange =
+    ChangeNotifierProvider<FooterMenuState>((ref) => FooterMenuState());
+
+/// state list des menus d'un footer
+final footerMenusStream =
+    StreamProvider.autoDispose.family((ref, String idFooter) {
+  return ref.watch(footerMenuChange).streamFooterMenus(idFooter);
+});

@@ -7,6 +7,7 @@ import 'package:woopear/pages/home.dart';
 import 'package:woopear/pages/john.dart';
 import 'package:woopear/pages/presentation_details.dart';
 import 'package:woopear/pages/private/account/account.dart';
+import 'package:woopear/pages/private/footer/footer_page.dart';
 import 'package:woopear/pages/private/presentation/presentation.dart';
 import 'package:woopear/pages/private/profil/profil.dart';
 
@@ -17,6 +18,7 @@ class Routes {
   final String _profil = '/app/profil';
   final String _account = '/app/account';
   final String _presentation = '/app/presentation';
+  final String _footer = '/app/footer';
   final String _createUser = '/create/account';
   final String _forgotPassword = '/forgot/password';
   final String _presentationDetail = '/presentation/detail';
@@ -32,6 +34,7 @@ class Routes {
   String get account => _account;
   String get presentation => _presentation;
   String get presentationDetail => _presentationDetail;
+  String get footer => _footer;
   String get john => _john;
   String get david => _david;
 
@@ -46,6 +49,7 @@ class Routes {
       _account: (context) => const Account(),
       _presentation: (context) => const Presentation(),
       _presentationDetail: (context) => const PresentationDetails(),
+      _footer: (context) => const FooterPage(),
       _john: (context) => const John(),
       _david: (context) => const David(),
     };

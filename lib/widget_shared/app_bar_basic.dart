@@ -54,7 +54,7 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
                           children: [
                             /// icon goto tableau de bord
                             /// seulement visible si il est sur la page du site
-                            widget.text != 'Woopear'
+                            widget.text != 'woopear'
                                 ? Container()
                                 : IconButton(
                                     tooltip: 'Retour tableau de bord',

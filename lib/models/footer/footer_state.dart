@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woo_firestore_crud/woo_firestore_crud.dart';
 import 'package:woopear/models/footer/footer_menu/footer_menu_state.dart';
 import 'package:woopear/models/footer/footer_schema.dart';
@@ -9,12 +10,11 @@ class FooterState extends ChangeNotifier {
   final _footerMenu = FooterMenuState();
 
   /// ecoute tous les footers
-  Stream? streamFooters() {
-    _firestore.streamCol(
+  Stream<List<FooterSchema>> streamFooters() {
+    return _firestore.streamCol<FooterSchema>(
       path: FirestorePath.footers(),
       builder: (data, documentId) => FooterSchema.fromMap(data, documentId),
     );
-    return null;
   }
 
   /// add footer
@@ -47,3 +47,21 @@ class FooterState extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+/// state de la class FooterState
+final footerChange =
+    ChangeNotifierProvider<FooterState>((ref) => FooterState());
+
+/// state liste footers
+final footersStream = StreamProvider((ref) {
+  return ref.watch(footerChange).streamFooters();
+});
+
+/// state un footer (le premier)
+final footerProvider = Provider((ref) {
+  FooterSchema? list;
+  ref.watch(footersStream).whenData((value) {
+    list = value[0];
+  });
+  return list;
+});

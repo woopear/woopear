@@ -2,11 +2,11 @@
 
 class FooterSchema {
   String? id;
-  String? copyright;
+  String copyright;
 
   FooterSchema({
     this.id,
-    this.copyright,
+    required this.copyright,
   });
 
   factory FooterSchema.fromMap(Map<String, dynamic> data, documentId) {
@@ -20,7 +20,7 @@ class FooterSchema {
 
   Map<String, dynamic> toMap() {
     return {
-      'copyright': copyright ?? '',
+      'copyright': copyright,
     };
   }
 }
