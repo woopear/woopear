@@ -21,7 +21,7 @@ class _HomeState extends ConsumerState<Home> {
       child: Scaffold(
         appBar: AppBarBasic(
           seeConnexion: true,
-          text: 'Woopear',
+          text: 'woopear',
           automaticallyImplyLeading: false,
         ),
         body: SingleChildScrollView(

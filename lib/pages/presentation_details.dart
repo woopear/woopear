@@ -20,7 +20,7 @@ class _PresentationDetailsState extends ConsumerState<PresentationDetails> {
     final user = FirebaseAuth.instance.currentUser;
 
     /// recuperer list user avec role root
-    final allProfil = ref.watch(allProfilProvider);
+    final allProfil = ref.watch(allProfilRootProvider);
 
     /// on recupere la largeur de l'ecran
     double _width = MediaQuery.of(context).size.width;
@@ -80,7 +80,9 @@ class _PresentationDetailsState extends ConsumerState<PresentationDetails> {
                                             const EdgeInsets.only(top: 20.0),
                                         child: profil != null
                                             ? Text(
-                                                profil.userName!,
+                                              profil.firstName == 'Woopear' 
+                                              ? profil.firstName
+                                              : profil.userName!,
                                                 style: const TextStyle(
                                                     fontSize: 46.0),
                                               )
@@ -109,7 +111,7 @@ class _PresentationDetailsState extends ConsumerState<PresentationDetails> {
                                   : const WaitingData(),
 
                               /// techno
-                              buildLabel('Technos utilisées : ', _width),
+                              buildLabel('Technos utilisées ', _width),
                               profil != null
                                   ? buildInfo(profil.techno!, _width)
                                   : const WaitingData(),
