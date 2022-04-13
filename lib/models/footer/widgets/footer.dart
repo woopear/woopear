@@ -4,7 +4,6 @@ import 'package:woopear/models/footer/footer_menu/footer_menu_state.dart';
 import 'package:woopear/models/footer/footer_state.dart';
 import 'package:woopear/models/presentation/presentation_state.dart';
 import 'package:woopear/widget_shared/waiting_data.dart';
-import 'package:woopear/widget_shared/waiting_error.dart';
 
 class Footer extends ConsumerStatefulWidget {
   const Footer({Key? key}) : super(key: key);
@@ -34,8 +33,8 @@ class _FooterState extends ConsumerState<Footer> {
     return Container(
       color: idModeDark ? const Color(0XFF363636) : const Color(0XFFF5F5F5),
       padding: EdgeInsets.only(
-        left: _width > 700 ? 250 : 30.0,
-        right: _width > 700 ? 250 : 30.0,
+        left: _width > 950 ? 250 : 30.0,
+        right: _width > 950 ? 250 : 30.0,
         top: 70.0,
         bottom: 20.0,
       ),
@@ -51,7 +50,7 @@ class _FooterState extends ConsumerState<Footer> {
                 presentation != null
                     ? Container(
                         margin: const EdgeInsets.only(bottom: 60.0),
-                        width: 150.0,
+                        width: _width > 700 ? 250.0 : 150.0,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -71,20 +70,25 @@ class _FooterState extends ConsumerState<Footer> {
                     : const WaitingData(),
 
                 /// menu
-                footerMenus != null ? Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: footerMenus.map((menu) {
-                        return Container(
-                          child: TextButton.icon(
-                            onPressed: () =>
-                                Navigator.pushNamed(context, menu.url),
-                            icon: const Icon(Icons.rule),
-                            label: Text(menu.libelle, style: const TextStyle().copyWith(fontSize: 14.0),),
-                          ),
-                        );
-                      }).toList(),
-                    ): const WaitingData(),
-                  
+                footerMenus != null
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: footerMenus.map((menu) {
+                          return Container(
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, menu.url);
+                              },
+                              child: Text(
+                                menu.libelle,
+                                style:
+                                    const TextStyle().copyWith(fontSize: 14.0),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      )
+                    : const WaitingData(),
               ],
             ),
 
