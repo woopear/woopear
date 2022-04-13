@@ -29,7 +29,7 @@ class _FooterState extends ConsumerState<Footer> {
     final presentation = ref.watch(presentationSelectProvider);
 
     /// on recupere le stream de tous les FooterMenu
-    final footerMenus = ref.watch(footerMenusStream(footer!.id!));
+    final footerMenus = ref.watch(footerMenusProvider);
 
     return Container(
       color: idModeDark ? const Color(0XFF363636) : const Color(0XFFF5F5F5),
@@ -71,11 +71,9 @@ class _FooterState extends ConsumerState<Footer> {
                     : const WaitingData(),
 
                 /// menu
-                footerMenus.when(
-                  data: (menus) {
-                    return Column(
+                footerMenus != null ? Column(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: menus.map((menu) {
+                      children: footerMenus.map((menu) {
                         return Container(
                           child: TextButton.icon(
                             onPressed: () =>
@@ -85,12 +83,8 @@ class _FooterState extends ConsumerState<Footer> {
                           ),
                         );
                       }).toList(),
-                    );
-                  },
-                  error: (error, stack) => const WaitingError(),
-                  loading: () => const WaitingData(),
-                ),
-                
+                    ): const WaitingData(),
+                  
               ],
             ),
 

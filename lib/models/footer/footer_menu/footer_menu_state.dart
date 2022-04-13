@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woo_firestore_crud/woo_firestore_crud.dart';
 import 'package:woopear/models/footer/footer_menu/footer_menu_schema.dart';
+import 'package:woopear/models/footer/footer_state.dart';
 import 'package:woopear/utils/fire/firestore_path.dart';
 
 class FooterMenuState extends ChangeNotifier {
@@ -68,7 +69,16 @@ final footerMenuChange =
     ChangeNotifierProvider<FooterMenuState>((ref) => FooterMenuState());
 
 /// state list des menus d'un footer
-final footerMenusStream =
-    StreamProvider.autoDispose.family((ref, String idFooter) {
+final footerMenusStream = StreamProvider.family((ref, String idFooter) {
   return ref.watch(footerMenuChange).streamFooterMenus(idFooter);
+});
+
+final footerMenusProvider = Provider((ref) {
+  List<FooterMenuSchema>? list;
+  ref.watch(footersStream).whenData((value) {
+    ref.watch(footerMenusStream(value[0].id!)).whenData((value) {
+      list = value;
+    });
+  });
+  return list;
 });
