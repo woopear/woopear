@@ -23,19 +23,13 @@ class FirestorePath {
   static String footerMenu(String idFooter, String idFooterMenu) =>
       'footers/$idFooter/menus/$idFooterMenu';
 
-  /// content
-  static String contents() => 'contents';
-  static String content(String idContent) => 'contents/$idContent';
-
-  /// condition generale
-  static String conditionsGene() => 'conditions_generales';
+  /// condition gene
+  static String conditionGenes() => 'condition_genes';
   static String conditionGene(String idConditionGene) =>
-      'conditions_generales/$idConditionGene';
+      'condition_genes/$idConditionGene';
+  static String conditionGeneArticles(String idConditionGene) =>
+      'condition_genes/$idConditionGene/articles';
+    static String conditionGeneArticle(String idConditionGene, String idArticle) =>
+      'condition_genes/$idConditionGene/articles/$idArticle';
 
-  /// article condition generale
-  static String articlesConditionGene(String idConditionGene) =>
-      'conditions_generales/$idConditionGene/articles_conditions_generales';
-  static String articleConditionGene(
-          String idConditionGene, String idArticleConditionGene) =>
-      'conditions_generales/$idConditionGene/articles_conditions_generales/$idArticleConditionGene';
 }
