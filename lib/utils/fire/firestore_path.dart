@@ -29,7 +29,13 @@ class FirestorePath {
       'condition_genes/$idConditionGene';
   static String conditionGeneArticles(String idConditionGene) =>
       'condition_genes/$idConditionGene/articles';
-    static String conditionGeneArticle(String idConditionGene, String idArticle) =>
+  static String conditionGeneArticle(
+          String idConditionGene, String idArticle) =>
       'condition_genes/$idConditionGene/articles/$idArticle';
-
+  static String conditionGeneArticleContents(
+          String idConditionGene, String idArticle) =>
+      'condition_genes/$idConditionGene/articles/$idArticle/contents';
+  static String conditionGeneArticleContent(
+          String idConditionGene, String idArticle, String idContent) =>
+      'condition_genes/$idConditionGene/articles/$idArticle/contents/$idContent';
 }

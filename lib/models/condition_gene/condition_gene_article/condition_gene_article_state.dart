@@ -2,11 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woo_firestore_crud/woo_firestore_crud.dart';
+import 'package:woopear/models/condition_gene/condition_gene_article/condition_gene_article_content/condition_gene_article_content_state.dart';
 import 'package:woopear/models/condition_gene/condition_gene_article/condition_gene_article_schema.dart';
 import 'package:woopear/utils/fire/firestore_path.dart';
 
 class ConditionGeneArticleState extends ChangeNotifier {
   final _firestore = WooFirestore.instance;
+  final _contents = ConditionGeneArticleContentState();
 
   /// ecoute tous les articles d'une conditions
   Stream<List<ConditionGeneArticleSchema>> streamArticlesOfConditionGene(
@@ -39,29 +41,38 @@ class ConditionGeneArticleState extends ChangeNotifier {
   /// delete un article d'une condition
   Future<void> deleteArticleOfConditionGene(
       String idConditionGene, String idArticle) async {
-    /// TODO : delete tous les contents de l'article
+    /// supprime tous les contents de l'article
+    await _contents.deleteContentsOfArticleOfConditionGene(
+        idConditionGene, idArticle);
 
     await _firestore.delete(
       path: FirestorePath.conditionGeneArticle(idConditionGene, idArticle),
     );
   }
 
-  /// delete tous les articles d'une condition
+  /// delete tous les articles d'une condition + tous les contents de l'article
   Future<void> deleteArticlesOfConditionGene(String idConditionGene) async {
     /// instance firestore pour batch
     WriteBatch batch = FirebaseFirestore.instance.batch();
 
     /// ref collection path
-    CollectionReference ref = FirebaseFirestore.instance.collection(
+    CollectionReference refArticles = FirebaseFirestore.instance.collection(
       FirestorePath.conditionGeneArticles(idConditionGene),
     );
 
     /// boucle pour delete les articles
-    return ref.get().then((querySnapshot) {
+    return refArticles.get().then((querySnapshot) async {
       for (var doc in querySnapshot.docs) {
-        /// TODO : delete tous les contents de l'article
-        /// ! faire boucle
+        /// ref collection path
+        CollectionReference refContents = FirebaseFirestore.instance.collection(
+          FirestorePath.conditionGeneArticleContents(idConditionGene, doc.id),
+        );
 
+        /// boucle pour delete les content de l'article
+        await _contents.deleteContentsOfArticleOfConditionGene(
+            idConditionGene, doc.id);
+
+        /// delete l'article
         batch.delete(doc.reference);
       }
 
