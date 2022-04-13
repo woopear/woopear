@@ -73,6 +73,7 @@ class _FooterState extends ConsumerState<Footer> {
                 footerMenus != null
                     ? Column(
                         mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: footerMenus.map((menu) {
                           return Container(
                             child: TextButton(

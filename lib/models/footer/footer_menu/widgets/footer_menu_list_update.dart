@@ -64,26 +64,27 @@ class _FooterMenuListUpdateState extends ConsumerState<FooterMenuListUpdate> {
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 50.0),
-      child: Column(
-        children: [
-          footerMenus.when(
-            data: (menus) {
-              return ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: menus.length,
-                itemBuilder: (context, index) {
-                  final menu = menus[index];
-                  _libelle = TextEditingController(text: menu.libelle);
-                  _url = TextEditingController(text: menu.url);
-                  return Container(
-                    child: Form(
-                      key: _formKey,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            footerMenus.when(
+              data: (menus) {
+                return ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: menus.length,
+                  itemBuilder: (context, index) {
+                    final menu = menus[index];
+                    _libelle = TextEditingController(text: menu.libelle);
+                    _url = TextEditingController(text: menu.url);
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 50.0),
                       child: Column(
                         children: [
                           /// title avec id
-                          buildTitleItemMenu(
-                              'Item : ${index + 1}', widget.footer.id!, menu.id!),
+                          buildTitleItemMenu('Item : ${index + 1}',
+                              widget.footer.id!, menu.id!),
 
                           /// input libelle
                           InputBasic(
@@ -117,21 +118,22 @@ class _FooterMenuListUpdateState extends ConsumerState<FooterMenuListUpdate> {
                           ),
                         ],
                       ),
-                    ),
-                  );
-                },
-              );
-            },
-            error: (error, stack) => const WaitingError(),
-            loading: () => const WaitingData(),
-          )
-        ],
+                    );
+                  },
+                );
+              },
+              error: (error, stack) => const WaitingError(),
+              loading: () => const WaitingData(),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   /// title de l'item du menu
-  Widget buildTitleItemMenu(String title, String idFooter, String idFooterMenu) {
+  Widget buildTitleItemMenu(
+      String title, String idFooter, String idFooterMenu) {
     return Container(
       child: Row(
         children: [
