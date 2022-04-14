@@ -21,12 +21,15 @@ class ConditionGeneArticleState extends ChangeNotifier {
   }
 
   /// add un article d'une condition
-  Future<void> addArticleOfConditionGene(
+  Future<DocumentReference<Map<String, dynamic>?>?>? addArticleOfConditionGene(
       String idConditionGene, ConditionGeneArticleSchema newArticle) async {
-    await _firestore.add(
+    final result = await _firestore.add(
       path: FirestorePath.conditionGeneArticles(idConditionGene),
       data: newArticle.toMap(),
+      returnData: true,
     );
+
+    return result;
   }
 
   /// update un article d'une condition

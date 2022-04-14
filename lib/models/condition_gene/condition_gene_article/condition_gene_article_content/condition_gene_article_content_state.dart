@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tuple/tuple.dart';
 import 'package:woo_firestore_crud/woo_firestore_crud.dart';
 import 'package:woopear/models/condition_gene/condition_gene_article/condition_gene_article_content/condition_gene_article_content_schema.dart';
 import 'package:woopear/utils/fire/firestore_path.dart';
@@ -87,3 +89,16 @@ class ConditionGeneArticleContentState extends ChangeNotifier {
     });
   }
 }
+
+/// state de la class conditiongenearticlecontentstate
+final conditionGeneArticleContentChange =
+    ChangeNotifierProvider<ConditionGeneArticleContentState>(
+        (ref) => ConditionGeneArticleContentState());
+
+/// state de tous les contents d'un article
+final contentsOfArticleStream =
+    StreamProvider.family((ref, Tuple2<String, String> ids) {
+  return ref
+      .watch(conditionGeneArticleContentChange)
+      .streamContentsOfArticleOfConditionGene(ids.item1, ids.item2);
+});
