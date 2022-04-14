@@ -83,7 +83,7 @@ class _ConditionGeneUpdateState extends ConsumerState<ConditionGeneUpdate> {
               .when(
                 data: (conditionSelect) {
                   return ContainerBasic(
-                    width: _width > 700 ? 600 : double.infinity,
+                    width: _width > 800 ? 800 : double.infinity,
                     margin: const EdgeInsets.all(30.0),
                     child: Column(
                       children: [
