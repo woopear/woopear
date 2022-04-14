@@ -68,7 +68,7 @@ class ConditionGeneArticleState extends ChangeNotifier {
           FirestorePath.conditionGeneArticleContents(idConditionGene, doc.id),
         );
 
-        /// boucle pour delete les content de l'article
+        /// *boucle pour delete les content de l'article
         await _contents.deleteContentsOfArticleOfConditionGene(
             idConditionGene, doc.id);
 

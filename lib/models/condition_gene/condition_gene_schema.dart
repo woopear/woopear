@@ -20,7 +20,6 @@ class ConditionGeneSchema {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'title': title,
       'date': date ?? Timestamp.now(),
     };
