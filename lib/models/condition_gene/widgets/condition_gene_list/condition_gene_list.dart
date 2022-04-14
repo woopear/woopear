@@ -48,7 +48,7 @@ class _ConditionGeneListState extends ConsumerState<ConditionGeneList> {
 
                                   /// date
                                   cel2(
-                                      'du ${date.month < 10 ? '0${date.month}' : '${date.month}'}/${date.year}'),
+                                      'du ${date.day < 10 ? '0${date.day}' : '${date.day}'}/${date.month < 10 ? '0${date.month}' : '${date.month}'}/${date.year}'),
 
                                   /// groupe btn action
                                   action(conditionGene.id!),
@@ -96,7 +96,7 @@ class _ConditionGeneListState extends ConsumerState<ConditionGeneList> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ConditionGeneModify(),
+                    builder: (context) => ConditionGeneModify(idConditionSelected: idConditionGene),
                   ),
                 );
               },

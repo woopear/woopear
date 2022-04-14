@@ -52,6 +52,8 @@ class _ConditionGeneFormState extends ConsumerState<ConditionGeneForm> {
       /// creation en BDD
       await ref.watch(conditionGeneChange).addConditionGene(newConditionGene);
 
+      resetInput();
+
       /// message de succes
       NotificationBasic(
         text: "Création condition avec succès",

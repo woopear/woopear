@@ -58,7 +58,7 @@ class Routes {
       _account: (context) => const Account(),
       _presentation: (context) => const Presentation(),
       _conditionGene: (context) => const ConditionGene(),
-      _conditionGeneModify: (context) => const ConditionGeneModify(),
+      _conditionGeneModify: (context) => ConditionGeneModify(),
       _presentationDetail: (context) => const PresentationDetails(),
       _conditionGenerale: (context) => const ConditionGeneral(),
       _footer: (context) => const FooterPage(),

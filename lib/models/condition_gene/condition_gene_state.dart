@@ -18,6 +18,15 @@ class ConditionGeneState extends ChangeNotifier {
     );
   }
 
+  /// ecouteur de une condition gene
+  Stream<ConditionGeneSchema> streamConditionGene(String idConditionGene) {
+    return _firestore.streamDoc<ConditionGeneSchema>(
+      path: FirestorePath.conditionGene(idConditionGene),
+      builder: (data, documentId) =>
+          ConditionGeneSchema.fromMap(data, documentId),
+    );
+  }
+
   /// add condition gene
   Future<void> addConditionGene(ConditionGeneSchema newConditionGene) async {
     await _firestore.add(
@@ -54,4 +63,20 @@ final conditionGeneChange =
 /// sate du stream de toutes les condition gene
 final conditionGenesStream = StreamProvider((ref) {
   return ref.watch(conditionGeneChange).streamConditionGenes();
+});
+
+/// state du stream d'une condition gene
+final conditionGeneStream =
+    StreamProvider.family((ref, String idConditionGene) {
+  return ref.watch(conditionGeneChange).streamConditionGene(idConditionGene);
+});
+
+/// state d'une condition gene
+final conditionGeneSelectedProvider =
+    Provider.family((ref, String idConditionGene) {
+  ConditionGeneSchema? conditionGene;
+  ref.watch(conditionGeneStream(idConditionGene)).whenData((value) {
+    conditionGene = value;
+  });
+  return conditionGene;
 });
