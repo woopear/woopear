@@ -40,6 +40,7 @@ class _ConditionGeneArticleContentUpdateState
     super.dispose();
   }
 
+  /// creation content
   Future<void> createContent() async {
     try {
       /// creation du content
@@ -63,6 +64,7 @@ class _ConditionGeneArticleContentUpdateState
     }
   }
 
+  /// modification du content
   Future<void> updateContent() async {
     try {
       /// creation du content
@@ -74,8 +76,8 @@ class _ConditionGeneArticleContentUpdateState
       /// creation du content dans la bdd
       await ref
           .watch(conditionGeneArticleContentChange)
-          .updateContentOfArticleOfConditionGene(
-              widget.idConditionGene, widget.idArticle, widget.content.id!, newContent);
+          .updateContentOfArticleOfConditionGene(widget.idConditionGene,
+              widget.idArticle, widget.content.id!, newContent);
 
       NotificationBasic(
         text: "Paragraphe modifier avec succès",
@@ -89,8 +91,19 @@ class _ConditionGeneArticleContentUpdateState
     }
   }
 
+  /// delete content
   Future<void> deleteContent() async {
-    /// Todo : faire delete content
+    try {
+      await ref
+          .watch(conditionGeneArticleContentChange)
+          .deleteContentOfArticleOfConditionGene(
+              widget.idConditionGene, widget.idArticle, widget.content.id!);
+    } catch (e) {
+      NotificationBasic(
+        text: "Impossible de supprimer le paragraphe",
+        error: true,
+      ).notification(context);
+    }
   }
 
   @override

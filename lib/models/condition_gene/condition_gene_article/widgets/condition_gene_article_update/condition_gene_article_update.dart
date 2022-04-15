@@ -34,18 +34,25 @@ class _ConditionGeneArticleUpdateState
                   buildTitleSectionConditionGeneArticle(
                       "Section article", context),
 
-                  /// liste des articles avec input
-                  ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: articles.length,
-                    itemBuilder: (context, index) {
-                      return ConditionGeneArticleUpdateForm(
-                        idConditionGene: widget.idConditionGene,
-                        article: articles[index],
-                      );
-                    },
-                  ),
+                  articles.isNotEmpty
+                      ?
+
+                      /// liste des articles avec input
+                      ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: articles.length,
+                          itemBuilder: (context, index) {
+                            return ConditionGeneArticleUpdateForm(
+                              idConditionGene: widget.idConditionGene,
+                              article: articles[index],
+                            );
+                          },
+                        )
+                      : Container(
+                          margin: const EdgeInsets.only(top: 40.0),
+                          child: const Text('Aucun article'),
+                        )
                 ],
               ),
             );

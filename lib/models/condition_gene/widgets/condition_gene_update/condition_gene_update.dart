@@ -93,6 +93,11 @@ class _ConditionGeneUpdateState extends ConsumerState<ConditionGeneUpdate> {
                           conditionGene: conditionSelect,
                         ),
 
+                        /// formulaire create / update article
+                        /// + formulaire create / update content pour article
+                        ConditionGeneArticleUpdate(
+                            idConditionGene: conditionSelect.id!),
+                        
                         /// btn ajoute un article
                         Align(
                           alignment: Alignment.centerLeft,
@@ -107,11 +112,6 @@ class _ConditionGeneUpdateState extends ConsumerState<ConditionGeneUpdate> {
                             ),
                           ),
                         ),
-
-                        /// formulaire create / update article
-                        /// + formulaire create / update content pour article
-                        ConditionGeneArticleUpdate(
-                            idConditionGene: conditionSelect.id!),
                       ],
                     ),
                   );
