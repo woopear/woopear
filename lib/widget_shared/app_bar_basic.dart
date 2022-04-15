@@ -68,9 +68,12 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
                             /// icon deconnection
                             IconButton(
                               onPressed: () async {
+
+                                await ref.watch(userChange).disconnectUser();
+                                Navigator.pop(context);
                                 Navigator.pushNamed(
                                           context, Routes().home);
-                                await ref.watch(userChange).disconnectUser();
+                                
                               },
                               icon: const Icon(Icons.logout),
                             ),
