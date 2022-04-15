@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:woopear/models/condition_gene/condition_gene_schema.dart';
 import 'package:woopear/models/condition_gene/condition_gene_state.dart';
 import 'package:woopear/pages/private/condition_gene/condition_gene_modify.dart';
 import 'package:woopear/widget_shared/sub_title_auth.dart';
@@ -51,7 +52,7 @@ class _ConditionGeneListState extends ConsumerState<ConditionGeneList> {
                                       'du ${date.day < 10 ? '0${date.day}' : '${date.day}'}/${date.month < 10 ? '0${date.month}' : '${date.month}'}/${date.year}'),
 
                                   /// groupe btn action
-                                  action(conditionGene.id!),
+                                  action(conditionGene),
                                 ],
                               ));
                         },
@@ -86,17 +87,39 @@ class _ConditionGeneListState extends ConsumerState<ConditionGeneList> {
       );
 
   /// cellule action regroupant les btns
-  Widget action(String idConditionGene) => Container(
+  Widget action(ConditionGeneSchema conditionGene) => Container(
         padding: const EdgeInsets.only(left: 50.0, right: 10.0),
         child: Row(
           children: [
+            /// btn activate
+            IconButton(
+              onPressed: () async {
+                final newConditionGene = conditionGene;
+                newConditionGene.activate = !newConditionGene.activate!;
+                await ref.watch(conditionGeneChange).updateConditionGene(
+                      conditionGene.id!,
+                      newConditionGene,
+                    );
+              },
+              icon: conditionGene.activate!
+                  ? const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                    )
+                  : Icon(
+                      Icons.check_circle_outline,
+                      color: Theme.of(context).disabledColor,
+                    ),
+            ),
+
             /// btn voir
             IconButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ConditionGeneModify(idConditionSelected: idConditionGene),
+                    builder: (context) => ConditionGeneModify(
+                        idConditionSelected: conditionGene.id!),
                   ),
                 );
               },
@@ -108,7 +131,7 @@ class _ConditionGeneListState extends ConsumerState<ConditionGeneList> {
               onPressed: () async {
                 await ref
                     .watch(conditionGeneChange)
-                    .deleteConditionGene(idConditionGene);
+                    .deleteConditionGene(conditionGene.id!);
               },
               icon: const Icon(Icons.delete_rounded, color: Colors.red),
             ),
