@@ -21,9 +21,6 @@ class _PresentationDisplayState extends ConsumerState<PresentationDisplay> {
     /// on recupere la largeur de l'ecran
     double _width = MediaQuery.of(context).size.width;
 
-    /// si mode dark ou pas
-    bool idModeDark = Theme.of(context).brightness == Brightness.dark;
-
     return Container(
       padding: const EdgeInsets.only(
           left: 30.0, right: 30.0, top: 50.0, bottom: 80.0),

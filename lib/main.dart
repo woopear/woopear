@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'package:woo_theme_mode/woo_theme_mode.dart';
 import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/utils/config/theme/theme.dart';
@@ -8,6 +9,7 @@ import 'package:woopear/utils/constants/globals.dart';
 import 'package:woopear/utils/fire/firebase_options.dart';
 
 void main() async {
+  setPathUrlStrategy();
   /// pour les widgets android
   WidgetsFlutterBinding.ensureInitialized();
   /// init firebase

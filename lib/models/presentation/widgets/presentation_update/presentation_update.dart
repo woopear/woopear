@@ -517,8 +517,6 @@ class _PresentationUpdateState extends ConsumerState<PresentationUpdate> {
                               ),
 
                               /// btn ajouter content
-                              /// TODO : ajoute un content dans la BDD
-                              /// TODO : vérifier que l'ecouteur met à jour la list
                               TextButton.icon(
                                 onPressed: () async {
                                   ref
@@ -542,8 +540,6 @@ class _PresentationUpdateState extends ConsumerState<PresentationUpdate> {
                               ),
 
                               /// list des contents
-                              /// TODO : list des contents sous forme de input
-                              /// TODO : sinon on affiche le message pas de content
                               Container(
                                 margin: const EdgeInsets.only(top: 30.0),
                                 child: Column(children: [

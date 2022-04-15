@@ -66,6 +66,28 @@ class _DrawerBasicState extends ConsumerState<DrawerBasic> {
               },
             ),
 
+            /// footer
+            ItemMenu(
+              text: 'Gestion footer',
+              icon: Icons.info_outline_rounded,
+              colorIcon: Colors.white,
+              colorText: Colors.white,
+              onTap: () {
+                Navigator.pushNamed(context, Routes().footer);
+              },
+            ),
+
+            /// footer
+            ItemMenu(
+              text: 'Gestion Conditions',
+              icon: Icons.rule,
+              colorIcon: Colors.white,
+              colorText: Colors.white,
+              onTap: () {
+                Navigator.pushNamed(context, Routes().conditionGene);
+              },
+            ),
+
             /// separation avec info compte
             SeparateItem(
               heighTop: 20.0,
