@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:woo_theme_mode/woo_theme_mode.dart';
 import 'package:woopear/models/profil/profil_state.dart';
-import 'package:woopear/models/user/user_state.dart';
 import 'package:woopear/utils/config/routes.dart';
 
 class AppBarBasic extends ConsumerStatefulWidget with PreferredSizeWidget {
@@ -68,9 +67,7 @@ class _AppBarFlutooState extends ConsumerState<AppBarBasic> {
                             /// icon deconnection
                             IconButton(
                               onPressed: () async {
-                                await ref.watch(userChange).disconnectUser();
-                                Navigator.pop(context, true);
-                                Navigator.pushNamed(context, Routes().home);
+                                ///await FirebaseAuth.instance.signOut();
                               },
                               icon: const Icon(Icons.logout),
                             ),

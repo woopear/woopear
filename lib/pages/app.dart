@@ -39,7 +39,6 @@ class _ConnexionState extends ConsumerState<AppAcces> {
                         /// dashboard
                         return const Dashboard();
                       } else {
-                        /// formulaire de connexion
                         return const Signin();
                       }
                     },
