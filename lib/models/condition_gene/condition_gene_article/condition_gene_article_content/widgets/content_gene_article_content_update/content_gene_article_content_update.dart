@@ -30,7 +30,6 @@ class _ConditionGeneArticleContentUpdateState
     extends ConsumerState<ConditionGeneArticleContentUpdate> {
   TextEditingController _subTitle = TextEditingController(text: '');
   TextEditingController _text = TextEditingController(text: '');
-  final _formKey = GlobalKey<FormState>();
   final bool _validate = false;
 
   @override

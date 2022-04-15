@@ -19,8 +19,6 @@ class ProfilInfo extends ConsumerStatefulWidget {
 class _ProfilInfoState extends ConsumerState<ProfilInfo> {
   @override
   Widget build(BuildContext context) {
-    /// si mode dark ou pas
-    bool idModeDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       margin: const EdgeInsets.only(top: 70.0),

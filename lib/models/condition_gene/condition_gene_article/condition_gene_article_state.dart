@@ -66,11 +66,6 @@ class ConditionGeneArticleState extends ChangeNotifier {
     /// boucle pour delete les articles
     return refArticles.get().then((querySnapshot) async {
       for (var doc in querySnapshot.docs) {
-        /// ref collection path
-        CollectionReference refContents = FirebaseFirestore.instance.collection(
-          FirestorePath.conditionGeneArticleContents(idConditionGene, doc.id),
-        );
-
         /// *boucle pour delete les content de l'article
         await _contents.deleteContentsOfArticleOfConditionGene(
             idConditionGene, doc.id);

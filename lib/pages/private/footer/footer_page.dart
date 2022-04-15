@@ -36,9 +36,6 @@ class _FooterPageState extends ConsumerState<FooterPage> {
     /// on recupere le user
     final user = FirebaseAuth.instance.currentUser;
 
-    /// on recupere la largeur de l'ecran
-    double _width = MediaQuery.of(context).size.width;
-
     return SafeArea(
       child: Scaffold(
         drawer: user != null ? const DrawerBasic() : null,
