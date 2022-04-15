@@ -27,6 +27,16 @@ class ConditionGeneState extends ChangeNotifier {
     );
   }
 
+  /// ecouteur de toutes les conditions gene avec activate à true
+  Stream<List<ConditionGeneSchema>> streamConditionGenesActivate() {
+    return _firestore.streamCol<ConditionGeneSchema>(
+      path: FirestorePath.conditionGenes(),
+      builder: (data, documentId) =>
+          ConditionGeneSchema.fromMap(data, documentId),
+      queryBuilder: (query) => query.where('activate', isEqualTo: true),
+    );
+  }
+
   /// add condition gene
   Future<void> addConditionGene(ConditionGeneSchema newConditionGene) async {
     await _firestore.add(
@@ -79,4 +89,9 @@ final conditionGeneSelectedProvider =
     conditionGene = value;
   });
   return conditionGene;
+});
+
+/// sate du stream de toutes les condition gene activate à true
+final conditionGenesActivateStream = StreamProvider((ref) {
+  return ref.watch(conditionGeneChange).streamConditionGenesActivate();
 });
