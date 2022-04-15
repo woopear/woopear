@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:woopear/models/condition_gene/condition_gene_state.dart';
 import 'package:woopear/models/condition_gene/widgets/condition_gene_update/condition_gene_update.dart';
+import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
 import 'package:woopear/widget_shared/sub_title_auth.dart';
 import 'package:woopear/widget_shared/waiting_data.dart';
@@ -17,6 +18,19 @@ class ConditionGeneModify extends ConsumerStatefulWidget {
 }
 
 class _ConditionGeneModifyState extends ConsumerState<ConditionGeneModify> {
+  @override
+  void initState() {
+    super.initState();
+
+    /// si deconnecter retour sur la page app (connexion ou dashboard)
+    if (FirebaseAuth.instance.currentUser == null) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, Routes().appAcces);
+          }));
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     /// on recupere le user

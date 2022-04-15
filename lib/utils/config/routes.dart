@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:woopear/pages/app.dart';
 import 'package:woopear/pages/condition_general.dart';
 import 'package:woopear/pages/create_user.dart';
-import 'package:woopear/pages/david.dart';
 import 'package:woopear/pages/forgot_password.dart';
 import 'package:woopear/pages/home.dart';
-import 'package:woopear/pages/john.dart';
 import 'package:woopear/pages/presentation_details.dart';
 import 'package:woopear/pages/private/account/account.dart';
 import 'package:woopear/pages/private/condition_gene/condition_gene.dart';
@@ -28,8 +26,6 @@ class Routes {
   final String _forgotPassword = '/forgot/password';
   final String _presentationDetail = '/presentation/detail';
   final String _conditionGenerale = '/conditions-generales';
-  final String _john = '/john';
-  final String _david = '/david';
 
   /// les getters des routes
   String get home => _home;
@@ -44,8 +40,6 @@ class Routes {
   String get presentationDetail => _presentationDetail;
   String get conditionGenerale => _conditionGenerale;
   String get footer => _footer;
-  String get john => _john;
-  String get david => _david;
 
   /// retourne un widget en fonction de la routes
   Map<String, Widget Function(BuildContext)> urls() {
@@ -62,8 +56,6 @@ class Routes {
       _presentationDetail: (context) => const PresentationDetails(),
       _conditionGenerale: (context) => const ConditionGeneral(),
       _footer: (context) => const FooterPage(),
-      _john: (context) => const John(),
-      _david: (context) => const David(),
     };
   }
 }

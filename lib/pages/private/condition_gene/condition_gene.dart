@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:woopear/models/condition_gene/widgets/condition_gene_create/condition_gene_create.dart';
 import 'package:woopear/models/condition_gene/widgets/condition_gene_list/condition_gene_list.dart';
+import 'package:woopear/utils/config/routes.dart';
 import 'package:woopear/widget_shared/app_bar_basic.dart';
 import 'package:woopear/widget_shared/drawer_basic.dart';
 import 'package:woopear/widget_shared/sub_title_auth.dart';
@@ -18,6 +19,19 @@ class ConditionGene extends ConsumerStatefulWidget {
 class _ConditionGeneState extends ConsumerState<ConditionGene> {
   bool seeListConditionGene = true;
   bool seeCreateConditionGene = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// si deconnecter retour sur la page app (connexion ou dashboard)
+    if (FirebaseAuth.instance.currentUser == null) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, Routes().appAcces);
+          }));
+    }
+  }
 
   void seeCreate() {
     setState(() {
